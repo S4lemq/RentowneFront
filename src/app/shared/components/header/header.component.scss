@@ -1,0 +1,15 @@
+:host{
+    background: #ddd;
+    padding: 20px;
+}
+
+.header{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.logo{
+    display: flex;
+    flex: 1 1 auto;
+}
