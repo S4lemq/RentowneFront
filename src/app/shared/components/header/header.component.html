@@ -1,10 +1,11 @@
 <header class="header">
     <div class="logo">
-        Logo
+        <mat-icon class="material-icons-outlined">real_estate_agent</mat-icon>
+        <span class="logo-text">{{title}}</span>
     </div>
-    <div>
-        <button routerLink="">Strona główna</button>
-        <button routerLink="/apartments">Mieszkania</button>
-        <button routerLink="/tenant">Najemcy</button>
+    <div class="nav">
+        <button mat-flat-button color="primary" routerLink="">Strona główna</button>
+        <button mat-flat-button color="primary" routerLink="/apartments">Mieszkania</button>
+        <button mat-flat-button color="primary" routerLink="/tenant">Najemcy</button>
     </div>
 </header>

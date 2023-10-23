@@ -1,5 +1,7 @@
+@import '../../../../variables.scss';
+
 :host{
-    background: #ddd;
+    background: $darkgray;
     padding: 20px;
 }
 
@@ -12,4 +14,22 @@
 .logo{
     display: flex;
     flex: 1 1 auto;
+    justify-content: flex-start;
+    align-items: end;
+    gap: 0.3rem;
+    color: white;
+}
+
+.nav{
+    display: flex;
+    gap: 1rem;
+}
+
+.logo-text{
+    font-size: 20px;
+    color: white;
+}
+
+.material-icons-outlined {
+    font-size: 27px;
 }
