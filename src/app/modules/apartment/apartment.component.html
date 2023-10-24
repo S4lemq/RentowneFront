@@ -1,1 +1,9 @@
 <p>apartment works!</p>
+<div>
+   <p *ngIf="apartment">
+      Country: {{apartment.country}}
+      <br>
+      Street: {{apartment.street}}
+   </p>
+   <p *ngIf="!apartment">Loading data...</p>
+</div>
