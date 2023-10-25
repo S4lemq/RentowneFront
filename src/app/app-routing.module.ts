@@ -6,6 +6,7 @@ import { ApartmentComponent } from './modules/apartment/apartment.component';
 import { LoginComponent } from './modules/login/login.component';
 import { EmptyLoginComponent } from './layouts/empty-login/empty-login.component';
 import { AuthorizeGuard } from './modules/common/guard/authorizeGuard';
+import { RegisterComponent } from './modules/register/register.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
   },
   {
     path: '', component: EmptyLoginComponent, children: [
-      {path: 'login', component: LoginComponent}
+      {path: 'login', component: LoginComponent},
+      {path: 'register', component: RegisterComponent}
     ]
   }
 ];

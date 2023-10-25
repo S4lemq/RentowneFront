@@ -5,13 +5,15 @@ import { EmptyLoginComponent } from './empty-login.component';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from 'src/app/modules/register/register.component';
 
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    EmptyLoginComponent
+    EmptyLoginComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,

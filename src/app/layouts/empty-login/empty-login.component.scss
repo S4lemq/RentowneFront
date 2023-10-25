@@ -5,6 +5,11 @@ body, html {
 }
 
 .home {
+    background-image: url('/assets/image/login-image.png');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center center;
+    /* Twoje istniejące style dla .home... */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -26,6 +31,21 @@ body, html {
     text-align: center;
 }
 
-.material-icons-outlined {
-    font-size: 27px;
+.login-form {
+    background-color: white;
+    border-radius: 5px;
+    width: 500px;
+    height: 300px;
+    display: flex;          /* Dodano display flex */
+    flex-direction: column; /* Dodano kierunek kolumny */
+    justify-content: center;/* Aby elementy były wyśrodkowane w pionie */
+    align-items: center;    /* Aby elementy były wyśrodkowane w poziomie */
 }
+
+.login-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    /* Wyśrodkowanie elementów w poziomie */
+    gap: 10px;              /* Odstępy pomiędzy elementami */
+}
+
