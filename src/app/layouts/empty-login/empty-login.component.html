@@ -1,13 +1,24 @@
 <div class="home">
     <div class="login-form">
         <div class="login-controls">
-            <div class="logo">
-                <span>Rentowne</span>
+            <div class="logo-container">
+                <div class="logo">
+                    <mat-icon>person</mat-icon>
+                </div>
+                <div class="logo-text">
+                    <span>Witaj w Rentowne</span>
+                    <p>Podaj dane logowania, aby kontynuować</p>
+                </div>
             </div>
-            <div style="width: 350px">
+            <div class="field-container">
                 <router-outlet></router-outlet>
-                <!-- <button mat-flat-button color="primary" routerLink="/register">Zarejestruj się</button> -->
             </div>
+        </div>
+        <div style="padding-top: 15px;">
+            <span>
+                Nie masz konta?
+            </span>
+            <a routerLink="/register" class="blue-text-link">Zarejestruj się</a>
         </div>
     </div>
 </div>
