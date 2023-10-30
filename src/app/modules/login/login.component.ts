@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
@@ -34,8 +34,13 @@ export class LoginComponent implements OnInit {
         .subscribe({
           next: (response) => {
             this.loginError = false;
-            this.jwtService.setAccessToken(response.accessToken);
-            this.jwtService.setRefreshToken(response.refreshToken);
+            if (response.landlordAccess) {
+              this.jwtService.setAccessToken(response.accessToken);
+              this.jwtService.setRefreshToken(response.refreshToken);  
+              this.jwtService.setLandlordAccess(true);
+            } else {
+              this.loginError = true;//bo nie jest userem tylko adminem
+            }
             this.router.navigate([""]);//przekierowanie do głównego panelu, jak chcesz to możesz do np (["/apartments"])
           },
           error: () => this.loginError = true

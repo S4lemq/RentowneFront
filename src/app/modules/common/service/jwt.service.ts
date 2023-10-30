@@ -6,6 +6,8 @@ import jwt_decode from 'jwt-decode'
 })
 export class JwtService {
 
+  landlordAccess = false;
+
   constructor() { }
 
   setAccessToken(token: string) {
@@ -32,6 +34,14 @@ export class JwtService {
   private notExpired(token: string): boolean {
     let tokenDecoded = jwt_decode<any>(token);
     return (tokenDecoded.exp * 1000) > new Date().getTime();
+  }
+
+  public setLandlordAccess(landlordAccess: boolean) {
+    this.landlordAccess = landlordAccess;
+  }
+
+  public getLandlordAccess(): boolean {
+    return this.landlordAccess;
   }
 
 }

@@ -12,7 +12,7 @@ export class AuthorizeGuard implements CanActivate {
     ){}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        if (!this.jwtService.isLoggedIn()) {
+        if (!this.jwtService.isLoggedIn() || !this.jwtService.getLandlordAccess()) {
             this.router.navigate(["/login"])
         }
         return true;

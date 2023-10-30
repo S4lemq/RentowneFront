@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthenticationRequestDto } from '../../login/model/authentication-request';
 import { Observable } from 'rxjs';
-import { AuthenticationRequestDto } from './model/authentication-request';
-import { AuthenticationResponseDto } from './model/authentication-response';
+import { AuthenticationResponseDto } from '../../login/model/authentication-response';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class TenanLoginService {
 
   constructor(private http: HttpClient) { }
 

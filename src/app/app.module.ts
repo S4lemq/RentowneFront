@@ -9,6 +9,8 @@ import { EmptyLoginModule } from './layouts/empty-login/empty-login.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './modules/common/interceptor/jwt.interceptor';
 import { AuthorizeGuard } from './modules/common/guard/authorizeGuard';
+import { EmptyTenantLoginModule } from './layouts/empty-tenant-login/empty-tenant-login.module';
+import { TenantFullpageModule } from './layouts/tenant-fullpage/tenant-fullpage.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { AuthorizeGuard } from './modules/common/guard/authorizeGuard';
     AppRoutingModule,
     DefaultModule,
     BrowserAnimationsModule,
-    EmptyLoginModule
+    EmptyLoginModule,
+    EmptyTenantLoginModule,
+    TenantFullpageModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

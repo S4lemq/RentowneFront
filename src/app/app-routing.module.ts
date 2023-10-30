@@ -7,6 +7,10 @@ import { LoginComponent } from './modules/login/login.component';
 import { EmptyLoginComponent } from './layouts/empty-login/empty-login.component';
 import { AuthorizeGuard } from './modules/common/guard/authorizeGuard';
 import { RegisterComponent } from './modules/register/register.component';
+import { EmptyTenantLoginComponent } from './layouts/empty-tenant-login/empty-tenant-login.component';
+import { TenantLoginComponent } from './modules/tenant/tenant-login/tenant-login.component';
+import { TenantFullpageComponent } from './layouts/tenant-fullpage/tenant-fullpage.component';
+import { ProfileComponent } from './modules/tenant/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -20,7 +24,18 @@ const routes: Routes = [
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent}
     ]
+  },
+  {
+    path: '', component: EmptyTenantLoginComponent, children: [
+      {path: 'tenant/login', component: TenantLoginComponent},
+    ]
+  },
+  {
+    path: '', component: TenantFullpageComponent, children: [
+      {path: 'tenant/profile', component: ProfileComponent, canActivate: [AuthorizeGuard]},
+    ]
   }
+
 ];
 
 @NgModule({

@@ -1,1 +1,27 @@
-<p>register works!</p>
+<form [formGroup]="registerForm" (submit)="register()" class="registerForm">
+    <div *ngIf="registerError" class="error">{{registerErrorMessage}}</div>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Imię</mat-label>
+        <input matInput formControlName="firstname">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Nazwisko</mat-label>
+        <input matInput formControlName="lastname">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Adres e-mail</mat-label>
+        <input matInput formControlName="email">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Hasło</mat-label>
+        <input type="password" matInput formControlName="password">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Powtórz hasło</mat-label>
+        <input type="password" matInput formControlName="repeatPassword">
+    </mat-form-field>
+    <mat-checkbox class="checkbox" color="primary" formControlName="mfaEnabled">Dwuskładnikowe uwierzytelnienie</mat-checkbox>
+    
+    <button mat-flat-button color="primary">Zarejestruj się</button>
+</form>
