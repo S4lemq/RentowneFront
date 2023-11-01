@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from 'src/app/modules/register/register.component';
-
+import { FormsModule } from '@angular/forms'; 
 
 
 @NgModule({
@@ -19,7 +19,8 @@ import { RegisterComponent } from 'src/app/modules/register/register.component';
     CommonModule,
     RouterModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class EmptyLoginModule { }

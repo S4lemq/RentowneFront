@@ -11,6 +11,7 @@ import { EmptyTenantLoginComponent } from './layouts/empty-tenant-login/empty-te
 import { TenantLoginComponent } from './modules/tenant/tenant-login/tenant-login.component';
 import { TenantFullpageComponent } from './layouts/tenant-fullpage/tenant-fullpage.component';
 import { ProfileComponent } from './modules/tenant/profile/profile.component';
+import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGuard';
 
 const routes: Routes = [
   {
@@ -32,7 +33,7 @@ const routes: Routes = [
   },
   {
     path: '', component: TenantFullpageComponent, children: [
-      {path: 'tenant/profile', component: ProfileComponent, canActivate: [AuthorizeGuard]},
+      {path: 'tenant/profile', component: ProfileComponent, canActivate: [TenantAuthorizeGuard]},
     ]
   }
 

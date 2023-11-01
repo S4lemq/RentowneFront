@@ -1,4 +1,4 @@
-<div class="login-form">
+<div class="login-form" *ngIf="!authResponse.mfaEnabled">
     <div class="login-controls">
         <div class="logo-container">
             <div class="logo">
@@ -24,4 +24,13 @@
             </form>
         </div>
     </div>
+</div>
+<div class="container" *ngIf="authResponse.mfaEnabled">
+    <span>Uwierzytelnianie dwuskładnikowe</span>
+      <label for="validationCode">Wprowadź 6-cyfrowy kod weryfikacyjny wygenerowany przez Google Authenticator</label>
+      <mat-form-field appearance="outline">
+        <mat-label>Kod</mat-label>
+        <input matInput type="text" id="validationCode" name="validationCode" required [(ngModel)]="otpCode">
+    </mat-form-field>
+    <button mat-flat-button color="primary" (click)="verifyCode()">Potwierdź kod</button>
 </div>

@@ -85,3 +85,11 @@ mat-icon {
 .blue-text-link:hover {
     color: #00004f;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+}

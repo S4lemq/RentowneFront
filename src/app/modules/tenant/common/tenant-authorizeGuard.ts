@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import { JwtService } from "src/app/modules/common/service/jwt.service";
 
 @Injectable()
-export class AuthorizeGuard implements CanActivate {
+export class TenantAuthorizeGuard implements CanActivate {
     
     constructor(
         private jwtService: JwtService,
@@ -12,8 +12,8 @@ export class AuthorizeGuard implements CanActivate {
     ){}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        if (!this.jwtService.isLoggedIn() || !this.jwtService.isLandLord()) {
-            this.router.navigate(["/login"])
+        if (!this.jwtService.isLoggedIn() || this.jwtService.isLandLord()) {
+            this.router.navigate(["/tenant/login"])
         }
         return true;
     }

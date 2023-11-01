@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from './register.service';
 import { JwtService } from '../common/service/jwt.service';
 import { Router } from '@angular/router';
+import { VerificationRequestDto } from './model/register-verify-code';
+import { RegisterRequestDto } from './model/register-request';
+import { RegisterResponseDto } from './model/register-response';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +16,10 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   registerError = false;
   registerErrorMessage = "";
+  registerRequest: RegisterRequestDto = {};
+  registerResponse: RegisterResponseDto = {};
+  otpCode = '';
+  tfaCodeMessage: string = "";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,13 +43,14 @@ export class RegisterComponent implements OnInit {
       this.registerService.register(this.registerForm.value)
       .subscribe({
         next: response => {
-          if (response.landlordAccess) {
-            this.jwtService.setAccessToken(response.accessToken);
-            this.jwtService.setRefreshToken(response.refreshToken);
-            this.jwtService.setLandlordAccess(true);
+          if (!response.mfaEnabled && response.landlordAccess) {
+            this.jwtService.setAccessToken(response.accessToken as string);
+            this.jwtService.setRefreshToken(response.refreshToken as string);
+            this.router.navigate(["/"])
+          } else {
+            this.registerResponse = response;
           }
-          this.router.navigate(["/"])
-        },
+      },
         error: err => {
           this.registerError = true;
           if (err.error.message) {
@@ -53,6 +61,27 @@ export class RegisterComponent implements OnInit {
         }
       });
     }
+  }
+
+  verifyTfa() {
+    this.tfaCodeMessage = "";
+    const verifyRequest: VerificationRequestDto = {
+      email: this.registerForm.value.email,
+      code: this.otpCode
+    };
+    this.registerService.verifyCode(verifyRequest)
+      .subscribe({
+        next: (response) => {
+          this.tfaCodeMessage = "Konto zostało utworzone, za chwilę zostaniesz przekierowany na stronę główną"
+          setTimeout(() => {
+            if (response.landlordAccess) {
+              this.jwtService.setAccessToken(response.accessToken as string);
+              this.jwtService.setRefreshToken(response.refreshToken as string);
+              this.router.navigate(["/"])
+            }
+          }, 3000)
+        }
+      })
   }
 
   private isPasswordIdentical(register: any): boolean {

@@ -1,27 +1,45 @@
-<form [formGroup]="registerForm" (submit)="register()" class="registerForm">
-    <div *ngIf="registerError" class="error">{{registerErrorMessage}}</div>
+<div *ngIf="!registerResponse.mfaEnabled">
+    <form [formGroup]="registerForm" (submit)="register()" class="registerForm">
+        <div *ngIf="registerError" class="error">{{registerErrorMessage}}</div>
 
+        <mat-form-field appearance="outline">
+            <mat-label>Imię</mat-label>
+            <input matInput formControlName="firstname">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Nazwisko</mat-label>
+            <input matInput formControlName="lastname">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Adres e-mail</mat-label>
+            <input matInput formControlName="email">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Hasło</mat-label>
+            <input type="password" matInput formControlName="password">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Powtórz hasło</mat-label>
+            <input type="password" matInput formControlName="repeatPassword">
+        </mat-form-field>
+        <mat-checkbox class="checkbox" color="primary" formControlName="mfaEnabled">Dwuskładnikowe uwierzytelnienie</mat-checkbox>
+        <button mat-flat-button color="primary">Zarejestruj się</button>
+    </form>
+</div>
+
+<div class="container" *ngIf="registerResponse.mfaEnabled">
+    <div class="success-message-panel" *ngIf="tfaCodeMessage">
+        <div class="success-icon">&#10004;</div>
+        <div class="success-message">{{tfaCodeMessage}}</div>
+    </div>
+    <span>Zeskanuj kod QR w aplikacji Google Authenticator</span>
+    <div class="qr-code">
+      <img [src]="registerResponse.secretImageUri" alt="QR Code">
+    </div>
+    <span>Podaj 6 cyfrowy kod wygenerowany przez Google Authenticator</span>
     <mat-form-field appearance="outline">
-        <mat-label>Imię</mat-label>
-        <input matInput formControlName="firstname">
+        <mat-label>Kod</mat-label>
+        <input matInput type="text" id="validationCode" name="validationCode" required [(ngModel)]="otpCode">
     </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>Nazwisko</mat-label>
-        <input matInput formControlName="lastname">
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>Adres e-mail</mat-label>
-        <input matInput formControlName="email">
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>Hasło</mat-label>
-        <input type="password" matInput formControlName="password">
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>Powtórz hasło</mat-label>
-        <input type="password" matInput formControlName="repeatPassword">
-    </mat-form-field>
-    <mat-checkbox class="checkbox" color="primary" formControlName="mfaEnabled">Dwuskładnikowe uwierzytelnienie</mat-checkbox>
-    
-    <button mat-flat-button color="primary">Zarejestruj się</button>
-</form>
+    <button mat-flat-button color="primary" (click)="verifyTfa()">Potwierdź kod</button>
+</div>

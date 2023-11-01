@@ -11,6 +11,7 @@ import { JwtInterceptor } from './modules/common/interceptor/jwt.interceptor';
 import { AuthorizeGuard } from './modules/common/guard/authorizeGuard';
 import { EmptyTenantLoginModule } from './layouts/empty-tenant-login/empty-tenant-login.module';
 import { TenantFullpageModule } from './layouts/tenant-fullpage/tenant-fullpage.module';
+import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGuard';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { TenantFullpageModule } from './layouts/tenant-fullpage/tenant-fullpage.
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    AuthorizeGuard
+    AuthorizeGuard,
+    TenantAuthorizeGuard
   ],
   bootstrap: [AppComponent]
 })
