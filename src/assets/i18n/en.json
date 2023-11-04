@@ -1,0 +1,3 @@
+{
+    "common.message.USER_ALREADY_EXISTS": "The user with the specified e-mail address: {{email}} already exists"
+}

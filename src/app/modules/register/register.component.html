@@ -10,9 +10,10 @@
             <mat-label>Nazwisko</mat-label>
             <input matInput formControlName="lastname">
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Adres e-mail</mat-label>
             <input matInput formControlName="email">
+            <!-- <mat-error *ngIf="emailError">{{ emailError }}</mat-error> -->
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Hasło</mat-label>
@@ -25,6 +26,8 @@
         <mat-checkbox class="checkbox" color="primary" formControlName="mfaEnabled">Dwuskładnikowe uwierzytelnienie</mat-checkbox>
         <button mat-flat-button color="primary">Zarejestruj się</button>
     </form>
+    <button (click)="switchLanguage('pl')">Polski</button>
+<button (click)="switchLanguage('en')">English</button>
 </div>
 
 <div class="container" *ngIf="registerResponse.mfaEnabled">

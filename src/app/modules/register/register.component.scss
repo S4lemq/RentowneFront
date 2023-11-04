@@ -6,12 +6,6 @@
     border-radius: 10px;
 }
 
-.error{
-    color: red;
-    padding: 10px;
-    text-align: center;
-}
-
 ::ng-deep .mat-mdc-checkbox .mdc-checkbox--selected ~ .mdc-checkbox__ripple {
     background: rgb(0, 0, 0) !important;
 }
@@ -62,7 +56,31 @@
     gap: 10px;
 }
 
-/* //change mat-nput size
+
+::ng-deep .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+    color: orange;
+    background-color: yellow;
+    font-size: 14px !important;
+    padding: 0 10px;
+}
+
+::ng-deep .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
+    color: rgb(3, 148, 141 );
+}
+
+
+/* ::ng-deep .mdc-text-field--outlined.mdc-text-field:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+::ng-deep .mdc-text-field--outlined.mdc-text-field:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+::ng-deep .mdc-text-field--outlined.mdc-text-field:not(.mdc-text-field--disabled) .mdc-notched-outline__trailling{
+    border-color: red;
+    border-width: 10px;
+}  */
+
+
+
+  
+/* 
+ //change mat-nput size
 ::ng-deep .mat-mdc-text-field-wrapper {
     height: 35px !important;
 }
@@ -96,9 +114,9 @@
     // background-color: red;
 }
 
+ 
+
  */
-
-
 
 
 

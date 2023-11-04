@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { VerificationRequestDto } from './model/register-verify-code';
 import { RegisterRequestDto } from './model/register-request';
 import { RegisterResponseDto } from './model/register-response';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -21,11 +22,18 @@ export class RegisterComponent implements OnInit {
   otpCode = '';
   tfaCodeMessage: string = "";
 
+  emailError: string | null = null;
+
   constructor(
     private formBuilder: FormBuilder,
     private registerService: RegisterService,
     private jwtService: JwtService,
-    private router: Router) {}
+    private router: Router,
+    private translate: TranslateService) {}
+
+    switchLanguage(language: string) {
+      this.translate.use(language);
+    }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
@@ -52,11 +60,12 @@ export class RegisterComponent implements OnInit {
           }
       },
         error: err => {
-          this.registerError = true;
-          if (err.error.message) {
-            this.registerErrorMessage = err.error.message;
+          if (err && err.error && err.error.field === 'email') {
+            // Jeśli backend zwróci błąd dla pola e-mail, ustaw stan błędu
+            this.emailError = err.error.message || 'Błąd związany z e-mail';
           } else {
-            this.registerErrorMessage = "Coś poszło źle, spróbuj ponownie później";
+            // Dla innych błędów, ustaw ogólny komunikat błędu
+            this.emailError = 'Wystąpił błąd podczas rejestracji. Proszę spróbować ponownie.';
           }
         }
       });
