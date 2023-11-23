@@ -1,3 +1,40 @@
 {
-    "common.message.USER_ALREADY_EXISTS": "Użytkownik o podanym adresie e-mail: {{email}} już istnieje"
+    "server.error.USER_ALREADY_EXISTS": "Podany adres e-mail jest zajęty",
+    "common.error.register.default": "Wystąpił błąd podczas rejestracji. Proszę spróbować ponownie",
+    "register": {
+        "name": "Imię",
+        "surname": "Nazwisko",
+        "email": "Adres e-mail",
+        "password": "Hasło",
+        "repeatPassword": "Powtórz hasło",
+        "mfaEnabled": "Dwuskładnikowe uwierzytelnienie",
+        "submit": "Zarejestruj się",
+        "scanCode": "Zeskanuj kod QR w aplikacji Google Authenticator",
+        "addCode": "Podaj 6 cyfrowy kod wygenerowany przez Google Authenticator",
+        "code": "Kod",
+        "confirmCode": "Potwierdź kod",
+        "error": {
+            "email": "Nieprawidłowy adres e-mail",
+            "password": "Minimum 8 znaków, duża litera, cyfra, znak specjalny",
+            "matchPassword": "Hasła muszą być identyczne"
+        }
+    },
+    "login": {
+        "welcomeInRentowne": "Witaj w Rentowne",
+        "enterData": "Podaj dane logowania, aby kontynuować",
+        "enterCorrectData": "Podaj poprawne dane logowania",
+        "email": "Adres e-mail",
+        "password": "Hasło",
+        "getIn": "Zaloguj",
+        "doNotHaveAccount": "Nie masz konta?",
+        "register": "Zarejestruj się",
+        "tfa": "Uwierzytelnianie dwuskładnikowe",
+        "enterCode": "Wprowadź 6-cyfrowy kod weryfikacyjny wygenerowany przez Google Authenticator",
+        "code": "Kod",
+        "confirmCode": "Potwierdź kod"
+        
+    }
+
+
+    ,"END_OF_FILE": "Dodawaj wpisy powyżej!"
 }

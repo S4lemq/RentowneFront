@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { TenantLoginComponent } from 'src/app/modules/tenant/tenant-login/tenant-login.component';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { EmptyTenantLoginComponent } from './empty-tenant-login.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -18,7 +19,8 @@ import { EmptyTenantLoginComponent } from './empty-tenant-login.component';
     RouterModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class EmptyTenantLoginModule { }

@@ -9,28 +9,28 @@ export class JwtService {
   constructor() { }
 
   setAccessToken(token: string) {
-    localStorage.setItem("accessToken", token);
+    sessionStorage.setItem("accessToken", token);
   }
 
   getAccessToken(): string | null {
-    return localStorage.getItem("accessToken");
+    return sessionStorage.getItem("accessToken");
   }
 
   setRefreshToken(token: string) {
-    localStorage.setItem("refreshToken", token);
+    sessionStorage.setItem("refreshToken", token);
   }
 
   getRefreshToken(): string | null {
-    return localStorage.getItem("refreshToken");
+    return sessionStorage.getItem("refreshToken");
   }
 
   isLoggedIn(): boolean {
-    let token = localStorage.getItem("accessToken");
+    let token = sessionStorage.getItem("accessToken");
     return token != null && this.notExpired(token);
   }
 
   isLandLord(): boolean {
-    let token = <string>localStorage.getItem("accessToken");
+    let token = <string>sessionStorage.getItem("accessToken");
     let tokenDecoded = jwt_decode<any>(token);
     return tokenDecoded.landlordAccess;
   }

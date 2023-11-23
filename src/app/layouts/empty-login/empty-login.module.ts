@@ -7,6 +7,7 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from 'src/app/modules/register/register.component';
 import { FormsModule } from '@angular/forms'; 
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     RouterModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class EmptyLoginModule { }

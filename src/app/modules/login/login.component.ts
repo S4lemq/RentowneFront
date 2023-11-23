@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   authRequest: AuthenticationRequestDto = {};
   otpCode = '';
   authResponse: AuthenticationResponseDto = {};
+  hide = true;
 
   constructor(
     private formBuilder: FormBuilder,

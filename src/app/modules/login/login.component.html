@@ -5,38 +5,42 @@
                 <mat-icon>person</mat-icon>
             </div>
             <div class="logo-text">
-                <span>Witaj w Rentowne</span>
-                <p>Podaj dane logowania, aby kontynuować</p>
+                <span>{{ 'login.welcomeInRentowne' | translate }}</span>
+                <p>{{ 'login.enterData' | translate }}</p>
             </div>
         </div>
         <div class="field-container">
             <form [formGroup]="formGroup" class="form" (submit)="submit()">
-                <div *ngIf="loginError" class="error">Podaj poprawne dane logowania</div>
+                <div *ngIf="loginError" class="error">{{ 'login.enterCorrectData' | translate }}</div>
                 <mat-form-field appearance="outline">
-                    <mat-label>Adres e-mail</mat-label>
+                    <mat-label>{{ 'login.email' | translate }}</mat-label>
                     <input matInput formControlName="email">
                 </mat-form-field>
+                
                 <mat-form-field appearance="outline">
-                    <mat-label>Hasło</mat-label>
-                    <input type="password" matInput formControlName="password">
+                    <mat-label>{{ 'login.password' | translate }}</mat-label>
+                    <input [type]="hide ? 'password' : 'text'" matInput formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
                 </mat-form-field>
-                <button mat-flat-button class="button-login" style="background-color: black; color: white;">Zaloguj</button>
+                <button mat-flat-button class="button-login" style="background-color: black; color: white;">{{ 'login.getIn' | translate }}</button>
             </form>
         </div>
     </div>
     <div style="padding-top: 15px;">
         <span>
-            Nie masz konta?
+            {{ 'login.doNotHaveAccount' | translate }}
         </span>
-        <a routerLink="/register" class="blue-text-link">Zarejestruj się</a>
+        <a routerLink="/register" class="blue-text-link">{{ 'login.register' | translate }}</a>
     </div>
 </div>
 <div class="container" *ngIf="authResponse.mfaEnabled">
-    <span>Uwierzytelnianie dwuskładnikowe</span>
-      <label for="validationCode">Wprowadź 6-cyfrowy kod weryfikacyjny wygenerowany przez Google Authenticator</label>
+    <span>{{ 'login.tfa' | translate }}</span>
+      <label for="validationCode">{{ 'login.enterCode' | translate }}</label>
       <mat-form-field appearance="outline">
-        <mat-label>Kod</mat-label>
+        <mat-label>{{ 'login.code' | translate }}</mat-label>
         <input matInput type="text" id="validationCode" name="validationCode" required [(ngModel)]="otpCode">
     </mat-form-field>
-    <button mat-flat-button color="primary" (click)="verifyCode()">Potwierdź kod</button>
-  </div>
+    <button mat-flat-button color="primary" (click)="verifyCode()">{{ 'login.confirmCode' | translate }}</button>
+</div>

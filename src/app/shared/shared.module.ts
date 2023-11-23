@@ -5,6 +5,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { TranslateAppModule } from '../modules/common/translate/translate.module';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,14 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     RouterModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    TranslateAppModule
   ],
   exports: [
     FooterComponent,
     HeaderComponent,
-    MaterialModule
+    MaterialModule,
+    TranslateAppModule
   ]
 })
 export class SharedModule { }
