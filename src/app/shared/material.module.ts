@@ -5,6 +5,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [],
@@ -14,14 +16,18 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   exports: [
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class MaterialModule { }

@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,10 +13,10 @@ import { EmptyLoginModule } from './layouts/empty-login/empty-login.module';
 import { EmptyTenantLoginModule } from './layouts/empty-tenant-login/empty-tenant-login.module';
 import { TenantFullpageModule } from './layouts/tenant-fullpage/tenant-fullpage.module';
 import { AuthorizeGuard } from './modules/common/guard/authorizeGuard';
-import { JwtInterceptor } from './modules/common/interceptor/jwt.interceptor';
-import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGuard';
 import { ErrorHandlingInterceptor } from './modules/common/interceptor/error-handling.interceptor';
+import { JwtInterceptor } from './modules/common/interceptor/jwt.interceptor';
 import { TranslateAppModule } from './modules/common/translate/translate.module';
+import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGuard';
 
 @NgModule({
   declarations: [
