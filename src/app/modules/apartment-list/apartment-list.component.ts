@@ -18,6 +18,7 @@ export class ApartmentListComponent implements AfterViewInit {
   ];
   totalElements: number = 0;
   apartments: Apartment[] = [];
+  isLoadingResults: boolean = true;
 
   constructor(private dtService: DTService){}
 
@@ -31,9 +32,11 @@ export class ApartmentListComponent implements AfterViewInit {
     this.paginator.page.pipe(
       startWith({}),
       switchMap(() => {
+        this.isLoadingResults = true;
         return this.dtService.getItems(dtDefinition, this.paginator.pageIndex, this.paginator.pageSize, sortDirection, sortColumnName, text, filter);
       }),
       map(data => {
+        this.isLoadingResults = false;
         this.dtService.getItemsCount(dtDefinition, text, filter).subscribe(
           value => this.totalElements = value 
         );
