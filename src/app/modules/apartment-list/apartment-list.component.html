@@ -6,32 +6,38 @@
 
 
   <div class="example-table-container">
-    <table mat-table [dataSource]="apartments" class="example-table">
+    <table mat-table [dataSource]="apartments" class="example-table" matSort>
 
+      <!-- Kolumna ID -->
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="id"> Id </th>
         <td mat-cell *matCellDef="let element"> {{element.id}} </td>
       </ng-container>
 
+      <!-- Kolumna Nazwa Apartamentu -->
       <ng-container matColumnDef="apartmentName">
-        <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="apartmentName"> Nazwa </th>
         <td mat-cell *matCellDef="let element"> {{element.apartmentName}} </td>
       </ng-container>
 
+      <!-- Kolumna Liczba Umów Najmu -->
       <ng-container matColumnDef="leasesNumber">
-        <th mat-header-cell *matHeaderCellDef> Liczba umów najmu </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="leasesNumber"> Liczba umów najmu </th>
         <td mat-cell *matCellDef="let element"> {{element.leasesNumber}} </td>
       </ng-container>
 
+      <!-- Kolumna Wynajęte -->
       <ng-container matColumnDef="isRented">
-        <th mat-header-cell *matHeaderCellDef> Wynajęte </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="isRented"> Wynajęte </th>
         <td mat-cell *matCellDef="let element"> {{element.isRented}} </td>
       </ng-container>
 
+      <!-- Wiersze tabeli -->
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
+
 
   <mat-paginator 
     [pageSizeOptions]="[25, 50, 100]"
