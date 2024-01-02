@@ -1,49 +1,36 @@
-<div class="example-container mat-elevation-z8">
-  <div class="example-loading-shade"
-       *ngIf="isLoadingResults">
-    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+<mat-form-field appearance="fill">
+  <mat-label>{{ 'dataTable.fastSearch' | translate }}</mat-label>
+  <input matInput formControlName="lastname">
+</mat-form-field>
+
+<div class="container">
+  <div class="filter">
+    <h1>filtry</h1>
+  </div>
+  <div class="card-list">
+    <mat-card class="card" *ngFor="let apartment of apartments">
+        <img src="/assets/image/image-placeholder.png" class="container-1">
+
+        <div class="container-2">
+          <p>{{apartment.apartmentName}}</p>
+          <p>Adres: </p>
+          <p>Liczba umów najmu: {{apartment.leasesNumber}}</p>
+        </div>
+
+        <div class="container-3">
+          <p class="income">Nierozliczony dochód:</p>
+          <img src="assets/icons/pin.svg" alt="Pin Icon" class="pin" (click)="pinApartment()">
+        </div>
+    </mat-card>
+
+    <mat-paginator *ngIf="totalElements > 0"
+      [length]="totalElements" 
+      [pageSize]="10"
+      [pageSizeOptions]="[10, 25, 50]"
+      (page)="onPageEvent($event)"
+      >
+    </mat-paginator>
   </div>
 
+</div>  
 
-  <div class="example-table-container">
-    <table mat-table [dataSource]="apartments" class="example-table" matSort>
-
-      <!-- Kolumna ID -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header="id"> Id </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-      </ng-container>
-
-      <!-- Kolumna Nazwa Apartamentu -->
-      <ng-container matColumnDef="apartmentName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header="apartmentName"> Nazwa </th>
-        <td mat-cell *matCellDef="let element"> {{element.apartmentName}} </td>
-      </ng-container>
-
-      <!-- Kolumna Liczba Umów Najmu -->
-      <ng-container matColumnDef="leasesNumber">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header="leasesNumber"> Liczba umów najmu </th>
-        <td mat-cell *matCellDef="let element"> {{element.leasesNumber}} </td>
-      </ng-container>
-
-      <!-- Kolumna Wynajęte -->
-      <ng-container matColumnDef="isRented">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header="isRented"> Wynajęte </th>
-        <td mat-cell *matCellDef="let element"> {{element.isRented}} </td>
-      </ng-container>
-
-      <!-- Wiersze tabeli -->
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  </div>
-
-
-  <mat-paginator 
-    [pageSizeOptions]="[25, 50, 100]"
-    [pageSize]="25"
-    showFirstLastButtons
-    [length]="totalElements">
-  </mat-paginator>
-
-</div>

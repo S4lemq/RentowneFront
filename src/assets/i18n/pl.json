@@ -32,7 +32,15 @@
         "enterCode": "Wprowadź 6-cyfrowy kod weryfikacyjny wygenerowany przez Google Authenticator",
         "code": "Kod",
         "confirmCode": "Potwierdź kod"
-        
+    },
+    "dataTable": {
+        "id": "Id",
+        "fastSearch": "Szybkie wyszukiwanie"
+    },
+    "apartmentDataTable": {
+        "name": "Nazwa",
+        "leasesNumber": "Liczba umów najmu",
+        "isRented": "Wynajęte"
     }
 
 

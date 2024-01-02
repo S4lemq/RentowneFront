@@ -10,7 +10,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>{{ 'register.email' | translate }}</mat-label>
-            <input matInput formControlName="email">
+            <input matInput formControlName="email" placeholder="pat@example.com">
             <mat-error *ngIf="registerForm.get('email')?.invalid">
                 {{ getEmailErrorMessage() }}
             </mat-error>
