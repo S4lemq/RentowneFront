@@ -1,19 +1,53 @@
-<div class="searcher">
-    <mat-form-field appearance="outline" class="border">
-        <input [formControl]="searchInput" class="input-search" matInput (keydown.enter)="onSearchClick()" placeholder="{{ 'dataTable.search' | translate }}">
-        <button mat-icon-button matPrefix (click)="onSearchClick()">
-            <mat-icon>search</mat-icon>
-        </button>
+<div class="container">
+  <div class="filter">
+    
+    <mat-form-field appearance="outline" class="test">
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput [formControl]="searchInput"  
+                (input)="onSearchClick()" 
+                placeholder="{{ 'dataTable.search' | translate }}">
         <button mat-icon-button matSuffix (click)="onCleanSearchClick()">
             <mat-icon>close</mat-icon>
         </button>
     </mat-form-field>
-</div>
+  
+    <mat-form-field>
+      <mat-label>Kierunek sortowania</mat-label>
+      <mat-select [(ngModel)]="selectedSortDirection">
+        <mat-option *ngFor="let sortDirection of sortDirections" [value]="sortDirection.value">
+          {{ sortDirection.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
+    <mat-form-field>
+      <mat-label>Sortuj po</mat-label>
+      <mat-select [(ngModel)]="selectedColumnName">
+        <mat-option *ngFor="let columnName of columnsName" [value]="columnName.value">
+          {{ columnName.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-<div class="container">
-  <div class="filter">
-    
+    <mat-form-field>
+      <mat-label>Liczba umów najmu</mat-label>
+      <mat-select [(ngModel)]="selectedLeasesNumber">
+          <mat-option *ngFor="let number of leasesNumbers" [value]="number">
+              {{number}}
+          </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div style="display: flex; flex-direction: column; padding-bottom: 17px;">
+      <p style="margin: 0;">Czy mieszkanie wynajęte?</p>
+      <mat-checkbox color="primary" class="rented-checkbox" [checked]="isRented === true" 
+                    (change)="onCheckboxChange(true)">Tak</mat-checkbox>
+      <mat-checkbox color="primary" class="rented-checkbox" [checked]="isRented === false" 
+                    (change)="onCheckboxChange(false)">Nie</mat-checkbox>
+    </div>
+
+    <button (click)="filter()" mat-flat-button color="accent" style="background-color: black; color: white;">Filtruj</button>
+
   </div>
   <div class="card-list">
     <mat-card class="card" *ngFor="let apartment of apartments">

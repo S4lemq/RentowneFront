@@ -46,16 +46,40 @@
     width: 25px;
 }
 
+
 .filter {
+    border-radius: 4px;
     margin-right: 20px;
-    width: 350px;
-    height: 800px;
+    width: 300px;
+    padding: 20px 20px 20px 20px;
     background-color: lightgray;
-}
-
-.searcher{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    
 }
 
+::ng-deep .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+    background-color: whitesmoke;
+    border-radius: 4px;
+}
+
+::ng-deep .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper:hover {
+    background-color:rgb(236,236,236);
+    border-radius: 4px;
+}
+
+::ng-deep .mdc-checkbox__native-control {
+    background-color: red;    
+}
+
+.rented-checkbox{
+    margin-left: -10px;
+    margin-top: -5px;
+    margin-bottom: -5px;
+}
+
+.test {
+    /* display: flex;
+    flex-direction: row;
+    flex: 1 1 auto; */
+}
