@@ -1,7 +1,9 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { UntypedFormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { DTService } from 'src/app/shared/data-table/dt.service';
 import { Apartment } from './apartment';
 
@@ -11,16 +13,18 @@ import { Apartment } from './apartment';
   styleUrls: ['./apartment-list.component.scss']
 })
 export class ApartmentListComponent implements OnInit, OnDestroy {
-
   apartments: Apartment[] = [];
   totalElements: number = 0;
+  searchInput!: UntypedFormControl;
 
-  private killer$: Subject<void> = new Subject<void>()
+  private killer$ = new Subject<void>();
 
-  constructor(private dtService: DTService){}
+  constructor(private dtService: DTService) {
+    this.searchInput = new UntypedFormControl();
+  }
 
   ngOnInit(): void {
-    this.getApartmentPage(0, 10);
+    this.loadApartmentPage(0, 10, '');
   }
 
   ngOnDestroy(): void {
@@ -28,34 +32,36 @@ export class ApartmentListComponent implements OnInit, OnDestroy {
     this.killer$.complete();
   }
 
-  onPageEvent(event: PageEvent) {
-    this.getApartmentPage(event.pageIndex, event.pageSize);
+  onSearchClick(): void {
+    let search = this.searchInput.value;
+    if (search != null) { 
+      this.loadApartmentPage(0, 10, search);
+    }
   }
 
-  pinApartment() {
-    
+onCleanSearchClick() {
+    this.searchInput.setValue("");
+    const search = this.searchInput.value;
+    this.loadApartmentPage(0, 10, search);
+}
+
+  onPageEvent(event: PageEvent): void {
+    this.loadApartmentPage(event.pageIndex, event.pageSize, '');
   }
 
-  private getApartmentPage(page: number, size: number) {
+  private loadApartmentPage(page: number, size: number, text: string): void {
     const dtDefinition = 'APARTMENT';
-    const text = '';
-    const filter = {};
 
-    this.dtService.getItemsCount(dtDefinition, text, filter).subscribe(
-      value => this.totalElements = value 
-    );
+    this.dtService.getItemsCount(dtDefinition, text, {})
+      .pipe(takeUntil(this.killer$))
+      .subscribe(value => this.totalElements = value);
 
-    this.dtService.getItems(
-      dtDefinition,
-      page * size,
-      size,
-      "NONE",
-      '',
-      text,
-      filter
-    ).subscribe(
-      data => this.apartments = data as Apartment[]
-    )
+    this.dtService.getItems(dtDefinition, page * size, size, "NONE", '', text, {})
+      .pipe(takeUntil(this.killer$))
+      .subscribe(data => this.apartments = data as Apartment[]);
   }
 
+  pinApartment(): void {
+  }
+  
 }
