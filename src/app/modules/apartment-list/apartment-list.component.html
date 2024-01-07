@@ -12,7 +12,7 @@
     </mat-form-field>
   
     <mat-form-field>
-      <mat-label>Kierunek sortowania</mat-label>
+      <mat-label>{{ 'dataTable.filter.sortDirection' | translate }}</mat-label>
       <mat-select [(ngModel)]="selectedSortDirection">
         <mat-option *ngFor="let sortDirection of sortDirections" [value]="sortDirection.value">
           {{ sortDirection.viewValue }}
@@ -21,7 +21,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Sortuj po</mat-label>
+      <mat-label>{{ 'dataTable.filter.columnName' | translate }}</mat-label>
       <mat-select [(ngModel)]="selectedColumnName">
         <mat-option *ngFor="let columnName of columnsName" [value]="columnName.value">
           {{ columnName.viewValue }}
@@ -30,7 +30,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Liczba umów najmu</mat-label>
+      <mat-label>{{ 'dataTable.filter.leasesNumber' | translate }}</mat-label>
       <mat-select [(ngModel)]="selectedLeasesNumber">
           <mat-option *ngFor="let number of leasesNumbers" [value]="number">
               {{number}}
@@ -39,14 +39,14 @@
     </mat-form-field>
 
     <div style="display: flex; flex-direction: column; padding-bottom: 17px;">
-      <p style="margin: 0;">Czy mieszkanie wynajęte?</p>
+      <p style="margin: 0;">{{ 'dataTable.filter.isRented' | translate }}</p>
       <mat-checkbox color="primary" class="rented-checkbox" [checked]="isRented === true" 
-                    (change)="onCheckboxChange(true)">Tak</mat-checkbox>
+                    (change)="onCheckboxChange(true)">{{ 'common.yes' | translate }}</mat-checkbox>
       <mat-checkbox color="primary" class="rented-checkbox" [checked]="isRented === false" 
-                    (change)="onCheckboxChange(false)">Nie</mat-checkbox>
+                    (change)="onCheckboxChange(false)">{{ 'common.no' | translate }}</mat-checkbox>
     </div>
 
-    <button (click)="filter()" mat-flat-button color="accent" style="background-color: black; color: white;">Filtruj</button>
+    <button (click)="filter()" mat-flat-button color="accent" style="background-color: black; color: white;">{{ 'dataTable.button-filter' | translate }}</button>
 
   </div>
   <div class="card-list">
@@ -54,13 +54,13 @@
         <img src="/assets/image/image-placeholder.png" class="container-1">
 
         <div class="container-2">
-          <p>{{apartment.apartmentName}}</p>
-          <p>Adres: </p>
-          <p>Liczba umów najmu: {{apartment.leasesNumber}}</p>
+          <p class="container-2-name">{{apartment.apartmentName}}</p>
+          <p>{{ 'apartment.card.address' | translate }} {{apartment.cityName}} {{apartment.streetName}} {{apartment.buildingNumber}}{{"/"}}{{apartment.apartmentNumber}}</p>
+          <p>{{ 'apartment.card.leasesNumber' | translate }} {{apartment.leasesNumber}}</p>
         </div>
 
         <div class="container-3">
-          <p class="income">Nierozliczony dochód:</p>
+          <p class="income">{{ 'apartment.card.unsettled-income' | translate }}</p>
           <img src="assets/icons/pin.svg" alt="Pin Icon" class="pin" (click)="pinApartment()">
         </div>
     </mat-card>

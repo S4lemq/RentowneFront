@@ -35,13 +35,28 @@
     },
     "dataTable": {
         "id": "Id",
-        "search": "Wyszukaj"
+        "search": "Wyszukaj",
+        "button-filter": "Filtruj",
+        "filter": {
+            "sortDirection":"Kierunek sortowania",
+            "columnName":"Sortuj po",
+            "leasesNumber": "Liczba umów najmu",
+            "isRented": "Czy mieszkanie wynajęte?"
+        }
     },
     "apartmentDataTable": {
         "name": "Nazwa",
         "leasesNumber": "Liczba umów najmu",
         "isRented": "Wynajęte"
+    },
+    "common.yes": "Tak",
+    "common.no": "Nie",
+    "apartment": {
+        "card.address": "Adres:",
+        "card.leasesNumber":"Liczba umów najmu:",
+        "card.unsettled-income":"Nierozliczony dochód:"
     }
+
 
 
     ,"END_OF_FILE": "Dodawaj wpisy powyżej!"
