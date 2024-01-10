@@ -12,12 +12,16 @@ import { RegisterComponent } from './modules/register/register.component';
 import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGuard';
 import { ProfileComponent } from './modules/tenant/profile/profile.component';
 import { TenantLoginComponent } from './modules/tenant/tenant-login/tenant-login.component';
+import { ApartmentEditComponent } from './modules/apartment-edit/apartment-edit.component';
+import { ApartmentAddComponent } from './modules/apartment-add/apartment-add.component';
 
 const routes: Routes = [
   {
     path: '', component: DefaultComponent, children: [
       {path: '', component: HomeComponent, canActivate: [AuthorizeGuard]},
       {path: 'apartments', component: ApartmentListComponent, canActivate: [AuthorizeGuard]},
+      {path: 'apartments/edit/:id', component: ApartmentEditComponent, canActivate: [AuthorizeGuard]},
+      {path: 'apartments/add', component: ApartmentAddComponent, canActivate: [AuthorizeGuard]},
     ]
   },
   {

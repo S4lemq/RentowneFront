@@ -1,3 +1,7 @@
+<div class="add-apartment-button">
+  <button style="background-color: black; color: white;"
+   mat-raised-button routerLink="/apartments/add">Dodaj mieszkanie <mat-icon>add</mat-icon></button>
+</div>
 <div class="container">
   <div class="filter">
     
@@ -50,12 +54,12 @@
 
   </div>
   <div class="card-list">
-    <mat-card class="card" *ngFor="let apartment of apartments">
+    <mat-card class="card" *ngFor="let apartment of apartments" (click)="navigateToApartment(apartment.id)">
         <img src="/assets/image/image-placeholder.png" class="container-1">
 
         <div class="container-2">
           <p class="container-2-name">{{apartment.apartmentName}}</p>
-          <p>{{ 'apartment.card.address' | translate }} {{apartment.cityName}} {{apartment.streetName}} {{apartment.buildingNumber}}{{"/"}}{{apartment.apartmentNumber}}</p>
+          <p>{{ 'apartment.card.address' | translate }} {{apartment.cityName}} {{'ul.'}} {{apartment.streetName}} {{apartment.buildingNumber}}{{"/"}}{{apartment.apartmentNumber}}</p>
           <p>{{ 'apartment.card.leasesNumber' | translate }} {{apartment.leasesNumber}}</p>
         </div>
 
@@ -63,7 +67,7 @@
           <p class="income">{{ 'apartment.card.unsettled-income' | translate }}</p>
           <img src="assets/icons/pin.svg" alt="Pin Icon" class="pin" (click)="pinApartment()">
         </div>
-    </mat-card>
+    </mat-card> 
 
     <mat-paginator *ngIf="totalElements > 0"
       [length]="totalElements" 

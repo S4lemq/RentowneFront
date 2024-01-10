@@ -8,6 +8,7 @@ import { DTService } from 'src/app/shared/data-table/dt.service';
 import { Apartment } from './apartment';
 import { KeyValue } from './model/key-value';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-apartment-list',
@@ -39,7 +40,7 @@ export class ApartmentListComponent implements OnInit, OnDestroy {
 
   private killer$ = new Subject<void>();
 
-  constructor(private dtService: DTService) {
+  constructor(private dtService: DTService, private router: Router) {
     this.searchInput = new UntypedFormControl();
     this.leasesNumbers = [null, ...Array.from({ length: 21 }, (_, index) => index)];
   }
@@ -54,6 +55,10 @@ export class ApartmentListComponent implements OnInit, OnDestroy {
     this.killer$.next();
     this.killer$.complete();
   }
+
+  navigateToApartment(id: number) {
+    this.router.navigate(['/apartments/edit', id]);
+}
 
   onCheckboxChange(value: boolean) {
     if (this.isRented === value) {

@@ -1,0 +1,10 @@
+<h1>Edycja mieszkania</h1>
+<mat-card class="card">
+    <form [formGroup]="apartmentForm">
+        <app-apartment-form [parentForm]="apartmentForm"></app-apartment-form>
+        <div class="btn">
+            <button mat-flat-button style="background-color: black; color: white;" (click)="submit()">Zapisz</button>
+        </div>
+    </form>
+</mat-card>
+

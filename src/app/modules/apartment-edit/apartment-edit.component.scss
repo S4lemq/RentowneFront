@@ -1,0 +1,21 @@
+.card{
+    padding: 20px;
+}
+
+::ng-deep .snackbar{
+    --mdc-snackbar-container-color: rgb(36, 143, 36);
+}
+
+::ng-deep .mat-mdc-snack-bar-container {
+    --mdc-snackbar-supporting-text-size: 15px !important;
+}
+
+::ng-deep .mat-mdc-snack-bar-label .mdc-snackbar__label{
+    display: flex;
+    justify-content: center;
+}
+
+.btn{
+    display: flex;
+    justify-content: flex-end;
+}

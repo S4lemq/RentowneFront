@@ -54,8 +54,19 @@
     "apartment": {
         "card.address": "Adres:",
         "card.leasesNumber":"Liczba umów najmu:",
-        "card.unsettled-income":"Nierozliczony dochód:"
-    }
+        "card.unsettled-income":"Nierozliczony dochód:",
+        "name": "Nazwa mieszkania",
+        "leasesNumber": "Liczba umów najmu",
+        "area": "Metraż",
+        "street": "Ulica",
+        "buildingNumber": "Numer budynku",
+        "apartmentNumber": "Numer lokalu",
+        "zipCode": "Kod pocztowy",
+        "cityName": "Miejscowość",
+        "voivodeship": "Województwo"
+    },
+    "snackbar.apartmentAdded": "Mieszkanie zostało dodane"
+
 
 
 

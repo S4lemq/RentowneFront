@@ -37,19 +37,22 @@ export class ErrorHandlingInterceptor implements HttpInterceptor {
           // Pobieranie przetłumaczonego komunikatu z ewentualnym parametrem.
           this.translate.get(messageKey, messageParams).subscribe((translatedMessage: string) => {
             // Wyświetl komunikat za pomocą MatSnackBar.
-            this.snackBar.open(translatedMessage, 'Close', {
+            this.snackBar.open(translatedMessage, '', {
               duration: 13000,
               horizontalPosition: 'center',
               verticalPosition: 'bottom',
+              panelClass: ['snackbarError']
             });
           });
         } else {
+          console.log("WCHODZI W ELSE")
           // Jeśli błąd nie ma kodu, wyświetl domyślny komunikat.
           const defaultMessage = 'An unexpected error occurred.';
-          this.snackBar.open(defaultMessage, 'Close', {
+          this.snackBar.open(defaultMessage, '', {
             duration: 3000,
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
+            panelClass: ['snackbarError']
           });
         }
         
