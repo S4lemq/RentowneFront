@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApartmentEditService } from './apartment-edit.service';
-import { ApartmentEditDto } from './model/apartment-edit-dto';
+import { ApartmentDto } from './model/apartment-dto';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddressDto } from './model/address-dto';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -14,7 +14,7 @@ import { ConfirmDialogService } from '../confirm-dialog/confirm-dialog.service';
 })
 export class ApartmentEditComponent implements OnInit{
 
-  apartment!: ApartmentEditDto;
+  apartment!: ApartmentDto;
   apartmentForm!: FormGroup;
   rentedObjectsFormArray!: FormArray;
 
@@ -101,7 +101,7 @@ export class ApartmentEditComponent implements OnInit{
         area: this.apartmentForm.get('area')?.value,
         addressDto: addressDto,
         rentedObjectDtos: rentedObjectsDtosArray
-      } as ApartmentEditDto).subscribe(apartment => {
+      } as ApartmentDto).subscribe(apartment => {
         this.mapFormValues(apartment)
         this.snackBar.open("Mieszkanie zostało zapisane", '', {
           duration: 3000,
@@ -113,7 +113,7 @@ export class ApartmentEditComponent implements OnInit{
     }
   }
 
-  mapFormValues(apartment: ApartmentEditDto): void {
+  mapFormValues(apartment: ApartmentDto): void {
     this.apartmentForm.patchValue({
       apartmentName: apartment.apartmentName,
       leasesNumber: apartment.leasesNumber,

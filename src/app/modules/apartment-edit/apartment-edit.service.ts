@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApartmentEditDto } from './model/apartment-edit-dto';
+import { ApartmentDto } from './model/apartment-dto';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,12 +10,12 @@ export class ApartmentEditService {
 
   constructor(private http: HttpClient) { }
 
-  getApartment(id: number): Observable<ApartmentEditDto> {
-    return this.http.get<ApartmentEditDto>("/api/apartments/" + id);
+  getApartment(id: number): Observable<ApartmentDto> {
+    return this.http.get<ApartmentDto>("/api/apartments/" + id);
   }
 
-  savePost(id: number, value: ApartmentEditDto) {
-    return this.http.put<ApartmentEditDto>("/api/apartments/" + id, value);
+  savePost(id: number, value: ApartmentDto) {
+    return this.http.put<ApartmentDto>("/api/apartments/" + id, value);
   }
 
   delete(id: number): Observable<void> {

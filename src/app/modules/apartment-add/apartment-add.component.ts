@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApartmentAddService } from './apartment-add.service';
 import { AddressDto } from '../apartment-edit/model/address-dto';
-import { ApartmentEditDto } from '../apartment-edit/model/apartment-edit-dto';
+import { ApartmentDto } from '../apartment-edit/model/apartment-dto';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
@@ -88,7 +88,7 @@ export class ApartmentAddComponent implements OnInit{
         area: this.apartmentForm.get('area')?.value,
         addressDto: addressDto,
         rentedObjectDtos: rentedObjectsDtosArray
-      } as ApartmentEditDto).subscribe(apartment => {
+      } as ApartmentDto).subscribe(apartment => {
         const translatedText = this.translateService.instant("snackbar.apartmentAdded");
         this.router.navigate(["/apartments/edit", apartment.id])
             .then(() => this.snackBar.open(translatedText, '', {

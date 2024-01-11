@@ -1,7 +1,7 @@
 import { AddressDto } from "./address-dto"
 import { RentedObjectDto } from "./rented-object-dto"
 
-export interface ApartmentEditDto {
+export interface ApartmentDto {
     id: number
     apartmentName: string
     leasesNumber: number
