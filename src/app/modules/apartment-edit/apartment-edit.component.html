@@ -5,6 +5,17 @@
         <div class="btn">
             <button mat-flat-button style="background-color: black; color: white;" (click)="submit()">Zapisz</button>
         </div>
+        <div formArrayName="rentedObjects">
+            <div *ngFor="let rentedObject of getRentedObjectsFormArray.controls; let i = index" [formGroupName]="i">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'rentedObject.name' | translate }}</mat-label>
+                <input matInput formControlName="rentedObjectName">
+                <mat-error *ngIf="rentedObject.get('rentedObjectName')?.invalid && (rentedObject.get('rentedObjectName')?.dirty || rentedObject.get('rentedObjectName')?.touched)">
+                  {{ 'required' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+        </div>
     </form>
 </mat-card>
 

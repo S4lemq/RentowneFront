@@ -42,7 +42,24 @@
 
 //=============================================================================================================================================
 
+//================================================SNACKBAR=========================
+::ng-deep .snackbarSuccess{
+    --mdc-snackbar-container-color: rgb(36, 143, 36);
+}
+::ng-deep .snackbarError{
+    --mdc-snackbar-container-color: rgb(204, 0, 0);
+}
 
+::ng-deep .mat-mdc-snack-bar-container {
+    --mdc-snackbar-supporting-text-size: 15px !important;
+}
+
+::ng-deep .mat-mdc-snack-bar-label .mdc-snackbar__label{
+    display: flex;
+    justify-content: center;
+}
+
+//===============================================================================
 
 /* 
  //change mat-nput size

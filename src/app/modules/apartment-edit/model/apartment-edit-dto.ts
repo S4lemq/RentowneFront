@@ -1,4 +1,5 @@
 import { AddressDto } from "./address-dto"
+import { RentedObjectDto } from "./rented-object-dto"
 
 export interface ApartmentEditDto {
     id: number
@@ -6,4 +7,5 @@ export interface ApartmentEditDto {
     leasesNumber: number
     area: number
     addressDto: AddressDto
+    rentedObjectDtos: RentedObjectDto[]
 }

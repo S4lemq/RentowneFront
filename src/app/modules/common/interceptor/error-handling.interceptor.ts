@@ -45,7 +45,6 @@ export class ErrorHandlingInterceptor implements HttpInterceptor {
             });
           });
         } else {
-          console.log("WCHODZI W ELSE")
           // Jeśli błąd nie ma kodu, wyświetl domyślny komunikat.
           const defaultMessage = 'An unexpected error occurred.';
           this.snackBar.open(defaultMessage, '', {

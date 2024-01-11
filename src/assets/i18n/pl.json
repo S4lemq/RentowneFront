@@ -65,10 +65,13 @@
         "cityName": "Miejscowość",
         "voivodeship": "Województwo"
     },
-    "snackbar.apartmentAdded": "Mieszkanie zostało dodane"
+    "snackbar.apartmentAdded": "Mieszkanie zostało dodane",
+    "rentedObject.name": "Nazwa kawalerki",
+    "required": "Wartość wymagana",
+    "common.message.NON_UNIQUE_RENTED_OBJECT_NAME":"Nazwy kawalerek muszą być unikalne",
 
 
 
 
-    ,"END_OF_FILE": "Dodawaj wpisy powyżej!"
+    "END_OF_FILE": "Dodawaj wpisy powyżej!"
 }

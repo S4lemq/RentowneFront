@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApartmentEditService } from './apartment-edit.service';
 import { ApartmentEditDto } from './model/apartment-edit-dto';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddressDto } from './model/address-dto';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -15,6 +15,7 @@ export class ApartmentEditComponent implements OnInit{
 
   apartment!: ApartmentEditDto;
   apartmentForm!: FormGroup;
+  rentedObjectsFormArray!: FormArray;
 
   constructor(
     private router: ActivatedRoute,
@@ -24,6 +25,7 @@ export class ApartmentEditComponent implements OnInit{
 
   ngOnInit(): void {
     this.getApartment();
+    
     this.apartmentForm = new FormGroup({
       apartmentName: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(60)]),
       leasesNumber: new FormControl('', [Validators.required, Validators.min(1), Validators.max(99)]),
@@ -34,13 +36,42 @@ export class ApartmentEditComponent implements OnInit{
       zipCode: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]),
       cityName: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(60)]),
       voivodeship: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(60)]),
-    })
+      rentedObjects: new FormArray([])
+    });
+    this.apartmentForm.get('leasesNumber')?.valueChanges.subscribe((leasesNumber: number) => {
+      this.updateRentedObjects(leasesNumber);
+    });
   }
+
+  private updateRentedObjects(leasesNumber: number): void {
+    this.rentedObjectsFormArray = this.apartmentForm.get('rentedObjects') as FormArray;
+    const currentNumber = this.rentedObjectsFormArray.length;
+
+    if (leasesNumber > currentNumber) {
+      for (let i = currentNumber; i < leasesNumber; i++) {
+        this.rentedObjectsFormArray.push(new FormGroup({
+          rentedObjectName: new FormControl('', Validators.required)
+        }));
+      }
+    } else if (leasesNumber < currentNumber) {
+      for (let i = currentNumber; i > leasesNumber; i--) {
+        this.rentedObjectsFormArray.removeAt(i - 1);
+      }
+    }
+  }
+
+  get getRentedObjectsFormArray(): FormArray {
+    return this.apartmentForm.get('rentedObjects') as FormArray;
+  }
+  
 
   getApartment() {
     let id = Number(this.router.snapshot.params['id']);
     this.apartmentEditService.getApartment(id)
-      .subscribe(apartment => this.mapFormValues(apartment));
+      .subscribe(apartment => {
+        this.mapFormValues(apartment)
+        this.apartment = apartment;
+      });
   }
 
   submit() {
@@ -48,6 +79,7 @@ export class ApartmentEditComponent implements OnInit{
       let id = Number(this.router.snapshot.params['id']);
 
       const addressDto: AddressDto = {
+        id: this.apartment.addressDto.id,
         streetName: this.apartmentForm.get('streetName')?.value,
         buildingNumber: this.apartmentForm.get('buildingNumber')?.value,
         apartmentNumber: this.apartmentForm.get('apartmentNumber')?.value,
@@ -56,16 +88,21 @@ export class ApartmentEditComponent implements OnInit{
         voivodeship: this.apartmentForm.get('voivodeship')?.value,
       }
 
+      const rentedObjectsDtosArray = Array.from(this.getRentedObjectsFormArray.controls, control => ({
+        rentedObjectName: control.get('rentedObjectName')?.value
+      }));
+
       this.apartmentEditService.savePost(id, {
         apartmentName: this.apartmentForm.get('apartmentName')?.value,
         leasesNumber: this.apartmentForm.get('leasesNumber')?.value,
         area: this.apartmentForm.get('area')?.value,
-        addressDto: addressDto
+        addressDto: addressDto,
+        rentedObjectDtos: rentedObjectsDtosArray
       } as ApartmentEditDto).subscribe(apartment => {
         this.mapFormValues(apartment)
         this.snackBar.open("Mieszkanie zostało zapisane", '', {
           duration: 3000,
-          panelClass: ['snackbar']
+          panelClass: ['snackbarSuccess']
         });
       });
     } else {
@@ -74,7 +111,7 @@ export class ApartmentEditComponent implements OnInit{
   }
 
   mapFormValues(apartment: ApartmentEditDto): void {
-    return this.apartmentForm.setValue({
+    this.apartmentForm.patchValue({
       apartmentName: apartment.apartmentName,
       leasesNumber: apartment.leasesNumber,
       area: apartment.area,
@@ -84,7 +121,10 @@ export class ApartmentEditComponent implements OnInit{
       zipCode: apartment.addressDto.zipCode,
       cityName: apartment.addressDto.cityName,
       voivodeship: apartment.addressDto.voivodeship,
-    })
+      rentedObjects: apartment.rentedObjectDtos
+    });
+
   }
+  
 
 }
