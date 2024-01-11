@@ -3,7 +3,8 @@
     <form [formGroup]="apartmentForm">
         <app-apartment-form [parentForm]="apartmentForm"></app-apartment-form>
         <div class="btn">
-            <button mat-flat-button style="background-color: black; color: white;" (click)="submit()">Zapisz</button>
+            <button mat-flat-button style="background-color: black; color: white;" (click)="submit()" [disabled]="!apartmentForm.dirty">Zapisz</button>
+            <button mat-flat-button color="warn" (click)="confirmDelete(apartment.id)">Usuń</button>
         </div>
         <div formArrayName="rentedObjects">
             <div *ngFor="let rentedObject of getRentedObjectsFormArray.controls; let i = index" [formGroupName]="i">

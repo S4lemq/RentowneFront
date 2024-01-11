@@ -17,4 +17,8 @@ export class ApartmentEditService {
   savePost(id: number, value: ApartmentEditDto) {
     return this.http.put<ApartmentEditDto>("/api/apartments/" + id, value);
   }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>("/api/apartments/" + id);
+  }
 }

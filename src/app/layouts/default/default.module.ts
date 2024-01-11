@@ -9,6 +9,7 @@ import { DefaultComponent } from './default.component';
 import { ApartmentEditComponent } from 'src/app/modules/apartment-edit/apartment-edit.component';
 import { ApartmentAddComponent } from 'src/app/modules/apartment-add/apartment-add.component';
 import { ApartmentFormComponent } from 'src/app/modules/apartment-form/apartment-form.component';
+import { ConfirmDialogComponent } from 'src/app/modules/confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ApartmentFormComponent } from 'src/app/modules/apartment-form/apartment
     ApartmentListComponent,
     ApartmentEditComponent,
     ApartmentAddComponent,
-    ApartmentFormComponent
+    ApartmentFormComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,

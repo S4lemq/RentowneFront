@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApartmentEditService } from './apartment-edit.service';
 import { ApartmentEditDto } from './model/apartment-edit-dto';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddressDto } from './model/address-dto';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmDialogService } from '../confirm-dialog/confirm-dialog.service';
 
 @Component({
   selector: 'app-apartment-edit',
@@ -18,9 +19,11 @@ export class ApartmentEditComponent implements OnInit{
   rentedObjectsFormArray!: FormArray;
 
   constructor(
-    private router: ActivatedRoute,
+    private acitvatedRoute: ActivatedRoute,
     private apartmentEditService: ApartmentEditService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialogService: ConfirmDialogService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -66,7 +69,7 @@ export class ApartmentEditComponent implements OnInit{
   
 
   getApartment() {
-    let id = Number(this.router.snapshot.params['id']);
+    let id = Number(this.acitvatedRoute.snapshot.params['id']);
     this.apartmentEditService.getApartment(id)
       .subscribe(apartment => {
         this.mapFormValues(apartment)
@@ -76,7 +79,7 @@ export class ApartmentEditComponent implements OnInit{
 
   submit() {
     if(this.apartmentForm.valid) {
-      let id = Number(this.router.snapshot.params['id']);
+      let id = Number(this.acitvatedRoute.snapshot.params['id']);
 
       const addressDto: AddressDto = {
         id: this.apartment.addressDto.id,
@@ -124,6 +127,19 @@ export class ApartmentEditComponent implements OnInit{
       rentedObjects: apartment.rentedObjectDtos
     });
 
+  }
+
+  confirmDelete(id: number) {
+    this.dialogService.openConfirmDialog("Czy na pewno chcesz usunąć mieszkanie?")
+      .afterClosed()
+        .subscribe(result => {
+          if(result) {
+            this.apartmentEditService.delete(id)
+              .subscribe(() => {
+                this.router.navigate(["/apartments"])
+              });
+          }
+        });
   }
   
 

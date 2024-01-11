@@ -12,6 +12,7 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
 import {FormsModule} from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -28,7 +29,8 @@ import {FormsModule} from '@angular/forms';
     MatSortModule,
     MatCardModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ],
   exports: [
     MatIconModule,
@@ -42,7 +44,8 @@ import {FormsModule} from '@angular/forms';
     MatSortModule,
     MatCardModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule { }

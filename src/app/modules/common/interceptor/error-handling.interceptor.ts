@@ -46,7 +46,7 @@ export class ErrorHandlingInterceptor implements HttpInterceptor {
           });
         } else {
           // Jeśli błąd nie ma kodu, wyświetl domyślny komunikat.
-          const defaultMessage = 'An unexpected error occurred.';
+          const defaultMessage = 'Wystąpił nieoczekiwany błąd, skonsultuj się z Administratorem.';
           this.snackBar.open(defaultMessage, '', {
             duration: 3000,
             horizontalPosition: 'center',
