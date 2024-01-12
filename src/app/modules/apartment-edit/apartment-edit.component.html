@@ -3,7 +3,7 @@
     <form [formGroup]="apartmentForm">
         <app-apartment-form [parentForm]="apartmentForm"></app-apartment-form>
         <div class="btn">
-            <button mat-flat-button style="background-color: black; color: white;" (click)="submit()" [disabled]="!apartmentForm.dirty">Zapisz</button>
+            <button mat-flat-button style="background-color: black; color: white;" (click)="submit()" [disabled]="!apartmentForm.dirty && !this.imageUploaded">Zapisz</button>
             <button mat-flat-button color="warn" (click)="confirmDelete(apartment.id)">Usuń</button>
         </div>
         <div formArrayName="rentedObjects">
@@ -17,6 +17,11 @@
               </mat-form-field>
             </div>
         </div>
+    </form>
+    <img *ngIf="image" src="{{'/api/data/apartmentImage/' + image}}" width="220" height="165">
+    <form [formGroup]="imageForm" (submit)="uploadFile()">
+      <input type="file" [accept]="requredFileTypes" (change)="onFileChange($event)">
+      <button mat-flat-button style="background-color: black; color: white;">Wgraj zdjęcie</button>
     </form>
 </mat-card>
 

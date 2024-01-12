@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApartmentDto } from './model/apartment-dto';
 import { Observable } from 'rxjs';
+import { UploadResponse } from './model/upload-response';
 
 @Injectable({
   providedIn: 'root'
@@ -21,4 +22,9 @@ export class ApartmentEditService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>("/api/apartments/" + id);
   }
+
+  uploadImage(formData: FormData): Observable<UploadResponse> {
+    return this.http.post<UploadResponse>("/api/apartments/upload-image", formData);
+  }
+
 }

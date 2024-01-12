@@ -17,6 +17,10 @@ export class ApartmentEditComponent implements OnInit{
   apartment!: ApartmentDto;
   apartmentForm!: FormGroup;
   rentedObjectsFormArray!: FormArray;
+  requredFileTypes = "image/jpeg, image/png";
+  imageForm!: FormGroup;
+  image: string | null = null;
+  imageUploaded: boolean = false;
 
   constructor(
     private acitvatedRoute: ActivatedRoute,
@@ -28,6 +32,10 @@ export class ApartmentEditComponent implements OnInit{
 
   ngOnInit(): void {
     this.getApartment();
+
+    this.imageForm = new FormGroup({
+      file: new FormControl('')
+    });
     
     this.apartmentForm = new FormGroup({
       apartmentName: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(60)]),
@@ -79,6 +87,7 @@ export class ApartmentEditComponent implements OnInit{
 
   submit() {
     if(this.apartmentForm.valid) {
+      this.imageUploaded = false;
       let id = Number(this.acitvatedRoute.snapshot.params['id']);
 
       const addressDto: AddressDto = {
@@ -100,7 +109,8 @@ export class ApartmentEditComponent implements OnInit{
         leasesNumber: this.apartmentForm.get('leasesNumber')?.value,
         area: this.apartmentForm.get('area')?.value,
         addressDto: addressDto,
-        rentedObjectDtos: rentedObjectsDtosArray
+        rentedObjectDtos: rentedObjectsDtosArray,
+        image: this.image
       } as ApartmentDto).subscribe(apartment => {
         this.mapFormValues(apartment)
         this.snackBar.open("Mieszkanie zostało zapisane", '', {
@@ -126,7 +136,7 @@ export class ApartmentEditComponent implements OnInit{
       voivodeship: apartment.addressDto.voivodeship,
       rentedObjects: apartment.rentedObjectDtos
     });
-
+    this.image = apartment.image;
   }
 
   confirmDelete(id: number) {
@@ -140,6 +150,28 @@ export class ApartmentEditComponent implements OnInit{
               });
           }
         });
+  }
+
+  uploadFile() {
+    let formData = new FormData();
+    formData.append('file', this.imageForm.get('file')?.value);
+    this.apartmentEditService.uploadImage(formData)
+      .subscribe(result => {
+        this.image = result.filename;
+        this.snackBar.open("Plik graficzny został wgrany", '', {
+          duration: 3000,
+          panelClass: ['snackbarSuccess']
+        });
+        this.imageUploaded = true;
+      });
+  }
+
+  onFileChange(event: any){
+    if(event.target.files.length > 0){
+      this.imageForm.patchValue({
+        file: event.target.files[0]
+      });
+    }
   }
   
 

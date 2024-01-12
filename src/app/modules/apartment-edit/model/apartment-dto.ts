@@ -6,6 +6,7 @@ export interface ApartmentDto {
     apartmentName: string
     leasesNumber: number
     area: number
+    image: string
     addressDto: AddressDto
     rentedObjectDtos: RentedObjectDto[]
 }
