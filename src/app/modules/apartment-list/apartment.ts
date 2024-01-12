@@ -9,4 +9,5 @@ export interface Apartment extends DTRow {
     streetName: string
     buildingNumber: string
     apartmentNumber: string
+    image: string
 }

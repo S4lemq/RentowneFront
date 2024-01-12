@@ -21,6 +21,7 @@ export class ApartmentEditComponent implements OnInit{
   imageForm!: FormGroup;
   image: string | null = null;
   imageUploaded: boolean = false;
+  imageSelected: boolean = false;
 
   constructor(
     private acitvatedRoute: ActivatedRoute,
@@ -163,11 +164,13 @@ export class ApartmentEditComponent implements OnInit{
           panelClass: ['snackbarSuccess']
         });
         this.imageUploaded = true;
+        this.imageSelected = false;
       });
   }
 
   onFileChange(event: any){
     if(event.target.files.length > 0){
+      this.imageSelected = true;
       this.imageForm.patchValue({
         file: event.target.files[0]
       });

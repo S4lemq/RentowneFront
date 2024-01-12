@@ -21,7 +21,7 @@
     <img *ngIf="image" src="{{'/api/data/apartmentImage/' + image}}" width="220" height="165">
     <form [formGroup]="imageForm" (submit)="uploadFile()">
       <input type="file" [accept]="requredFileTypes" (change)="onFileChange($event)">
-      <button mat-flat-button style="background-color: black; color: white;">Wgraj zdjęcie</button>
+      <button mat-flat-button style="background-color: black; color: white;" [disabled]="!this.imageSelected">Wgraj zdjęcie</button>
     </form>
 </mat-card>
 

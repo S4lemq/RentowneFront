@@ -52,7 +52,6 @@
     "common.yes": "Tak",
     "common.no": "Nie",
     "apartment": {
-        "card.address": "Adres:",
         "card.leasesNumber":"Liczba umów najmu:",
         "card.unsettled-income":"Nierozliczony dochód:",
         "name": "Nazwa mieszkania",

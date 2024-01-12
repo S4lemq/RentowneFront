@@ -2,13 +2,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DTService } from 'src/app/shared/data-table/dt.service';
 import { Apartment } from './apartment';
 import { KeyValue } from './model/key-value';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-apartment-list',
