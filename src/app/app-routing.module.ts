@@ -14,9 +14,16 @@ import { ProfileComponent } from './modules/tenant/profile/profile.component';
 import { TenantLoginComponent } from './modules/tenant/tenant-login/tenant-login.component';
 import { ApartmentEditComponent } from './modules/apartment-edit/apartment-edit.component';
 import { ApartmentAddComponent } from './modules/apartment-add/apartment-add.component';
+import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { SettingsComponent } from './modules/settings/settings.component';
 
 const routes: Routes = [
-  {
+  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+  {path: 'dashboard', component: DashboardComponent},
+  {path: 'settings', component: SettingsComponent},
+  {path: 'apartments', component: ApartmentListComponent},
+
+  /* {
     path: '', component: DefaultComponent, children: [
       {path: '', component: HomeComponent, canActivate: [AuthorizeGuard]},
       {path: 'apartments', component: ApartmentListComponent, canActivate: [AuthorizeGuard]},
@@ -39,7 +46,7 @@ const routes: Routes = [
     path: '', component: TenantFullpageComponent, children: [
       {path: 'tenant/profile', component: ProfileComponent, canActivate: [TenantAuthorizeGuard]},
     ]
-  }
+  } */
 
 ];
 
