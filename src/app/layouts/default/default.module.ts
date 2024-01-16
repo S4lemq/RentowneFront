@@ -10,6 +10,10 @@ import { ApartmentEditComponent } from 'src/app/modules/apartment-edit/apartment
 import { ApartmentAddComponent } from 'src/app/modules/apartment-add/apartment-add.component';
 import { ApartmentFormComponent } from 'src/app/modules/apartment-form/apartment-form.component';
 import { ConfirmDialogComponent } from 'src/app/modules/confirm-dialog/confirm-dialog.component';
+import { BodyComponent } from 'src/app/modules/body/body.component';
+import { SidenavComponent } from 'src/app/modules/sidenav/sidenav.component';
+import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
+import { SettingsComponent } from 'src/app/modules/settings/settings.component';
 
 
 @NgModule({
@@ -20,13 +24,20 @@ import { ConfirmDialogComponent } from 'src/app/modules/confirm-dialog/confirm-d
     ApartmentEditComponent,
     ApartmentAddComponent,
     ApartmentFormComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    BodyComponent,
+    SidenavComponent,
+    DashboardComponent,
+    SettingsComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     SharedModule,
     ReactiveFormsModule
+  ],
+  exports: [
+    BodyComponent
   ]
 })
 export class DefaultModule { }

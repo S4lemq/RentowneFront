@@ -18,13 +18,11 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'settings', component: SettingsComponent},
-  {path: 'apartments', component: ApartmentListComponent},
 
-  /* {
+   {
     path: '', component: DefaultComponent, children: [
+      {path: 'settings', component: SettingsComponent},
+      {path: 'dashboard', component: DashboardComponent},
       {path: '', component: HomeComponent, canActivate: [AuthorizeGuard]},
       {path: 'apartments', component: ApartmentListComponent, canActivate: [AuthorizeGuard]},
       {path: 'apartments/edit/:id', component: ApartmentEditComponent, canActivate: [AuthorizeGuard]},
@@ -46,7 +44,7 @@ const routes: Routes = [
     path: '', component: TenantFullpageComponent, children: [
       {path: 'tenant/profile', component: ProfileComponent, canActivate: [TenantAuthorizeGuard]},
     ]
-  } */
+  } 
 
 ];
 

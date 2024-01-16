@@ -1,54 +1,56 @@
-<div *ngIf="!registerResponse.mfaEnabled">
-    <form [formGroup]="registerForm" class="registerForm">
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'register.name' | translate }}</mat-label>
-            <input matInput formControlName="firstname">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'register.surname' | translate }}</mat-label>
-            <input matInput formControlName="lastname">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'register.email' | translate }}</mat-label>
-            <input matInput formControlName="email" placeholder="pat@example.com">
-            <mat-error *ngIf="registerForm.get('email')?.invalid">
-                {{ getEmailErrorMessage() }}
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'register.password' | translate }}</mat-label>
-            <input [type]="hide ? 'password' : 'text'" matInput formControlName="password">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-            <mat-error *ngIf="registerForm.get('password')?.errors?.['pattern']">
-                {{ 'register.error.password' | translate }}
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'register.repeatPassword' | translate }}</mat-label>
-            <input [type]="hide ? 'password' : 'text'" matInput formControlName="repeatPassword">
-            <mat-error *ngIf="registerForm.get('repeatPassword')?.errors?.['passwordMatchError']">
-                {{ 'register.error.matchPassword' | translate }}
-            </mat-error>
-        </mat-form-field>
-        <mat-checkbox class="checkbox" color="primary" formControlName="mfaEnabled">{{ 'register.mfaEnabled' | translate }}</mat-checkbox>
-        <button mat-flat-button color="primary" (click)="register()">{{ 'register.submit' | translate }}</button>
-    </form>
-</div>
-<div class="container" *ngIf="registerResponse.mfaEnabled">
-    <div class="success-message-panel" *ngIf="tfaCodeMessage">
-        <div class="success-icon">&#10004;</div>
-        <div class="success-message">{{tfaCodeMessage}}</div>
+<div class="layout">
+    <div *ngIf="!registerResponse.mfaEnabled">
+        <form [formGroup]="registerForm" class="registerForm">
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'register.name' | translate }}</mat-label>
+                <input matInput formControlName="firstname">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'register.surname' | translate }}</mat-label>
+                <input matInput formControlName="lastname">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'register.email' | translate }}</mat-label>
+                <input matInput formControlName="email" placeholder="pat@example.com">
+                <mat-error *ngIf="registerForm.get('email')?.invalid">
+                    {{ getEmailErrorMessage() }}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'register.password' | translate }}</mat-label>
+                <input [type]="hide ? 'password' : 'text'" matInput formControlName="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="registerForm.get('password')?.errors?.['pattern']">
+                    {{ 'register.error.password' | translate }}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'register.repeatPassword' | translate }}</mat-label>
+                <input [type]="hide ? 'password' : 'text'" matInput formControlName="repeatPassword">
+                <mat-error *ngIf="registerForm.get('repeatPassword')?.errors?.['passwordMatchError']">
+                    {{ 'register.error.matchPassword' | translate }}
+                </mat-error>
+            </mat-form-field>
+            <mat-checkbox class="checkbox" color="primary" formControlName="mfaEnabled">{{ 'register.mfaEnabled' | translate }}</mat-checkbox>
+            <button mat-flat-button style="background-color: black; color: white;" (click)="register()">{{ 'register.submit' | translate }}</button>
+        </form>
     </div>
-    <span>{{ 'register.scanCode' | translate }}</span>
-    <div class="qr-code">
-      <img [src]="registerResponse.secretImageUri" alt="QR Code">
+    <div class="container" *ngIf="registerResponse.mfaEnabled">
+        <div class="success-message-panel" *ngIf="tfaCodeMessage">
+            <div class="success-icon">&#10004;</div>
+            <div class="success-message">{{tfaCodeMessage}}</div>
+        </div>
+        <span>{{ 'register.scanCode' | translate }}</span>
+        <div class="qr-code">
+        <img [src]="registerResponse.secretImageUri" alt="QR Code">
+        </div>
+        <span>{{ 'register.addCode' | translate }}</span>
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'register.code' | translate }}</mat-label>
+            <input matInput type="text" id="validationCode" name="validationCode" required [(ngModel)]="otpCode">
+        </mat-form-field>
+        <button mat-flat-button color="primary" (click)="verifyTfa()">{{ 'register.confirmCode' | translate }}</button>
     </div>
-    <span>{{ 'register.addCode' | translate }}</span>
-    <mat-form-field appearance="outline">
-        <mat-label>{{ 'register.code' | translate }}</mat-label>
-        <input matInput type="text" id="validationCode" name="validationCode" required [(ngModel)]="otpCode">
-    </mat-form-field>
-    <button mat-flat-button color="primary" (click)="verifyTfa()">{{ 'register.confirmCode' | translate }}</button>
 </div>

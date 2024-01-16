@@ -1,46 +1,48 @@
-<div class="login-form" *ngIf="!authResponse.mfaEnabled">
-    <div class="login-controls">
-        <div class="logo-container">
-            <div class="logo">
-                <mat-icon>person</mat-icon>
+<div class="layout">
+    <div class="login-form" *ngIf="!authResponse.mfaEnabled">
+        <div class="login-controls">
+            <div class="logo-container">
+                <div class="logo">
+                    <mat-icon>person</mat-icon>
+                </div>
+                <div class="logo-text">
+                    <span>{{ 'login.welcomeInRentowne' | translate }}</span>
+                    <p>{{ 'login.enterData' | translate }}</p>
+                </div>
             </div>
-            <div class="logo-text">
-                <span>{{ 'login.welcomeInRentowne' | translate }}</span>
-                <p>{{ 'login.enterData' | translate }}</p>
+            <div class="field-container">
+                <form [formGroup]="formGroup" class="form" (submit)="submit()">
+                    <div *ngIf="loginError" class="error">{{ 'login.enterCorrectData' | translate }}</div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{ 'login.email' | translate }}</mat-label>
+                        <input matInput formControlName="email">
+                    </mat-form-field>
+                    
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{ 'login.password' | translate }}</mat-label>
+                        <input [type]="hide ? 'password' : 'text'" matInput formControlName="password">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <button mat-flat-button class="button-login" style="background-color: black; color: white;">{{ 'login.getIn' | translate }}</button>
+                </form>
             </div>
         </div>
-        <div class="field-container">
-            <form [formGroup]="formGroup" class="form" (submit)="submit()">
-                <div *ngIf="loginError" class="error">{{ 'login.enterCorrectData' | translate }}</div>
-                <mat-form-field appearance="outline">
-                    <mat-label>{{ 'login.email' | translate }}</mat-label>
-                    <input matInput formControlName="email">
-                </mat-form-field>
-                
-                <mat-form-field appearance="outline">
-                    <mat-label>{{ 'login.password' | translate }}</mat-label>
-                    <input [type]="hide ? 'password' : 'text'" matInput formControlName="password">
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                </mat-form-field>
-                <button mat-flat-button class="button-login" style="background-color: black; color: white;">{{ 'login.getIn' | translate }}</button>
-            </form>
+        <div style="padding-top: 15px;">
+            <span>
+                {{ 'login.doNotHaveAccount' | translate }}
+            </span>
+            <a routerLink="/register" class="blue-text-link">{{ 'login.register' | translate }}</a>
         </div>
     </div>
-    <div style="padding-top: 15px;">
-        <span>
-            {{ 'login.doNotHaveAccount' | translate }}
-        </span>
-        <a routerLink="/register" class="blue-text-link">{{ 'login.register' | translate }}</a>
+    <div class="container" *ngIf="authResponse.mfaEnabled">
+        <span>{{ 'login.tfa' | translate }}</span>
+        <label for="validationCode">{{ 'login.enterCode' | translate }}</label>
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'login.code' | translate }}</mat-label>
+            <input matInput type="text" id="validationCode" name="validationCode" required [(ngModel)]="otpCode">
+        </mat-form-field>
+        <button mat-flat-button color="primary" (click)="verifyCode()">{{ 'login.confirmCode' | translate }}</button>
     </div>
-</div>
-<div class="container" *ngIf="authResponse.mfaEnabled">
-    <span>{{ 'login.tfa' | translate }}</span>
-      <label for="validationCode">{{ 'login.enterCode' | translate }}</label>
-      <mat-form-field appearance="outline">
-        <mat-label>{{ 'login.code' | translate }}</mat-label>
-        <input matInput type="text" id="validationCode" name="validationCode" required [(ngModel)]="otpCode">
-    </mat-form-field>
-    <button mat-flat-button color="primary" (click)="verifyCode()">{{ 'login.confirmCode' | translate }}</button>
 </div>

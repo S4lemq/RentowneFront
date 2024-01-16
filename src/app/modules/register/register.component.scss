@@ -3,12 +3,20 @@
     flex-direction: column;
     background-color: white;
     padding: 40px;
+    width: 400px;
     border-radius: 10px;
+}
+
+.layout{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .checkbox {
     padding-bottom: 15px;
-    // margin-left: -10px;
+    margin-left: -10px;
 }
 
 .container {
@@ -29,33 +37,3 @@
   margin-left: -17px;
   margin-right: -40px;
 }
-
-/* .mat-mdc-form-field-error-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 0;
-}  */
-  
-
-
-/* 
-.email-field-error ::ng-deep .mdc-text-field:not(.mdc-text-field-disabled) .mdc-floating-label {
-    color: red;
-}
- 
-.email-field-error ::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
-.email-field-error ::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
-.email-field-error ::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing{
-    border-color: red;
-    border-width: 2px;
-}
-
-.email-field-error ::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline .mdc-notched-outline__leading,
-.email-field-error ::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline .mdc-notched-outline__notch,
-.email-field-error ::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline .mdc-notched-outline__trailing{
-    border-color: red;
-}
-
- */

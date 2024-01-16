@@ -1,3 +1,4 @@
+
 .container {
     display: flex;
     box-sizing: border-box;
@@ -40,13 +41,23 @@
 }
 
 .income{
-    flex: 1 1 auto;
+    display: flex;
+    margin: 0;
 }
 
 .pin{
     width: 25px;
 }
 
+.pin-div{
+    flex: 1 1 auto;
+}
+
+.income-value{
+    font-size: 18px;
+    font-weight: 500;
+    color: #DB2700;
+}
 
 .filter {
     border-radius: 4px;

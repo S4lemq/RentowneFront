@@ -1,3 +1,4 @@
+<div class="test">
 <div class="add-apartment-button">
   <button style="background-color: black; color: white;"
    mat-raised-button routerLink="/apartments/add">Dodaj Nieruchomość<mat-icon>add</mat-icon></button>
@@ -12,7 +13,7 @@
                 placeholder="{{ 'dataTable.search' | translate }}">
         <button mat-icon-button matSuffix (click)="onCleanSearchClick()">
           <i class="fa-solid fa-xmark"></i>
-            <!-- <mat-icon>close</mat-icon> -->
+            <mat-icon>close</mat-icon>
         </button>
     </mat-form-field>
   
@@ -66,8 +67,13 @@
         </div>
 
         <div class="container-3">
+          <div class="pin-div">
+            <i class="fal fa-thumbtack" style="font-size: 22px; padding-top: 2px;" (click)="pinApartment()"></i>
+          </div>
           <p class="income">{{ 'apartment.card.unsettled-income' | translate }}</p>
-          <img src="assets/icons/pin.svg" alt="Pin Icon" class="pin" (click)="pinApartment()">
+          <div class="income-value">
+            2137.34 zł
+          </div>
         </div>
     </mat-card> 
 
@@ -81,4 +87,4 @@
   </div>
 
 </div>  
-
+</div>
