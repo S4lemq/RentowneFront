@@ -18,9 +18,8 @@ import { Router } from '@angular/router';
         <a class="sublevel-nav-link"
           (click)="handleClick(item)"
           *ngIf="item.items && item.items.length > 0"
-          [ngClass]="getActiveClass(item)"]
+          [ngClass]="getActiveClass(item)"
         >
-          <i class="i sublevel-link-icon fa fa-circle"></i>
           <span class="sublevel-link-text" @fadeInOut
            *ngIf="collapsed">{{item.label}}</span>
           <i *ngIf="item.items && collapsed" class="menu-collapse-icon"
@@ -33,7 +32,6 @@ import { Router } from '@angular/router';
           routerLinkActive="active-sublevel"
           [routerLinkActiveOptions]="{exact: true}"
         >
-          <i class="i sublevel-link-icon fa fa-circle"></i>
           <span class="sublevel-link-text" @fadeInOut
             *ngIf="collapsed">{{item.label}}</span>
         </a>
@@ -47,6 +45,7 @@ import { Router } from '@angular/router';
         </div>
       </li>
     </ul>
+
   `,
   styleUrls: ['./sidenav.component.scss'],
   animations: [
