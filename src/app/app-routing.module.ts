@@ -6,7 +6,6 @@ import { EmptyTenantLoginComponent } from './layouts/empty-tenant-login/empty-te
 import { TenantFullpageComponent } from './layouts/tenant-fullpage/tenant-fullpage.component';
 import { ApartmentListComponent } from './modules/apartment-list/apartment-list.component';
 import { AuthorizeGuard } from './modules/common/guard/authorizeGuard';
-import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
 import { RegisterComponent } from './modules/register/register.component';
 import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGuard';
@@ -22,8 +21,7 @@ const routes: Routes = [
    {
     path: '', component: DefaultComponent, children: [
       {path: 'settings', component: SettingsComponent, canActivate: [AuthorizeGuard]},
-      {path: 'dashboard', component: DashboardComponent},
-      {path: '', component: HomeComponent, canActivate: [AuthorizeGuard]},
+      {path: 'dashboard', component: DashboardComponent, canActivate: [AuthorizeGuard]},
       {path: 'apartments', component: ApartmentListComponent, canActivate: [AuthorizeGuard]},
       {path: 'apartments/edit/:id', component: ApartmentEditComponent, canActivate: [AuthorizeGuard]},
       {path: 'apartments/add', component: ApartmentAddComponent, canActivate: [AuthorizeGuard]},

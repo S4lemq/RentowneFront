@@ -2,6 +2,11 @@ import { InavbarData } from "./helper";
 
 export const navbarData: InavbarData[] = [
     {
+        routeLink: 'dashboard',
+        icon: 'fal fa-server',
+        label: 'Panel'
+    },
+    {
         routeLink: 'apartments',
         icon: 'fal fa-home-lg-alt',
         label: 'Nieruchomości',
@@ -63,10 +68,5 @@ export const navbarData: InavbarData[] = [
         ]
     },
     
-/*     {
-        routeLink: 'dashboard',
-        icon: 'fal fa-money-bill-wave',
-        label: 'Dashboard'
-    } */
 
 ];
