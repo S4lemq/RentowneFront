@@ -21,7 +21,7 @@ const routes: Routes = [
 
    {
     path: '', component: DefaultComponent, children: [
-      {path: 'settings', component: SettingsComponent},
+      {path: 'settings', component: SettingsComponent, canActivate: [AuthorizeGuard]},
       {path: 'dashboard', component: DashboardComponent},
       {path: '', component: HomeComponent, canActivate: [AuthorizeGuard]},
       {path: 'apartments', component: ApartmentListComponent, canActivate: [AuthorizeGuard]},

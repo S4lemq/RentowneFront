@@ -17,13 +17,10 @@ import { ErrorHandlingInterceptor } from './modules/common/interceptor/error-han
 import { JwtInterceptor } from './modules/common/interceptor/jwt.interceptor';
 import { TranslateAppModule } from './modules/common/translate/translate.module';
 import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGuard';
-import { SidenavComponent } from './modules/sidenav/sidenav.component';
-import { DashboardComponent } from './modules/dashboard/dashboard.component';
-import { SettingsComponent } from './modules/settings/settings.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
 
   ],
   imports: [

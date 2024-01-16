@@ -1,8 +1,44 @@
-export const navbarData = [
+import { InavbarData } from "./helper";
+
+export const navbarData: InavbarData[] = [
     {
         routeLink: 'apartments',
         icon: 'fal fa-home-lg-alt',
-        label: 'Nieruchomości'
+        label: 'Nieruchomości',
+        items: [
+            {
+                routeLink: 'apartments',
+                label: 'Nieruchomości'
+            },
+            {
+                routeLink: 'apartments/add',
+                label: 'Dodaj nieruchomość'
+            },
+            {
+                routeLink: 'test/level1.1',
+                label: 'level 1.1',
+                items: [
+                    {
+                        routeLink: '',
+                        label: 'level 2.1'
+                    },
+                    {
+                        routeLink: '',
+                        label: 'level 2.2',
+                        items: [
+                            {
+                                routeLink: '',
+                                label: 'level 3.1'
+                            },
+                            {
+                                routeLink: '',
+                                label: 'level 3.2'
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     },
     {
         routeLink: 'tenants',
@@ -12,7 +48,7 @@ export const navbarData = [
     {
         routeLink: 'utility-providers',
         icon: 'fal fa-address-card',
-        label: 'Dostawcy świadczeń'
+        label: 'Dostawcy'
     },
     {
         routeLink: 'meters',
@@ -28,7 +64,8 @@ export const navbarData = [
         routeLink: 'analytics',
         icon: 'fal fa-chart-line',
         label: 'Analizy'
-    },{
+    },
+    {
         routeLink: 'agreements',
         icon: 'fal fa-copy',
         label: 'Umowy'
@@ -36,7 +73,18 @@ export const navbarData = [
     {
         routeLink: 'settings',
         icon: 'fal fa-cog',
-        label: 'Ustawienia'
+        label: 'Ustawienia',
+        expanded: true,
+        items: [
+            {
+                routeLink: 'settings',
+                label: 'Profil'
+            },
+            {
+                routeLink: 'settings/customize',
+                label: 'Personalizuj'
+            }
+        ]
     },
     
 /*     {

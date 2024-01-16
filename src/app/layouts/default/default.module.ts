@@ -14,6 +14,7 @@ import { BodyComponent } from 'src/app/modules/body/body.component';
 import { SidenavComponent } from 'src/app/modules/sidenav/sidenav.component';
 import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
 import { SettingsComponent } from 'src/app/modules/settings/settings.component';
+import { SublevelMenuComponent } from 'src/app/modules/sidenav/sublevel-menu.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { SettingsComponent } from 'src/app/modules/settings/settings.component';
     BodyComponent,
     SidenavComponent,
     DashboardComponent,
-    SettingsComponent
+    SettingsComponent,
+    SublevelMenuComponent,
   ],
   imports: [
     CommonModule,
