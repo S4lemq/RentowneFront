@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
             if(response.landlordAccess && !response.mfaEnabled) {
               this.jwtService.setAccessToken(response.accessToken as string);
               this.jwtService.setRefreshToken(response.refreshToken as string);
-              this.router.navigate([""]);//przekierowanie do głównego panelu, jak chcesz to możesz do np (["/apartments"])
+              this.router.navigate(["/dashboard"]);//przekierowanie do głównego panelu, jak chcesz to możesz do np (["/apartments"])
             } else if (response.landlordAccess && !this.authResponse.mfaEnabled) {
               this.authResponse = response;
             } else {
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
             if (response.landlordAccess) {
               this.jwtService.setAccessToken(response.accessToken as string);
               this.jwtService.setRefreshToken(response.refreshToken as string);
-              this.router.navigate([""]);//przekierowanie do głównego panelu, jak chcesz to możesz do np (["/apartments"])
+              this.router.navigate(["/dashboard"]);//przekierowanie do głównego panelu, jak chcesz to możesz do np (["/apartments"])
             }
         }
       })

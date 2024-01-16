@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
           if (!response.mfaEnabled && response.landlordAccess) {
             this.jwtService.setAccessToken(response.accessToken as string);
             this.jwtService.setRefreshToken(response.refreshToken as string);
-            this.router.navigate(["/"])
+            this.router.navigate(["/dashboard"])
           } else {
             this.registerResponse = response;
           }
@@ -104,7 +104,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
             if (response.landlordAccess) {
               this.jwtService.setAccessToken(response.accessToken as string);
               this.jwtService.setRefreshToken(response.refreshToken as string);
-              this.router.navigate(["/"])
+              this.router.navigate(["/dashboard"])
             }
           }, 3000)
         }
