@@ -1,6 +1,9 @@
 <div class="layout">
     <div *ngIf="!registerResponse.mfaEnabled">
         <form [formGroup]="registerForm" class="registerForm">
+            <div class="fields">
+                
+            </div>
             <mat-form-field appearance="outline">
                 <mat-label>{{ 'register.name' | translate }}</mat-label>
                 <input matInput formControlName="firstname">
@@ -37,20 +40,32 @@
             <button mat-flat-button style="background-color: black; color: white;" (click)="register()">{{ 'register.submit' | translate }}</button>
         </form>
     </div>
-    <div class="container" *ngIf="registerResponse.mfaEnabled">
-        <div class="success-message-panel" *ngIf="tfaCodeMessage">
-            <div class="success-icon">&#10004;</div>
-            <div class="success-message">{{tfaCodeMessage}}</div>
+    <div class="main-otp-container" *ngIf="registerResponse.mfaEnabled">
+        <div class="container">
+            <div class="verify-text-container-1">
+                <span class="verify-text-1">{{ 'register.scanCode' | translate }}</span>
+            </div>
+    
+            <div class="qr-code">
+                <img [src]="registerResponse.secretImageUri" alt="QR Code" style="width: 250px; height: 250px;">
+            </div>
+    
+            <div class="verify-text-container-2">
+                <span class="verify-text-2">{{ 'register.addCode' | translate }}</span>
+            </div>
+    
+            <ng-otp-input
+                [ngClass]="{'red-border': invalidCode}" 
+                (onInputChange)="onOtpChange($event)" 
+                [config]="otpConfig"
+            ></ng-otp-input>
+            <div [ngClass]="getErrorClass()">
+                Nieprawidłowy kod
+            </div>
+            <div class="btn-container">
+                <button mat-flat-button color="primary" class="verify-code-btn" (click)="verifyTfa()" [disabled]="otpLength !== 6">{{ 'register.confirmCode' | translate }}</button>
+            </div>
         </div>
-        <span>{{ 'register.scanCode' | translate }}</span>
-        <div class="qr-code">
-        <img [src]="registerResponse.secretImageUri" alt="QR Code">
-        </div>
-        <span>{{ 'register.addCode' | translate }}</span>
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'register.code' | translate }}</mat-label>
-            <input matInput type="text" id="validationCode" name="validationCode" required [(ngModel)]="otpCode">
-        </mat-form-field>
-        <button mat-flat-button color="primary" (click)="verifyTfa()">{{ 'register.confirmCode' | translate }}</button>
     </div>
+    
 </div>

@@ -93,10 +93,67 @@ mat-icon {
     color: #00004f;
 }
 
+.main-otp-container {
+    width: 497px;
+    height: 221px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-code-empty {
+    margin-left: 48px;
+    font-size: 12px;
+    color: white;
+    padding: 5px 0 5px 0;
+}
+
+.error-code-visible {
+    margin-left: 48px;
+    font-size: 12px;
+    color: red;
+    padding: 5px 0 5px 0;
+}
+
+
 .container {
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    background-color: white;
-    border-radius: 5px;
 }
+
+.btn-container {
+    // margin-top: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.verify-code-btn{
+    width: 150px;
+}
+
+.verify-text-container-1 {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.verify-text-container-2 {
+    display: flex;
+    justify-content: center;
+}
+
+.verify-text-1 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.verify-text-2 {
+    font-size: 15px;
+}
+
+.red-border .each_input {
+    border: 2px solid red !important;
+}
+

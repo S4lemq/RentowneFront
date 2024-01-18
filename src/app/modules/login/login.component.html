@@ -36,13 +36,27 @@
             <a routerLink="/register" class="blue-text-link">{{ 'login.register' | translate }}</a>
         </div>
     </div>
-    <div class="container" *ngIf="authResponse.mfaEnabled">
-        <span>{{ 'login.tfa' | translate }}</span>
-        <label for="validationCode">{{ 'login.enterCode' | translate }}</label>
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'login.code' | translate }}</mat-label>
-            <input matInput type="text" id="validationCode" name="validationCode" required [(ngModel)]="otpCode">
-        </mat-form-field>
-        <button mat-flat-button color="primary" (click)="verifyCode()">{{ 'login.confirmCode' | translate }}</button>
+
+    <div class="main-otp-container" *ngIf="authResponse.mfaEnabled">
+        <div class="container">
+            <div class="verify-text-container-1">
+                <span class="verify-text-1">{{ 'login.tfa' | translate }}</span>
+            </div>
+            <div class="verify-text-container-2">
+                <span class="verify-text-2">{{ 'login.addCode' | translate }}</span>
+            </div>
+            <ng-otp-input
+                [ngClass]="{'red-border': invalidCode}" 
+                (onInputChange)="onOtpChange($event)" 
+                [config]="otpConfig"
+            ></ng-otp-input>
+            <div [ngClass]="getErrorClass()">
+                Nieprawidłowy kod
+            </div>
+            <div class="btn-container">
+                <button mat-flat-button color="primary" class="verify-code-btn" (click)="verifyCode()" [disabled]="otpLength !== 6">{{ 'login.confirmCode' | translate }}</button>
+            </div>
+        </div>
     </div>
+
 </div>

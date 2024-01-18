@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AuthenticationRequestDto } from './model/authentication-request';
 import { AuthenticationResponseDto } from './model/authentication-response';
 import { VerificationRequestDto } from '../register/model/register-verify-code';
+import { NgOtpInputConfig } from 'ng-otp-input';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,27 @@ export class LoginComponent implements OnInit {
   otpCode = '';
   authResponse: AuthenticationResponseDto = {};
   hide = true;
+  invalidCode: boolean = false;
+  otpLength: number = 0;
+
+  otpConfig: NgOtpInputConfig = {
+    allowNumbersOnly: true,
+    length: 6,
+    isPasswordInput: false,
+    disableAutoFocus: false,
+    placeholder: '',
+    inputStyles:{
+      'display':'flex',
+      'border-color': 'initial'
+    },
+    containerStyles:{
+      'display':'flex',
+      'justify-content': 'center',
+      'padding-top': '20px'
+    },
+    inputClass:'each_input',
+    containerClass:'all_inputs'
+  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,6 +55,11 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
+  }
+
+  onOtpChange(value: string): void {
+    this.otpCode = value;
+    this.otpLength = value.length;
   }
 
   submit() {
@@ -69,8 +96,33 @@ export class LoginComponent implements OnInit {
               this.jwtService.setRefreshToken(response.refreshToken as string);
               this.router.navigate(["/dashboard"]);//przekierowanie do głównego panelu, jak chcesz to możesz do np (["/apartments"])
             }
+        },
+        error: () => {
+          this.invalidCode = true;
+          this.updateInputStyles();
         }
       })
+  }
+
+  updateInputStyles() {
+    if (this.otpConfig.inputStyles) {
+      this.otpConfig.inputStyles['border-color'] = this.invalidCode ? 'red' : 'initial';
+    } else {
+      this.otpConfig.inputStyles = {
+        'display': 'flex',
+        'border-color': this.invalidCode ? 'red' : 'initial'
+      };
+    }
+  }
+
+  getErrorClass(): string {
+    let styleClass = '';
+    if (this.invalidCode) {
+      styleClass = 'error-code-visible';
+    } else {
+      styleClass = 'error-code-empty';
+    }
+    return styleClass;
   }
 
 }

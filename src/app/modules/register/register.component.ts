@@ -9,6 +9,7 @@ import { RegisterRequestDto } from './model/register-request';
 import { RegisterResponseDto } from './model/register-response';
 import { VerificationRequestDto } from './model/register-verify-code';
 import { RegisterService } from './register.service';
+import { NgOtpInputConfig } from 'ng-otp-input';
 
 @Component({
   selector: 'app-register',
@@ -22,8 +23,28 @@ export class RegisterComponent implements OnInit, OnDestroy {
   registerRequest: RegisterRequestDto = {};
   registerResponse: RegisterResponseDto = {};
   otpCode = '';
-  tfaCodeMessage: string = "";
   hide = true;
+  invalidCode: boolean = false;
+  otpLength: number = 0;
+
+  otpConfig: NgOtpInputConfig = {
+    allowNumbersOnly: true,
+    length: 6,
+    isPasswordInput: false,
+    disableAutoFocus: false,
+    placeholder: '',
+    inputStyles:{
+      'display':'flex',
+      'border-color': 'initial'
+    },
+    containerStyles:{
+      'display':'flex',
+      'justify-content': 'center',
+      'padding-top': '20px'
+    },
+    inputClass:'each_input',
+    containerClass:'all_inputs'
+  };
   
   emailError: string | null = null;
 
@@ -56,6 +77,21 @@ export class RegisterComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.killer$.next();
     this.killer$.complete();
+  }
+
+  onOtpChange(value: string): void {
+    this.otpCode = value;
+    this.otpLength = value.length;
+  }
+
+  getErrorClass(): string {
+    let styleClass = '';
+    if (this.invalidCode) {
+      styleClass = 'error-code-visible';
+    } else {
+      styleClass = 'error-code-empty';
+    }
+    return styleClass;
   }
   
   register() {
@@ -90,7 +126,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   verifyTfa() {
-    this.tfaCodeMessage = "";
     const verifyRequest: VerificationRequestDto = {
       email: this.registerForm.value.email,
       code: this.otpCode
@@ -99,14 +134,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.killer$))
       .subscribe({
         next: (response) => {
-          this.tfaCodeMessage = "Konto zostało utworzone, za chwilę zostaniesz przekierowany na stronę główną"
-          setTimeout(() => {
-            if (response.landlordAccess) {
-              this.jwtService.setAccessToken(response.accessToken as string);
-              this.jwtService.setRefreshToken(response.refreshToken as string);
-              this.router.navigate(["/dashboard"])
-            }
-          }, 3000)
+          if (response.landlordAccess) {
+            this.jwtService.setAccessToken(response.accessToken as string);
+            this.jwtService.setRefreshToken(response.refreshToken as string);
+            this.router.navigate(["/dashboard"])
+          }
+        },
+        error: () => {
+          this.invalidCode = true;
+          this.updateInputStyles();
         }
       })
   }
@@ -121,6 +157,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
       }
     }
     return '';
+  }
+
+  updateInputStyles() {
+    if (this.otpConfig.inputStyles) {
+      this.otpConfig.inputStyles['border-color'] = this.invalidCode ? 'red' : 'initial';
+    } else {
+      this.otpConfig.inputStyles = {
+        'display': 'flex',
+        'border-color': this.invalidCode ? 'red' : 'initial'
+      };
+    }
   }
 
 }

@@ -2,9 +2,10 @@
     display: flex;
     flex-direction: column;
     background-color: white;
-    padding: 40px;
+    padding: 20px 40px 20px 40px;
     width: 400px;
     border-radius: 10px;
+    gap: 8px;
 }
 
 .layout{
@@ -15,19 +16,25 @@
 }
 
 .checkbox {
-    padding-bottom: 15px;
+    margin-top: -10px;
+    padding-bottom: 10px;
     margin-left: -10px;
+}
+
+.main-otp-container {
+    width: 517px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 5px;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    background-color: white;
-    border-radius: 5px;
-    gap: 10px;
 }
-
 
  .mat-mdc-form-field-error {
   margin-top: -3px;
@@ -37,3 +44,58 @@
   margin-left: -17px;
   margin-right: -40px;
 }
+
+.btn-container {
+    padding-top: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.verify-text-container-1 {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.verify-text-1 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+
+.verify-code-btn{
+    width: 150px;
+}
+
+.error-code-empty {
+    margin-left: 58px;
+    font-size: 12px;
+    color: white;
+    padding: 5px 0 5px 0;
+}
+
+.error-code-visible {
+    margin-left: 58px;
+    font-size: 12px;
+    color: red;
+    padding: 5px 0 5px 0;
+}
+
+.red-border .each_input {
+    border: 2px solid red !important;
+}
+
+.qr-code {
+    display: flex;
+    justify-content: center;
+}
+
+.verify-text-container-2 {
+    display: flex;
+    justify-content: center;
+}
+
+.verify-text-2 {
+    font-size: 15px;
+}
+

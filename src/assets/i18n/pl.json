@@ -10,7 +10,7 @@
         "mfaEnabled": "Dwuskładnikowe uwierzytelnienie",
         "submit": "Zarejestruj się",
         "scanCode": "Zeskanuj kod QR w aplikacji Google Authenticator",
-        "addCode": "Podaj 6 cyfrowy kod wygenerowany przez Google Authenticator",
+        "addCode": "Podaj 6-cyfrowy kod wygenerowany w aplikacji",
         "code": "Kod",
         "confirmCode": "Potwierdź kod",
         "error": {
@@ -31,7 +31,8 @@
         "tfa": "Uwierzytelnianie dwuskładnikowe",
         "enterCode": "Wprowadź 6-cyfrowy kod weryfikacyjny wygenerowany przez Google Authenticator",
         "code": "Kod",
-        "confirmCode": "Potwierdź kod"
+        "confirmCode": "Potwierdź kod",
+        "addCode": "Podaj 6-cyfrowy kod wygenerowany przez Google Authenticator"
     },
     "dataTable": {
         "id": "Id",
