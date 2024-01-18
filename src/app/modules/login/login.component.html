@@ -12,15 +12,20 @@
             </div>
             <div class="field-container">
                 <form [formGroup]="formGroup" class="form" (submit)="submit()">
-                    <div *ngIf="loginError" class="error">{{ 'login.enterCorrectData' | translate }}</div>
                     <mat-form-field appearance="outline">
                         <mat-label>{{ 'login.email' | translate }}</mat-label>
                         <input matInput formControlName="email">
+                        <mat-error *ngIf="this.email?.invalid">
+                            {{getEmailErrorMsg()}}
+                        </mat-error>
                     </mat-form-field>
                     
                     <mat-form-field appearance="outline">
                         <mat-label>{{ 'login.password' | translate }}</mat-label>
                         <input [type]="hide ? 'password' : 'text'" matInput formControlName="password">
+                        <mat-error *ngIf="this.password?.invalid">
+                            {{getPasswordErrorMsg()}}
+                        </mat-error>
                         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>

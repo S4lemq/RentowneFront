@@ -63,8 +63,9 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    if(this.formGroup.valid) {
-      this.loginService.login(this.formGroup.value)
+    if (this.email && this.password) {
+      if (!this.email.hasError('email') && !this.email.hasError('required') && !this.password.hasError('required')) {
+        this.loginService.login(this.formGroup.value)
         .subscribe({
           next: (response) => {
             this.loginError = false;
@@ -78,8 +79,11 @@ export class LoginComponent implements OnInit {
               this.loginError = true;//bo nie jest userem tylko adminem
             }
           },
-          error: () => this.loginError = true
+          error: err => {
+            this.formGroup.controls['password'].setErrors({ server: true }); // Ustawienie błędu pochodzącego z serwera na kontrolce formularza
+          }
         })
+      }
     }
   }
 
@@ -123,6 +127,43 @@ export class LoginComponent implements OnInit {
       styleClass = 'error-code-empty';
     }
     return styleClass;
+  }
+
+  getEmailErrorMsg() {
+    const emailControl = this.email;
+    if (emailControl) {
+      if (emailControl.hasError('email')) {
+        return 'Nieprawidłowy format e-mail';
+      } else if (emailControl.hasError('required')) {
+        return 'Wartość wymagana';
+      }
+    }
+    return '';
+  }
+
+  getPasswordErrorMsg() {
+    const passwordControl = this.password;
+    const emailControl = this.formGroup.get('email');
+    if (passwordControl) {
+      if (passwordControl.hasError('required')) {
+        return 'Wartość wymagana';
+      } else if (passwordControl.hasError('server')) {
+        if (emailControl) {
+          // Ustawienie błędu 'invalid' na kontrolce email
+          emailControl.setErrors({ invalid: true });
+        }
+        return 'Nieprawidłowy adres e-mail lub hasło';
+      }
+    }
+    return '';
+  }
+
+  get email() {
+    return this.formGroup.get("email");
+  }
+
+  get password() {
+    return this.formGroup.get("password");
   }
 
 }
