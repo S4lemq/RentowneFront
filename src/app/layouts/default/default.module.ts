@@ -14,6 +14,9 @@ import { SidenavComponent } from 'src/app/modules/sidenav/sidenav.component';
 import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
 import { SettingsComponent } from 'src/app/modules/settings/settings.component';
 import { SublevelMenuComponent } from 'src/app/modules/sidenav/sublevel-menu.component';
+import { HeaderComponent } from 'src/app/modules/header/header.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { CdkMenuModule } from '@angular/cdk/menu';
 
 
 @NgModule({
@@ -29,12 +32,15 @@ import { SublevelMenuComponent } from 'src/app/modules/sidenav/sublevel-menu.com
     DashboardComponent,
     SettingsComponent,
     SublevelMenuComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    OverlayModule,
+    CdkMenuModule
   ],
   exports: [
     BodyComponent

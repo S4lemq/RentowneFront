@@ -1,3 +1,9 @@
+
+.text-style {
+    color: rgb(130, 189, 243);
+    font-weight: bold;
+}
+
 .card {
     display: flex;
     flex-direction: column;
@@ -12,6 +18,8 @@
         border-bottom: 1px solid #edf1f7;
         font-size: 1rem;
         font-weight: 600;
+        // background-color: #556ee640;
+        // color: #556ee6;
     }
 
     .card-body {

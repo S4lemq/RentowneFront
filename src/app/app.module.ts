@@ -21,7 +21,6 @@ import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGu
 @NgModule({
   declarations: [
     AppComponent
-
   ],
   imports: [
     BrowserModule,
