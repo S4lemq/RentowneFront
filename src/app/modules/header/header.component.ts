@@ -1,5 +1,7 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { languages, notifications, userItems } from './header-dummy-data';
+import { LogoutService } from '../login/logout.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -23,9 +25,23 @@ export class HeaderComponent implements OnInit {
     this.checkCanShowSearchAsOverlay(window.innerWidth);
   }
 
+  constructor(
+    private logoutService: LogoutService,
+    private router: Router) {}
+
   ngOnInit(): void {
     this.checkCanShowSearchAsOverlay(window.innerWidth);
     this.selectedLanguage = this.languages[0];
+  }
+
+  onMenuClick(itemLabel: string) {
+    if (itemLabel === 'Logout') {
+      this.logoutService.logout().subscribe(() => {
+        sessionStorage.removeItem('accessToken');
+        sessionStorage.removeItem('refreshToken');
+        this.router.navigate(['/login']);
+      });
+    }
   }
 
   getHeadClass(): string {
