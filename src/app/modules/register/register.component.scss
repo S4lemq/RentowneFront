@@ -90,3 +90,25 @@
     font-size: 15px;
 }
 
+.logo-container {
+    display: flex;
+    align-items: center; 
+    gap: 15px; 
+    margin-bottom: 10px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    background-color: #000; 
+    color: #fff;
+}
+
+.register-text {
+    font-size: 20px;
+    font-weight: 500;
+}

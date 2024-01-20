@@ -25,8 +25,19 @@ export class ErrorHandlingInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         console.log(error);
         // Sprawdź, czy błąd jest specyficznym błędem autoryzacji Google.
-        if (error.error && error.error.message === 'WRONG_GOOGLE_AUTH_CODE') {
+        if (error.error && ((error.error.message === 'WRONG_GOOGLE_AUTH_CODE') || (error.error.message === 'BAD_CREDENTIALS'))) {
           // Ignoruj ten błąd i przekaż go dalej bez wyświetlania komunikatu.
+          return throwError(() => error);
+        }
+        if(error.status === 504) {
+          this.translate.get("snackbar.server-error").subscribe((translatedMessage: string) => {
+            this.snackBar.open(translatedMessage, '', {
+              duration: 13000,
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom',
+              panelClass: ['snackbarError']
+            });
+          });
           return throwError(() => error);
         }
 
