@@ -13,7 +13,7 @@
                     *ngIf="data.items && data.items.length > 0"
                     [ngClass]="getActiveClass(data)"
                 >
-                    <i class="sidenav-link-icon" [class]="data.icon"></i>
+                    <i class="sidenav-link-icon" [class]="data.icon" (click)="toggleCollapse()"></i>
                     <span class="sidenav-link-text" fadeInOut *ngIf="collapsed">
                         {{data.label}}
                     </span>
