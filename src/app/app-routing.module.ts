@@ -15,6 +15,8 @@ import { ApartmentEditComponent } from './modules/apartment-edit/apartment-edit.
 import { ApartmentAddComponent } from './modules/apartment-add/apartment-add.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { SettingsComponent } from './modules/settings/settings.component';
+import { MeterAddComponent } from './modules/meter-add/meter-add.component';
+import { MeterEditComponent } from './modules/meter-edit/meter-edit.component';
 
 const routes: Routes = [
 
@@ -25,6 +27,9 @@ const routes: Routes = [
       {path: 'apartments', component: ApartmentListComponent, canActivate: [AuthorizeGuard]},
       {path: 'apartments/edit/:id', component: ApartmentEditComponent, canActivate: [AuthorizeGuard]},
       {path: 'apartments/add', component: ApartmentAddComponent, canActivate: [AuthorizeGuard]},
+      {path: 'rented-object/:id/meters/add', component: MeterAddComponent, canActivate: [AuthorizeGuard]},
+      {path: 'meters/add', component: MeterAddComponent, canActivate: [AuthorizeGuard]},
+      {path: 'meters/edit/:id', component: MeterEditComponent, canActivate: [AuthorizeGuard]},
     ]
   },
   {

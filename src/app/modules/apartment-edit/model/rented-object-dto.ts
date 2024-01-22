@@ -1,3 +1,7 @@
+import { MeterDto } from "../../meter-edit/model/meter-dto"
+
 export interface RentedObjectDto {
-    rentedObjectName: string
+    id?: number
+    rentedObjectName?: string
+    meters?: Array<MeterDto>
 }

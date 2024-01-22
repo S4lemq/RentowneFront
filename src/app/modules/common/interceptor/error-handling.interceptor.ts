@@ -23,7 +23,6 @@ export class ErrorHandlingInterceptor implements HttpInterceptor {
     // Przepuść request dalej w łańcuchu.
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.log(error);
         // Sprawdź, czy błąd jest specyficznym błędem autoryzacji Google.
         if (error.error && ((error.error.message === 'WRONG_GOOGLE_AUTH_CODE') || (error.error.message === 'BAD_CREDENTIALS'))) {
           // Ignoruj ten błąd i przekaż go dalej bez wyświetlania komunikatu.

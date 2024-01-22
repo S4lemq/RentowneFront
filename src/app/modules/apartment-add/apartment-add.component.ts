@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ApartmentAddService } from './apartment-add.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AddressDto } from '../apartment-edit/model/address-dto';
 import { ApartmentDto } from '../apartment-edit/model/apartment-dto';
-import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { TranslateService } from '@ngx-translate/core';
-import { RentedObjectDto } from '../apartment-edit/model/rented-object-dto';
+import { ApartmentAddService } from './apartment-add.service';
 
 @Component({
   selector: 'app-apartment-add',

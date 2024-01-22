@@ -1,0 +1,22 @@
+<div class="card-list">
+    <mat-card class="card" *ngFor="let rentedObject of rentedObjects">
+        <div class="head">
+            <div class="rented-object-name">
+                {{rentedObject.rentedObjectName}}
+            </div>
+            <button mat-raised-button [routerLink]="['/rented-object', rentedObject.id, 'meters', 'add']" mat-flat-button style="background-color: black; color: white;">
+                Dodaj Licznik<mat-icon>add</mat-icon>
+            </button>
+        </div>
+        
+        <div class="card-list-meter">
+            <mat-card class="card-meter" *ngFor="let meter of rentedObject?.meters">
+                <div class="meter-text">
+                    {{ meter.name }}
+                    {{ meter.meterType | translateMeterType }}
+                </div>
+                <button mat-button [routerLink]="['/meters/edit', meter.id]" style="background-color: black; color: white;">Edytuj</button>
+            </mat-card>
+        </div>
+    </mat-card> 
+</div>

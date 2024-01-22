@@ -22,6 +22,7 @@ export class ApartmentEditComponent implements OnInit{
   image: string | null = null;
   imageUploaded: boolean = false;
   imageSelected: boolean = false;
+  apartmentId!: number;
 
   constructor(
     private acitvatedRoute: ActivatedRoute,
@@ -32,6 +33,7 @@ export class ApartmentEditComponent implements OnInit{
     ) { }
 
   ngOnInit(): void {
+    this.apartmentId = Number(this.acitvatedRoute.snapshot.params['id']);
     this.getApartment();
 
     this.imageForm = new FormGroup({
@@ -78,8 +80,7 @@ export class ApartmentEditComponent implements OnInit{
   
 
   getApartment() {
-    let id = Number(this.acitvatedRoute.snapshot.params['id']);
-    this.apartmentEditService.getApartment(id)
+    this.apartmentEditService.getApartment(this.apartmentId)
       .subscribe(apartment => {
         this.mapFormValues(apartment)
         this.apartment = apartment;
@@ -89,7 +90,6 @@ export class ApartmentEditComponent implements OnInit{
   submit() {
     if(this.apartmentForm.valid) {
       this.imageUploaded = false;
-      let id = Number(this.acitvatedRoute.snapshot.params['id']);
 
       const addressDto: AddressDto = {
         id: this.apartment.addressDto.id,
@@ -105,7 +105,7 @@ export class ApartmentEditComponent implements OnInit{
         rentedObjectName: control.get('rentedObjectName')?.value
       }));
 
-      this.apartmentEditService.savePost(id, {
+      this.apartmentEditService.savePost(this.apartmentId, {
         apartmentName: this.apartmentForm.get('apartmentName')?.value,
         leasesNumber: this.apartmentForm.get('leasesNumber')?.value,
         area: this.apartmentForm.get('area')?.value,

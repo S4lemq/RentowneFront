@@ -16,6 +16,10 @@ import { SublevelMenuComponent } from 'src/app/modules/sidenav/sublevel-menu.com
 import { HeaderComponent } from 'src/app/modules/header/header.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkMenuModule } from '@angular/cdk/menu';
+import { MeterEditComponent } from 'src/app/modules/meter-edit/meter-edit.component';
+import { TranslateMeterTypePipe } from 'src/app/modules/meter-card-view/translate-meter-type.pipe';
+import { MeterCardViewComponent } from 'src/app/modules/meter-card-view/meter-card-view.component';
+import { MeterAddComponent } from 'src/app/modules/meter-add/meter-add.component';
 
 
 @NgModule({
@@ -30,7 +34,11 @@ import { CdkMenuModule } from '@angular/cdk/menu';
     DashboardComponent,
     SettingsComponent,
     SublevelMenuComponent,
-    HeaderComponent
+    HeaderComponent,
+    MeterEditComponent,
+    TranslateMeterTypePipe,
+    MeterCardViewComponent,
+    MeterAddComponent
   ],
   imports: [
     CommonModule,

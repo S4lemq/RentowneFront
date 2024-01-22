@@ -1,0 +1,43 @@
+.card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    padding: 20px;
+    background-color: #f4f7fa;
+}
+
+.head{
+    display: flex;
+    flex-direction: row;
+    .rented-object-name{
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 30px;
+        flex: 1 1 auto;
+        line-height: 35px;
+    }
+}
+
+
+.card-list-meter{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .card-meter{
+        display: flex;
+        flex-direction: row;
+        padding: 15px;
+
+        .meter-text{
+            display: flex;
+            flex: 1 1 auto;
+            line-height: 40px;
+        }
+    }
+}
+

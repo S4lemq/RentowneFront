@@ -70,7 +70,7 @@
     "required": "Wartość wymagana",
     "common.message.NON_UNIQUE_RENTED_OBJECT_NAME":"Nazwy kawalerek muszą być unikalne",
     "snackbar.server-error": "Błąd 504: Serwer nie odpowiada. Spróbuj ponownie za chwilę.",
-
+    "snackbar.meterAdded": "Licznik został dodany",
 
 
 

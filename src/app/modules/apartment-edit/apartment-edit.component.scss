@@ -11,7 +11,12 @@
 .form-1{
     display: flex;
     gap: 5px;
+    margin-top: 30px;
 }
  .right-align {
     text-align: right;
+ }
+
+ ::ng-deep .mat-mdc-tab-body-content{
+    overflow: hidden !important;
  }

@@ -34,7 +34,17 @@ export const navbarData: InavbarData[] = [
     {
         routeLink: 'meters',
         icon: 'fal fa-tachometer-alt-fast',
-        label: 'Liczniki'
+        label: 'Liczniki',
+        items: [
+            {
+                routeLink: 'meters',
+                label: 'Liczniki'
+            },
+            {
+                routeLink: 'meters/add',
+                label: 'Dodaj licznik'
+            }
+        ]
     },
     {
         routeLink: 'finances',

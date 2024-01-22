@@ -1,0 +1,28 @@
+<form [formGroup]="meterForm">
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Nazwa licznika</mat-label>
+            <input matInput formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Typ licznika</mat-label>
+            <mat-select formControlName="meterType">
+                <mat-option *ngFor="let meterType of meterTypes" [value]="meterType">
+                    {{ meterType | translateMeterType }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Obiekt do wynajęcia</mat-label>
+            <mat-select formControlName="rentedObjectId">
+                <mat-option *ngFor="let rentedObject of rentedObjects" [value]="rentedObject.id">
+                    {{rentedObject.rentedObjectName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button mat-flat-button style="background-color: black; color: white;" (click)="submit()">Zapisz</button>
+    </div>
+</form>
