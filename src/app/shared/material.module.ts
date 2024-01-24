@@ -14,6 +14,9 @@ import {MatSelectModule} from '@angular/material/select';
 import {FormsModule} from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+
 
 @NgModule({
   declarations: [],
@@ -32,7 +35,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatSelectModule,
     FormsModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
   ],
   exports: [
     MatIconModule,
@@ -48,7 +53,12 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatSelectModule,
     FormsModule,
     MatDialogModule,
-    MatTabsModule
-  ]
+    MatTabsModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+  ],
+  providers: [
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }
+  ],
 })
 export class MaterialModule { }

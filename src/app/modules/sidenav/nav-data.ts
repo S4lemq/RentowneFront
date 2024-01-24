@@ -59,7 +59,17 @@ export const navbarData: InavbarData[] = [
     {
         routeLink: 'agreements',
         icon: 'fal fa-copy',
-        label: 'Umowy'
+        label: 'Umowy',
+        items: [
+            {
+                routeLink: 'lease-agreements',
+                label: 'Umowy'
+            },
+            {
+                routeLink: 'lease-agreements/add',
+                label: 'Dodaj umowę'
+            }
+        ]
     },
     {
         routeLink: 'settings',

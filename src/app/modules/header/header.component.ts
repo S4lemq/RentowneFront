@@ -37,9 +37,9 @@ export class HeaderComponent implements OnInit {
   onMenuClick(itemLabel: string) {
     if (itemLabel === 'Logout') {
       this.logoutService.logout().subscribe(() => {
+        this.router.navigate(['/login']);
         sessionStorage.removeItem('accessToken');
         sessionStorage.removeItem('refreshToken');
-        this.router.navigate(['/login']);
       });
     }
   }

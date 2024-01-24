@@ -59,7 +59,7 @@ export class MeterEditComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    if(this.meterForm.valid) {
+    if (this.meterForm.valid) {
       this.meterService.updateMeter(
         {
           id: this.meterId,
@@ -74,6 +74,8 @@ export class MeterEditComponent implements OnInit, OnDestroy {
           panelClass: ['snackbarSuccess']
         });
       });
+    } else {
+      this.meterForm.markAllAsTouched();
     }
   }
   

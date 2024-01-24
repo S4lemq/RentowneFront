@@ -135,7 +135,7 @@ export class ApartmentAddComponent implements OnInit{
       return 'Minimalnie 1';
     }
     if (this.area?.errors?.['max']) {
-      return "Maksymalnie 999.99";
+      return "Maksymalnie 999.99m²";
     }
     return null;
   }

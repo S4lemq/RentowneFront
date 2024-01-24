@@ -20,6 +20,8 @@ import { MeterEditComponent } from 'src/app/modules/meter-edit/meter-edit.compon
 import { TranslateMeterTypePipe } from 'src/app/modules/meter-card-view/translate-meter-type.pipe';
 import { MeterCardViewComponent } from 'src/app/modules/meter-card-view/meter-card-view.component';
 import { MeterAddComponent } from 'src/app/modules/meter-add/meter-add.component';
+import { LeaseAgreementAddComponent } from 'src/app/modules/lease-agreement-add/lease-agreement-add.component';
+import { LeaseAgreementEditComponent } from 'src/app/modules/lease-agreement-edit/lease-agreement-edit.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { MeterAddComponent } from 'src/app/modules/meter-add/meter-add.component
     MeterEditComponent,
     TranslateMeterTypePipe,
     MeterCardViewComponent,
-    MeterAddComponent
+    MeterAddComponent,
+    LeaseAgreementAddComponent,
+    LeaseAgreementEditComponent
   ],
   imports: [
     CommonModule,

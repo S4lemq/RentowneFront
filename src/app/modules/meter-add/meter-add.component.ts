@@ -53,7 +53,7 @@ export class MeterAddComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    if( this.meterForm.valid ) {
+    if (this.meterForm.valid) {
       const rentedObjectDto: RentedObjectDto = {
         id: this.rentedObjectId
       }
@@ -65,7 +65,6 @@ export class MeterAddComponent implements OnInit, OnDestroy {
         } as MeterDto
       ).pipe(takeUntil(this.killer$))
       .subscribe(meter => {
-        console.log('dziala')
         const translatedText = this.translateService.instant("snackbar.meterAdded");
         this.router.navigate(["meters/edit/", meter.id])
             .then(() => this.snackBar.open(translatedText, '', {
@@ -73,6 +72,8 @@ export class MeterAddComponent implements OnInit, OnDestroy {
                 panelClass: ['snackbarSuccess']
             }));
       });
+    } else {
+      this.meterForm.markAllAsTouched();
     }
   }
 
