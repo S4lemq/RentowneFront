@@ -86,7 +86,7 @@ export class LeaseAgreementEditComponent implements OnInit, OnDestroy {
 
   submit() {
     if (this.leaseAgreementForm.valid) {
-      this.leaseAgreementService.saveLeaseAgreement(
+      this.leaseAgreementService.updateLeaseAgreement(
         {
           id: this.leaseAgreementId,
           startContractDate: this.startContractDate?.value,

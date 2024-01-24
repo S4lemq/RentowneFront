@@ -22,6 +22,7 @@ import { MeterCardViewComponent } from 'src/app/modules/meter-card-view/meter-ca
 import { MeterAddComponent } from 'src/app/modules/meter-add/meter-add.component';
 import { LeaseAgreementAddComponent } from 'src/app/modules/lease-agreement-add/lease-agreement-add.component';
 import { LeaseAgreementEditComponent } from 'src/app/modules/lease-agreement-edit/lease-agreement-edit.component';
+import { TenantAddComponent } from 'src/app/modules/tenant-add/tenant-add.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { LeaseAgreementEditComponent } from 'src/app/modules/lease-agreement-edi
     MeterCardViewComponent,
     MeterAddComponent,
     LeaseAgreementAddComponent,
-    LeaseAgreementEditComponent
+    LeaseAgreementEditComponent,
+    TenantAddComponent
   ],
   imports: [
     CommonModule,

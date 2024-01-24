@@ -18,4 +18,8 @@ export class LeaseAgreementService {
     return this.http.get<LeaseAgreementDto>(`/api/lease-agreements/` + id);
   }
 
+  updateLeaseAgreement(dto: LeaseAgreementDto) {
+    return this.http.put<LeaseAgreementDto>(`/api/lease-agreements`, dto);
+  }
+
 }

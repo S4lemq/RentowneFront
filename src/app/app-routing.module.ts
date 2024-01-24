@@ -19,6 +19,7 @@ import { MeterAddComponent } from './modules/meter-add/meter-add.component';
 import { MeterEditComponent } from './modules/meter-edit/meter-edit.component';
 import { LeaseAgreementAddComponent } from './modules/lease-agreement-add/lease-agreement-add.component';
 import { LeaseAgreementEditComponent } from './modules/lease-agreement-edit/lease-agreement-edit.component';
+import { TenantAddComponent } from './modules/tenant-add/tenant-add.component';
 
 const routes: Routes = [
 
@@ -34,6 +35,7 @@ const routes: Routes = [
       {path: 'meters/edit/:id', component: MeterEditComponent, canActivate: [AuthorizeGuard]},
       {path: 'lease-agreements/add', component: LeaseAgreementAddComponent, canActivate: [AuthorizeGuard]},
       {path: 'lease-agreements/edit/:id', component: LeaseAgreementEditComponent, canActivate: [AuthorizeGuard]},
+      {path: 'tenants/add', component: TenantAddComponent, canActivate: [AuthorizeGuard]},
     ]
   },
   {
