@@ -27,5 +27,4 @@ export class MeterCardViewComponent implements OnInit, OnDestroy {
     this.killer$.complete();
   }
 
-
 }

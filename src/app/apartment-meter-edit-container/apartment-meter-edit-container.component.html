@@ -1,0 +1,11 @@
+<mat-card class="card">
+    <mat-tab-group>
+        <mat-tab label="Nieruchomości">
+            <app-apartment-edit></app-apartment-edit>
+        </mat-tab>
+        <mat-tab label="Liczniki">
+            <app-meter-card-view [apartmentId]="this.apartmentId"></app-meter-card-view>
+        </mat-tab>
+    </mat-tab-group>
+</mat-card>
+

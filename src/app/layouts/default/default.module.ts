@@ -23,6 +23,7 @@ import { MeterAddComponent } from 'src/app/modules/meter-add/meter-add.component
 import { LeaseAgreementAddComponent } from 'src/app/modules/lease-agreement-add/lease-agreement-add.component';
 import { LeaseAgreementEditComponent } from 'src/app/modules/lease-agreement-edit/lease-agreement-edit.component';
 import { TenantAddComponent } from 'src/app/modules/tenant-add/tenant-add.component';
+import { ApartmentMeterEditContainerComponent } from 'src/app/apartment-meter-edit-container/apartment-meter-edit-container.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { TenantAddComponent } from 'src/app/modules/tenant-add/tenant-add.compon
     MeterAddComponent,
     LeaseAgreementAddComponent,
     LeaseAgreementEditComponent,
-    TenantAddComponent
+    TenantAddComponent,
+    ApartmentMeterEditContainerComponent
   ],
   imports: [
     CommonModule,
