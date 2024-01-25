@@ -72,6 +72,7 @@
     "snackbar.server-error": "Błąd 504: Serwer nie odpowiada. Spróbuj ponownie za chwilę.",
     "snackbar.meterAdded": "Licznik został dodany",
     "snackbar.leaseAgreementAdded": "Umowa została dodana",
+    "snackbar.tenantAdded": "Najemca został dodany oraz przypisany do umowy",
 
 
 

@@ -21,6 +21,7 @@ import { LeaseAgreementAddComponent } from './modules/lease-agreement-add/lease-
 import { LeaseAgreementEditComponent } from './modules/lease-agreement-edit/lease-agreement-edit.component';
 import { TenantAddComponent } from './modules/tenant-add/tenant-add.component';
 import { ApartmentMeterEditContainerComponent } from './apartment-meter-edit-container/apartment-meter-edit-container.component';
+import { TenantEditComponent } from './modules/tenant-edit/tenant-edit.component';
 
 const routes: Routes = [
 
@@ -37,6 +38,8 @@ const routes: Routes = [
       {path: 'lease-agreements/add', component: LeaseAgreementAddComponent, canActivate: [AuthorizeGuard]},
       {path: 'lease-agreements/edit/:id', component: LeaseAgreementEditComponent, canActivate: [AuthorizeGuard]},
       {path: 'tenants/add', component: TenantAddComponent, canActivate: [AuthorizeGuard]},
+      {path: 'tenants/edit/:id', component: TenantEditComponent, canActivate: [AuthorizeGuard]},
+      
     ]
   },
   {

@@ -1,32 +1,32 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
-import { TenantService } from './tenant.service';
-import { TenantDto } from './model/tenant-dto';
+import { TenantService } from '../tenant-add/tenant.service';
+import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TenantDto } from '../tenant-add/model/tenant-dto';
 import { AddressDto } from '../apartment-edit/model/address-dto';
 import { LeaseAgreementDto } from '../lease-agreement-add/model/lease-agreement-dto';
 
 @Component({
-  selector: 'app-tenant-add',
-  templateUrl: './tenant-add.component.html',
-  styleUrls: ['./tenant-add.component.scss']
+  selector: 'app-tenant-edit',
+  templateUrl: './tenant-edit.component.html',
+  styleUrls: ['./tenant-edit.component.scss']
 })
-export class TenantAddComponent implements OnInit, OnDestroy {
-
+export class TenantEditComponent {
   private killer$ = new Subject<void>();
   tenantForm!: FormGroup;
+  tenantId!: number;
 
   constructor(
-    private translateService: TranslateService,
-    private router: Router,
-    private snackBar: MatSnackBar,
-    private tenantService: TenantService
+    private tenantService: TenantService,
+    private acitvatedRoute: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
+    this.tenantId = Number(this.acitvatedRoute.snapshot.params['id']);
+    this.getTenant();
     this.tenantForm = new FormGroup({
       firstname: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
       lastname: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
@@ -42,6 +42,34 @@ export class TenantAddComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngOnDestroy(): void {
+    this.killer$.next();
+    this.killer$.complete();
+  }
+
+  getTenant() {
+    this.tenantService.getTenant(this.tenantId)
+    .pipe(takeUntil(this.killer$))
+    .subscribe(leaseAgreement => {
+      this.mapFormValues(leaseAgreement);
+    })
+  }
+
+  mapFormValues(tenant: TenantDto): void {
+    this.tenantForm.patchValue({
+      firstname: tenant.firstname,
+      lastname: tenant.lastname,
+      email: tenant.email,
+      accountNumber: tenant.accountNumber,
+      phoneNumber: tenant.phoneNumber,
+      streetName: tenant.addressDto?.streetName,
+      buildingNumber: tenant.addressDto?.buildingNumber,
+      apartmentNumber: tenant.addressDto?.apartmentNumber,
+      zipCode: tenant.addressDto?.zipCode,
+      cityName: tenant.addressDto?.cityName,
+      voivodeship: tenant.addressDto?.voivodeship,
+    });
+  }
 
   submit() {
     if (this.tenantForm.valid) {
@@ -58,8 +86,9 @@ export class TenantAddComponent implements OnInit, OnDestroy {
         id: 13
       }
 
-      this.tenantService.saveTenant(
+      this.tenantService.updateTenant(
         {
+          id: this.tenantId,
           firstname: this.firstname?.value,
           lastname: this.lastname?.value,
           email: this.email?.value,
@@ -67,24 +96,17 @@ export class TenantAddComponent implements OnInit, OnDestroy {
           phoneNumber: this.phoneNumber?.value,
           leaseAgreementDto: leaseAgreementDto,
           addressDto: addressDto
-        } as TenantDto
+        } as LeaseAgreementDto
       ).pipe(takeUntil(this.killer$))
-      .subscribe(tenant => {
-        const translatedText = this.translateService.instant("snackbar.tenantAdded");
-        this.router.navigate(["tenants/edit/", tenant.id])
-            .then(() => this.snackBar.open(translatedText, '', {
-                duration: 3000,
-                panelClass: ['snackbarSuccess']
-            }));
+      .subscribe(meter => {
+        this.snackBar.open("Umowa została zapisana", '', {
+          duration: 3000,
+          panelClass: ['snackbarSuccess']
+        });
       });
     } else {
       this.tenantForm.markAllAsTouched();
     }
-  }
-
-  ngOnDestroy(): void {
-    this.killer$.next();
-    this.killer$.complete();
   }
 
   getStreetNameErrorMsg() {
@@ -166,6 +188,7 @@ export class TenantAddComponent implements OnInit, OnDestroy {
   }
 
 
+  
   get firstname() {
     return this.tenantForm.get("firstname");
   }

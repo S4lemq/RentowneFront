@@ -68,7 +68,6 @@ export class ApartmentAddComponent implements OnInit{
   submit() {
     if( this.apartmentForm.valid ) {
       const addressDto: AddressDto = {
-        id: null,
         streetName: this.apartmentForm.get('streetName')?.value,
         buildingNumber: this.apartmentForm.get('buildingNumber')?.value,
         apartmentNumber: this.apartmentForm.get('apartmentNumber')?.value,

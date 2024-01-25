@@ -140,6 +140,13 @@
                 </div>
             </form>
         </mat-tab>
-        <mat-tab label="Najemca"> Content 2 </mat-tab>
+        <mat-tab label="Najemca">
+            <div *ngIf="true">
+                <app-tenant-edit></app-tenant-edit>
+            </div>
+            <div *ngIf="false">
+                <app-tenant-add></app-tenant-add>
+            </div>
+        </mat-tab>
     </mat-tab-group>
 </mat-card>

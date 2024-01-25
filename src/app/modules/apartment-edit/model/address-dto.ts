@@ -1,5 +1,5 @@
 export interface AddressDto {
-    id: number | null
+    id?: number
     streetName: string
     buildingNumber: string
     apartmentNumber: string

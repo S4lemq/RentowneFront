@@ -59,7 +59,6 @@ export class LeaseAgreementEditComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.killer$))
     .subscribe(leaseAgreement => {
       this.mapFormValues(leaseAgreement);
-      console.log(this.leaseAgreementForm);
     })
   }
 
