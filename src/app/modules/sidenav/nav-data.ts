@@ -24,7 +24,13 @@ export const navbarData: InavbarData[] = [
     {
         routeLink: 'tenants',
         icon: 'fal fa-user-friends',
-        label: 'Najemcy'
+        label: 'Najemcy',
+        items: [
+            {
+                routeLink: 'tenants/add',
+                label: 'Dodaj najemcę'
+            }
+        ]
     },
     {
         routeLink: 'utility-providers',
@@ -60,16 +66,6 @@ export const navbarData: InavbarData[] = [
         routeLink: 'agreements',
         icon: 'fal fa-copy',
         label: 'Umowy',
-        items: [
-            {
-                routeLink: 'lease-agreements',
-                label: 'Umowy'
-            },
-            {
-                routeLink: 'lease-agreements/add',
-                label: 'Dodaj umowę'
-            }
-        ]
     },
     {
         routeLink: 'settings',

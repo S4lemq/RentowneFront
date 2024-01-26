@@ -71,8 +71,9 @@
     "common.message.NON_UNIQUE_RENTED_OBJECT_NAME":"Nazwy kawalerek muszą być unikalne",
     "snackbar.server-error": "Błąd 504: Serwer nie odpowiada. Spróbuj ponownie za chwilę.",
     "snackbar.meterAdded": "Licznik został dodany",
-    "snackbar.leaseAgreementAdded": "Umowa została dodana",
-    "snackbar.tenantAdded": "Najemca został dodany oraz przypisany do umowy",
+    "snackbar.tenantAdded": "Najemca został dodany",
+    "snackbar.tenantSaved": "Najemca został zapisany",
+
 
 
 

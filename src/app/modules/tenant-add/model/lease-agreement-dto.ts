@@ -4,7 +4,7 @@ export interface LeaseAgreementDto {
     endContractDate?: Date
     deposit?: number
     depositPaid?: number
-    paymentDueDate?: Date
+    paymentDueDayOfMonth?: number
     rentAmount?: number
     compensationAmount?: number
     internetFee?: number
