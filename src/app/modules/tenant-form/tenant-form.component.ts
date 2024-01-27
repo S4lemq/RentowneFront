@@ -5,8 +5,8 @@ import { FormGroup } from '@angular/forms';
   selector: 'app-tenant-form',
   template: `
 <div [formGroup]="parentForm" >
-  <mat-accordion class="example-headers-align">
-    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+  <mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel [expanded]="true" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
           Dane personalne
@@ -56,13 +56,9 @@ import { FormGroup } from '@angular/forms';
               {{getPhoneNumberErrorMsg()}}
           </mat-error>
       </mat-form-field>
-
-      <mat-action-row>
-        <button mat-button color="primary" (click)="nextStep()">Dalej</button>
-      </mat-action-row>
     </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+    <mat-expansion-panel [expanded]="true" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
           Adres
@@ -120,14 +116,9 @@ import { FormGroup } from '@angular/forms';
               {{getVoivodeshipErrorMsg()}}
           </mat-error>
       </mat-form-field>
-
-      <mat-action-row>
-        <button mat-button color="warn" (click)="prevStep()">Cofnij</button>
-        <button mat-button color="primary" (click)="nextStep()">Dalej</button>
-      </mat-action-row>
     </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+    <mat-expansion-panel [expanded]="true" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
           Umowa
@@ -271,11 +262,6 @@ import { FormGroup } from '@angular/forms';
       </mat-form-field>
 
       <mat-checkbox class="checkbox" color="primary" formControlName="contractActive">Czy aktywna umowa</mat-checkbox>
-
-      <mat-action-row>
-        <button mat-button color="warn" (click)="prevStep()">Previous</button>
-        <button mat-button color="primary" (click)="nextStep()">End</button>
-      </mat-action-row>
     </mat-expansion-panel>
 
   </mat-accordion>
