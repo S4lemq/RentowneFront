@@ -6,6 +6,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddressDto } from './model/address-dto';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDialogService } from '../confirm-dialog/confirm-dialog.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-apartment-edit',
@@ -29,7 +30,8 @@ export class ApartmentEditComponent implements OnInit{
     private apartmentEditService: ApartmentEditService,
     private snackBar: MatSnackBar,
     private dialogService: ConfirmDialogService,
-    private router: Router
+    private router: Router,
+    private translateService: TranslateService
     ) { }
 
   ngOnInit(): void {
@@ -112,12 +114,13 @@ export class ApartmentEditComponent implements OnInit{
         addressDto: addressDto,
         rentedObjectDtos: rentedObjectsDtosArray,
         image: this.image
-      } as ApartmentDto).subscribe(apartment => {
-        this.mapFormValues(apartment)
-        this.snackBar.open("Mieszkanie zostało zapisane", '', {
-          duration: 3000,
-          panelClass: ['snackbarSuccess']
-        });
+      } as ApartmentDto)
+      .subscribe(() => {
+        this.router.navigate(["/apartments/edit", this.apartmentId])
+        .then(() => {
+          const translatedText = this.translateService.instant("snackbar.apartmentSaved");
+          this.snackBar.open(translatedText, '', {duration: 3000, panelClass: ['snackbarSuccess']});
+        })
       });
     } else {
       this.apartmentForm.markAllAsTouched();

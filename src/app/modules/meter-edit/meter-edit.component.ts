@@ -28,7 +28,9 @@ export class MeterEditComponent implements OnInit, OnDestroy {
     private meterService: MeterService,
     private acitvatedRoute: ActivatedRoute,
     private rentedObjectService: RentedObjectService,
-    private snackBar: MatSnackBar) {}
+    private snackBar: MatSnackBar,
+    private translateService: TranslateService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.meterId = Number(this.acitvatedRoute.snapshot.params['id']);
@@ -68,11 +70,12 @@ export class MeterEditComponent implements OnInit, OnDestroy {
           rentedObject: { id: this.rentedObjectIdControl?.value }
         } as MeterDto,
       ).pipe(takeUntil(this.killer$))
-      .subscribe(meter => {
-        this.snackBar.open("Licznik został zapisany", '', {
-          duration: 3000,
-          panelClass: ['snackbarSuccess']
-        });
+      .subscribe(() => {
+        this.router.navigate(["/meters/edit", this.meterId])
+        .then(() => {
+          const translatedText = this.translateService.instant("snackbar.meterSaved");
+          this.snackBar.open(translatedText, '', {duration: 3000, panelClass: ['snackbarSuccess']});
+        })
       });
     } else {
       this.meterForm.markAllAsTouched();

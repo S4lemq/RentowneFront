@@ -23,6 +23,7 @@ import { TenantAddComponent } from 'src/app/modules/tenant-add/tenant-add.compon
 import { TenantEditComponent } from 'src/app/modules/tenant-edit/tenant-edit.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DefaultComponent } from './default.component';
+import { TenantFormComponent } from 'src/app/modules/tenant-form/tenant-form.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { DefaultComponent } from './default.component';
     MeterAddComponent,
     TenantAddComponent,
     ApartmentMeterEditContainerComponent,
-    TenantEditComponent
+    TenantEditComponent,
+    TenantFormComponent
   ],
   imports: [
     CommonModule,
