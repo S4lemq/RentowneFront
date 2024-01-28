@@ -8,13 +8,15 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EmptyLoginComponent } from './empty-login.component';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { LostPasswordComponent } from 'src/app/modules/lost-password/lost-password.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     EmptyLoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    LostPasswordComponent
   ],
   imports: [
     CommonModule,

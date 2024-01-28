@@ -79,14 +79,27 @@ mat-icon {
     font-weight: 500;
 }
 
-.blue-text-link {
+.registr-link {
     color: blue;
     text-decoration: none;
 }
 
-.blue-text-link:hover {
+.registr-link:hover {
     color: #00004f;
 }
+
+.lost-password-link {
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+    color: blue;
+    text-decoration: none;
+}
+
+.lost-password-link:hover {
+    color: #00004f;
+}
+
 
 .main-otp-container {
     width: 497px;

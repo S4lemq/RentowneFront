@@ -75,7 +75,8 @@
     "snackbar.tenantSaved": "Najemca został zapisany",
     "snackbar.apartmentSaved": "Mieszkanie został zapisane",
     "snackbar.meterSaved": "Licznik został zapisany",
-
+    "common.message.BAD_LINK":"Nie prawidłowy link url, spróbuj ponownie wypełnić formularz resetujący hasło.",
+    "common.message.LINK_EXPIRED":"Link wygasł, musisz ponownie wypełnić formularz resetujący hasło.",
 
 
 

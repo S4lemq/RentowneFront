@@ -19,6 +19,7 @@ import { TenantEditComponent } from './modules/tenant-edit/tenant-edit.component
 import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGuard';
 import { ProfileComponent } from './modules/tenant/profile/profile.component';
 import { TenantLoginComponent } from './modules/tenant/tenant-login/tenant-login.component';
+import { LostPasswordComponent } from './modules/lost-password/lost-password.component';
 
 const routes: Routes = [
 
@@ -40,7 +41,9 @@ const routes: Routes = [
   {
     path: '', component: EmptyLoginComponent, children: [
       {path: 'login', component: LoginComponent},
-      {path: 'register', component: RegisterComponent}
+      {path: 'register', component: RegisterComponent},
+      {path: 'lost-password', component: LostPasswordComponent},
+      {path: 'lost-password/:hash', component: LostPasswordComponent}
     ]
   },
   {

@@ -58,11 +58,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.registerForm = new FormGroup({
       firstname: new FormControl(null, [Validators.required]),
       lastname: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required, Validators.email]),
+      email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(60)]),
       mfaEnabled: new FormControl(false),
       password: new FormControl(null, [
         Validators.required,
-        Validators.pattern("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–\\[\\]{}:;',?/*~$^+=<>]).{8,64}$")
+        Validators.pattern("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–\\[\\]{}:;',?/*~$^+=<>]).{8,64}$"),
+        Validators.maxLength(64)
       ]),
       repeatPassword: new FormControl(null, [Validators.required])
       },
@@ -95,10 +96,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
   
   register() {
-    if (this.registerForm.invalid) {
-      this.registerForm.get('repeatPassword')?.markAsTouched();
-      return;
-    } 
     if (this.registerForm.valid) {
       this.registerService.register(this.registerForm.value)
       .pipe(takeUntil(this.killer$))
@@ -122,6 +119,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
           }
         }
       });
+    } else {
+      this.registerForm.markAllAsTouched();
     }
   }
 
@@ -147,17 +146,53 @@ export class RegisterComponent implements OnInit, OnDestroy {
       })
   }
 
-  getEmailErrorMessage() {
-    const emailControl = this.registerForm.get('email');
-    if (emailControl) {
-      if (emailControl.hasError('email')) {
-        return this.translate.instant('register.error.email');
-      } else if (emailControl.hasError('server')) {
-        return this.emailError;
-      }
+  getPasswordErrorMsg() {
+    if (this.password?.hasError('pattern')) {
+      return 'Minimum 8 znaków, duża litera, cyfra, znak specjalny';
+    } else if (this.password?.hasError('required')) {
+      return 'Wartość wymagana';
+    } else if (this.password?.hasError('maxlength')) {
+      return 'Maksymalnie 64';
     }
     return '';
   }
+
+  getRepeatPasswordErrorMsg() {
+    if (this.repeatPassword?.hasError('passwordMatchError')) {
+      return 'Hasła muszą być identyczne';
+    } else if (this.repeatPassword?.hasError('required')) {
+      return 'Wartość wymagana';
+    }
+    return '';
+  }
+
+  getEmailErrorMessage() {
+    if (this.email?.hasError('email')) {
+      return 'Nieprawidłowy format e-mail'
+    } else if (this.email?.hasError('server')) {
+      return this.emailError;
+    } else if (this.email?.hasError('maxlength')) {
+      return 'Maksymalnie 60'
+    } else if (this.email?.hasError('required')) {
+      return 'Wartość wymagana'
+    }
+    return '';
+  }
+
+  getFirstNameErrorMsg() {
+    if (this.firstname?.hasError('required')) {
+      return 'Wartość wymagana'
+    }
+    return '';
+  }
+
+  getLastNameErrorMsg() {
+    if (this.lastname?.hasError('required')) {
+      return 'Wartość wymagana'
+    }
+    return '';
+  }
+
 
   updateInputStyles() {
     if (this.otpConfig.inputStyles) {
@@ -168,6 +203,27 @@ export class RegisterComponent implements OnInit, OnDestroy {
         'border-color': this.invalidCode ? 'red' : 'initial'
       };
     }
+  }
+
+
+  get firstname() {
+    return this.registerForm.get("firstname");
+  }
+
+  get lastname() {
+    return this.registerForm.get("lastname");
+  }
+
+  get email() {
+    return this.registerForm.get("email");
+  }
+
+  get password() {
+    return this.registerForm.get("password");
+  }
+
+  get repeatPassword() {
+    return this.registerForm.get("repeatPassword");
   }
 
 }

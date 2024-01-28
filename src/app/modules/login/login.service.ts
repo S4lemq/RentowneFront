@@ -19,4 +19,14 @@ export class LoginService {
   verifyCode(verify: VerificationRequestDto): Observable<AuthenticationResponseDto> {
     return this.http.post<AuthenticationResponseDto>("/api/auth/verify", verify);
   }
+
+  lostPassword(emailObject: any): Observable<any> {
+    return this.http.post("/api/lost-password", emailObject);
+  }
+
+  changePassword(passwordObject: any): Observable<any> {
+    return this.http.post("/api/change-password", passwordObject);
+  }
+    
+    
 }
