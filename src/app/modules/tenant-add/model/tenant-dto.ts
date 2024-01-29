@@ -1,4 +1,5 @@
 import { AddressDto } from "../../apartment-edit/model/address-dto"
+import { RentedObjectDto } from "../../apartment-edit/model/rented-object-dto"
 import { LeaseAgreementDto } from "./lease-agreement-dto"
 
 export interface TenantDto {
@@ -10,4 +11,6 @@ export interface TenantDto {
     phoneNumber?: string
     addressDto?: AddressDto
     leaseAgreementDto?: LeaseAgreementDto
+    rentedObjectDto?: RentedObjectDto
+    apartmentId?: number
 }

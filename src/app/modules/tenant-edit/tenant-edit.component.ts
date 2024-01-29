@@ -62,7 +62,9 @@ export class TenantEditComponent {
       initialGasMeterReading: new FormControl('', [Validators.min(0), Validators.max(99999), maxDecimalPlaces(5)]), //początkowy odczyt gazu
       depositReturnDate: new FormControl(''), //data zwrotu kaucji
       returnedDepositAmount: new FormControl('',[Validators.min(0), Validators.max(99999.99), maxDecimalPlaces(2)]), //kwota zwróconej kaucji
-      contractActive: new FormControl(''), //czy aktywna umowa
+      contractActive: new FormControl(''), //czy aktywna umowa,
+      rentedObjectId: new FormControl(''), //wybrana nieruchomość do wynajmu
+      apartmentId: new FormControl('')
     });
   }
 
@@ -109,7 +111,9 @@ export class TenantEditComponent {
       initialGasMeterReading: tenant.leaseAgreementDto?.initialGasMeterReading,
       depositReturnDate: tenant.leaseAgreementDto?.depositReturnDate,
       returnedDepositAmount: tenant.leaseAgreementDto?.returnedDepositAmount,
-      contractActive: tenant.leaseAgreementDto?.contractActive
+      contractActive: tenant.leaseAgreementDto?.contractActive,
+      rentedObjectId: tenant.rentedObjectDto?.id,
+      apartmentId: tenant.apartmentId
     });
   }
 

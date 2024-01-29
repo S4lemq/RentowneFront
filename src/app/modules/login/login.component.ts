@@ -130,30 +130,21 @@ export class LoginComponent implements OnInit {
   }
 
   getEmailErrorMsg() {
-    const emailControl = this.email;
-    if (emailControl) {
-      if (emailControl.hasError('email')) {
-        return 'Nieprawidłowy format e-mail';
-      } else if (emailControl.hasError('required')) {
-        return 'Wartość wymagana';
-      }
+    if (this.email?.hasError('email')) {
+      return 'Nieprawidłowy format e-mail';
+    } else if (this.email?.hasError('required')) {
+      return 'Wartość wymagana';
     }
     return '';
   }
 
   getPasswordErrorMsg() {
-    const passwordControl = this.password;
-    const emailControl = this.formGroup.get('email');
-    if (passwordControl) {
-      if (passwordControl.hasError('required')) {
-        return 'Wartość wymagana';
-      } else if (passwordControl.hasError('server')) {
-        if (emailControl) {
-          // Ustawienie błędu 'invalid' na kontrolce email
-          emailControl.setErrors({ invalid: true });
-        }
-        return 'Nieprawidłowy adres e-mail lub hasło';
-      }
+    if (this.password?.hasError('required')) {
+      return 'Wartość wymagana';
+    } else if (this.password?.hasError('server')) {
+        // Ustawienie błędu 'invalid' na kontrolce email
+        this.email?.setErrors({ invalid: true });
+      return 'Nieprawidłowy adres e-mail lub hasło';
     }
     return '';
   }

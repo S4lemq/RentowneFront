@@ -1,5 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ApartmentAddService } from '../apartment-add/apartment-add.service';
+import { ApartmentDto } from '../apartment-edit/model/apartment-dto';
+import { Subject, takeUntil } from 'rxjs';
+import { RentedObjectDto } from '../apartment-edit/model/rented-object-dto';
+import { RentedObjectService } from '../apartment-add/rented-object.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tenant-form',
@@ -264,6 +270,36 @@ import { FormGroup } from '@angular/forms';
       <mat-checkbox class="checkbox" color="primary" formControlName="contractActive">Czy aktywna umowa</mat-checkbox>
     </mat-expansion-panel>
 
+    <mat-expansion-panel [expanded]="true" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Mieszaknie
+        </mat-panel-title>
+        <mat-panel-description>
+          Wybierz nieruchomość do wynajęcia
+          <mat-icon>date_range</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mieszkanie</mat-label>
+          <mat-select formControlName="apartmentId" (selectionChange)="getRentedObjects($event.value)">
+              <mat-option *ngFor="let apartment of apartments" [value]="apartment.id">
+                  {{apartment.apartmentName}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Obiekt do wynajęcia</mat-label>
+        <mat-select formControlName="rentedObjectId">
+            <mat-option *ngFor="let rentedObject of rentedObjects" [value]="rentedObject.id">
+                {{rentedObject.id}}
+            </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </mat-expansion-panel>
   </mat-accordion>
     
     <button mat-flat-button style="background-color: black; color: white;">Zapisz</button>
@@ -280,19 +316,40 @@ import { FormGroup } from '@angular/forms';
     }
   `]
 })
-export class TenantFormComponent {
+export class TenantFormComponent implements OnInit, OnDestroy {
+  private killer$ = new Subject<void>();
   @Input() parentForm!: FormGroup;
   daysOfMonth: number[] = [];
+  apartments: ApartmentDto[] = [];
+  rentedObjects: RentedObjectDto[] = [];
   step = 0;
 
-  constructor() {
+  constructor(
+    private apartmentService: ApartmentAddService,
+    private rentedObjectService: RentedObjectService) {
     this.daysOfMonth = [...Array.from({ length: 28 }, (_, index) => index)];
+  }
+
+  ngOnInit(): void {
+    this.apartmentService.getAllApartmentsByLoggedUser()
+    .pipe(takeUntil(this.killer$))
+    .subscribe(data => this.apartments = data);
+  }
+
+  ngOnDestroy(): void {
+    this.killer$.next();
+    this.killer$.complete();
+  }
+
+  getRentedObjects(id: number) {
+    this.rentedObjectService.getAllRentedObjectsByLoggedUser(id)
+      .pipe(takeUntil(this.killer$))
+      .subscribe(data => this.rentedObjects = data);
   }
 
   setStep(index: number) {
     this.step = index;
     this.parentForm.reset();
-    
   }
 
   nextStep() {
@@ -734,5 +791,13 @@ export class TenantFormComponent {
 
   get contractActive() {
     return this.parentForm.get("contractActive");
+  }
+
+  get rentedObjectId() {
+    return this.parentForm.get("rentedObjectId");
+  }
+
+  get apartmentIdControl() {
+    return this.parentForm.get("apartmentId");
   }
 }

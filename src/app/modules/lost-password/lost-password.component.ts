@@ -54,33 +54,32 @@ export class LostPasswordComponent implements OnInit, OnDestroy {
   }
 
 
-  send(){
+  send() {
     if (this.formGroup.valid) {
       this.loginService.lostPassword(this.formGroup.value)
       .pipe(takeUntil(this.killer$))
       .subscribe(() => {
         this.router.navigate(["/login"])
         .then(() => this.snackBar.open('Email z linkiem został wysłany', '', {duration: 3000, panelClass: ['snackbarSuccess']}));
-      })
+      });
     } else {
       this.formGroup.markAllAsTouched();
     }
   }
 
-  sendChangePassword(){
+  sendChangePassword() {
     if (this.formGroupChangePassword.valid) {
       this.loginService.changePassword({
         password: this.formGroupChangePassword.get("password")?.value,
         repeatPassword: this.formGroupChangePassword.get("repeatPassword")?.value,
         hash: this.hash
       }).pipe(takeUntil(this.killer$))
-      .subscribe({
-        next: () => {
-          this.formGroupChangePassword.reset();
-          this.snackBar.open('Hasło zostało zmienione', '', {duration: 3000, panelClass: ['snackbarSuccess']});
-        }
-    });
-
+      .subscribe(() => {
+        this.router.navigate(["/login"])
+        .then(() => this.snackBar.open('Hasło zostało zmienione', '', {duration: 3000, panelClass: ['snackbarSuccess']}));
+      });
+    } else {
+      this.formGroupChangePassword.markAllAsTouched();
     }
   }
 

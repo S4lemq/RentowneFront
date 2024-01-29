@@ -4,11 +4,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
-import { TenantService } from './tenant.service';
-import { TenantDto } from './model/tenant-dto';
 import { AddressDto } from '../apartment-edit/model/address-dto';
-import { LeaseAgreementDto } from './model/lease-agreement-dto';
 import { maxDecimalPlaces } from '../common/validators/max-decimal-places.validator';
+import { LeaseAgreementDto } from './model/lease-agreement-dto';
+import { TenantDto } from './model/tenant-dto';
+import { TenantService } from './tenant.service';
+import { RentedObjectDto } from '../apartment-edit/model/rented-object-dto';
 
 @Component({
   selector: 'app-tenant-add',
@@ -24,7 +25,7 @@ export class TenantAddComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     private router: Router,
     private snackBar: MatSnackBar,
-    private tenantService: TenantService
+    private tenantService: TenantService,
   ) {}
 
   ngOnInit(): void {
@@ -56,7 +57,8 @@ export class TenantAddComponent implements OnInit, OnDestroy {
       initialGasMeterReading: new FormControl('', [Validators.min(0), Validators.max(99999), maxDecimalPlaces(5)]), //początkowy odczyt gazu
       depositReturnDate: new FormControl(''), //data zwrotu kaucji
       returnedDepositAmount: new FormControl('',[Validators.min(0), Validators.max(99999.99), maxDecimalPlaces(2)]), //kwota zwróconej kaucji
-      contractActive: new FormControl(''), //czy aktywna umowa
+      contractActive: new FormControl(''), //czy aktywna umowa,
+      rentedObjectId: new FormControl(''), //wybrana nieruchomość do wynajmu
     });
   }
 
@@ -91,6 +93,10 @@ export class TenantAddComponent implements OnInit, OnDestroy {
         contractActive: this.tenantForm.get('contractActive')?.value
       }
 
+      const rentedObjectDto: RentedObjectDto = {
+        id: this.tenantForm.get('rentedObjectId')?.value
+      }
+
       this.tenantService.saveTenant(
         {
           firstname: this.tenantForm.get('firstname')?.value,
@@ -99,7 +105,8 @@ export class TenantAddComponent implements OnInit, OnDestroy {
           accountNumber: this.tenantForm.get('accountNumber')?.value,
           phoneNumber: this.tenantForm.get('phoneNumber')?.value,
           addressDto: addressDto,
-          leaseAgreementDto: leaseAgreementDto
+          leaseAgreementDto: leaseAgreementDto,
+          rentedObjectDto: rentedObjectDto
         } as TenantDto
       ).pipe(takeUntil(this.killer$))
       .subscribe(tenant => {

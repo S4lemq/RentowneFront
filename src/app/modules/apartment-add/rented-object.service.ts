@@ -13,4 +13,8 @@ export class RentedObjectService {
   getAllRentedObjects(): Observable<Array<RentedObjectDto>> {
     return this.http.get<Array<RentedObjectDto>>(`/api/rented-objects/all`);
   }
+
+  getAllRentedObjectsByLoggedUser(id: number): Observable<Array<RentedObjectDto>> {
+    return this.http.get<Array<RentedObjectDto>>("/api/apartments/" + id + "/rented-objects/all");
+  }
 }
