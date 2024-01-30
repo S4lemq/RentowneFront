@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RentedObjectDto } from '../apartment-edit/model/rented-object-dto';
 import { Observable } from 'rxjs';
@@ -14,7 +14,11 @@ export class RentedObjectService {
     return this.http.get<Array<RentedObjectDto>>(`/api/rented-objects/all`);
   }
 
-  getAllRentedObjectsByLoggedUser(id: number): Observable<Array<RentedObjectDto>> {
-    return this.http.get<Array<RentedObjectDto>>("/api/apartments/" + id + "/rented-objects/all");
+  getAllRentedObjectsByLoggedUser(id: number, rentedObjectId?: number): Observable<Array<RentedObjectDto>> {
+    let params = new HttpParams();
+    if (rentedObjectId !== undefined) {
+      params = params.set('rentedObjectId', rentedObjectId.toString());
+    }
+    return this.http.get<Array<RentedObjectDto>>("/api/apartments/" + id + "/rented-objects/all", { params });
   }
 }

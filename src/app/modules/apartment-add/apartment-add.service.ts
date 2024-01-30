@@ -14,8 +14,13 @@ export class ApartmentAddService {
     return this.http.post<ApartmentDto>("/api/apartments", apartment);
   }
 
-  getAllApartmentsByLoggedUser(): Observable<Array<ApartmentDto>> {
-    return this.http.get<Array<ApartmentDto>>("/api/apartments/all-by-logged-user");
+  getAllApartments(apartmentId?: number): Observable<Array<ApartmentDto>> {
+    let params = new HttpParams();
+    if (apartmentId !== undefined) {
+      params = params.set('apartmentId', apartmentId.toString());
+    }
+
+    return this.http.get<Array<ApartmentDto>>("/api/apartments/all-by-logged-user", { params });
   }
 
 }

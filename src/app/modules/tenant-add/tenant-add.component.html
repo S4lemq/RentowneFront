@@ -1,5 +1,302 @@
 <mat-card>
     <form [formGroup]="tenantForm" (submit)="submit()">
-        <app-tenant-form [parentForm]="tenantForm"></app-tenant-form>
+            <mat-accordion class="example-headers-align" multi>
+              <mat-expansion-panel [expanded]="true" hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Dane personalne
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Podaj dane personalne najemcy
+                    <mat-icon>account_circle</mat-icon>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>Imię</mat-label>
+                    <input matInput formControlName="firstname">
+                    <mat-error *ngIf="firstname?.invalid && (firstname?.dirty || firstname?.touched)">
+                        {{getFirstnameErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>Nazwisko</mat-label>
+                    <input matInput formControlName="lastname">
+                    <mat-error *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)">
+                        {{getLastnameErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>Adres email</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-error *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                        {{getEmailErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>Numer konta bankowego</mat-label>
+                    <input matInput formControlName="accountNumber">
+                    <mat-error *ngIf="accountNumber?.invalid && (accountNumber?.dirty || accountNumber?.touched)">
+                        {{getAccountNumberErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>Numer telefonu</mat-label>
+                    <input matInput formControlName="phoneNumber">
+                    <mat-error *ngIf="phoneNumber?.invalid && (phoneNumber?.dirty || phoneNumber?.touched)">
+                        {{getPhoneNumberErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+              </mat-expansion-panel>
+          
+              <mat-expansion-panel [expanded]="true" hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Adres
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Podaj dane adresowe najemcy
+                    <mat-icon>map</mat-icon>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.street' | translate }}</mat-label>
+                    <input matInput formControlName="streetName">
+                    <mat-error *ngIf="streetName?.invalid && (streetName?.dirty || streetName?.touched)">
+                        {{getStreetNameErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.buildingNumber' | translate }}</mat-label>
+                    <input matInput formControlName="buildingNumber">
+                    <mat-error *ngIf="buildingNumber?.invalid && (buildingNumber?.dirty || buildingNumber?.touched)">
+                        {{getBuildingNumberErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.apartmentNumber' | translate }}</mat-label>
+                    <input matInput formControlName="apartmentNumber">
+                    <mat-error *ngIf="apartmentNumber?.invalid && (apartmentNumber?.dirty || apartmentNumber?.touched)">
+                        {{getApartmentNumberErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.zipCode' | translate }}</mat-label>
+                    <input matInput formControlName="zipCode">
+                    <mat-error *ngIf="zipCode?.invalid && (zipCode?.dirty || zipCode?.touched)">
+                        {{getZipCodeErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.cityName' | translate }}</mat-label>
+                    <input matInput formControlName="cityName">
+                    <mat-error *ngIf="cityName?.invalid && (cityName?.dirty || cityName?.touched)">
+                        {{getCityNameErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.voivodeship' | translate }}</mat-label>
+                    <input matInput formControlName="voivodeship">
+                    <mat-error *ngIf="voivodeship?.invalid && (voivodeship?.dirty || voivodeship?.touched)">
+                        {{getVoivodeshipErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+              </mat-expansion-panel>
+          
+              <mat-expansion-panel [expanded]="true" hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Umowa
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Podaj dane umowy
+                    <mat-icon>date_range</mat-icon>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+          
+                <mat-form-field appearance="fill">
+                    <mat-label>Podaj okres umowy</mat-label>
+                    <mat-date-range-input [formGroup]="tenantForm" [rangePicker]="pickerContractPeriod">
+                        <input matStartDate formControlName="startContractDate" placeholder="Data początkowa">
+                        <input matEndDate formControlName="endContractDate" placeholder="Data końcowa">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matIconSuffix [for]="pickerContractPeriod"></mat-datepicker-toggle>
+                    <mat-date-range-picker #pickerContractPeriod></mat-date-range-picker>
+                    <mat-error *ngIf="this.startContractDate?.invalid">
+                        {{getStartContractDateErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+                
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>Kaucja</mat-label>
+                    <input matInput formControlName="deposit" type="number">
+                    <span matTextSuffix>zł</span>
+                    <mat-error *ngIf="this.deposit?.invalid">
+                        {{getDepositErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>Wpłacona kaucja</mat-label>
+                    <input matInput formControlName="depositPaid" type="number">
+                    <span matTextSuffix>zł</span>
+                    <mat-error *ngIf="this.depositPaid?.invalid">
+                        {{getDepositPaidErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field>
+                    <mat-label>Termin płatności</mat-label>
+                    <mat-select formControlName="paymentDueDayOfMonth">
+                        <mat-option *ngFor="let number of daysOfMonth" [value]="number">
+                            {{number}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="this.paymentDueDayOfMonth?.invalid">
+                        {{getPaymentDueDateErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>Kwota czynszu</mat-label>
+                    <input matInput formControlName="rentAmount" type="number">
+                    <span matTextSuffix>zł</span>
+                    <mat-error *ngIf="this.rentAmount?.invalid">
+                        {{getRentAmountErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>Kwota odstępnego</mat-label>
+                    <input matInput formControlName="compensationAmount" type="number">
+                    <span matTextSuffix>zł</span>
+                    <mat-error *ngIf="this.compensationAmount?.invalid">
+                        {{getCompensationAmountErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>Kwota za internet</mat-label>
+                    <input matInput formControlName="internetFee" type="number">
+                    <span matTextSuffix>zł</span>
+                    <mat-error *ngIf="this.internetFee?.invalid">
+                        {{getInternetFeeErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>Opłata za gaz</mat-label>
+                    <input matInput formControlName="gasDeposit" type="number">
+                    <span matTextSuffix>zł</span>
+                    <mat-error *ngIf="this.gasDeposit?.invalid">
+                        {{getGasDepositErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>Ilość wliczonej wody</mat-label>
+                    <input matInput formControlName="includedWaterMeters" type="number">
+                    <span matTextSuffix>m³&nbsp;</span>
+                    <mat-error *ngIf="this.includedWaterMeters?.invalid">
+                        {{getIncludedWaterMetersErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>Początkowy odczyt energii</mat-label>
+                    <input matInput formControlName="initialEnergyMeterReading" type="number">
+                    <span matTextSuffix>kWh</span>
+                    <mat-error *ngIf="this.initialEnergyMeterReading?.invalid">
+                        {{getInitialEnergyMeterReadingErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>Początkowy odczyt wody</mat-label>
+                    <input matInput formControlName="initialWaterMeterReading" type="number">
+                    <span matTextSuffix>m³&nbsp;</span>
+                    <mat-error *ngIf="this.initialWaterMeterReading?.invalid">
+                        {{getInitialWaterMeterReadingErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>Początkowy odczyt gazu</mat-label>
+                    <input matInput formControlName="initialGasMeterReading" type="number">
+                    <span matTextSuffix>m³&nbsp;</span>
+                    <mat-error *ngIf="this.initialGasMeterReading?.invalid">
+                        {{getInitialGasMeterReadingErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="fill">
+                    <mat-label>Data zwrotu kaucji</mat-label>
+                    <input matInput [matDatepicker]="pickerDepositReturnDate" formControlName="depositReturnDate">
+                    <mat-datepicker-toggle matIconSuffix [for]="pickerDepositReturnDate"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerDepositReturnDate></mat-datepicker>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>Kwota zwróconej kaucji</mat-label>
+                    <input matInput formControlName="returnedDepositAmount" type="number">
+                    <span matTextSuffix>zł</span>
+                    <mat-error *ngIf="this.returnedDepositAmount?.invalid">
+                        {{getReturnedDepositAmountErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-checkbox class="checkbox" color="primary" formControlName="contractActive">Czy aktywna umowa</mat-checkbox>
+              </mat-expansion-panel>
+          
+              <mat-expansion-panel [expanded]="true" hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Mieszaknie
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Wybierz nieruchomość do wynajęcia
+                    <mat-icon>date_range</mat-icon>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+          
+                <mat-form-field appearance="outline">
+                  <mat-label>Mieszkanie</mat-label>
+                    <mat-select formControlName="apartmentId" (selectionChange)="getRentedObjects($event.value)">
+                        <mat-option *ngFor="let apartment of apartments" [value]="apartment.id">
+                            {{apartment.apartmentName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="this.apartmentIdControl?.invalid">
+                        {{getApartmentErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                  <mat-label>Obiekt do wynajęcia</mat-label>
+                  <mat-select formControlName="rentedObjectId">
+                      <mat-option *ngFor="let rentedObject of rentedObjects" [value]="rentedObject.id">
+                          {{rentedObject.rentedObjectName}}
+                      </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="this.rentedObjectId?.invalid">
+                    {{getRentedObjectErrorMsg()}}
+                </mat-error>
+                </mat-form-field>
+          
+              </mat-expansion-panel>
+            </mat-accordion>
+              
+              <button mat-flat-button style="background-color: black; color: white;">Zapisz</button>
     </form>
 </mat-card>
