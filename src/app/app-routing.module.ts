@@ -25,7 +25,7 @@ import { LostPasswordTenantComponent } from './modules/lost-password-tenant/lost
 const routes: Routes = [
 
    {
-    path: '', component: DefaultComponent, children: [
+    path: '', component: DefaultComponent, canActivate: [AuthorizeGuard], children: [
       {path: 'settings', component: SettingsComponent, canActivate: [AuthorizeGuard]},
       {path: 'dashboard', component: DashboardComponent, canActivate: [AuthorizeGuard]},
       {path: 'apartments', component: ApartmentListComponent, canActivate: [AuthorizeGuard]},
