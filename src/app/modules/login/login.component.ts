@@ -16,7 +16,6 @@ import { NgOtpInputConfig } from 'ng-otp-input';
 export class LoginComponent implements OnInit {
 
   formGroup!: FormGroup;
-  loginError = false;
   authRequest: AuthenticationRequestDto = {};
   otpCode = '';
   authResponse: AuthenticationResponseDto = {};
@@ -68,15 +67,14 @@ export class LoginComponent implements OnInit {
         this.loginService.login(this.formGroup.value)
         .subscribe({
           next: (response) => {
-            this.loginError = false;
             if(response.landlordAccess && !response.mfaEnabled) {
               this.jwtService.setAccessToken(response.accessToken as string);
               this.jwtService.setRefreshToken(response.refreshToken as string);
-              this.router.navigate(["/dashboard"]);//przekierowanie do głównego panelu, jak chcesz to możesz do np (["/apartments"])
+              this.router.navigate(["/dashboard"]);
             } else if (response.landlordAccess && !this.authResponse.mfaEnabled) {
               this.authResponse = response;
             } else {
-              this.loginError = true;//bo nie jest userem tylko adminem
+              this.password?.setErrors({ server: true });//bo użytkownik z rolą USER próbował się zalogować na konto ADMIN
             }
           },
           error: err => {
@@ -98,7 +96,7 @@ export class LoginComponent implements OnInit {
             if (response.landlordAccess) {
               this.jwtService.setAccessToken(response.accessToken as string);
               this.jwtService.setRefreshToken(response.refreshToken as string);
-              this.router.navigate(["/dashboard"]);//przekierowanie do głównego panelu, jak chcesz to możesz do np (["/apartments"])
+              this.router.navigate(["/dashboard"]);
             }
         },
         error: () => {

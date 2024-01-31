@@ -4,6 +4,18 @@
     width: 100%;
 }
 
+.layout{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lost-password-link {
+    color: blue;
+    text-decoration: none;
+}
+
 .error{
     color: red;
     padding: 10px;
@@ -28,7 +40,7 @@
     background-color: white;
     border-radius: 10px;
     width: 420px;
-    height: 320px;
+    height: 340px;
     display: flex;
     flex-direction: column;
     justify-content: center;

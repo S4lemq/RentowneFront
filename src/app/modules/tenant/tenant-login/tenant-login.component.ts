@@ -16,10 +16,10 @@ export class TenantLoginComponent implements OnInit {
 
   private readonly REDIRECT_ROUTE = "tenant/profile";
   formGroup!: FormGroup;
-  loginError = false;
   authRequest: AuthenticationRequestDto = {};
   otpCode = '';
   authResponse: AuthenticationResponseDto = {};
+  hide = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,23 +40,24 @@ export class TenantLoginComponent implements OnInit {
   }
 
   submit() {
-    if(this.formGroup.valid) {
-      this.loginService.login(this.formGroup.value)
-      .subscribe({
-        next: (response) => {
-          this.loginError = false;
-          if(!response.landlordAccess && !response.mfaEnabled) {
-            this.jwtService.setAccessToken(response.accessToken as string);
-            this.jwtService.setRefreshToken(response.refreshToken as string);
-            this.router.navigate([this.REDIRECT_ROUTE]);
-          } else if (!response.landlordAccess && !this.authResponse.mfaEnabled) {
-            this.authResponse = response;
-          } else {
-            this.loginError = true;
+    if (this.email && this.password) {
+      if (!this.email.hasError('email') && !this.email.hasError('required') && !this.password.hasError('required')) {
+        this.loginService.login(this.formGroup.value)
+        .subscribe({
+          next: (response) => {
+            if(!response.landlordAccess && !response.mfaEnabled) {
+              this.jwtService.setAccessToken(response.accessToken as string);
+              this.jwtService.setRefreshToken(response.refreshToken as string);
+              this.router.navigate([this.REDIRECT_ROUTE]);
+            } else if (!response.landlordAccess && !this.authResponse.mfaEnabled) {
+              this.authResponse = response;
+            }
+          },
+          error: err => {
+            this.formGroup.controls['password'].setErrors({ server: true }); // Ustawienie błędu pochodzącego z serwera na kontrolce formularza
           }
-        },
-        error: () => this.loginError = true
-      });
+        })
+      }
     }
   }
 
@@ -76,6 +77,34 @@ export class TenantLoginComponent implements OnInit {
             }
         }
       })
+  }
+
+  getEmailErrorMsg() {
+    if (this.email?.hasError('email')) {
+      return 'Nieprawidłowy format e-mail';
+    } else if (this.email?.hasError('required')) {
+      return 'Wartość wymagana';
+    }
+    return '';
+  }
+
+  getPasswordErrorMsg() {
+    if (this.password?.hasError('required')) {
+      return 'Wartość wymagana';
+    } else if (this.password?.hasError('server')) {
+        // Ustawienie błędu 'invalid' na kontrolce email
+        this.email?.setErrors({ invalid: true });
+      return 'Nieprawidłowy adres e-mail lub hasło';
+    }
+    return '';
+  }
+
+  get email() {
+    return this.formGroup.get("email");
+  }
+
+  get password() {
+    return this.formGroup.get("password");
   }
 
 }

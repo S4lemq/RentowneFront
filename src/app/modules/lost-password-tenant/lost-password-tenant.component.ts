@@ -8,12 +8,11 @@ import { LoginService } from '../login/login.service';
 import { LostPasswordRequest } from '../login/model/lost-password-request';
 
 @Component({
-  selector: 'app-lost-password',
-  templateUrl: './lost-password.component.html',
-  styleUrls: ['./lost-password.component.scss']
+  selector: 'app-lost-password-tenant',
+  templateUrl: './lost-password-tenant.component.html',
+  styleUrls: ['./lost-password-tenant.component.scss']
 })
-export class LostPasswordComponent implements OnInit, OnDestroy {
-
+export class LostPasswordTenantComponent implements OnInit, OnDestroy {
   private killer$ = new Subject<void>();  
   formGroup!: FormGroup;
   formGroupChangePassword!: FormGroup;
@@ -57,15 +56,14 @@ export class LostPasswordComponent implements OnInit, OnDestroy {
 
   send() {
     if (this.formGroup.valid) {
-      this.loginService.lostPassword(
-        {
-          email: this.formGroup.value,
-          isTenant: false
-        } as LostPasswordRequest
-      )
+      const request: LostPasswordRequest = {
+        email: this.formGroup.value.email,
+        isTenant: true
+      }
+      this.loginService.lostPassword(request)
       .pipe(takeUntil(this.killer$))
       .subscribe(() => {
-        this.router.navigate(["/login"])
+        this.router.navigate(["/tenant/login"])
         .then(() => this.snackBar.open('Email z linkiem został wysłany', '', {duration: 3000, panelClass: ['snackbarSuccess']}));
       });
     } else {
@@ -81,7 +79,7 @@ export class LostPasswordComponent implements OnInit, OnDestroy {
         hash: this.hash
       }).pipe(takeUntil(this.killer$))
       .subscribe(() => {
-        this.router.navigate(["/login"])
+        this.router.navigate(["/tenant/login"])
         .then(() => this.snackBar.open('Hasło zostało zmienione', '', {duration: 3000, panelClass: ['snackbarSuccess']}));
       });
     } else {
@@ -139,5 +137,4 @@ export class LostPasswordComponent implements OnInit, OnDestroy {
   get repeatPassword() {
     return this.formGroupChangePassword.get("repeatPassword");
   }
-
 }
