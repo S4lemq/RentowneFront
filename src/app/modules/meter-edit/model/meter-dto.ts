@@ -6,4 +6,7 @@ export interface MeterDto {
     name?: string
     meterType: MeterType
     rentedObject?: RentedObjectDto
+    meterNumber?: string
+    initialMeterReading?: number
+    installationDate?: Date
 }

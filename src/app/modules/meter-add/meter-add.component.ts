@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { MeterService } from '../meter-edit/meter.service';
@@ -9,6 +9,7 @@ import { RentedObjectService } from '../apartment-add/rented-object.service';
 import { RentedObjectDto } from '../apartment-edit/model/rented-object-dto';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { maxDecimalPlaces } from '../common/validators/max-decimal-places.validator';
 
 @Component({
   selector: 'app-meter-add',
@@ -43,7 +44,10 @@ export class MeterAddComponent implements OnInit, OnDestroy {
     this.meterForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(32)]),
       meterType: new FormControl('', Validators.required),
-      rentedObjectId: new FormControl(this.rentedObjectId, Validators.required)
+      rentedObjectId: new FormControl(this.rentedObjectId, Validators.required),
+      meterNumber: new FormControl('', [Validators.minLength(4), Validators.maxLength(20)]),
+      initialMeterReading: new FormControl('', [Validators.min(0), Validators.max(99999), maxDecimalPlaces(5)]),
+      installationDate: new FormControl(''),
     });
   }
 
@@ -61,7 +65,10 @@ export class MeterAddComponent implements OnInit, OnDestroy {
         {
           name: this.name?.value,
           meterType: this.meterType?.value,
-          rentedObject: rentedObjectDto
+          rentedObject: rentedObjectDto,
+          meterNumber: this.meterNumber?.value,
+          initialMeterReading: this.initialMeterReading?.value,
+          installationDate: this.installationDate?.value,
         } as MeterDto
       ).pipe(takeUntil(this.killer$))
       .subscribe(meter => {
@@ -77,12 +84,97 @@ export class MeterAddComponent implements OnInit, OnDestroy {
     }
   }
 
+  getUnit(meterType: MeterType | null): string {
+    if (!meterType) {
+      return '';
+    }
+  
+    switch (meterType) {
+      case MeterType.WATER_COLD:
+      case MeterType.WATER_WARM:
+      case MeterType.GAS:
+        return 'm³';
+      case MeterType.ELECTRIC:
+        return 'kWh';
+      case MeterType.HEAT:
+        return 'GJ';
+      default:
+        return '';
+    }
+  }
+
+  getInitialMeterReadingErrorMsg(): string {
+    if (this.initialMeterReading?.hasError('min')) {
+      return 'Minimalnie 0m³';
+    }
+    if (this.initialMeterReading?.hasError('maxlength')) {
+      return 'Maksymalnie 99999m³';
+    }
+    if (this.initialMeterReading?.hasError('maxDecimalPlaces')) {
+      return "Maksymalnie 5 miejsca po przecinku"
+    }
+    return '';
+  }
+
+  getMeterNumberErrorMsg(): string {
+    if (this.meterNumber?.hasError('minlength')) {
+      return 'Minimalnie 4';
+    }
+    if (this.meterNumber?.hasError('maxlength')) {
+      return 'Maksymalnie 20';
+    }
+    return '';
+  }
+
+  getRentedObjectErrorMsg(): string {
+    if (this.rentedObjectIdControl?.hasError('required')) {
+      return 'Wartość wymagana';
+    }
+    return '';
+  }
+
+  getMeterTypeErrorMsg(): string {
+    if (this.meterType?.hasError('required')) {
+      return 'Wartość wymagana';
+    }
+    return '';
+  }
+
+  getNametErrorMsg(): string {
+    if (this.name?.hasError('required')) {
+      return 'Wartość wymagana';
+    }
+    if (this.name?.hasError('minlength')) {
+      return 'Minimalnie 1';
+    }
+    if (this.name?.hasError('maxlength')) {
+      return 'Maksymalnie 32';
+    }
+    return '';
+  }
+
   get name() {
     return this.meterForm.get("name");
   }
 
   get meterType() {
     return this.meterForm.get("meterType");
+  }
+
+  get rentedObjectIdControl() {
+    return this.meterForm.get("rentedObjectId");
+  }
+
+  get meterNumber() {
+    return this.meterForm.get("meterNumber");
+  }
+
+  get initialMeterReading() {
+    return this.meterForm.get("initialMeterReading");
+  }
+
+  get installationDate() {
+    return this.meterForm.get("installationDate");
   }
 
 }

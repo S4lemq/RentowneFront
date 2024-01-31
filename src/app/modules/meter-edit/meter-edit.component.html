@@ -3,6 +3,9 @@
         <mat-form-field appearance="outline">
             <mat-label>Nazwa licznika</mat-label>
             <input matInput formControlName="name">
+            <mat-error *ngIf="name?.invalid">
+                {{getNametErrorMsg()}}
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -12,6 +15,10 @@
                     {{ meterType | translateMeterType }}
                 </mat-option>
             </mat-select>
+            <span *ngIf="meterType?.value" matSuffix>{{ getUnit(meterType?.value) }}&nbsp;</span>
+            <mat-error *ngIf="meterType?.invalid">
+                {{ getMeterTypeErrorMsg() }}
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -21,6 +28,33 @@
                     {{rentedObject.rentedObjectName}}
                 </mat-option>
             </mat-select>
+            <mat-error *ngIf="rentedObjectIdControl?.invalid">
+                {{getRentedObjectErrorMsg()}}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Numer licznika</mat-label>
+            <input matInput formControlName="meterNumber">
+            <mat-error *ngIf="meterNumber?.invalid">
+                {{getMeterNumberErrorMsg()}}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Odczyt początkowy</mat-label>
+            <input matInput formControlName="initialMeterReading" type="number">
+            <span matTextSuffix>m³&nbsp;</span>
+            <mat-error *ngIf="this.initialMeterReading?.invalid">
+                {{getInitialMeterReadingErrorMsg()}}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Data montażu</mat-label>
+            <input matInput [matDatepicker]="pickerInstallationDate" formControlName="installationDate">
+            <mat-datepicker-toggle matIconSuffix [for]="pickerInstallationDate"></mat-datepicker-toggle>
+            <mat-datepicker #pickerInstallationDate></mat-datepicker>
         </mat-form-field>
 
         <button mat-flat-button style="background-color: black; color: white;" (click)="submit()">Zapisz</button>
