@@ -72,7 +72,7 @@ export class TenantAddComponent implements OnInit, OnDestroy {
       initialWaterMeterReading: new FormControl('', [Validators.required, Validators.min(0), Validators.max(99999), maxDecimalPlaces(5)]), //początkowy odczyt wody
       initialGasMeterReading: new FormControl('', [Validators.min(0), Validators.max(99999), maxDecimalPlaces(5)]), //początkowy odczyt gazu
       depositReturnDate: new FormControl(''), //data zwrotu kaucji
-      returnedDepositAmount: new FormControl('',[Validators.min(0), Validators.max(99999.99), maxDecimalPlaces(2)]), //kwota zwróconej kaucji
+      returnedDepositAmount: new FormControl('',[Validators.min(0), Validators.max(99999), maxDecimalPlaces(2)]), //kwota zwróconej kaucji
       contractActive: new FormControl(''), //czy aktywna umowa,
       rentedObjectId: new FormControl('', Validators.required), //wybrana nieruchomość do wynajmu,
       apartmentId: new FormControl('', Validators.required)

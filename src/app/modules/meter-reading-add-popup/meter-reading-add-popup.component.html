@@ -1,0 +1,41 @@
+<form [formGroup]="meterReadingForm" (ngSubmit)="saveMeterReading()">
+    <h1 mat-dialog-title>{{inputData.title}}</h1>
+    <div mat-dialog-content class="container-1">
+        <mat-form-field appearance="outline">
+            <mat-label>Aktualny odczyt</mat-label>
+            <input type="number" matInput formControlName="currentReading">
+            <span matTextSuffix>m³&nbsp;</span>
+            <mat-error *ngIf="this.currentReadingControl?.invalid">
+                {{getCurrentReadingErrorMsg()}}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Data odczytu</mat-label>
+            <input matInput [matDatepicker]="readingDatePicker" formControlName="readingDate">
+            <mat-datepicker-toggle matSuffix [for]="readingDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #readingDatePicker></mat-datepicker>
+            <mat-error *ngIf="this.readingDateControl?.invalid">
+                {{getReadingDateErrorMsg()}}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Poprzedni odczyt</mat-label>
+            <input matInput formControlName="previousReading">
+            <span matTextSuffix>m³&nbsp;</span>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Poprzednia data odczytu</mat-label>
+            <input matInput [matDatepicker]="pickerPreviousReadingDate" formControlName="previousReadingDate">
+            <mat-datepicker-toggle matIconSuffix [for]="pickerPreviousReadingDate"></mat-datepicker-toggle>
+            <mat-datepicker #pickerPreviousReadingDate></mat-datepicker>
+        </mat-form-field>
+        
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button class="btn" color="warn"[mat-dialog-close]="false">Anuluj</button>
+        <button mat-flat-button style="background-color: black; color: white;">Zapisz</button>
+    </div>
+</form>

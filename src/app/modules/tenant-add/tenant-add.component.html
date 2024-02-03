@@ -124,7 +124,7 @@
                   </mat-panel-description>
                 </mat-expansion-panel-header>
           
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline">
                     <mat-label>Podaj okres umowy</mat-label>
                     <mat-date-range-input [formGroup]="tenantForm" [rangePicker]="pickerContractPeriod">
                         <input matStartDate formControlName="startContractDate" placeholder="Data początkowa">
@@ -156,7 +156,7 @@
                     </mat-error>
                 </mat-form-field>
           
-                <mat-form-field>
+                <mat-form-field appearance="outline">
                     <mat-label>Termin płatności</mat-label>
                     <mat-select formControlName="paymentDueDayOfMonth">
                         <mat-option *ngFor="let number of daysOfMonth" [value]="number">
@@ -240,7 +240,7 @@
                     </mat-error>
                 </mat-form-field>
           
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline">
                     <mat-label>Data zwrotu kaucji</mat-label>
                     <input matInput [matDatepicker]="pickerDepositReturnDate" formControlName="depositReturnDate">
                     <mat-datepicker-toggle matIconSuffix [for]="pickerDepositReturnDate"></mat-datepicker-toggle>

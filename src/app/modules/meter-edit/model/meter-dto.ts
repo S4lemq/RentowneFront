@@ -4,7 +4,7 @@ import { MeterType } from "./meter-type"
 export interface MeterDto {
     id?: number
     name?: string
-    meterType: MeterType
+    meterType?: MeterType
     rentedObject?: RentedObjectDto
     meterNumber?: string
     initialMeterReading?: number

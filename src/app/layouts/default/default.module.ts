@@ -23,6 +23,8 @@ import { TenantAddComponent } from 'src/app/modules/tenant-add/tenant-add.compon
 import { TenantEditComponent } from 'src/app/modules/tenant-edit/tenant-edit.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DefaultComponent } from './default.component';
+import { MeterReadingListComponent } from 'src/app/modules/meter-reading-list/meter-reading-list.component';
+import { MeterReadingAddPopupComponent } from 'src/app/modules/meter-reading-add-popup/meter-reading-add-popup.component';
 
 
 @NgModule({
@@ -45,6 +47,8 @@ import { DefaultComponent } from './default.component';
     TenantAddComponent,
     ApartmentMeterEditContainerComponent,
     TenantEditComponent,
+    MeterReadingListComponent,
+    MeterReadingAddPopupComponent
   ],
   imports: [
     CommonModule,
@@ -53,9 +57,6 @@ import { DefaultComponent } from './default.component';
     ReactiveFormsModule,
     OverlayModule,
     CdkMenuModule
-  ],
-  exports: [
-    BodyComponent
   ]
 })
 export class DefaultModule { }

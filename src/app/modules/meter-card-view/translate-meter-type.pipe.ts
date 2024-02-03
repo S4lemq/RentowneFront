@@ -6,7 +6,7 @@ import { MeterType } from '../meter-edit/model/meter-type';
 })
 export class TranslateMeterTypePipe implements PipeTransform {
 
-  transform(value: MeterType): string {
+  transform(value: MeterType | undefined): string {
     switch (value) {
       case MeterType.WATER_COLD:
         return 'Woda zimna';
