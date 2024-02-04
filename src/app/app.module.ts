@@ -17,6 +17,8 @@ import { ErrorHandlingInterceptor } from './modules/common/interceptor/error-han
 import { JwtInterceptor } from './modules/common/interceptor/jwt.interceptor';
 import { TranslateAppModule } from './modules/common/translate/translate.module';
 import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGuard';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { CustomMatPaginatorIntl } from './modules/common/translate/custom-mat-paginator-intl';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGu
       multi: true,
     },
     AuthorizeGuard,
-    TenantAuthorizeGuard
+    TenantAuthorizeGuard,
+    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl }
   ],
   bootstrap: [AppComponent]
 })

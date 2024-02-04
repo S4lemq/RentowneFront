@@ -77,6 +77,14 @@
     "snackbar.meterSaved": "Licznik został zapisany",
     "common.message.BAD_LINK":"Nie prawidłowy link url, spróbuj ponownie wypełnić formularz resetujący hasło.",
     "common.message.LINK_EXPIRED":"Link wygasł, musisz ponownie wypełnić formularz resetujący hasło.",
+    "matPaginator": {
+        "itemsPerPageLabel": "Elementów na stronę",
+        "nextPageLabel": "Następna strona",
+        "previousPageLabel": "Poprzednia strona",
+        "firstPageLabel": "Pierwsza strona",
+        "lastPageLabel": "Ostatnia strona",
+        "rangeLabel": "z"
+    },
 
 
 

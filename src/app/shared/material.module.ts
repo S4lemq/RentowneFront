@@ -18,8 +18,6 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import {MatExpansionModule} from '@angular/material/expansion';
 
-
-
 @NgModule({
   declarations: [],
   imports: [
@@ -62,7 +60,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatExpansionModule
   ],
   providers: [
-    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
   ],
 })
 export class MaterialModule { }

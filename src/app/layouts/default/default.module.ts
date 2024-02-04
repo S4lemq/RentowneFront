@@ -25,6 +25,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { DefaultComponent } from './default.component';
 import { MeterReadingListComponent } from 'src/app/modules/meter-reading-list/meter-reading-list.component';
 import { MeterReadingAddPopupComponent } from 'src/app/modules/meter-reading-add-popup/meter-reading-add-popup.component';
+import { TenantListComponent } from 'src/app/modules/tenant-list/tenant-list.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { MeterReadingAddPopupComponent } from 'src/app/modules/meter-reading-add
     ApartmentMeterEditContainerComponent,
     TenantEditComponent,
     MeterReadingListComponent,
-    MeterReadingAddPopupComponent
+    MeterReadingAddPopupComponent,
+    TenantListComponent
   ],
   imports: [
     CommonModule,

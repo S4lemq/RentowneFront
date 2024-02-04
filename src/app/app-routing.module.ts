@@ -21,6 +21,7 @@ import { ProfileComponent } from './modules/tenant/profile/profile.component';
 import { TenantLoginComponent } from './modules/tenant/tenant-login/tenant-login.component';
 import { LostPasswordComponent } from './modules/lost-password/lost-password.component';
 import { LostPasswordTenantComponent } from './modules/lost-password-tenant/lost-password-tenant.component';
+import { TenantListComponent } from './modules/tenant-list/tenant-list.component';
 
 const routes: Routes = [
 
@@ -36,6 +37,7 @@ const routes: Routes = [
       {path: 'meters/edit/:id', component: MeterEditComponent, canActivate: [AuthorizeGuard]},
       {path: 'tenants/add', component: TenantAddComponent, canActivate: [AuthorizeGuard]},
       {path: 'tenants/edit/:id', component: TenantEditComponent, canActivate: [AuthorizeGuard]},
+      {path: 'tenants', component: TenantListComponent, canActivate: [AuthorizeGuard]},
       
     ]
   },

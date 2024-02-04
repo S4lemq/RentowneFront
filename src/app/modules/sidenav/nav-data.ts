@@ -27,6 +27,10 @@ export const navbarData: InavbarData[] = [
         label: 'Najemcy',
         items: [
             {
+                routeLink: 'tenants',
+                label: 'Najemcy'
+            },
+            {
                 routeLink: 'tenants/add',
                 label: 'Dodaj najemcę'
             }

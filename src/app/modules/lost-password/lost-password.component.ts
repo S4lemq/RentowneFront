@@ -59,7 +59,7 @@ export class LostPasswordComponent implements OnInit, OnDestroy {
     if (this.formGroup.valid) {
       this.loginService.lostPassword(
         {
-          email: this.formGroup.value,
+          email: this.formGroup.value.email,
           isTenant: false
         } as LostPasswordRequest
       )
