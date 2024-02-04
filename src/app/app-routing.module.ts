@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApartmentMeterEditContainerComponent } from './apartment-meter-edit-container/apartment-meter-edit-container.component';
+import { ApartmentMeterEditContainerComponent } from './modules/apartment-meter-edit-container/apartment-meter-edit-container.component';
 import { DefaultComponent } from './layouts/default/default.component';
 import { EmptyLoginComponent } from './layouts/empty-login/empty-login.component';
 import { EmptyTenantLoginComponent } from './layouts/empty-tenant-login/empty-tenant-login.component';
