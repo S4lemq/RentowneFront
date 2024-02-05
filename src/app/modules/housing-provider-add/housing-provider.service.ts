@@ -10,8 +10,8 @@ export class HousingProviderService {
 
   constructor(private http: HttpClient) { }
 
-  saveHousingProvider(dto: HousingProviderDto): Observable<any> {
-    return this.http.post<HousingProviderDto>(`api/housing-service-provider`, dto);
+  saveHousingProvider(dto: HousingProviderDto): Observable<number> {
+    return this.http.post<number>(`api/housing-service-provider`, dto);
   }
 
   getHousingProvider(id: number): Observable<HousingProviderDto> {

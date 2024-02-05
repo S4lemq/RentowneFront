@@ -8,6 +8,8 @@ import { HousingProviderDto } from './model/housing-provider-dto';
 import { ProviderFieldDto } from './model/provider-field-dto';
 import { ProviderType } from './model/provider-type';
 import { maxDecimalPlaces } from '../common/validators/max-decimal-places.validator';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-housing-provider-add',
@@ -23,7 +25,9 @@ export class HousingProviderAddComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private housingProviderService: HousingProviderService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private router: Router,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -64,6 +68,66 @@ export class HousingProviderAddComponent implements OnInit, OnDestroy {
     });
   }
 
+  addItem(): void {
+    this.items.push(this.createItem());
+  }
+
+  removeItem(index: number): void {
+    this.items.removeAt(index);
+  }
+
+  submit() {
+    if (this.housingProviderForm.valid) {
+      const providerFieldDtos = this.getProviderFieldDtos();
+
+      const housingProvider: HousingProviderDto = {
+        name: this.nameControl?.value,
+        type: this.typeControl?.value,
+        tax: this.taxControl?.value,
+        providerFieldDtos: providerFieldDtos
+      }
+
+      this.updateBillingMethod(housingProvider);
+      this.housingProviderService.saveHousingProvider(housingProvider)
+      .pipe(takeUntil(this.killer$))
+      .subscribe(id => {
+        const translatedText = this.translateService.instant("snackbar.housingProviderSaved");
+        this.router.navigate(["/housing-providers/edit", id])
+            .then(() => this.snackBar.open(translatedText, '', {
+                duration: 3000,
+                panelClass: ['snackbarSuccess']
+            }));
+      });
+    } else {
+      this.housingProviderForm.markAllAsTouched();
+    }
+  }
+
+  updateBillingMethod(dto: HousingProviderDto): void {
+    if (dto.type === ProviderType.INTERNET || dto.type === ProviderType.WATER) {
+      if (dto.providerFieldDtos && dto.providerFieldDtos.length > 0) {
+        dto.providerFieldDtos[0].billingMethod = BillingMethod.MONTHLY;
+      }
+    }
+    if (dto.type === ProviderType.ADMINISTRATIVE_FEE) {
+      dto.providerFieldDtos?.forEach(field => {
+        field.billingMethod = BillingMethod.MONTHLY;
+      });
+    }
+  }
+
+  getProviderFieldDtos(): ProviderFieldDto[] {
+    const items = this.items.value;
+  
+    const providerFieldDtos: ProviderFieldDto[] = items.map((item: any) => ({
+      name: item.fieldName,
+      price: item.price,
+      billingMethod: item.billingMethod,
+    }));
+  
+    return providerFieldDtos;
+  }
+  
   getPriceErrorMsg(index: number): string {
     const item = this.items.at(index) as FormGroup;
     const priceControl = item.get('price');
@@ -112,67 +176,6 @@ export class HousingProviderAddComponent implements OnInit, OnDestroy {
     }
     return '';
   }
-
-  addItem(): void {
-    this.items.push(this.createItem());
-  }
-
-  removeItem(index: number): void {
-    this.items.removeAt(index);
-  }
-
-  submit() {
-    if (this.housingProviderForm.valid) {
-      const providerFieldDtos = this.getProviderFieldDtos();
-
-      const housingProvider: HousingProviderDto = {
-        name: this.nameControl?.value,
-        type: this.typeControl?.value,
-        tax: this.taxControl?.value,
-        providerFieldDtos: providerFieldDtos
-      }
-
-      this.updateBillingMethod(housingProvider);
-      this.housingProviderService.saveHousingProvider(housingProvider)
-      .pipe(takeUntil(this.killer$))
-      .subscribe(tenant => {
-        /* const translatedText = this.translateService.instant("snackbar.housingProviderSaved");
-        this.router.navigate(["tenants/edit/", tenant.id])
-            .then(() => this.snackBar.open(translatedText, '', {
-                duration: 3000,
-                panelClass: ['snackbarSuccess']
-            })); */
-      });
-    } else {
-      this.housingProviderForm.markAllAsTouched();
-    }
-  }
-
-  updateBillingMethod(dto: HousingProviderDto): void {
-    if (dto.type === ProviderType.INTERNET || dto.type === ProviderType.WATER) {
-      if (dto.providerFieldDtos && dto.providerFieldDtos.length > 0) {
-        dto.providerFieldDtos[0].billingMethod = BillingMethod.MONTHLY;
-      }
-    }
-    if (dto.type === ProviderType.ADMINISTRATIVE_FEE) {
-      dto.providerFieldDtos?.forEach(field => {
-        field.billingMethod = BillingMethod.MONTHLY;
-      });
-    }
-  }
-
-  getProviderFieldDtos(): ProviderFieldDto[] {
-    const items = this.items.value;
-  
-    const providerFieldDtos: ProviderFieldDto[] = items.map((item: any) => ({
-      name: item.fieldName,
-      price: item.price,
-      billingMethod: item.billingMethod,
-    }));
-  
-    return providerFieldDtos;
-  }
-  
 
   get nameControl() {
     return this.housingProviderForm.get("name");
