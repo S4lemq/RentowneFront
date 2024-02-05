@@ -20,7 +20,7 @@ export class ApartmentEditComponent implements OnInit{
   rentedObjectsFormArray!: FormArray;
   requredFileTypes = "image/jpeg, image/png";
   imageForm!: FormGroup;
-  image: string | null = null;
+  image?: string | null = null;
   imageUploaded: boolean = false;
   imageSelected: boolean = false;
   apartmentId!: number;
@@ -94,7 +94,7 @@ export class ApartmentEditComponent implements OnInit{
       this.imageUploaded = false;
 
       const addressDto: AddressDto = {
-        id: this.apartment.addressDto.id,
+        id: this.apartment.addressDto?.id,
         streetName: this.apartmentForm.get('streetName')?.value,
         buildingNumber: this.apartmentForm.get('buildingNumber')?.value,
         apartmentNumber: this.apartmentForm.get('apartmentNumber')?.value,
@@ -132,18 +132,18 @@ export class ApartmentEditComponent implements OnInit{
       apartmentName: apartment.apartmentName,
       leasesNumber: apartment.leasesNumber,
       area: apartment.area,
-      streetName: apartment.addressDto.streetName,
-      buildingNumber: apartment.addressDto.buildingNumber,
-      apartmentNumber: apartment.addressDto.apartmentNumber,
-      zipCode: apartment.addressDto.zipCode,
-      cityName: apartment.addressDto.cityName,
-      voivodeship: apartment.addressDto.voivodeship,
+      streetName: apartment.addressDto?.streetName,
+      buildingNumber: apartment.addressDto?.buildingNumber,
+      apartmentNumber: apartment.addressDto?.apartmentNumber,
+      zipCode: apartment.addressDto?.zipCode,
+      cityName: apartment.addressDto?.cityName,
+      voivodeship: apartment.addressDto?.voivodeship,
       rentedObjects: apartment.rentedObjectDtos
     });
     this.image = apartment.image;
   }
 
-  confirmDelete(id: number) {
+  confirmDelete(id: number | undefined) {
     this.dialogService.openConfirmDialog("Czy na pewno chcesz usunąć mieszkanie?")
       .afterClosed()
         .subscribe(result => {

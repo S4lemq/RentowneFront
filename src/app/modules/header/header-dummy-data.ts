@@ -1,11 +1,11 @@
 export const languages = [
     {
-        language: 'English',
-        flag: 'uk'
-    },
-    {
         language: 'Polski',
         flag: 'pl'
+    },
+    {
+        language: 'English',
+        flag: 'uk'
     },
     {
         language: 'Yкраїнська',

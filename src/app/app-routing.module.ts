@@ -22,6 +22,8 @@ import { TenantLoginComponent } from './modules/tenant/tenant-login/tenant-login
 import { LostPasswordComponent } from './modules/lost-password/lost-password.component';
 import { LostPasswordTenantComponent } from './modules/lost-password-tenant/lost-password-tenant.component';
 import { TenantListComponent } from './modules/tenant-list/tenant-list.component';
+import { HousingProviderAddComponent } from './modules/housing-provider-add/housing-provider-add.component';
+import { HousingProviderEditComponent } from './modules/housing-provider-edit/housing-provider-edit.component';
 
 const routes: Routes = [
 
@@ -38,6 +40,8 @@ const routes: Routes = [
       {path: 'tenants/add', component: TenantAddComponent, canActivate: [AuthorizeGuard]},
       {path: 'tenants/edit/:id', component: TenantEditComponent, canActivate: [AuthorizeGuard]},
       {path: 'tenants', component: TenantListComponent, canActivate: [AuthorizeGuard]},
+      {path: 'housing-providers/add', component: HousingProviderAddComponent, canActivate: [AuthorizeGuard]},
+      {path: 'housing-providers/edit/:id', component: HousingProviderEditComponent, canActivate: [AuthorizeGuard]},
       
     ]
   },

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { TenantService } from '../tenant-add/tenant.service';
@@ -19,7 +19,7 @@ import { RentedObjectService } from '../apartment-add/rented-object.service';
   templateUrl: './tenant-edit.component.html',
   styleUrls: ['./tenant-edit.component.scss']
 })
-export class TenantEditComponent {
+export class TenantEditComponent implements OnInit, OnDestroy {
   private killer$ = new Subject<void>();
   tenantForm!: FormGroup;
   tenantId!: number;

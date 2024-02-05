@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,10 +16,9 @@ import { TenantFullpageModule } from './layouts/tenant-fullpage/tenant-fullpage.
 import { AuthorizeGuard } from './modules/common/guard/authorizeGuard';
 import { ErrorHandlingInterceptor } from './modules/common/interceptor/error-handling.interceptor';
 import { JwtInterceptor } from './modules/common/interceptor/jwt.interceptor';
+import { CustomMatPaginatorIntl } from './modules/common/translate/custom-mat-paginator-intl';
 import { TranslateAppModule } from './modules/common/translate/translate.module';
 import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGuard';
-import { MatPaginatorIntl } from '@angular/material/paginator';
-import { CustomMatPaginatorIntl } from './modules/common/translate/custom-mat-paginator-intl';
 
 @NgModule({
   declarations: [

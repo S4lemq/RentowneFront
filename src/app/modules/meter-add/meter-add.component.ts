@@ -107,7 +107,7 @@ export class MeterAddComponent implements OnInit, OnDestroy {
     if (this.initialMeterReading?.hasError('min')) {
       return 'Minimalnie 0m³';
     }
-    if (this.initialMeterReading?.hasError('maxlength')) {
+    if (this.initialMeterReading?.hasError('max')) {
       return 'Maksymalnie 99999m³';
     }
     if (this.initialMeterReading?.hasError('maxDecimalPlaces')) {

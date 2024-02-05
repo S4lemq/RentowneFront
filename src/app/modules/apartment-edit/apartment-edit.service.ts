@@ -19,7 +19,7 @@ export class ApartmentEditService {
     return this.http.put<ApartmentDto>("/api/apartments/" + id, value);
   }
 
-  delete(id: number): Observable<void> {
+  delete(id: number | undefined): Observable<void> {
     return this.http.delete<void>("/api/apartments/" + id);
   }
 

@@ -1,0 +1,7 @@
+export enum ProviderType {
+    INTERNET = "INTERNET",
+    ELECTRICITY = "ELECTRICITY",
+    GAS = "GAS",
+    WATER = "WATER",
+    ADMINISTRATIVE_FEE = "ADMINISTRATIVE_FEE"
+}

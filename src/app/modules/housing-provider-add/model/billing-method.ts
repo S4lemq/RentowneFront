@@ -1,0 +1,4 @@
+export enum BillingMethod {
+    MONTHLY = "MONTHLY",
+    ACCORDING_TO_CONSUMPTION = "ACCORDING_TO_CONSUMPTION"
+}

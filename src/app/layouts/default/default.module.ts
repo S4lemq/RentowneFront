@@ -26,6 +26,10 @@ import { DefaultComponent } from './default.component';
 import { MeterReadingListComponent } from 'src/app/modules/meter-reading-list/meter-reading-list.component';
 import { MeterReadingAddPopupComponent } from 'src/app/modules/meter-reading-add-popup/meter-reading-add-popup.component';
 import { TenantListComponent } from 'src/app/modules/tenant-list/tenant-list.component';
+import { HousingProviderAddComponent } from 'src/app/modules/housing-provider-add/housing-provider-add.component';
+import { TranslateProviderTypePipe } from 'src/app/modules/housing-provider-add/pipe/translate-provider-type.pipe';
+import { TranslateBillingMethodPipe } from 'src/app/modules/housing-provider-add/pipe/translate-billing-method.pipe';
+import { HousingProviderEditComponent } from 'src/app/modules/housing-provider-edit/housing-provider-edit.component';
 
 
 @NgModule({
@@ -50,7 +54,11 @@ import { TenantListComponent } from 'src/app/modules/tenant-list/tenant-list.com
     TenantEditComponent,
     MeterReadingListComponent,
     MeterReadingAddPopupComponent,
-    TenantListComponent
+    TenantListComponent,
+    HousingProviderAddComponent,
+    TranslateProviderTypePipe,
+    TranslateBillingMethodPipe,
+    HousingProviderEditComponent
   ],
   imports: [
     CommonModule,

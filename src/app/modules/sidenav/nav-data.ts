@@ -39,7 +39,17 @@ export const navbarData: InavbarData[] = [
     {
         routeLink: 'utility-providers',
         icon: 'fal fa-address-card',
-        label: 'Dostawcy'
+        label: 'Dostawcy',
+        items: [
+            {
+                routeLink: 'housing-providers',
+                label: 'Dostawcy'
+            },
+            {
+                routeLink: 'housing-providers/add',
+                label: 'Dodaj dostawcę'
+            }
+        ]
     },
     {
         routeLink: 'meters',

@@ -1,0 +1,40 @@
+.card{
+    padding: 20px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.container-1{
+    display: flex;
+    gap: 10px
+}
+
+.items{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.container-2{
+    display: flex;
+    gap: 10px;
+    max-height: 56px;
+}
+
+.btn-delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding-top: 20px;
+}
+

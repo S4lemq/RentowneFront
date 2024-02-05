@@ -1,0 +1,83 @@
+<mat-card class="card">
+    <form [formGroup]="housingProviderForm" (submit)="submit()" class="form">
+        <div class="container-1">
+            <mat-form-field appearance="outline">
+                <mat-label>Nazwa dostawcy</mat-label>
+                <input matInput formControlName="name">
+                <mat-error *ngIf="this.nameControl?.invalid">
+                    {{getNameErrorMsg()}}
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Podatek</mat-label>
+                <input matInput type="number" formControlName="tax">
+                <span matTextSuffix>%&nbsp;</span>
+                <mat-error *ngIf="this.taxControl?.invalid">
+                    {{getTaxErrorMsg()}}
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Rodzaj dostawcy</mat-label>
+                <mat-select formControlName="type">
+                    <mat-option *ngFor="let type of providerTypes" [value]="type">
+                        {{ type | translateProviderType }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="this.typeControl?.invalid">
+                    {{getTypeErrorMsg()}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div formArrayName="items" class="items">
+            <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="container-2">
+                <mat-form-field appearance="outline" *ngIf="typeControl?.value === 'ELECTRICITY' || typeControl?.value === 'GAS' || typeControl?.value === 'ADMINISTRATIVE_FEE'">
+                    <mat-label>Nazwa pola</mat-label>
+                    <input matInput formControlName="fieldName">
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline" *ngIf="typeControl?.value">
+                    <mat-label>Cena</mat-label>
+                    <input matInput type="number" formControlName="price">
+                    <span matTextSuffix>zł&nbsp;</span>
+                    <mat-error *ngIf="item.get('price')?.invalid">
+                        {{getPriceErrorMsg(i)}}
+                    </mat-error>
+                </mat-form-field>
+                <i class="far fa-info-circle" 
+                    matTooltip="Należy podać kwotę należną za miesięczną opłatę za internet dla wybranego obiektu"
+                    style="font-size: 25px; padding-left: 8px; color: rgb(0,0,0,0.6);"
+                    *ngIf="typeControl?.value === 'INTERNET'"
+                ></i>
+        
+                <mat-form-field appearance="outline" *ngIf="typeControl?.value === 'ELECTRICITY' || typeControl?.value === 'GAS'">
+                    <mat-label>Sposób naliczania</mat-label>
+                    <mat-select formControlName="billingMethod">
+                        <mat-option *ngFor="let billingMethod of billingMethods" [value]="billingMethod">
+                            {{ billingMethod | translateBillingMethod }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+        
+                <div class="btn-delete">
+                    <button *ngIf="items.length > 1 && (typeControl?.value === 'ELECTRICITY' || typeControl?.value === 'GAS' || typeControl?.value === 'ADMINISTRATIVE_FEE')"
+                        mat-raised-button color="warn"
+                        (click)="removeItem(i)">
+                        usuń
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="btn">
+            <button mat-flat-button style="background-color: black; color: white;">Zapisz</button>
+            <button mat-raised-button color="primary"
+                (click)="addItem()"
+                *ngIf="typeControl?.value === 'ELECTRICITY' || typeControl?.value === 'GAS' || typeControl?.value === 'ADMINISTRATIVE_FEE'"
+                >Dodaj parametr cenowy
+            </button>
+        </div>
+    </form>
+</mat-card>

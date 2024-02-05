@@ -17,6 +17,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [],
@@ -38,7 +39,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatTabsModule,
     MatDatepickerModule,
     MatMomentDateModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTooltipModule
   ],
   exports: [
     MatIconModule,
@@ -57,7 +59,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatTabsModule,
     MatDatepickerModule,
     MatMomentDateModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTooltipModule
   ],
   providers: [
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
