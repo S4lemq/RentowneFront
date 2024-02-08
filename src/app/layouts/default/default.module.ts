@@ -30,6 +30,8 @@ import { HousingProviderAddComponent } from 'src/app/modules/housing-provider-ad
 import { TranslateProviderTypePipe } from 'src/app/modules/housing-provider-add/pipe/translate-provider-type.pipe';
 import { TranslateBillingMethodPipe } from 'src/app/modules/housing-provider-add/pipe/translate-billing-method.pipe';
 import { HousingProviderEditComponent } from 'src/app/modules/housing-provider-edit/housing-provider-edit.component';
+import { HousingProviderApartmentListComponent } from 'src/app/modules/housing-provider-apartment-list/housing-provider-apartment-list.component';
+import { HousingProviderSelectPopupComponent } from 'src/app/modules/housing-provider-select-popup/housing-provider-select-popup.component';
 
 
 @NgModule({
@@ -58,7 +60,9 @@ import { HousingProviderEditComponent } from 'src/app/modules/housing-provider-e
     HousingProviderAddComponent,
     TranslateProviderTypePipe,
     TranslateBillingMethodPipe,
-    HousingProviderEditComponent
+    HousingProviderEditComponent,
+    HousingProviderApartmentListComponent,
+    HousingProviderSelectPopupComponent
   ],
   imports: [
     CommonModule,

@@ -69,7 +69,8 @@ export class MeterReadingAddPopupComponent implements OnInit, OnDestroy {
       ).pipe(takeUntil(this.killer$))
       .subscribe({
         next: () => {
-          this.closePopup();
+          // this.closePopup();
+          this.ref.close({ action: 'saved', data: 'test' });
         },
         error: err => {
           if (err.error?.message === 'BAD_METER_READING_VALUES') {

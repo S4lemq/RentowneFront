@@ -3,6 +3,9 @@
         <mat-tab label="Nieruchomości">
             <app-apartment-edit></app-apartment-edit>
         </mat-tab>
+        <mat-tab label="Dostawcy">
+            <app-housing-provider-apartment-list [apartmentId]="this.apartmentId"></app-housing-provider-apartment-list>
+        </mat-tab>
         <mat-tab label="Liczniki">
             <app-meter-card-view [apartmentId]="this.apartmentId"></app-meter-card-view>
         </mat-tab>

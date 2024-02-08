@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { map, merge, startWith, switchMap } from 'rxjs';
+import { Subject, map, merge, startWith, switchMap, takeUntil } from 'rxjs';
 import { DTService } from 'src/app/shared/data-table/dt.service';
 import { TenantRowDto } from './model/tenant-row-dto';
 import { UntypedFormControl } from '@angular/forms';
@@ -11,7 +11,9 @@ import { UntypedFormControl } from '@angular/forms';
   templateUrl: './tenant-list.component.html',
   styleUrls: ['./tenant-list.component.scss']
 })
-export class TenantListComponent implements AfterViewInit {
+export class TenantListComponent implements AfterViewInit, OnDestroy {
+  
+  private killer$ = new Subject<void>();
   displayedColumns: string[] = [
     "firstname", "lastname", "apartmentName", "rentedObjectName", "phoneNumber",
     "email", "endContractDate", "actions"
@@ -26,6 +28,11 @@ export class TenantListComponent implements AfterViewInit {
 
   constructor(private dtService: DTService) {
     this.searchInput = new UntypedFormControl();
+  }
+
+  ngOnDestroy(): void {
+    this.killer$.next();
+    this.killer$.complete();
   }
 
   ngAfterViewInit(): void {
@@ -48,7 +55,8 @@ export class TenantListComponent implements AfterViewInit {
     const dtDefinition = 'TENANT';
     const filter = {};
   
-    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+    this.sort.sortChange.pipe(takeUntil(this.killer$))
+    .subscribe(() => (this.paginator.pageIndex = 0));
   
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
@@ -73,12 +81,15 @@ export class TenantListComponent implements AfterViewInit {
       }),
       map(data => {
         this.isLoadingResults = false;
-        this.dtService.getItemsCount(dtDefinition, text, filter).subscribe(
+        this.dtService.getItemsCount(dtDefinition, text, filter)
+        .pipe(takeUntil(this.killer$))
+        .subscribe(
           value => this.totalElements = value 
         );
         return data as TenantRowDto[];
       })
-    ).subscribe(data => this.tenants = data);
+    ).pipe(takeUntil(this.killer$))
+    .subscribe(data => this.tenants = data);
   }
 
 }

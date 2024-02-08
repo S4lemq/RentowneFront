@@ -1,27 +1,27 @@
 import { AfterViewInit, Component, Input, OnDestroy, ViewChild } from '@angular/core';
-import { MeterReadingDto } from '../meter-reading-add-popup/model/meter-reading-dto';
-import { MatPaginator } from '@angular/material/paginator';
+import { HousingProviderDto } from '../housing-provider-add/model/housing-provider-dto';
 import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 import { DTService } from 'src/app/shared/data-table/dt.service';
-import { Subject, map, merge, startWith, switchMap, takeUntil } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { MeterReadingAddPopupComponent } from '../meter-reading-add-popup/meter-reading-add-popup.component';
+import { Subject, map, merge, startWith, switchMap, takeUntil } from 'rxjs';
+import { HousingProviderSelectPopupComponent } from '../housing-provider-select-popup/housing-provider-select-popup.component';
 
 @Component({
-  selector: 'app-meter-reading-list',
-  templateUrl: './meter-reading-list.component.html',
-  styleUrls: ['./meter-reading-list.component.scss']
+  selector: 'app-housing-provider-apartment-list',
+  templateUrl: './housing-provider-apartment-list.component.html',
+  styleUrls: ['./housing-provider-apartment-list.component.scss']
 })
-export class MeterReadingListComponent implements AfterViewInit, OnDestroy {
+export class HousingProviderApartmentListComponent implements AfterViewInit, OnDestroy {
 
   private killer$ = new Subject<void>();
   displayedColumns: string[] = [
-    "id", "currentReading", "readingDate", "consumption"
+    "id", "name", "type", "tax"
   ];
   totalElements: number = 0;
-  meterReadings: MeterReadingDto[] = [];
+  housingProviders: HousingProviderDto[] = [];
   isLoadingResults: boolean = true;
-  @Input() meterId!: number;
+  @Input() apartmentId!: number;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -37,17 +37,18 @@ export class MeterReadingListComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.loadMeterReadings();
+    this.loadData();
   }
 
-  loadMeterReadings() {
-    const dtDefinition = 'METER_READING';
+  loadData() {
+    const dtDefinition = 'APARTMENT_HOUSING_PROVIDER';
     const text = '';
     const filter = {
-      "meterId": this.meterId
+      "apartmentId": this.apartmentId
     };
   
-    this.sort.sortChange.pipe(takeUntil(this.killer$))
+    this.sort.sortChange
+    .pipe(takeUntil(this.killer$))
     .subscribe(() => (this.paginator.pageIndex = 0));
   
     merge(this.sort.sortChange, this.paginator.page)
@@ -78,19 +79,17 @@ export class MeterReadingListComponent implements AfterViewInit, OnDestroy {
         .subscribe(
           value => this.totalElements = value 
         );
-        return data as MeterReadingDto[];
+        return data as HousingProviderDto[];
       })
     ).pipe(takeUntil(this.killer$))
-    .subscribe(data => this.meterReadings = data);
+    .subscribe(data => this.housingProviders = data);
   }
-  
 
   openPopup() {
-    let _popup = this.dialog.open(MeterReadingAddPopupComponent,{
-      width: '60%',
+    let _popup = this.dialog.open(HousingProviderSelectPopupComponent,{
+      width: '80%',
       data: {
-        title: "Podaj odczyt licznika",
-        meterId: this.meterId
+        apartmentId: this.apartmentId
       }
     });
     _popup.afterClosed()
@@ -99,7 +98,8 @@ export class MeterReadingListComponent implements AfterViewInit, OnDestroy {
       if (result?.action === 'saved') {
         console.log(result.data);
       }
-      this.loadMeterReadings();
+      this.loadData();
     });
   }
+
 }
