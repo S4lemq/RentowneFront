@@ -86,6 +86,8 @@
         "rangeLabel": "z"
     },
     "snackbar.housingProviderSaved": "Dostawca został zapisany",
+    "common.message.BAD_METER_READING_DATE_TENANT":"Data początku umowy nie może być w tym samym miesiącu co data ostatniego odczytu licznika w danym obiekcie",
+    "common.message.BAD_METER_READING_VALUES_TENANT":"Jedna z początkowych wartości odczytów liczników jest niższa niż ostatni odczyt liczników w danym obiekcie. Sprawdź odczyty liczników w obiekcie",
 
 
 

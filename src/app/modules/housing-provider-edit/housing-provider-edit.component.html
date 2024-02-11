@@ -29,6 +29,14 @@
                     {{getTypeErrorMsg()}}
                 </mat-error>
             </mat-form-field>
+
+            <mat-form-field appearance="outline" *ngIf="typeControl?.value === 'GAS'">
+                <mat-label>Współczynnik konwersji</mat-label>
+                <input matInput type="number" formControlName="conversionRate">
+                <mat-error *ngIf="this.conversionRateControl?.invalid">
+                    {{getConversationErrorMsg()}}
+                </mat-error>
+            </mat-form-field>
         </div>
 
         <div formArrayName="items" class="items">

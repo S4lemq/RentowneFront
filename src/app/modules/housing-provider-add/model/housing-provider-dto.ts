@@ -7,5 +7,6 @@ export interface HousingProviderDto {
     name?: string
     type?: ProviderType
     tax?: number
+    conversionRate?: number
     providerFieldDtos?: ProviderFieldDto[]
 }

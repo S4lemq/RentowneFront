@@ -35,6 +35,7 @@ export class HousingProviderAddComponent implements OnInit, OnDestroy {
       name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(45)]],
       type: ['', Validators.required],
       tax: ['', [Validators.min(0), Validators.max(99), maxDecimalPlaces(2)]],
+      conversionRate: ['', [Validators.min(0), Validators.max(999), maxDecimalPlaces(5)]],
       items: this.fb.array([this.createItem()])
     });
 
@@ -84,6 +85,7 @@ export class HousingProviderAddComponent implements OnInit, OnDestroy {
         name: this.nameControl?.value,
         type: this.typeControl?.value,
         tax: this.taxControl?.value,
+        conversionRate: this.conversionRateControl?.value,
         providerFieldDtos: providerFieldDtos
       }
 
@@ -157,6 +159,19 @@ export class HousingProviderAddComponent implements OnInit, OnDestroy {
     return '';
   }
 
+  getConversationErrorMsg(): string {
+    if (this.conversionRateControl?.hasError('min')) {
+      return 'Minimalnie 0';
+    }
+    if (this.conversionRateControl?.hasError('max')) {
+      return 'Minimalnie 999';
+    }
+    if (this.conversionRateControl?.hasError('maxDecimalPlaces')) {
+      return "Maksymalnie 5 miejsc po przecinku"
+    }
+    return '';
+  }
+
   getTypeErrorMsg(): string {
     if (this.typeControl?.hasError('required')) {
       return 'Wartość wymagana';
@@ -189,4 +204,8 @@ export class HousingProviderAddComponent implements OnInit, OnDestroy {
     return this.housingProviderForm.get("tax");
   }
 
+  get conversionRateControl() {
+    return this.housingProviderForm.get("conversionRate");
+  }
+  
 }
