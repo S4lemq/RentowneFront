@@ -1,0 +1,11 @@
+<form [formGroup]="calculateForm">
+    <h1 mat-dialog-title>Rozlicz obiekt</h1>
+    <div mat-dialog-content class="container-1">
+        <mat-checkbox class="checkbox" color="primary" formControlName="waterIncluded">Uwzględnij rozliczenie wody</mat-checkbox>
+        <mat-checkbox class="checkbox" color="primary" formControlName="electricityIncluded">Uwzględnij rozliczenie energii elektrycznej</mat-checkbox>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button class="btn" color="warn"[mat-dialog-close]="false">Anuluj</button>
+        <button mat-flat-button style="background-color: black; color: white;" (click)="calculate()">Rozlicz</button>
+    </div>
+</form>

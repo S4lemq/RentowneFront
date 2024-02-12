@@ -1,35 +1,33 @@
-import { AfterViewInit, Component, Input, OnDestroy, ViewChild } from '@angular/core';
-import { MeterReadingDto } from '../meter-reading-add-popup/model/meter-reading-dto';
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { DTService } from 'src/app/shared/data-table/dt.service';
 import { Subject, map, merge, startWith, switchMap, takeUntil } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
-import { MeterReadingAddPopupComponent } from '../meter-reading-add-popup/meter-reading-add-popup.component';
+import { DTService } from 'src/app/shared/data-table/dt.service';
+import { UntypedFormControl } from '@angular/forms';
+import { RentedObjectSettlementRowDto } from './model/rented-object-settlement-row-dto';
 
 @Component({
-  selector: 'app-meter-reading-list',
-  templateUrl: './meter-reading-list.component.html',
-  styleUrls: ['./meter-reading-list.component.scss']
+  selector: 'app-rented-object-settlement-list',
+  templateUrl: './rented-object-settlement-list.component.html',
+  styleUrls: ['./rented-object-settlement-list.component.scss']
 })
-export class MeterReadingListComponent implements AfterViewInit, OnDestroy {
+export class RentedObjectSettlementListComponent implements AfterViewInit, OnDestroy {
 
   private killer$ = new Subject<void>();
   displayedColumns: string[] = [
-    "id", "currentReading", "readingDate", "consumption"
+    "apartment", "rentedObject", "tenantName", "tenantSurname", "lastSettlementDate", "lastSettlementTotalAmount", "actions"
   ];
   totalElements: number = 0;
-  meterReadings: MeterReadingDto[] = [];
+  rentedObjectSettlements: RentedObjectSettlementRowDto[] = [];
   isLoadingResults: boolean = true;
-  @Input() meterId!: number;
+  searchInput!: UntypedFormControl;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(
-    private dtService: DTService,
-    private dialog: MatDialog
-  ) {}
+  constructor(private dtService: DTService) {
+    this.searchInput = new UntypedFormControl();
+  }
 
   ngOnDestroy(): void {
     this.killer$.next();
@@ -37,15 +35,24 @@ export class MeterReadingListComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.loadMeterReadings();
+    this.loadData('');
   }
 
-  loadMeterReadings() {
-    const dtDefinition = 'METER_READING';
-    const text = '';
-    const filter = {
-      "meterId": this.meterId
-    };
+  onSearchClick() {
+    let search = this.searchInput.value;
+    if (search != null) { 
+      this.loadData(search);
+    }
+  }
+
+  onCleanSearchClick() {
+    this.searchInput.setValue("");
+    this.loadData('');
+  }
+
+  loadData(text: string) {
+    const dtDefinition = 'RENTED_OBJECT_SETTLEMENT';
+    const filter = {};
   
     this.sort.sortChange.pipe(takeUntil(this.killer$))
     .subscribe(() => (this.paginator.pageIndex = 0));
@@ -78,25 +85,11 @@ export class MeterReadingListComponent implements AfterViewInit, OnDestroy {
         .subscribe(
           value => this.totalElements = value 
         );
-        return data as MeterReadingDto[];
+        return data as RentedObjectSettlementRowDto[];
       })
     ).pipe(takeUntil(this.killer$))
-    .subscribe(data => this.meterReadings = data);
+    .subscribe(data => this.rentedObjectSettlements = data);
   }
-  
 
-  openPopup() {
-    let _popup = this.dialog.open(MeterReadingAddPopupComponent,{
-      width: '60%',
-      data: {
-        title: "Podaj odczyt licznika",
-        meterId: this.meterId
-      }
-    });
-    _popup.afterClosed()
-    .pipe(takeUntil(this.killer$))
-    .subscribe(() => {
-      this.loadMeterReadings();
-    });
-  }
+
 }

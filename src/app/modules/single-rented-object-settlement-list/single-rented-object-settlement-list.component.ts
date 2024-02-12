@@ -1,35 +1,46 @@
-import { AfterViewInit, Component, Input, OnDestroy, ViewChild } from '@angular/core';
-import { MeterReadingDto } from '../meter-reading-add-popup/model/meter-reading-dto';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { UntypedFormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { DTService } from 'src/app/shared/data-table/dt.service';
 import { Subject, map, merge, startWith, switchMap, takeUntil } from 'rxjs';
+import { DTService } from 'src/app/shared/data-table/dt.service';
+import { SingleRentedObjectSettlementRowDto } from './model/single-rented-object-settlement-row-dto';
+import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { MeterReadingAddPopupComponent } from '../meter-reading-add-popup/meter-reading-add-popup.component';
+import { CalculatePopupComponent } from '../calculate-popup/calculate-popup.component';
+
 
 @Component({
-  selector: 'app-meter-reading-list',
-  templateUrl: './meter-reading-list.component.html',
-  styleUrls: ['./meter-reading-list.component.scss']
+  selector: 'app-single-rented-object-settlement-list',
+  templateUrl: './single-rented-object-settlement-list.component.html',
+  styleUrls: ['./single-rented-object-settlement-list.component.scss']
 })
-export class MeterReadingListComponent implements AfterViewInit, OnDestroy {
+export class SingleRentedObjectSettlementListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private killer$ = new Subject<void>();
   displayedColumns: string[] = [
-    "id", "currentReading", "readingDate", "consumption"
+    "date", "compensationAmount", "rentAmount", "internetFee", "gasDeposit", "electricityAmount", "waterAmount", "totalAmount"
   ];
   totalElements: number = 0;
-  meterReadings: MeterReadingDto[] = [];
+  singleRentedObjectSettlements: SingleRentedObjectSettlementRowDto[] = [];
   isLoadingResults: boolean = true;
-  @Input() meterId!: number;
+  searchInput!: UntypedFormControl;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  financeId!: number;
+
   constructor(
     private dtService: DTService,
-    private dialog: MatDialog
-  ) {}
+    private acitvatedRoute: ActivatedRoute,
+    private dialog: MatDialog) {
+    this.searchInput = new UntypedFormControl();
+  }
+
+  ngOnInit(): void {
+    this.financeId = Number(this.acitvatedRoute.snapshot.params['id']);
+  }
 
   ngOnDestroy(): void {
     this.killer$.next();
@@ -37,14 +48,25 @@ export class MeterReadingListComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.loadMeterReadings();
+    this.loadData('');
   }
 
-  loadMeterReadings() {
-    const dtDefinition = 'METER_READING';
-    const text = '';
+  onSearchClick() {
+    let search = this.searchInput.value;
+    if (search != null) { 
+      this.loadData(search);
+    }
+  }
+
+  onCleanSearchClick() {
+    this.searchInput.setValue("");
+    this.loadData('');
+  }
+
+  loadData(text: string) {
+    const dtDefinition = 'SETTLEMENT';
     const filter = {
-      "meterId": this.meterId
+      "rentedObjectId": this.financeId
     };
   
     this.sort.sortChange.pipe(takeUntil(this.killer$))
@@ -78,25 +100,24 @@ export class MeterReadingListComponent implements AfterViewInit, OnDestroy {
         .subscribe(
           value => this.totalElements = value 
         );
-        return data as MeterReadingDto[];
+        return data as SingleRentedObjectSettlementRowDto[];
       })
     ).pipe(takeUntil(this.killer$))
-    .subscribe(data => this.meterReadings = data);
+    .subscribe(data => this.singleRentedObjectSettlements = data);
   }
-  
 
   openPopup() {
-    let _popup = this.dialog.open(MeterReadingAddPopupComponent,{
-      width: '60%',
+    let _popup = this.dialog.open(CalculatePopupComponent,{
+      width: '25%',
       data: {
-        title: "Podaj odczyt licznika",
-        meterId: this.meterId
+        rentedObjectId: this.financeId
       }
     });
     _popup.afterClosed()
     .pipe(takeUntil(this.killer$))
     .subscribe(() => {
-      this.loadMeterReadings();
+      this.loadData('');
     });
   }
+
 }

@@ -1,11 +1,11 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MeterReadingService } from './meter-reading.service';
-import { MeterReadingDto } from './model/meter-reading-dto';
+import { Subject, takeUntil } from 'rxjs';
 import { maxDecimalPlaces } from '../common/validators/max-decimal-places.validator';
 import { MeterDto } from '../meter-edit/model/meter-dto';
-import { Subject, takeUntil } from 'rxjs';
+import { MeterReadingService } from './meter-reading.service';
+import { MeterReadingDto } from './model/meter-reading-dto';
 
 @Component({
   selector: 'app-meter-reading-add-popup',
@@ -69,8 +69,7 @@ export class MeterReadingAddPopupComponent implements OnInit, OnDestroy {
       ).pipe(takeUntil(this.killer$))
       .subscribe({
         next: () => {
-          // this.closePopup();
-          this.ref.close({ action: 'saved', data: 'test' });
+          this.closePopup();
         },
         error: err => {
           if (err.error?.message === 'BAD_METER_READING_VALUES') {
