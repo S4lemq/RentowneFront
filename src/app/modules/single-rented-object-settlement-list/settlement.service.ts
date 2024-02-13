@@ -19,4 +19,10 @@ export class SettlementService {
     }
     return this.http.get<void>("/api/rented-objects/" + id + "/calculate", { params });
   }
+
+  exportSettlements(from: string, to: string, id: number): Observable<any> {
+    return this.http.get(`/api/rented-objects/${id}/calculate/export?from=${from}&to=${to}`, 
+      {responseType: 'blob', observe: 'response'}
+    );
+  }
 }

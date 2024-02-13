@@ -8,6 +8,7 @@ import { SingleRentedObjectSettlementRowDto } from './model/single-rented-object
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { CalculatePopupComponent } from '../calculate-popup/calculate-popup.component';
+import { SingleRentedObjectSettlementExportPopupComponent } from '../single-rented-object-settlement-export-popup/single-rented-object-settlement-export-popup.component';
 
 
 @Component({
@@ -117,6 +118,15 @@ export class SingleRentedObjectSettlementListComponent implements OnInit, AfterV
     .pipe(takeUntil(this.killer$))
     .subscribe(() => {
       this.loadData('');
+    });
+  }
+
+  openExportPopup() {
+    this.dialog.open(SingleRentedObjectSettlementExportPopupComponent,{
+      width: '50%',
+      data: {
+        rentedObjectId: this.financeId
+      }
     });
   }
 

@@ -1,11 +1,8 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
-import { maxDecimalPlaces } from '../common/validators/max-decimal-places.validator';
-import { MeterDto } from '../meter-edit/model/meter-dto';
 import { SettlementService } from '../single-rented-object-settlement-list/settlement.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-calculate-popup',
@@ -21,8 +18,7 @@ export class CalculatePopupComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private ref: MatDialogRef<CalculatePopupComponent>,
-    private service: SettlementService,
-    private activatedRoute: ActivatedRoute) {}
+    private service: SettlementService) {}
 
 
   ngOnInit(): void {

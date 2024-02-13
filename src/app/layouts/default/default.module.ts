@@ -35,6 +35,7 @@ import { HousingProviderSelectPopupComponent } from 'src/app/modules/housing-pro
 import { RentedObjectSettlementListComponent } from 'src/app/modules/rented-object-settlement-list/rented-object-settlement-list.component';
 import { SingleRentedObjectSettlementListComponent } from 'src/app/modules/single-rented-object-settlement-list/single-rented-object-settlement-list.component';
 import { CalculatePopupComponent } from 'src/app/modules/calculate-popup/calculate-popup.component';
+import { SingleRentedObjectSettlementExportPopupComponent } from 'src/app/modules/single-rented-object-settlement-export-popup/single-rented-object-settlement-export-popup.component';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { CalculatePopupComponent } from 'src/app/modules/calculate-popup/calcula
     HousingProviderSelectPopupComponent,
     RentedObjectSettlementListComponent,
     SingleRentedObjectSettlementListComponent,
-    CalculatePopupComponent
+    CalculatePopupComponent,
+    SingleRentedObjectSettlementExportPopupComponent
   ],
   imports: [
     CommonModule,
