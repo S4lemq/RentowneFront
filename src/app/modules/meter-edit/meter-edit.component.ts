@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MeterDto } from './model/meter-dto';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { maxDecimalPlaces } from '../common/validators/max-decimal-places.validator';
+import { NavigationService } from '../common/service/navigation.service';
 
 @Component({
   selector: 'app-meter-edit',
@@ -31,7 +32,9 @@ export class MeterEditComponent implements OnInit, OnDestroy {
     private rentedObjectService: RentedObjectService,
     private snackBar: MatSnackBar,
     private translateService: TranslateService,
-    private router: Router) {}
+    private router: Router,
+    private navigationService: NavigationService
+    ) {}
 
   ngOnInit(): void {
     this.meterId = Number(this.acitvatedRoute.snapshot.params['id']);
@@ -54,6 +57,11 @@ export class MeterEditComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.killer$.next();
     this.killer$.complete();
+  }
+
+  goBack() {
+    this.navigationService.setLastTabLabel('meters');
+    this.navigationService.goBack();
   }
 
   getMeter() {

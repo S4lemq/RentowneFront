@@ -6,6 +6,7 @@ import { DTService } from 'src/app/shared/data-table/dt.service';
 import { Subject, map, merge, startWith, switchMap, takeUntil } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { MeterReadingAddPopupComponent } from '../meter-reading-add-popup/meter-reading-add-popup.component';
+import { NavigationService } from '../common/service/navigation.service';
 
 @Component({
   selector: 'app-meter-reading-list',
@@ -28,7 +29,8 @@ export class MeterReadingListComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private dtService: DTService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private navigationService: NavigationService
   ) {}
 
   ngOnDestroy(): void {
@@ -38,6 +40,11 @@ export class MeterReadingListComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.loadMeterReadings();
+  }
+
+  goBack() {
+    this.navigationService.setLastTabLabel('meters');
+    this.navigationService.goBack();
   }
 
   loadMeterReadings() {

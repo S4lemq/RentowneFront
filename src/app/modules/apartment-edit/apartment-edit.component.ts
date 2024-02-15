@@ -7,6 +7,7 @@ import { AddressDto } from './model/address-dto';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDialogService } from '../confirm-dialog/confirm-dialog.service';
 import { TranslateService } from '@ngx-translate/core';
+import { NavigationService } from '../common/service/navigation.service';
 
 @Component({
   selector: 'app-apartment-edit',
@@ -31,7 +32,8 @@ export class ApartmentEditComponent implements OnInit{
     private snackBar: MatSnackBar,
     private dialogService: ConfirmDialogService,
     private router: Router,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private navigationService: NavigationService
     ) { }
 
   ngOnInit(): void {
@@ -59,27 +61,9 @@ export class ApartmentEditComponent implements OnInit{
     });
   }
 
-  private updateRentedObjects(leasesNumber: number): void {
-    this.rentedObjectsFormArray = this.apartmentForm.get('rentedObjects') as FormArray;
-    const currentNumber = this.rentedObjectsFormArray.length;
-
-    if (leasesNumber > currentNumber) {
-      for (let i = currentNumber; i < leasesNumber; i++) {
-        this.rentedObjectsFormArray.push(new FormGroup({
-          rentedObjectName: new FormControl('', Validators.required)
-        }));
-      }
-    } else if (leasesNumber < currentNumber) {
-      for (let i = currentNumber; i > leasesNumber; i--) {
-        this.rentedObjectsFormArray.removeAt(i - 1);
-      }
-    }
+  goBack() {
+    this.navigationService.goBack();
   }
-
-  get getRentedObjectsFormArray(): FormArray {
-    return this.apartmentForm.get('rentedObjects') as FormArray;
-  }
-  
 
   getApartment() {
     this.apartmentEditService.getApartment(this.apartmentId)
@@ -177,6 +161,23 @@ export class ApartmentEditComponent implements OnInit{
       this.imageForm.patchValue({
         file: event.target.files[0]
       });
+    }
+  }
+
+  private updateRentedObjects(leasesNumber: number): void {
+    this.rentedObjectsFormArray = this.apartmentForm.get('rentedObjects') as FormArray;
+    const currentNumber = this.rentedObjectsFormArray.length;
+
+    if (leasesNumber > currentNumber) {
+      for (let i = currentNumber; i < leasesNumber; i++) {
+        this.rentedObjectsFormArray.push(new FormGroup({
+          rentedObjectName: new FormControl('', Validators.required)
+        }));
+      }
+    } else if (leasesNumber < currentNumber) {
+      for (let i = currentNumber; i > leasesNumber; i--) {
+        this.rentedObjectsFormArray.removeAt(i - 1);
+      }
     }
   }
   
@@ -296,6 +297,10 @@ export class ApartmentEditComponent implements OnInit{
       return "Maksymalnie 60";
     }
     return null;
+  }
+
+  get getRentedObjectsFormArray(): FormArray {
+    return this.apartmentForm.get('rentedObjects') as FormArray;
   }
 
   get apartmentName() {
