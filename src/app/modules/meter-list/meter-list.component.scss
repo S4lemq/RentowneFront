@@ -1,0 +1,71 @@
+.container {
+    position: relative;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+}
+  
+.table-container {
+    border-style: solid;
+    border-width: 0.1px;
+    border-color: rgba(0, 0, 0, 0.12);
+}
+
+
+.loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.mat-column-apartment {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-column-rentedObject {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-column-meterName {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-column-meterType {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-column-name {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-column-initialMeterReading {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-column-installationDate {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-column-actions {
+    width: 180px;
+    text-align: center;
+}
+
+::ng-deep .mat-mdc-paginator-container {
+    padding: 30px 0 10px 0 !important;
+}
+
+.fast-searcher {
+    display: flex;
+    justify-content: flex-end;
+}
