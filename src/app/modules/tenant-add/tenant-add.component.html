@@ -261,7 +261,7 @@
                     <input matInput [matDatepicker]="pickerContractSigningDate" formControlName="contractSigningDate">
                     <mat-datepicker-toggle matIconSuffix [for]="pickerContractSigningDate"></mat-datepicker-toggle>
                     <mat-datepicker #pickerContractSigningDate></mat-datepicker>
-                    <mat-error *ngIf="this.returnedDepositAmount?.invalid">
+                    <mat-error *ngIf="this.contractSigningDate?.invalid">
                         {{getContractSigningDateErrorMsg()}}
                     </mat-error>
                 </mat-form-field>
