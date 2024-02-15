@@ -3,6 +3,12 @@
     <div mat-dialog-content class="container-1">
         <mat-checkbox class="checkbox" color="primary" formControlName="waterIncluded">Uwzględnij rozliczenie wody</mat-checkbox>
         <mat-checkbox class="checkbox" color="primary" formControlName="electricityIncluded">Uwzględnij rozliczenie energii elektrycznej</mat-checkbox>
+        <mat-form-field appearance="outline">
+            <mat-label>Data rozliczenia</mat-label>
+            <input matInput [matDatepicker]="pickerSettlementDate" formControlName="settlementDate">
+            <mat-datepicker-toggle matIconSuffix [for]="pickerSettlementDate"></mat-datepicker-toggle>
+            <mat-datepicker #pickerSettlementDate></mat-datepicker>
+        </mat-form-field>
     </div>
     <div mat-dialog-actions>
         <button mat-raised-button class="btn" color="warn"[mat-dialog-close]="false">Anuluj</button>

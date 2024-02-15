@@ -36,6 +36,7 @@ import { RentedObjectSettlementListComponent } from 'src/app/modules/rented-obje
 import { SingleRentedObjectSettlementListComponent } from 'src/app/modules/single-rented-object-settlement-list/single-rented-object-settlement-list.component';
 import { CalculatePopupComponent } from 'src/app/modules/calculate-popup/calculate-popup.component';
 import { SingleRentedObjectSettlementExportPopupComponent } from 'src/app/modules/single-rented-object-settlement-export-popup/single-rented-object-settlement-export-popup.component';
+import { SettlementStatsComponent } from 'src/app/modules/settlement-stats/settlement-stats.component';
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { SingleRentedObjectSettlementExportPopupComponent } from 'src/app/module
     RentedObjectSettlementListComponent,
     SingleRentedObjectSettlementListComponent,
     CalculatePopupComponent,
-    SingleRentedObjectSettlementExportPopupComponent
+    SingleRentedObjectSettlementExportPopupComponent,
+    SettlementStatsComponent
   ],
   imports: [
     CommonModule,

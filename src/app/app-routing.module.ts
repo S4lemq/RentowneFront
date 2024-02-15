@@ -26,6 +26,7 @@ import { HousingProviderAddComponent } from './modules/housing-provider-add/hous
 import { HousingProviderEditComponent } from './modules/housing-provider-edit/housing-provider-edit.component';
 import { RentedObjectSettlementListComponent } from './modules/rented-object-settlement-list/rented-object-settlement-list.component';
 import { SingleRentedObjectSettlementListComponent } from './modules/single-rented-object-settlement-list/single-rented-object-settlement-list.component';
+import { SettlementStatsComponent } from './modules/settlement-stats/settlement-stats.component';
 
 const routes: Routes = [
 
@@ -46,7 +47,7 @@ const routes: Routes = [
       {path: 'housing-providers/edit/:id', component: HousingProviderEditComponent, canActivate: [AuthorizeGuard]},
       {path: 'finances', component: RentedObjectSettlementListComponent, canActivate: [AuthorizeGuard]},
       {path: 'rented-object-finances/:id', component: SingleRentedObjectSettlementListComponent, canActivate: [AuthorizeGuard]},
-      
+      {path: 'analytics', component: SettlementStatsComponent, canActivate: [AuthorizeGuard]},
     ]
   },
   {

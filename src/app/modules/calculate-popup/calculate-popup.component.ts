@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
 import { SettlementService } from '../single-rented-object-settlement-list/settlement.service';
+import { CalculateRequestDto } from '../single-rented-object-settlement-list/model/calculate-request-dto';
 
 @Component({
   selector: 'app-calculate-popup',
@@ -25,7 +26,8 @@ export class CalculatePopupComponent implements OnInit, OnDestroy {
     this.inputData = this.data;
     this.calculateForm = new FormGroup({
       waterIncluded: new FormControl(false),
-      electricityIncluded: new FormControl(false)
+      electricityIncluded: new FormControl(false),
+      settlementDate: new FormControl(''),
     });
   }
 
@@ -37,8 +39,11 @@ export class CalculatePopupComponent implements OnInit, OnDestroy {
   calculate() {
     this.service.calculate(
       this.inputData.rentedObjectId,
-      this.waterIncludedControl?.value,
-      this.electricityIncludedControl?.value
+      {
+        waterIncluded: this.waterIncludedControl?.value,
+        electricityIncluded: this.electricityIncludedControl?.value,
+        settlementDate: this.settlementDateControl?.value
+      } as CalculateRequestDto
     )
     .pipe(takeUntil(this.killer$))
     .subscribe(() => this.closePopup());
@@ -54,6 +59,10 @@ export class CalculatePopupComponent implements OnInit, OnDestroy {
 
   get electricityIncludedControl() {
     return this.calculateForm.get("electricityIncluded");
+  }
+
+  get settlementDateControl() {
+    return this.calculateForm.get("settlementDate");
   }
 
 }
