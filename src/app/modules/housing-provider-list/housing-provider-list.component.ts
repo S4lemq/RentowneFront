@@ -5,31 +5,29 @@ import { MatPaginator } from '@angular/material/paginator';
 import { DTService } from 'src/app/shared/data-table/dt.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject, map, merge, startWith, switchMap, takeUntil } from 'rxjs';
-import { HousingProviderSelectPopupComponent } from '../housing-provider-select-popup/housing-provider-select-popup.component';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-housing-provider-apartment-list',
-  templateUrl: './housing-provider-apartment-list.component.html',
-  styleUrls: ['./housing-provider-apartment-list.component.scss']
+  selector: 'app-housing-provider-list',
+  templateUrl: './housing-provider-list.component.html',
+  styleUrls: ['./housing-provider-list.component.scss']
 })
-export class HousingProviderApartmentListComponent implements AfterViewInit, OnDestroy {
-
+export class HousingProviderListComponent implements AfterViewInit, OnDestroy {
   private killer$ = new Subject<void>();
   displayedColumns: string[] = [
-    "name", "type", "tax"
+    "name", "type", "tax", "actions"
   ];
   totalElements: number = 0;
   housingProviders: HousingProviderDto[] = [];
   isLoadingResults: boolean = true;
-  @Input() apartmentId!: number;
+  searchInput!: UntypedFormControl;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(
-    private dtService: DTService,
-    private dialog: MatDialog
-  ) {}
+  constructor(private dtService: DTService) {
+    this.searchInput = new UntypedFormControl();
+  }
 
   ngOnDestroy(): void {
     this.killer$.next();
@@ -37,15 +35,24 @@ export class HousingProviderApartmentListComponent implements AfterViewInit, OnD
   }
 
   ngAfterViewInit(): void {
-    this.loadData();
+    this.loadData('');
   }
 
-  loadData() {
+  onSearchClick() {
+    let search = this.searchInput.value;
+    if (search != null) { 
+      this.loadData(search);
+    }
+  }
+
+  onCleanSearchClick() {
+    this.searchInput.setValue("");
+    this.loadData('');
+  }
+
+  loadData(text: string) {
     const dtDefinition = 'APARTMENT_HOUSING_PROVIDER';
-    const text = '';
-    const filter = {
-      "apartmentId": this.apartmentId
-    };
+    const filter = {};
   
     this.sort.sortChange
     .pipe(takeUntil(this.killer$))
@@ -83,23 +90,6 @@ export class HousingProviderApartmentListComponent implements AfterViewInit, OnD
       })
     ).pipe(takeUntil(this.killer$))
     .subscribe(data => this.housingProviders = data);
-  }
-
-  openPopup() {
-    let _popup = this.dialog.open(HousingProviderSelectPopupComponent,{
-      width: '80%',
-      data: {
-        apartmentId: this.apartmentId
-      }
-    });
-    _popup.afterClosed()
-    .pipe(takeUntil(this.killer$))
-    .subscribe(result => {
-      if (result?.action === 'saved') {
-        console.log(result.data);
-      }
-      this.loadData();
-    });
   }
 
 }

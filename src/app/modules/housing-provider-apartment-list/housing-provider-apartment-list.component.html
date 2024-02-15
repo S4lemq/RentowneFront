@@ -7,13 +7,7 @@
     
       <div class="table-container">
         <table mat-table [dataSource]="housingProviders" class="example-table" matSort>
-    
-          <!-- Kolumna ID -->
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header="id">{{ 'dataTable.id' | translate }}</th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-          </ng-container>
-    
+   
           <!-- Kolumna Nazwa -->
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header="name">Nazwa</th>
@@ -23,13 +17,18 @@
           <!-- Kolumna Typ -->
           <ng-container matColumnDef="type">
             <th mat-header-cell *matHeaderCellDef mat-sort-header="type">Typ</th>
-            <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.type | translateProviderType}} </td>
           </ng-container>
     
           <!-- Kolumna Zużycie -->
           <ng-container matColumnDef="tax">
             <th mat-header-cell *matHeaderCellDef mat-sort-header="tax">Podatek</th>
-            <td mat-cell *matCellDef="let element"> {{element.tax}}</td>
+            <td mat-cell *matCellDef="let element">
+              <ng-container *ngIf="element.tax; else noTax">
+                {{ element.tax }} %
+              </ng-container>
+              <ng-template #noTax></ng-template>
+          </td>
           </ng-container>
     
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

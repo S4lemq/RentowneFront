@@ -38,6 +38,7 @@ import { CalculatePopupComponent } from 'src/app/modules/calculate-popup/calcula
 import { SingleRentedObjectSettlementExportPopupComponent } from 'src/app/modules/single-rented-object-settlement-export-popup/single-rented-object-settlement-export-popup.component';
 import { SettlementStatsComponent } from 'src/app/modules/settlement-stats/settlement-stats.component';
 import { LeaseAgreementListComponent } from 'src/app/modules/lease-agreement-list/lease-agreement-list.component';
+import { HousingProviderListComponent } from 'src/app/modules/housing-provider-list/housing-provider-list.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { LeaseAgreementListComponent } from 'src/app/modules/lease-agreement-lis
     CalculatePopupComponent,
     SingleRentedObjectSettlementExportPopupComponent,
     SettlementStatsComponent,
-    LeaseAgreementListComponent
+    LeaseAgreementListComponent,
+    HousingProviderListComponent
   ],
   imports: [
     CommonModule,

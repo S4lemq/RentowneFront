@@ -28,6 +28,7 @@ import { RentedObjectSettlementListComponent } from './modules/rented-object-set
 import { SingleRentedObjectSettlementListComponent } from './modules/single-rented-object-settlement-list/single-rented-object-settlement-list.component';
 import { SettlementStatsComponent } from './modules/settlement-stats/settlement-stats.component';
 import { LeaseAgreementListComponent } from './modules/lease-agreement-list/lease-agreement-list.component';
+import { HousingProviderListComponent } from './modules/housing-provider-list/housing-provider-list.component';
 
 const routes: Routes = [
    {
@@ -49,6 +50,7 @@ const routes: Routes = [
       {path: 'rented-object-finances/:id', component: SingleRentedObjectSettlementListComponent, canActivate: [AuthorizeGuard]},
       {path: 'analytics', component: SettlementStatsComponent, canActivate: [AuthorizeGuard]},
       {path: 'agreements', component: LeaseAgreementListComponent, canActivate: [AuthorizeGuard]},
+      {path: 'housing-providers', component: HousingProviderListComponent, canActivate: [AuthorizeGuard]},
     ]
   },
   {
