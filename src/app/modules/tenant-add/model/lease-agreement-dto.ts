@@ -16,4 +16,5 @@ export interface LeaseAgreementDto {
     depositReturnDate?: Date
     returnedDepositAmount?: number
     contractActive?: boolean
+    contractSigningDate?: Date
 }

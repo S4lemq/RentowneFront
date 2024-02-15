@@ -75,7 +75,8 @@ export class TenantAddComponent implements OnInit, OnDestroy {
       returnedDepositAmount: new FormControl('',[Validators.min(0), Validators.max(99999), maxDecimalPlaces(2)]), //kwota zwróconej kaucji
       contractActive: new FormControl(''), //czy aktywna umowa,
       rentedObjectId: new FormControl('', Validators.required), //wybrana nieruchomość do wynajmu,
-      apartmentId: new FormControl('', Validators.required)
+      apartmentId: new FormControl('', Validators.required),
+      contractSigningDate: new FormControl('', Validators.required)
     });
   }
 
@@ -113,7 +114,8 @@ export class TenantAddComponent implements OnInit, OnDestroy {
         initialGasMeterReading: this.tenantForm.get('initialGasMeterReading')?.value,
         depositReturnDate: this.tenantForm.get('depositReturnDate')?.value,
         returnedDepositAmount: this.tenantForm.get('returnedDepositAmount')?.value,
-        contractActive: this.tenantForm.get('contractActive')?.value
+        contractActive: this.tenantForm.get('contractActive')?.value,
+        contractSigningDate: this.tenantForm?.get('contractSigningDate')?.value
       }
 
       const rentedObjectDto: RentedObjectDto = {
@@ -505,6 +507,14 @@ export class TenantAddComponent implements OnInit, OnDestroy {
     return '';
   }
 
+  getContractSigningDateErrorMsg(): string {
+    if (this.contractSigningDate) {
+      if (this.contractSigningDate.hasError('required')) {
+        return 'Wartość wymagana';
+      }
+    }
+    return '';
+  }
 
   get firstname() {
     return this.tenantForm.get("firstname");
@@ -620,6 +630,10 @@ export class TenantAddComponent implements OnInit, OnDestroy {
 
   get apartmentIdControl() {
     return this.tenantForm.get("apartmentId");
+  }
+
+  get contractSigningDate() {
+    return this.tenantForm.get("contractSigningDate");
   }
 
 }

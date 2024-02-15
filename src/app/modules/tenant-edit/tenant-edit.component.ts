@@ -100,7 +100,8 @@ export class TenantEditComponent implements OnInit, OnDestroy {
       returnedDepositAmount: new FormControl('',[Validators.min(0), Validators.max(99999.99), maxDecimalPlaces(2)]), //kwota zwróconej kaucji
       contractActive: new FormControl(''), //czy aktywna umowa,
       rentedObjectId: new FormControl('', Validators.required), //wybrana nieruchomość do wynajmu
-      apartmentId: new FormControl('', Validators.required)
+      apartmentId: new FormControl('', Validators.required),
+      contractSigningDate: new FormControl('', Validators.required)
     });
   }
 
@@ -152,7 +153,8 @@ export class TenantEditComponent implements OnInit, OnDestroy {
       returnedDepositAmount: tenant.leaseAgreementDto?.returnedDepositAmount,
       contractActive: tenant.leaseAgreementDto?.contractActive,
       rentedObjectId: tenant.rentedObjectDto?.id,
-      apartmentId: tenant.apartmentId
+      apartmentId: tenant.apartmentId,
+      contractSigningDate: tenant.leaseAgreementDto?.contractSigningDate
     });
   }
 
@@ -185,7 +187,8 @@ export class TenantEditComponent implements OnInit, OnDestroy {
         initialGasMeterReading: this.initialGasMeterReading?.value,
         depositReturnDate: this.depositReturnDate?.value,
         returnedDepositAmount: this.returnedDepositAmount?.value,
-        contractActive: this.contractActive?.value
+        contractActive: this.contractActive?.value,
+        contractSigningDate: this.contractSigningDate?.value
       }
 
       const rentedObjectDto: RentedObjectDto = {
@@ -574,6 +577,14 @@ export class TenantEditComponent implements OnInit, OnDestroy {
     return '';
   }
 
+  getContractSigningDateErrorMsg(): string {
+    if (this.contractSigningDate) {
+      if (this.contractSigningDate.hasError('required')) {
+        return 'Wartość wymagana';
+      }
+    }
+    return '';
+  }
 
   get firstname() {
     return this.tenantForm.get("firstname");
@@ -689,6 +700,10 @@ export class TenantEditComponent implements OnInit, OnDestroy {
 
   get apartmentIdControl() {
     return this.tenantForm.get("apartmentId");
+  }
+
+  get contractSigningDate() {
+    return this.tenantForm.get("contractSigningDate");
   }
 
 }
