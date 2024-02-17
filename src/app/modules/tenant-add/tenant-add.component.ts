@@ -166,6 +166,15 @@ export class TenantAddComponent implements OnInit, OnDestroy {
   prevStep() {
     this.step--;
   }
+
+  checkMeters(rentedObjId: number) {
+    this.tenantService.checkIfObjectHaveMeters(rentedObjId).subscribe({
+      error: () => {
+        this.rentedObjectId?.setErrors({invalid: true});
+      }
+    });
+
+  }
   
   getFirstnameErrorMsg() {
     if(this.firstname?.errors?.['required']) {

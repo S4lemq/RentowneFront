@@ -4,7 +4,7 @@
             <form [formGroup]="meterForm">
                 <div class="form-1">
                     <mat-form-field appearance="outline">
-                        <mat-label>Nazwa licznika</mat-label>
+                        <mat-label>{{ 'meter.name' | translate }}</mat-label>
                         <input matInput formControlName="name">
                         <mat-error *ngIf="name?.invalid">
                             {{getNametErrorMsg()}}

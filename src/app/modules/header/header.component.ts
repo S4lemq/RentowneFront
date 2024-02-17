@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   @Input() screenWidth = 0;
   canShowSearchAsOverlay = false;
   selectedLanguage: any;
+  isFullScreen: boolean = false;
 
   languages = languages;
   notifications = notifications;
@@ -35,7 +36,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onMenuClick(itemLabel: string) {
-    if (itemLabel === 'Logout') {
+    if (itemLabel === 'Wyloguj') {
       this.logoutService.logout().subscribe(() => {
         this.router.navigate(['/login']);
         sessionStorage.removeItem('accessToken');
@@ -62,4 +63,37 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  toggleFullScreen() {
+    let doc: any = document; // Tutaj przekształcamy 'document' na 'any'
+  
+    if (!doc.fullscreenElement) {
+      let elem = doc.documentElement;
+  
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { /* Firefox */
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari, Opera */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        elem.msRequestFullscreen();
+      }
+      this.isFullScreen = true;
+    } else {
+      if (doc.exitFullscreen) {
+        doc.exitFullscreen();
+      } else if (doc.mozCancelFullScreen) { /* Firefox */
+        doc.mozCancelFullScreen();
+      } else if (doc.webkitExitFullscreen) { /* Chrome, Safari, Opera */
+        doc.webkitExitFullscreen();
+      } else if (doc.msExitFullscreen) { /* IE/Edge */
+        doc.msExitFullscreen();
+      }
+      this.isFullScreen = false;
+    }
+  }
+  
+  
+  
+  
 }

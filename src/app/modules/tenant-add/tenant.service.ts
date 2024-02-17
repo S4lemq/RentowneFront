@@ -18,8 +18,11 @@ export class TenantService {
     return this.http.get<TenantDto>(`/api/tenants/` + id);
   }
 
-  updateTenant(dto: TenantDto) {
+  updateTenant(dto: TenantDto): Observable<any> {
     return this.http.put<TenantDto>(`/api/tenants`, dto);
   }
 
+  checkIfObjectHaveMeters(id: number): Observable<void> {
+    return this.http.get<void>(`/api/rented-object/${id}/meter-count`);
+  }
 }

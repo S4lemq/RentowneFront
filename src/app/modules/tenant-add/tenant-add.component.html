@@ -293,16 +293,17 @@
                 </mat-form-field>
           
                 <mat-form-field appearance="outline">
-                  <mat-label>Obiekt do wynajęcia</mat-label>
-                  <mat-select formControlName="rentedObjectId">
+                    <mat-label>Obiekt do wynajęcia</mat-label>
+                    <mat-select formControlName="rentedObjectId" (selectionChange)="checkMeters($event.value)">
                       <mat-option *ngFor="let rentedObject of rentedObjects" [value]="rentedObject.id">
-                          {{rentedObject.rentedObjectName}}
+                        {{rentedObject.rentedObjectName}}
                       </mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="this.rentedObjectId?.invalid">
-                    {{getRentedObjectErrorMsg()}}
-                </mat-error>
-                </mat-form-field>
+                    </mat-select>
+                    <mat-error *ngIf="this.rentedObjectId?.invalid">
+                      {{getRentedObjectErrorMsg()}}
+                    </mat-error>
+                  </mat-form-field>
+                  
           
               </mat-expansion-panel>
             </mat-accordion>

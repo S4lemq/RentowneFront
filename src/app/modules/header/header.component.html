@@ -28,8 +28,9 @@
                     </button>
                 </div>
                 <div class="head-menu-item">
-                    <button class="head-menu-item-btn ripple">
-                        <i class="far fa-expand menu-icon"></i>
+                    <button class="head-menu-item-btn ripple"  (click)="toggleFullScreen()">
+                        <i *ngIf="!isFullScreen" class="far fa-expand menu-icon"></i>
+                        <i *ngIf="isFullScreen" class="far fa-compress menu-icon"></i>
                     </button>
                 </div>
                 <div class="head-menu-item">
@@ -46,7 +47,7 @@
             <div class="head-user-avatar-container">
                 <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
                     <img src="../../../assets/image/plubowicz.jpg" alt="user" class="user-avatar">
-                    <div class="circle-indicator pulse"></div>
+                    <!-- <div class="circle-indicator pulse"></div> -->
                 </div>
             </div>
         </div>
@@ -103,8 +104,9 @@
 <ng-template #userOverlay>
     <div class="overlay overlay-user overlay-fall" cdkMenu>
         <ul>
-            <li *ngFor="let item of userItems" cdkMenuItem>
-                <a (click)="onMenuClick(item.label)">
+            <li *ngFor="let item of userItems" cdkMenuItem (click)="onMenuClick(item.label)">
+                <!-- Usunięto (click) z <a> -->
+                <a>
                     <i class="icon" [ngClass]="item.icon"></i>
                     <span>{{item.label}}</span>
                 </a>
