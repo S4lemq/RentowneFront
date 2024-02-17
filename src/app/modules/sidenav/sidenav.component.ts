@@ -3,6 +3,7 @@ import { navbarData } from './nav-data';
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { InavbarData, fadeInOut } from './helper';
 import { Router } from '@angular/router';
+import { expand } from 'rxjs';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -50,8 +51,18 @@ export class SidenavComponent implements OnInit {
     this.screenWidth = window.innerWidth;
   }
 
+  private setExpandedFalse(data: InavbarData[]): void {
+    data.forEach(item => {
+        item.expanded = false;
+        if (item.items && item.items.length > 0) {
+            this.setExpandedFalse(item.items);
+        }
+    });
+  }
+
   toggleCollapse(): void {
     this.collapsed = !this.collapsed;
+    this.setExpandedFalse(this.navData);
     this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
   }
 
@@ -61,8 +72,15 @@ export class SidenavComponent implements OnInit {
   }
 
   handleClick(item: InavbarData): void {
+    if(this.collapsed === false && (item.expanded === undefined || item.expanded === false)) {
+      item.expanded = false;
+    } else {
+      item.expanded = !item.expanded;
+    }
     this.shrinkItems(item);
-    item.expanded = !item.expanded;
+
+    this.collapsed = true;
+    this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
   }
 
   getActiveClass(data: InavbarData): string {

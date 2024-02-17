@@ -27,7 +27,7 @@ export const navbarData: InavbarData[] = [
         label: 'Najemcy'
     },
     {
-        routeLink: 'utility-providers',
+        routeLink: 'housing-providers',
         icon: 'fal fa-address-card',
         label: 'Dostawcy',
         items: [
