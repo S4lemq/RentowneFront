@@ -39,7 +39,7 @@
                     </button>
                 </div>
                 <div class="head-menu-item">
-                    <button class="head-menu-item-btn ripple">
+                    <button class="head-menu-item-btn ripple" [cdkMenuTriggerFor]="messageOverlay">
                         <i class="far fa-comment-alt menu-icon"></i>
                     </button>
                 </div>
@@ -74,14 +74,24 @@
     </div>
 </ng-template>
 
+<ng-template #messageOverlay>
+    <div class="overlay overlay-notification overlay-fall">
+        <ul>
+            <li class="notification-head-container">
+                <div class="notification-head">Brak wiadomości</div>
+            </li>
+        </ul>
+    </div>
+</ng-template>
+
 <ng-template #notificationOverlay>
     <div class="overlay overlay-notification overlay-fall">
         <ul>
             <li class="notification-head-container">
-                <div class="notification-head">Notification</div>
-                <span class="view-all-link">
-                    <a>View All</a>
-                </span>
+                <div class="notification-head">Powiadomienia</div>
+                <!-- <span class="view-all-link">
+                    <a>Zobacz wszystko</a>
+                </span> -->
             </li>
             <li class="notification-message-container"
                 *ngFor="let notification of notifications"
@@ -105,7 +115,6 @@
     <div class="overlay overlay-user overlay-fall" cdkMenu>
         <ul>
             <li *ngFor="let item of userItems" cdkMenuItem (click)="onMenuClick(item.label)">
-                <!-- Usunięto (click) z <a> -->
                 <a>
                     <i class="icon" [ngClass]="item.icon"></i>
                     <span>{{item.label}}</span>

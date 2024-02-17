@@ -16,10 +16,10 @@ export const languages = [
 export const notifications = [
     {
         icon: 'far fa-cloud-download',
-        subject: 'Download complete',
+        subject: 'Pobieranie zakończone',
         description: 'Lorem ipsum dolor sit amet, consectetuer.'
     },
-    {
+    /* {
         icon: 'far fa-cloud-upload',
         subject: 'Upload complete',
         description: 'Lorem ipsum dolor sit amet, consectetuer.'
@@ -28,7 +28,7 @@ export const notifications = [
         icon: 'far fa-trash',
         subject: '350 MB trash files',
         description: 'Lorem ipsum dolor sit amet, consectetuer.'
-    }
+    } */
 ];
 
 export const userItems = [
