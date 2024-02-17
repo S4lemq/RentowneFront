@@ -4,7 +4,7 @@ export const navbarData: InavbarData[] = [
     {
         routeLink: 'dashboard',
         icon: 'fal fa-server',
-        label: 'Panel'
+        label: 'Pulpit'
     },
     {
         routeLink: 'apartments',
@@ -13,7 +13,7 @@ export const navbarData: InavbarData[] = [
         items: [
             {
                 routeLink: 'apartments',
-                label: 'Nieruchomości'
+                label: 'Lista nieruchomości'
             },
             {
                 routeLink: 'apartments/add',
@@ -24,17 +24,7 @@ export const navbarData: InavbarData[] = [
     {
         routeLink: 'tenants',
         icon: 'fal fa-user-friends',
-        label: 'Najemcy',
-        items: [
-            {
-                routeLink: 'tenants',
-                label: 'Najemcy'
-            },
-            {
-                routeLink: 'tenants/add',
-                label: 'Dodaj najemcę'
-            }
-        ]
+        label: 'Najemcy'
     },
     {
         routeLink: 'utility-providers',
@@ -43,7 +33,7 @@ export const navbarData: InavbarData[] = [
         items: [
             {
                 routeLink: 'housing-providers',
-                label: 'Dostawcy'
+                label: 'Lista dostawców'
             },
             {
                 routeLink: 'housing-providers/add',
@@ -58,7 +48,7 @@ export const navbarData: InavbarData[] = [
         items: [
             {
                 routeLink: 'meters',
-                label: 'Liczniki'
+                label: 'Lista liczników'
             },
             {
                 routeLink: 'meters/add',
@@ -80,23 +70,15 @@ export const navbarData: InavbarData[] = [
         routeLink: 'agreements',
         icon: 'fal fa-copy',
         label: 'Umowy',
-    },
-    {
-        routeLink: 'settings',
-        icon: 'fal fa-cog',
-        label: 'Ustawienia',
-        expanded: true,
         items: [
             {
-                routeLink: 'settings',
-                label: 'Profil'
+                routeLink: 'agreements',
+                label: 'Lista umów'
             },
             {
-                routeLink: 'settings/customize',
-                label: 'Personalizuj'
+                routeLink: 'agreements/add',
+                label: 'Dodaj umowę'
             }
         ]
     },
-    
-
 ];

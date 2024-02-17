@@ -77,7 +77,7 @@
         </div>
             <div class="btn">
                 <button mat-flat-button style="background-color: black; color: white;" (click)="submit()" [disabled]="!apartmentForm.dirty && !this.imageUploaded">Zapisz</button>
-                <button mat-flat-button color="warn" (click)="confirmDelete(apartment.id)">Usuń</button>
+                <!-- <button mat-flat-button color="warn" (click)="confirmDelete(apartment.id)">Usuń</button> -->
                 <button mat-flat-button color="primary" (click)="goBack()">Powrót</button>
             </div>
             <div formArrayName="rentedObjects">
