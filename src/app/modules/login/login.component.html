@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="field-container">
-                <form [formGroup]="formGroup" class="form" (submit)="submit()">
+                <form [formGroup]="formGroup" class="form">
                     <mat-form-field appearance="outline">
                         <mat-label>{{ 'login.email' | translate }}</mat-label>
                         <input matInput formControlName="email">
@@ -20,9 +20,10 @@
                         </mat-error>
                     </mat-form-field>
                     
-                    <mat-form-field appearance="outline">
+                    <mat-form-field appearance="outline" class="password">
                         <mat-label>{{ 'login.password' | translate }}</mat-label>
                         <input [type]="hide ? 'password' : 'text'" matInput formControlName="password">
+                        <mat-hint align="end" routerLink="/lost-password" class="lost-password-link">Zapomniałeś hasła?</mat-hint>
                         <mat-error *ngIf="this.password?.invalid">
                             {{getPasswordErrorMsg()}}
                         </mat-error>
@@ -30,7 +31,7 @@
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
                     </mat-form-field>
-                    <button mat-flat-button class="button-login" style="background-color: black; color: white;">{{ 'login.getIn' | translate }}</button>
+                    <button mat-flat-button class="button-login" style="background-color: black; color: white;" (click)="submit()">{{ 'login.getIn' | translate }}</button>
                 </form>
             </div>
         </div>
@@ -39,7 +40,7 @@
                 {{ 'login.doNotHaveAccount' | translate }}
             </span>
             <a routerLink="/register" class="registr-link">{{ 'login.register' | translate }}</a><br>
-            <a routerLink="/lost-password" class="lost-password-link">Zapomniałeś hasła?</a>
+            <!-- <a routerLink="/lost-password" class="lost-password-link">Zapomniałeś hasła?</a> -->
         </div>
     </div>
 

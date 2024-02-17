@@ -112,3 +112,21 @@
     font-size: 20px;
     font-weight: 500;
 }
+
+.have-account{
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+}
+
+.registr-link {
+    margin-left: 3px;
+    color: blue;
+    text-decoration: none;
+}
+
+.registr-link:hover {
+    color: #00004f;
+    cursor: pointer
+}
+

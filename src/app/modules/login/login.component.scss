@@ -89,17 +89,17 @@ mat-icon {
 }
 
 .lost-password-link {
-    display: flex;
-    justify-content: center;
-    padding-top: 5px;
-    color: blue;
     text-decoration: none;
 }
 
 .lost-password-link:hover {
-    color: #00004f;
+    color: blue;
+    cursor: pointer
 }
 
+.password{
+    padding-bottom: 5px;
+}
 
 .main-otp-container {
     width: 497px;

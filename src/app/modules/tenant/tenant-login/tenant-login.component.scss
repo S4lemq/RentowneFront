@@ -12,8 +12,16 @@
 }
 
 .lost-password-link {
-    color: blue;
     text-decoration: none;
+}
+
+.lost-password-link:hover {
+    color: blue;
+    cursor: pointer
+}
+
+.password{
+    padding-bottom: 5px;
 }
 
 .error{

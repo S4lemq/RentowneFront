@@ -56,8 +56,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
-      firstname: new FormControl(null, [Validators.required]),
-      lastname: new FormControl(null, [Validators.required]),
+      firstname: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern("^[a-zA-Z]+$")]),
+      lastname: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern("^[a-zA-Z]+$")]),
       email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(60)]),
       mfaEnabled: new FormControl(false),
       password: new FormControl(null, [
@@ -183,12 +183,30 @@ export class RegisterComponent implements OnInit, OnDestroy {
     if (this.firstname?.hasError('required')) {
       return 'Wartość wymagana'
     }
+    if (this.firstname?.hasError('minlength')) {
+      return 'Minimalnie 2';
+    }
+    if (this.firstname?.hasError('maxlength')) {
+      return "Maksymalnie 50";
+    }
+    if (this.firstname?.hasError('pattern')) {
+      return 'Nie może zawierać znaków specjalnych, białych oraz cyfr';
+    }
     return '';
   }
 
   getLastNameErrorMsg() {
     if (this.lastname?.hasError('required')) {
       return 'Wartość wymagana'
+    }
+    if (this.lastname?.hasError('minlength')) {
+      return 'Minimalnie 2';
+    }
+    if (this.lastname?.hasError('maxlength')) {
+      return "Maksymalnie 50";
+    }
+    if (this.lastname?.hasError('pattern')) {
+      return 'Nie może zawierać znaków specjalnych, białych oraz cyfr';
     }
     return '';
   }
