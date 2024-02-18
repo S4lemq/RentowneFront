@@ -16,7 +16,6 @@ import { MeterAddComponent } from 'src/app/modules/meter-add/meter-add.component
 import { MeterCardViewComponent } from 'src/app/modules/meter-card-view/meter-card-view.component';
 import { TranslateMeterTypePipe } from 'src/app/modules/meter-card-view/translate-meter-type.pipe';
 import { MeterEditComponent } from 'src/app/modules/meter-edit/meter-edit.component';
-import { SettingsComponent } from 'src/app/modules/settings/settings.component';
 import { SidenavComponent } from 'src/app/modules/sidenav/sidenav.component';
 import { SublevelMenuComponent } from 'src/app/modules/sidenav/sublevel-menu.component';
 import { TenantAddComponent } from 'src/app/modules/tenant-add/tenant-add.component';
@@ -40,6 +39,7 @@ import { SettlementStatsComponent } from 'src/app/modules/settlement-stats/settl
 import { LeaseAgreementListComponent } from 'src/app/modules/lease-agreement-list/lease-agreement-list.component';
 import { HousingProviderListComponent } from 'src/app/modules/housing-provider-list/housing-provider-list.component';
 import { MeterListComponent } from 'src/app/modules/meter-list/meter-list.component';
+import { BreadcrumbModule } from 'xng-breadcrumb';
 
 
 @NgModule({
@@ -52,7 +52,6 @@ import { MeterListComponent } from 'src/app/modules/meter-list/meter-list.compon
     BodyComponent,
     SidenavComponent,
     DashboardComponent,
-    SettingsComponent,
     SublevelMenuComponent,
     HeaderComponent,
     MeterEditComponent,
@@ -78,7 +77,7 @@ import { MeterListComponent } from 'src/app/modules/meter-list/meter-list.compon
     SettlementStatsComponent,
     LeaseAgreementListComponent,
     HousingProviderListComponent,
-    MeterListComponent
+    MeterListComponent,
   ],
   imports: [
     CommonModule,
@@ -86,7 +85,8 @@ import { MeterListComponent } from 'src/app/modules/meter-list/meter-list.compon
     SharedModule,
     ReactiveFormsModule,
     OverlayModule,
-    CdkMenuModule
+    CdkMenuModule,
+    BreadcrumbModule
   ]
 })
 export class DefaultModule { }

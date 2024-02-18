@@ -8,4 +8,5 @@ export interface MeterReadingDto {
     meterDto?: MeterDto
     previousReading?: number
     previousReadingDate?: Date
+    settled?: boolean
 }

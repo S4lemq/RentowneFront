@@ -59,7 +59,7 @@ export class MeterAddComponent implements OnInit, OnDestroy {
   submit() {
     if (this.meterForm.valid) {
       const rentedObjectDto: RentedObjectDto = {
-        id: this.rentedObjectId
+        id: this.rentedObjectIdControl?.value
       }
       this.meterService.saveMeter(
         {

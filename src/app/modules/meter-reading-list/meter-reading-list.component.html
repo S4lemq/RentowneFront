@@ -31,7 +31,12 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header="consumption">Zużycie</th>
           <td mat-cell *matCellDef="let element"> {{element.consumption | number:'1.0-2'}} m<sup>3</sup> </td>
         </ng-container>
-  
+
+        <ng-container matColumnDef="settled">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="settled">{{ 'dataTable.settled' | translate }}</th>
+          <td mat-cell *matCellDef="let element"> {{element.settled}} </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>

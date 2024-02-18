@@ -13,7 +13,6 @@ import { LoginComponent } from './modules/login/login.component';
 import { MeterAddComponent } from './modules/meter-add/meter-add.component';
 import { MeterEditComponent } from './modules/meter-edit/meter-edit.component';
 import { RegisterComponent } from './modules/register/register.component';
-import { SettingsComponent } from './modules/settings/settings.component';
 import { TenantAddComponent } from './modules/tenant-add/tenant-add.component';
 import { TenantEditComponent } from './modules/tenant-edit/tenant-edit.component';
 import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGuard';
@@ -34,11 +33,10 @@ import { MeterListComponent } from './modules/meter-list/meter-list.component';
 const routes: Routes = [
    {
     path: '', component: DefaultComponent, canActivate: [AuthorizeGuard], children: [
-      {path: 'settings', component: SettingsComponent, canActivate: [AuthorizeGuard]},
-      {path: 'dashboard', component: DashboardComponent, canActivate: [AuthorizeGuard]},
-      {path: 'apartments', component: ApartmentListComponent, canActivate: [AuthorizeGuard]},
-      {path: 'apartments/edit/:id', component: ApartmentMeterEditContainerComponent, canActivate: [AuthorizeGuard]},
-      {path: 'apartments/add', component: ApartmentAddComponent, canActivate: [AuthorizeGuard]},
+      {path: 'dashboard', component: DashboardComponent, canActivate: [AuthorizeGuard], data:{breadcrumb: 'Dashboard'}},
+      {path: 'apartments', component: ApartmentListComponent, canActivate: [AuthorizeGuard], data:{breadcrumb: 'apartments'}},
+      {path: 'apartments/edit/:id', component: ApartmentMeterEditContainerComponent, canActivate: [AuthorizeGuard],  data:{breadcrumb: 'edit'}},
+      {path: 'apartments/add', component: ApartmentAddComponent, canActivate: [AuthorizeGuard], data:{breadcrumb: 'add'}},
       {path: 'rented-object/:id/meters/add', component: MeterAddComponent, canActivate: [AuthorizeGuard]},
       {path: 'meters/add', component: MeterAddComponent, canActivate: [AuthorizeGuard]},
       {path: 'meters/edit/:id', component: MeterEditComponent, canActivate: [AuthorizeGuard]},
