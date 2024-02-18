@@ -33,7 +33,7 @@ export class ApartmentListComponent implements OnInit, OnDestroy {
   columnsName: KeyValue[] = [
     {value: null, viewValue: null},
     {value: 'apartmentName', viewValue: 'Nazwa mieszkania'},
-    {value: 'leasesNumber', viewValue: 'Liczba umów najmu'},
+    {value: 'leasesNumber', viewValue: 'Ilość obiektów'},
     {value: 'isRented', viewValue: "Czy wynajęto"}
   ];
 

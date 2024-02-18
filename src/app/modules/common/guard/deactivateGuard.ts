@@ -15,7 +15,7 @@ import { MatDialogRef } from "@angular/material/dialog";
       if (component.isFormValid()) {
         return true;
       } else {
-        const dialogRef: MatDialogRef<any> = this.confirmDialogService.openConfirmDialog('Masz nie zapisane zmiany, czy na pewno chcesz wyjść?');
+        const dialogRef: MatDialogRef<any> = this.confirmDialogService.openConfirmDialog('Masz niezapisane zmiany, czy na pewno chcesz wyjść?');
   
         return dialogRef.afterClosed().pipe(
           take(1),

@@ -41,22 +41,22 @@
         "filter": {
             "sortDirection":"Kierunek sortowania",
             "columnName":"Sortuj po",
-            "leasesNumber": "Liczba umów najmu",
-            "isRented": "Czy mieszkanie wynajęte?"
+            "leasesNumber": "Ilość obiektów",
+            "isRented": "Czy mieszkanie z wolnym obiektem?"
         }
     },
     "apartmentDataTable": {
         "name": "Nazwa",
-        "leasesNumber": "Liczba umów najmu",
+        "leasesNumber": "Ilość obiektów",
         "isRented": "Wynajęte"
     },
     "common.yes": "Tak",
     "common.no": "Nie",
     "apartment": {
-        "card.leasesNumber":"Liczba umów najmu:",
+        "card.leasesNumber":"Ilość obiektów:",
         "card.unsettled-income":"Nierozliczony dochód:",
         "name": "Nazwa mieszkania",
-        "leasesNumber": "Liczba umów najmu",
+        "leasesNumber": "Ilość obiektów",
         "area": "Metraż",
         "street": "Ulica",
         "buildingNumber": "Numer budynku",

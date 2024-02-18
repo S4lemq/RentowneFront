@@ -190,7 +190,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       return "Maksymalnie 50";
     }
     if (this.firstname?.hasError('pattern')) {
-      return 'Nie może zawierać znaków specjalnych, białych oraz cyfr';
+      return 'Niepoprawny format';
     }
     return '';
   }
@@ -206,7 +206,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       return "Maksymalnie 50";
     }
     if (this.lastname?.hasError('pattern')) {
-      return 'Nie może zawierać znaków specjalnych, białych oraz cyfr';
+      return 'Niepoprawny format';
     }
     return '';
   }

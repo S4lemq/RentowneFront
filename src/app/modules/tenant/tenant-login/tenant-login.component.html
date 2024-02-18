@@ -23,7 +23,6 @@
                     <mat-form-field appearance="outline" class="password">
                         <mat-label>{{ 'login.password' | translate }}</mat-label>
                         <input [type]="hide ? 'password' : 'text'" matInput formControlName="password">
-                        <mat-hint align="end" routerLink="/tenant-lost-password" class="lost-password-link">Zapomniałeś hasła?</mat-hint>
                         <mat-error *ngIf="this.password?.invalid">
                             {{getPasswordErrorMsg()}}
                         </mat-error>
@@ -31,6 +30,7 @@
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
                     </mat-form-field>
+                    <div align="end" routerLink="/tenant-lost-password" class="lost-password-link">Zapomniałeś hasła?</div>
                     
                     <button mat-flat-button class="button-login" style="background-color: black; color: white;" (click)="submit()">{{ 'login.getIn' | translate }}</button>
                 </form>

@@ -8,13 +8,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDialogService } from '../confirm-dialog/confirm-dialog.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NavigationService } from '../common/service/navigation.service';
+import { BaseComponent } from '../common/base.component';
 
 @Component({
   selector: 'app-apartment-edit',
   templateUrl: './apartment-edit.component.html',
   styleUrls: ['./apartment-edit.component.scss']
 })
-export class ApartmentEditComponent implements OnInit{
+export class ApartmentEditComponent implements OnInit, BaseComponent {
 
   apartment!: ApartmentDto;
   apartmentForm!: FormGroup;
@@ -25,6 +26,9 @@ export class ApartmentEditComponent implements OnInit{
   imageUploaded: boolean = false;
   imageSelected: boolean = false;
   apartmentId!: number;
+  selectedIndex!: number;
+  isFormSubmitted: boolean = false;
+  isFormValid = () => this.isFormSubmitted || !this.apartmentForm?.dirty;
 
   constructor(
     private acitvatedRoute: ActivatedRoute,
@@ -59,10 +63,25 @@ export class ApartmentEditComponent implements OnInit{
     this.apartmentForm.get('leasesNumber')?.valueChanges.subscribe((leasesNumber: number) => {
       this.updateRentedObjects(leasesNumber);
     });
+
+    const lastTabLabel = this.navigationService.getLastTabLabel();
+    if (lastTabLabel) {
+      this.selectedIndex = this.convertLabelToIndex(lastTabLabel);
+      this.navigationService.setLastTabLabel('');
+    }
   }
 
   goBack() {
     this.navigationService.goBack();
+  }
+
+  convertLabelToIndex(label: string): number {
+    switch(label) {
+      case 'apartments': return 0;
+      case 'housing-provider': return 1;
+      case 'meters': return 2;
+      default: return 0;
+    }
   }
 
   getApartment() {
@@ -75,6 +94,7 @@ export class ApartmentEditComponent implements OnInit{
 
   submit() {
     if(this.apartmentForm.valid) {
+      this.isFormSubmitted = true;
       this.imageUploaded = false;
 
       const addressDto: AddressDto = {
