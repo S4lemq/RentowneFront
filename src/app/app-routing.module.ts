@@ -33,10 +33,10 @@ import { MeterListComponent } from './modules/meter-list/meter-list.component';
 const routes: Routes = [
    {
     path: '', component: DefaultComponent, canActivate: [AuthorizeGuard], children: [
-      {path: 'dashboard', component: DashboardComponent, canActivate: [AuthorizeGuard], data:{breadcrumb: 'Dashboard'}},
-      {path: 'apartments', component: ApartmentListComponent, canActivate: [AuthorizeGuard], data:{breadcrumb: 'apartments'}},
-      {path: 'apartments/edit/:id', component: ApartmentMeterEditContainerComponent, canActivate: [AuthorizeGuard],  data:{breadcrumb: 'edit'}},
-      {path: 'apartments/add', component: ApartmentAddComponent, canActivate: [AuthorizeGuard], data:{breadcrumb: 'add'}},
+      {path: 'dashboard', component: DashboardComponent, canActivate: [AuthorizeGuard]},
+      {path: 'apartments', component: ApartmentListComponent, canActivate: [AuthorizeGuard]},
+      {path: 'apartments/edit/:id', component: ApartmentMeterEditContainerComponent, canActivate: [AuthorizeGuard]},
+      {path: 'apartments/add', component: ApartmentAddComponent, canActivate: [AuthorizeGuard]},
       {path: 'rented-object/:id/meters/add', component: MeterAddComponent, canActivate: [AuthorizeGuard]},
       {path: 'meters/add', component: MeterAddComponent, canActivate: [AuthorizeGuard]},
       {path: 'meters/edit/:id', component: MeterEditComponent, canActivate: [AuthorizeGuard]},

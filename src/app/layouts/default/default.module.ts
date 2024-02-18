@@ -39,7 +39,6 @@ import { SettlementStatsComponent } from 'src/app/modules/settlement-stats/settl
 import { LeaseAgreementListComponent } from 'src/app/modules/lease-agreement-list/lease-agreement-list.component';
 import { HousingProviderListComponent } from 'src/app/modules/housing-provider-list/housing-provider-list.component';
 import { MeterListComponent } from 'src/app/modules/meter-list/meter-list.component';
-import { BreadcrumbModule } from 'xng-breadcrumb';
 
 
 @NgModule({
@@ -86,7 +85,6 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
     ReactiveFormsModule,
     OverlayModule,
     CdkMenuModule,
-    BreadcrumbModule
   ]
 })
 export class DefaultModule { }
