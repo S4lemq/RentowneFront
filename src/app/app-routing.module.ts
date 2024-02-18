@@ -29,28 +29,126 @@ import { SettlementStatsComponent } from './modules/settlement-stats/settlement-
 import { LeaseAgreementListComponent } from './modules/lease-agreement-list/lease-agreement-list.component';
 import { HousingProviderListComponent } from './modules/housing-provider-list/housing-provider-list.component';
 import { MeterListComponent } from './modules/meter-list/meter-list.component';
+import { DeactivateGurad } from './modules/common/guard/deactivateGuard';
 
 const routes: Routes = [
    {
     path: '', component: DefaultComponent, canActivate: [AuthorizeGuard], children: [
-      {path: 'dashboard', component: DashboardComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Pulpit' }},
-      {path: 'apartments', component: ApartmentListComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Lista nieruchomości' }},
-      {path: 'apartments/edit/:id', component: ApartmentMeterEditContainerComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Lista nieruchomości / Edycja' }},
-      {path: 'apartments/add', component: ApartmentAddComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Lista nieruchomości / Dodaj nieruchomość' }},
-      {path: 'rented-object/:id/meters/add', component: MeterAddComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Lista nieruchomości / Edycja / Dodaj licznik' }},
-      {path: 'meters/add', component: MeterAddComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Lista liczników / Dodaj licznik' }},
-      {path: 'meters/edit/:id', component: MeterEditComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Lista liczników / Edycja' }},
-      {path: 'agreements/add', component: TenantAddComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Lista umów / Dodaj umowę' }},
-      {path: 'agreements/edit/:id', component: TenantEditComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Lista umów / Edycja' }},
-      {path: 'tenants', component: TenantListComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Lista najemców' }},
-      {path: 'housing-providers/add', component: HousingProviderAddComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Lista dostawców / Dodaj dostawcę' }},
-      {path: 'housing-providers/edit/:id', component: HousingProviderEditComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Lista dostawców / Edycja' }},
-      {path: 'finances', component: RentedObjectSettlementListComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Lista finansów' }},
-      {path: 'rented-object-finances/:id', component: SingleRentedObjectSettlementListComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Lista finansów / Edycja' }},
-      {path: 'analytics', component: SettlementStatsComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Analizy' }},
-      {path: 'agreements', component: LeaseAgreementListComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Lista umów' }},
-      {path: 'housing-providers', component: HousingProviderListComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Lista dostawców' }},
-      {path: 'meters', component: MeterListComponent, canActivate: [AuthorizeGuard], data: { breadcrumb: 'Lista liczników' }},
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [AuthorizeGuard],
+        data: { breadcrumb: 'Pulpit' }
+      },
+      {
+        path: 'apartments', 
+        component: ApartmentListComponent, 
+        canActivate: [AuthorizeGuard], 
+        data: { breadcrumb: 'Lista nieruchomości'}
+      },
+      {
+        path: 'apartments/edit/:id', 
+        component: ApartmentMeterEditContainerComponent, 
+        canActivate: [AuthorizeGuard], 
+        data: { breadcrumb: 'Lista nieruchomości / Edycja' }},
+      {
+        path: 'apartments/add',
+        component: ApartmentAddComponent,
+        canActivate: [AuthorizeGuard],
+        canDeactivate: [DeactivateGurad],
+        data: { breadcrumb: 'Lista nieruchomości / Dodaj nieruchomość' }
+      },
+      {
+        path: 'rented-object/:id/meters/add', 
+        component: MeterAddComponent, 
+        canActivate: [AuthorizeGuard],
+        canDeactivate: [DeactivateGurad],
+        data: { breadcrumb: 'Lista nieruchomości / Edycja / Dodaj licznik' }
+      },
+      {
+        path: 'meters/add', 
+        component: MeterAddComponent, 
+        canActivate: [AuthorizeGuard],
+        canDeactivate: [DeactivateGurad], 
+        data: { breadcrumb: 'Lista liczników / Dodaj licznik' }
+      },
+      {
+        path: 'meters/edit/:id', 
+        component: MeterEditComponent, 
+        canActivate: [AuthorizeGuard],
+        canDeactivate: [DeactivateGurad],  
+        data: { breadcrumb: 'Lista liczników / Edycja' }
+      },
+      {
+        path: 'agreements/add',
+        component: TenantAddComponent, 
+        canActivate: [AuthorizeGuard],
+        canDeactivate: [DeactivateGurad],
+        data: { breadcrumb: 'Lista umów / Dodaj umowę' }
+      },
+      {
+        path: 'agreements/edit/:id', 
+        component: TenantEditComponent, 
+        canActivate: [AuthorizeGuard],
+        canDeactivate: [DeactivateGurad],
+        data: { breadcrumb: 'Lista umów / Edycja' }
+      },
+      {
+        path: 'tenants', 
+        component: TenantListComponent, 
+        canActivate: [AuthorizeGuard], 
+        data: { breadcrumb: 'Lista najemców' }
+      },
+      {
+        path: 'housing-providers/add', 
+        component: HousingProviderAddComponent, 
+        canActivate: [AuthorizeGuard],
+        canDeactivate: [DeactivateGurad],
+        data: { breadcrumb: 'Lista dostawców / Dodaj dostawcę' }
+      },
+      {
+        path: 'housing-providers/edit/:id', 
+        component: HousingProviderEditComponent, 
+        canActivate: [AuthorizeGuard],
+        canDeactivate: [DeactivateGurad],
+        data: { breadcrumb: 'Lista dostawców / Edycja' }
+      },
+      {
+        path: 'finances',
+        component: RentedObjectSettlementListComponent, 
+        canActivate: [AuthorizeGuard], 
+        data: { breadcrumb: 'Lista finansów' }
+      },
+      {
+        path: 'rented-object-finances/:id', 
+        component: SingleRentedObjectSettlementListComponent, 
+        canActivate: [AuthorizeGuard],
+        data: { breadcrumb: 'Lista finansów / Rozliczenia' }
+      },
+      {
+        path: 'analytics', 
+        component: SettlementStatsComponent, 
+        canActivate: [AuthorizeGuard], 
+        data: { breadcrumb: 'Analizy' }
+      },
+      {
+        path: 'agreements', 
+        component: LeaseAgreementListComponent, 
+        canActivate: [AuthorizeGuard], 
+        data: { breadcrumb: 'Lista umów' }
+      },
+      {
+        path: 'housing-providers', 
+        component: HousingProviderListComponent, 
+        canActivate: [AuthorizeGuard], 
+        data: { breadcrumb: 'Lista dostawców' }
+      },
+      {
+        path: 'meters', 
+        component: MeterListComponent, 
+        canActivate: [AuthorizeGuard], 
+        data: { breadcrumb: 'Lista liczników' }
+      },
     ]
   },
   {

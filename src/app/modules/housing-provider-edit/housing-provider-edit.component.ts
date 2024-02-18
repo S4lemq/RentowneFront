@@ -10,18 +10,21 @@ import { ProviderFieldDto } from '../housing-provider-add/model/provider-field-d
 import { ProviderType } from '../housing-provider-add/model/provider-type';
 import { BillingMethod } from '../housing-provider-add/model/billing-method';
 import { maxDecimalPlaces } from '../common/validators/max-decimal-places.validator';
+import { BaseComponent } from '../common/base.component';
 
 @Component({
   selector: 'app-housing-provider-edit',
   templateUrl: './housing-provider-edit.component.html',
   styleUrls: ['./housing-provider-edit.component.scss']
 })
-export class HousingProviderEditComponent implements OnInit, OnDestroy {
+export class HousingProviderEditComponent implements OnInit, OnDestroy, BaseComponent {
   private killer$ = new Subject<void>();
   housingProviderId!: number;
   housingProviderForm!: FormGroup;
   providerTypes = Object.values(ProviderType);
   billingMethods = Object.values(BillingMethod);
+  isFormSubmitted: boolean = false;
+  isFormValid = () => this.isFormSubmitted || !this.housingProviderForm?.dirty;
 
   constructor(
     private acitvatedRoute: ActivatedRoute,
@@ -96,6 +99,7 @@ export class HousingProviderEditComponent implements OnInit, OnDestroy {
   
   submit() {
     if (this.housingProviderForm.valid) {
+      this.isFormSubmitted = true;
       const providerFieldDtos = this.getProviderFieldDtos();
 
       const housingProvider: HousingProviderDto = {

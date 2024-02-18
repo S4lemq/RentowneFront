@@ -13,13 +13,14 @@ import { ApartmentDto } from '../apartment-edit/model/apartment-dto';
 import { RentedObjectDto } from '../apartment-edit/model/rented-object-dto';
 import { ApartmentAddService } from '../apartment-add/apartment-add.service';
 import { RentedObjectService } from '../apartment-add/rented-object.service';
+import { BaseComponent } from '../common/base.component';
 
 @Component({
   selector: 'app-tenant-edit',
   templateUrl: './tenant-edit.component.html',
   styleUrls: ['./tenant-edit.component.scss']
 })
-export class TenantEditComponent implements OnInit, OnDestroy {
+export class TenantEditComponent implements OnInit, OnDestroy, BaseComponent {
   private killer$ = new Subject<void>();
   tenantForm!: FormGroup;
   tenantId!: number;
@@ -30,6 +31,8 @@ export class TenantEditComponent implements OnInit, OnDestroy {
   step = 0;
   retedObjectOfTenant?: number;
   apartmentOfTenant?: number;
+  isFormSubmitted: boolean = false;
+  isFormValid = () => this.isFormSubmitted || !this.tenantForm?.dirty;
 
   addressId?: number;
   leaseAgreementId?: number;
@@ -160,6 +163,7 @@ export class TenantEditComponent implements OnInit, OnDestroy {
 
   submit() {
     if (this.tenantForm.valid) {
+      this.isFormSubmitted = true;
       const addressDto: AddressDto = {
         id: this.addressId,
         streetName: this.streetName?.value,

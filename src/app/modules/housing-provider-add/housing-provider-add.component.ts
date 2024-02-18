@@ -10,17 +10,20 @@ import { ProviderType } from './model/provider-type';
 import { maxDecimalPlaces } from '../common/validators/max-decimal-places.validator';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BaseComponent } from '../common/base.component';
 
 @Component({
   selector: 'app-housing-provider-add',
   templateUrl: './housing-provider-add.component.html',
   styleUrls: ['./housing-provider-add.component.scss']
 })
-export class HousingProviderAddComponent implements OnInit, OnDestroy {
+export class HousingProviderAddComponent implements OnInit, OnDestroy, BaseComponent {
   private killer$ = new Subject<void>();
   housingProviderForm!: FormGroup;
   providerTypes = Object.values(ProviderType);
   billingMethods = Object.values(BillingMethod);
+  isFormSubmitted: boolean = false;
+  isFormValid = () => this.isFormSubmitted || !this.housingProviderForm?.dirty;
 
   constructor(
     private fb: FormBuilder,
@@ -79,6 +82,7 @@ export class HousingProviderAddComponent implements OnInit, OnDestroy {
 
   submit() {
     if (this.housingProviderForm.valid) {
+      this.isFormSubmitted = true;
       const providerFieldDtos = this.getProviderFieldDtos();
 
       const housingProvider: HousingProviderDto = {

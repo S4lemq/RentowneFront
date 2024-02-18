@@ -1,101 +1,100 @@
-<h1>Dodaj mieszkanie</h1>
-    <mat-card class="card">
-        <mat-tab-group>
-            <mat-tab label="Nieruchomości">
-                <form [formGroup]="apartmentForm">
-                <div class="form-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>{{ 'apartment.name' | translate }}</mat-label>
-                        <input matInput formControlName="apartmentName">
-                        <mat-error *ngIf="apartmentName?.invalid && (apartmentName?.dirty || apartmentName?.touched)">
-                            {{getApartmentNameErrorMsg()}}
-                        </mat-error>
-                    </mat-form-field>
-            
-                    <mat-form-field appearance="outline" >
-                        <mat-label>{{ 'apartment.leasesNumber' | translate }}</mat-label>
-                        <input matInput type="number" formControlName="leasesNumber">
-                        <mat-error *ngIf="leasesNumber?.invalid && (leasesNumber?.dirty || leasesNumber?.touched)">
-                            {{getleasesNumberErrorMsg()}}
-                        </mat-error>
-                    </mat-form-field>
-            
-                    <mat-form-field appearance="outline">
-                        <mat-label>{{ 'apartment.area' | translate }}</mat-label>
-                        <input matInput type="number" formControlName="area">
-                        <span matTextSuffix>m²&nbsp;</span>
-                        <mat-error *ngIf="area?.invalid && (area?.dirty || area?.touched)">
-                            {{getAreaNumberErrorMsg()}}
-                        </mat-error>
-                    </mat-form-field>
+<mat-card class="card">
+    <mat-tab-group>
+        <mat-tab label="Nieruchomości">
+            <form [formGroup]="apartmentForm">
+            <div class="form-1">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.name' | translate }}</mat-label>
+                    <input matInput formControlName="apartmentName">
+                    <mat-error *ngIf="apartmentName?.invalid && (apartmentName?.dirty || apartmentName?.touched)">
+                        {{getApartmentNameErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline" >
+                    <mat-label>{{ 'apartment.leasesNumber' | translate }}</mat-label>
+                    <input matInput type="number" formControlName="leasesNumber">
+                    <mat-error *ngIf="leasesNumber?.invalid && (leasesNumber?.dirty || leasesNumber?.touched)">
+                        {{getleasesNumberErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.area' | translate }}</mat-label>
+                    <input matInput type="number" formControlName="area">
+                    <span matTextSuffix>m²&nbsp;</span>
+                    <mat-error *ngIf="area?.invalid && (area?.dirty || area?.touched)">
+                        {{getAreaNumberErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-1">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.street' | translate }}</mat-label>
+                    <input matInput formControlName="streetName">
+                    <mat-error *ngIf="streetName?.invalid && (streetName?.dirty || streetName?.touched)">
+                        {{getStreetNameErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.buildingNumber' | translate }}</mat-label>
+                    <input matInput formControlName="buildingNumber">
+                    <mat-error *ngIf="buildingNumber?.invalid && (buildingNumber?.dirty || buildingNumber?.touched)">
+                        {{getBuildingNumberErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.apartmentNumber' | translate }}</mat-label>
+                    <input matInput formControlName="apartmentNumber">
+                    <mat-error *ngIf="apartmentNumber?.invalid && (apartmentNumber?.dirty || apartmentNumber?.touched)">
+                        {{getApartmentNumberErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.zipCode' | translate }}</mat-label>
+                    <input matInput formControlName="zipCode">
+                    <mat-error *ngIf="zipCode?.invalid && (zipCode?.dirty || zipCode?.touched)">
+                        {{getZipCodeErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.cityName' | translate }}</mat-label>
+                    <input matInput formControlName="cityName">
+                    <mat-error *ngIf="cityName?.invalid && (cityName?.dirty || cityName?.touched)">
+                        {{getCityNameErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.voivodeship' | translate }}</mat-label>
+                    <input matInput formControlName="voivodeship">
+                    <mat-error *ngIf="voivodeship?.invalid && (voivodeship?.dirty || voivodeship?.touched)">
+                        {{getVoivodeshipErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="btn">
+                <button mat-flat-button style="background-color: black; color: white;" (click)="submit()">Zapisz</button>
+            </div>
+            <div formArrayName="rentedObjects">
+                <div *ngFor="let rentedObject of getRentedObjectsFormArray.controls; let i = index" [formGroupName]="i">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'rentedObject.name' | translate }}</mat-label>
+                    <input matInput formControlName="rentedObjectName">
+                    <mat-error *ngIf="rentedObject.get('rentedObjectName')?.invalid && (rentedObject.get('rentedObjectName')?.dirty || rentedObject.get('rentedObjectName')?.touched)">
+                    {{ 'required' | translate }}
+                    </mat-error>
+                </mat-form-field>
                 </div>
-                <div class="form-1">
-                    <mat-form-field appearance="outline">
-                        <mat-label>{{ 'apartment.street' | translate }}</mat-label>
-                        <input matInput formControlName="streetName">
-                        <mat-error *ngIf="streetName?.invalid && (streetName?.dirty || streetName?.touched)">
-                            {{getStreetNameErrorMsg()}}
-                        </mat-error>
-                    </mat-form-field>
-            
-                    <mat-form-field appearance="outline">
-                        <mat-label>{{ 'apartment.buildingNumber' | translate }}</mat-label>
-                        <input matInput formControlName="buildingNumber">
-                        <mat-error *ngIf="buildingNumber?.invalid && (buildingNumber?.dirty || buildingNumber?.touched)">
-                            {{getBuildingNumberErrorMsg()}}
-                        </mat-error>
-                    </mat-form-field>
-            
-                    <mat-form-field appearance="outline">
-                        <mat-label>{{ 'apartment.apartmentNumber' | translate }}</mat-label>
-                        <input matInput formControlName="apartmentNumber">
-                        <mat-error *ngIf="apartmentNumber?.invalid && (apartmentNumber?.dirty || apartmentNumber?.touched)">
-                            {{getApartmentNumberErrorMsg()}}
-                        </mat-error>
-                    </mat-form-field>
-            
-                    <mat-form-field appearance="outline">
-                        <mat-label>{{ 'apartment.zipCode' | translate }}</mat-label>
-                        <input matInput formControlName="zipCode">
-                        <mat-error *ngIf="zipCode?.invalid && (zipCode?.dirty || zipCode?.touched)">
-                            {{getZipCodeErrorMsg()}}
-                        </mat-error>
-                    </mat-form-field>
-            
-                    <mat-form-field appearance="outline">
-                        <mat-label>{{ 'apartment.cityName' | translate }}</mat-label>
-                        <input matInput formControlName="cityName">
-                        <mat-error *ngIf="cityName?.invalid && (cityName?.dirty || cityName?.touched)">
-                            {{getCityNameErrorMsg()}}
-                        </mat-error>
-                    </mat-form-field>
-            
-                    <mat-form-field appearance="outline">
-                        <mat-label>{{ 'apartment.voivodeship' | translate }}</mat-label>
-                        <input matInput formControlName="voivodeship">
-                        <mat-error *ngIf="voivodeship?.invalid && (voivodeship?.dirty || voivodeship?.touched)">
-                            {{getVoivodeshipErrorMsg()}}
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="btn">
-                    <button mat-flat-button style="background-color: black; color: white;" (click)="submit()">Zapisz</button>
-                </div>
-                <div formArrayName="rentedObjects">
-                    <div *ngFor="let rentedObject of getRentedObjectsFormArray.controls; let i = index" [formGroupName]="i">
-                    <mat-form-field appearance="outline">
-                        <mat-label>{{ 'rentedObject.name' | translate }}</mat-label>
-                        <input matInput formControlName="rentedObjectName">
-                        <mat-error *ngIf="rentedObject.get('rentedObjectName')?.invalid && (rentedObject.get('rentedObjectName')?.dirty || rentedObject.get('rentedObjectName')?.touched)">
-                        {{ 'required' | translate }}
-                        </mat-error>
-                    </mat-form-field>
-                    </div>
-                </div>
-            </form>
-        </mat-tab>
-        <mat-tab label="Liczniki">
-            Najpierw dodaj Nieruchomość!
-        </mat-tab>
+            </div>
+        </form>
+    </mat-tab>
+    <mat-tab label="Liczniki">
+        Najpierw dodaj Nieruchomość!
+    </mat-tab>
     </mat-tab-group>
 </mat-card>

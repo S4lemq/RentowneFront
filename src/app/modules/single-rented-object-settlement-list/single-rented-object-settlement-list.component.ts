@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { ActivatedRoute } from '@angular/router';
 import { Subject, map, merge, startWith, switchMap, takeUntil } from 'rxjs';
 import { DTService } from 'src/app/shared/data-table/dt.service';
-import { SingleRentedObjectSettlementRowDto } from './model/single-rented-object-settlement-row-dto';
-import { ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
 import { CalculatePopupComponent } from '../calculate-popup/calculate-popup.component';
 import { SingleRentedObjectSettlementExportPopupComponent } from '../single-rented-object-settlement-export-popup/single-rented-object-settlement-export-popup.component';
+import { SingleRentedObjectSettlementRowDto } from './model/single-rented-object-settlement-row-dto';
 
 
 @Component({

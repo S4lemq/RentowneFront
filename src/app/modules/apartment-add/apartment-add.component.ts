@@ -6,16 +6,19 @@ import { TranslateService } from '@ngx-translate/core';
 import { AddressDto } from '../apartment-edit/model/address-dto';
 import { ApartmentDto } from '../apartment-edit/model/apartment-dto';
 import { ApartmentAddService } from './apartment-add.service';
+import { BaseComponent } from '../common/base.component';
 
 @Component({
   selector: 'app-apartment-add',
   templateUrl: './apartment-add.component.html',
   styleUrls: ['./apartment-add.component.scss']
 })
-export class ApartmentAddComponent implements OnInit{
+export class ApartmentAddComponent implements OnInit, BaseComponent {
 
   apartmentForm!: FormGroup;
   rentedObjectsFormArray!: FormArray;
+  isFormSubmitted: boolean = false;
+  isFormValid = () => this.isFormSubmitted || !this.apartmentForm?.dirty;
   
   constructor(
     private apartmentAddService: ApartmentAddService,
@@ -66,7 +69,8 @@ export class ApartmentAddComponent implements OnInit{
   
 
   submit() {
-    if( this.apartmentForm.valid ) {
+    if (this.apartmentForm.valid) {
+      this.isFormSubmitted = true;
       const addressDto: AddressDto = {
         streetName: this.apartmentForm.get('streetName')?.value,
         buildingNumber: this.apartmentForm.get('buildingNumber')?.value,

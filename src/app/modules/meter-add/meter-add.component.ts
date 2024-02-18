@@ -10,19 +10,22 @@ import { RentedObjectDto } from '../apartment-edit/model/rented-object-dto';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { maxDecimalPlaces } from '../common/validators/max-decimal-places.validator';
+import { BaseComponent } from '../common/base.component';
 
 @Component({
   selector: 'app-meter-add',
   templateUrl: './meter-add.component.html',
   styleUrls: ['./meter-add.component.scss']
 })
-export class MeterAddComponent implements OnInit, OnDestroy {
+export class MeterAddComponent implements OnInit, OnDestroy, BaseComponent {
 
   private killer$ = new Subject<void>();
   rentedObjectId!: number;
   meterForm!: FormGroup;
   meterTypes = Object.values(MeterType);
   rentedObjects: RentedObjectDto[] = [];
+  isFormSubmitted: boolean = false;
+  isFormValid = () => this.isFormSubmitted || !this.meterForm?.dirty;
 
   constructor(
     private meterService: MeterService,
@@ -58,6 +61,7 @@ export class MeterAddComponent implements OnInit, OnDestroy {
 
   submit() {
     if (this.meterForm.valid) {
+      this.isFormSubmitted = true;
       const rentedObjectDto: RentedObjectDto = {
         id: this.rentedObjectIdControl?.value
       }

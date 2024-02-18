@@ -13,13 +13,14 @@ import { RentedObjectDto } from '../apartment-edit/model/rented-object-dto';
 import { ApartmentDto } from '../apartment-edit/model/apartment-dto';
 import { ApartmentAddService } from '../apartment-add/apartment-add.service';
 import { RentedObjectService } from '../apartment-add/rented-object.service';
+import { BaseComponent } from '../common/base.component';
 
 @Component({
   selector: 'app-tenant-add',
   templateUrl: './tenant-add.component.html',
   styleUrls: ['./tenant-add.component.scss']
 })
-export class TenantAddComponent implements OnInit, OnDestroy {
+export class TenantAddComponent implements OnInit, OnDestroy, BaseComponent {
 
   private killer$ = new Subject<void>();
   tenantForm!: FormGroup;
@@ -27,6 +28,8 @@ export class TenantAddComponent implements OnInit, OnDestroy {
   apartments: ApartmentDto[] = [];
   rentedObjects: RentedObjectDto[] = [];
   step = 0;
+  isFormSubmitted: boolean = false;
+  isFormValid = () => this.isFormSubmitted || !this.tenantForm?.dirty;
 
   constructor(
     private translateService: TranslateService,
@@ -89,6 +92,7 @@ export class TenantAddComponent implements OnInit, OnDestroy {
 
   submit() {
     if (this.tenantForm.valid) {
+      this.isFormSubmitted = true;
       const addressDto: AddressDto = {
         streetName: this.tenantForm.get('streetName')?.value,
         buildingNumber: this.tenantForm.get('buildingNumber')?.value,

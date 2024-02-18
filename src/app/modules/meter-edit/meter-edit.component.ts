@@ -11,13 +11,14 @@ import { MeterDto } from './model/meter-dto';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { maxDecimalPlaces } from '../common/validators/max-decimal-places.validator';
 import { NavigationService } from '../common/service/navigation.service';
+import { BaseComponent } from '../common/base.component';
 
 @Component({
   selector: 'app-meter-edit',
   templateUrl: './meter-edit.component.html',
   styleUrls: ['./meter-edit.component.scss']
 })
-export class MeterEditComponent implements OnInit, OnDestroy {
+export class MeterEditComponent implements OnInit, OnDestroy, BaseComponent {
   
   private killer$ = new Subject<void>();
   rentedObjectId!: number;
@@ -25,6 +26,8 @@ export class MeterEditComponent implements OnInit, OnDestroy {
   meterTypes = Object.values(MeterType);
   rentedObjects: RentedObjectDto[] = [];
   meterId!: number;
+  isFormSubmitted: boolean = false;
+  isFormValid = () => this.isFormSubmitted || !this.meterForm?.dirty;
 
   constructor(
     private meterService: MeterService,
