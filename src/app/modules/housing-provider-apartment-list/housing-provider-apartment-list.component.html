@@ -1,9 +1,5 @@
 <div class="container mat-elevation-z8">
   <button mat-raised-button color="primary" (click)="openPopup()">Dodaj dostawcę</button>
-      <div class="loading-shade"
-           *ngIf="isLoadingResults">
-        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-      </div>
     
       <div class="table-container">
         <table mat-table [dataSource]="housingProviders" class="example-table" matSort>

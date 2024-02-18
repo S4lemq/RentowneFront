@@ -1,9 +1,5 @@
 <div class="container mat-elevation-z8">
   <button mat-raised-button color="primary" (click)="openPopup()">Dodaj odczyt</button>
-    <div class="loading-shade"
-         *ngIf="isLoadingResults">
-      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-    </div>
   
     <div class="table-container">
       <table mat-table [dataSource]="meterReadings" class="example-table" matSort>

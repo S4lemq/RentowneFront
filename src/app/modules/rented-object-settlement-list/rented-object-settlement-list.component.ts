@@ -19,7 +19,6 @@ export class RentedObjectSettlementListComponent implements AfterViewInit, OnDes
   ];
   totalElements: number = 0;
   rentedObjectSettlements: RentedObjectSettlementRowDto[] = [];
-  isLoadingResults: boolean = true;
   searchInput!: UntypedFormControl;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -61,7 +60,6 @@ export class RentedObjectSettlementListComponent implements AfterViewInit, OnDes
       .pipe(
         startWith({}),
         switchMap(() => {
-          this.isLoadingResults = true;
           const sortColumn = this.sort.active;
           let sortOrder = this.sort.direction ? this.sort.direction.toUpperCase() : 'ASC';
   
@@ -79,7 +77,6 @@ export class RentedObjectSettlementListComponent implements AfterViewInit, OnDes
           );
       }),
       map(data => {
-        this.isLoadingResults = false;
         this.dtService.getItemsCount(dtDefinition, text, filter)
         .pipe(takeUntil(this.killer$))
         .subscribe(

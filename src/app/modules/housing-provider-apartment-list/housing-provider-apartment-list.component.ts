@@ -20,7 +20,6 @@ export class HousingProviderApartmentListComponent implements AfterViewInit, OnD
   ];
   totalElements: number = 0;
   housingProviders: HousingProviderDto[] = [];
-  isLoadingResults: boolean = true;
   @Input() apartmentId!: number;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -55,7 +54,6 @@ export class HousingProviderApartmentListComponent implements AfterViewInit, OnD
       .pipe(
         startWith({}),
         switchMap(() => {
-          this.isLoadingResults = true;
           const sortColumn = this.sort.active;
           let sortOrder = this.sort.direction ? this.sort.direction.toUpperCase() : 'ASC';
   
@@ -73,7 +71,6 @@ export class HousingProviderApartmentListComponent implements AfterViewInit, OnD
           );
       }),
       map(data => {
-        this.isLoadingResults = false;
         this.dtService.getItemsCount(dtDefinition, text, filter)
         .pipe(takeUntil(this.killer$))
         .subscribe(

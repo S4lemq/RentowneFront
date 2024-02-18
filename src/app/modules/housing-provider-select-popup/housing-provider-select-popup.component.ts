@@ -21,7 +21,6 @@ export class HousingProviderSelectPopupComponent implements OnInit, AfterViewIni
   ];
   totalElements: number = 0;
   housingProviders: HousingProviderDto[] = [];
-  isLoadingResults: boolean = true;
   inputData: any;
   selection = new SelectionModel<HousingProviderDto>(true, []);
 
@@ -64,7 +63,6 @@ export class HousingProviderSelectPopupComponent implements OnInit, AfterViewIni
       .pipe(
         startWith({}),
         switchMap(() => {
-          this.isLoadingResults = true;
           const sortColumn = this.sort.active;
           let sortOrder = this.sort.direction ? this.sort.direction.toUpperCase() : 'ASC';
   
@@ -82,7 +80,6 @@ export class HousingProviderSelectPopupComponent implements OnInit, AfterViewIni
           );
       }),
       map(data => {
-        this.isLoadingResults = false;
         this.dtService.getItemsCount(dtDefinition, text, filter)
         .pipe(takeUntil(this.killer$))
         .subscribe(
