@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoaderService } from './modules/common/service/loader.service';
 
 
 
@@ -11,5 +12,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Rentowne';
   
+  constructor(public loaderService: LoaderService) {}
   
 }

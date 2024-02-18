@@ -1,1 +1,4 @@
+<div *ngIf="loaderService.isLoading | async" class="spin">
+    <mat-spinner style="top: 40vh; left: 50%;"></mat-spinner>
+</div>
 <router-outlet></router-outlet>

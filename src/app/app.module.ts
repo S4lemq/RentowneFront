@@ -19,6 +19,8 @@ import { JwtInterceptor } from './modules/common/interceptor/jwt.interceptor';
 import { CustomMatPaginatorIntl } from './modules/common/translate/custom-mat-paginator-intl';
 import { TranslateAppModule } from './modules/common/translate/translate.module';
 import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGuard';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import { LoaderInterceptorService } from './modules/common/interceptor/loader-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGu
     EmptyTenantLoginModule,
     TenantFullpageModule,
     MatSnackBarModule,
-    TranslateAppModule
+    TranslateAppModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {
@@ -45,6 +48,11 @@ import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGu
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlingInterceptor,
       multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptorService,
+      multi: true
     },
     AuthorizeGuard,
     TenantAuthorizeGuard,
