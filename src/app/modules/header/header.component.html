@@ -1,23 +1,7 @@
 <div class="body-container" [ngClass]="getHeadClass()">
     <div class="head-content">
         <div class="head-content-left">
-            <div class="search-container">
-                <div *ngIf="!canShowSearchAsOverlay" class="normal-search">
-                    <input type="search"
-                         class="search" name="" id=""
-                         placeholder="Wyszukaj..."
-                         >
-                    <i class="far fa-search search-icon"></i>
-                </div>
-                <div *ngIf="canShowSearchAsOverlay">
-                    <button
-                        [cdkMenuTriggerFor]="searchOverlay"
-                        class="search-menu-btn ripple"
-                    >
-                        <i class="far fa-search search-icon"></i>
-                    </button>
-                </div>
-            </div>
+            <xng-breadcrumb></xng-breadcrumb>
         </div>
         <div class="head-content-right">
             <div class="head-menu">
