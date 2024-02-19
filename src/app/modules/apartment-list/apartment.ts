@@ -10,4 +10,5 @@ export interface Apartment extends DTRow {
     buildingNumber: string
     apartmentNumber: string
     image: string
+    pinned?: boolean
 }

@@ -56,11 +56,11 @@
 
   </div>
   <div class="card-list">
-    <mat-card class="card" *ngFor="let apartment of apartments" (click)="navigateToApartment(apartment.id)">
-        <img *ngIf="!apartment?.image" src="/assets/image/image-placeholder.png" class="container-1">
-        <img *ngIf="apartment?.image" src="{{'/api/data/apartmentImage/'+ apartment?.image}}" class="container-1">
+    <mat-card class="card" *ngFor="let apartment of apartments">
+        <img *ngIf="!apartment?.image" src="/assets/image/image-placeholder.png" class="container-1" (click)="navigateToApartment(apartment.id)">
+        <img *ngIf="apartment?.image" src="{{'/api/data/apartmentImage/'+ apartment?.image}}" class="container-1" (click)="navigateToApartment(apartment.id)">
 
-        <div class="container-2">
+        <div class="container-2" (click)="navigateToApartment(apartment.id)">
           <p class="container-2-name">{{apartment.apartmentName}}</p>
           <p>{{apartment.cityName}}{{', ul.'}} {{apartment.streetName}} {{apartment.buildingNumber}}{{"/"}}{{apartment.apartmentNumber}}</p>
           <p>{{ 'apartment.card.leasesNumber' | translate }} {{apartment.leasesNumber}}</p>
@@ -68,7 +68,8 @@
 
         <div class="container-3">
           <div class="pin-div">
-            <i class="fal fa-thumbtack" style="font-size: 22px; padding-top: 2px;" (click)="pinApartment()"></i>
+            <i *ngIf="!apartment.pinned" class="fal fa-thumbtack" style="font-size: 22px; padding-top: 2px; cursor: pointer;" (click)="pinApartment(apartment.id, true)"></i>
+            <i *ngIf="apartment.pinned" class="fas fa-thumbtack" style="font-size: 22px; padding-top: 2px; cursor: pointer;" (click)="pinApartment(apartment.id, false)"></i>
           </div>
           <p class="income">{{ 'apartment.card.unsettled-income' | translate }}</p>
           <div class="income-value">

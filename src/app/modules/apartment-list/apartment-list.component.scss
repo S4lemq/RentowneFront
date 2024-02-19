@@ -19,16 +19,17 @@
     box-sizing: border-box;
     flex-direction: row;
     padding: 10px;
-    cursor: pointer;
 }
 
 .container-1 {
+    cursor: pointer;
     width: 220px;
     height: 165px;
     border-radius: 4px;
 }
 
 .container-2{
+    cursor: pointer;
     flex: 1 1 auto;
     margin-left: 15px;
 }
@@ -43,10 +44,6 @@
 .income{
     display: flex;
     margin: 0;
-}
-
-.pin{
-    width: 25px;
 }
 
 .pin-div{

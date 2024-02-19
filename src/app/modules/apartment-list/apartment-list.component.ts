@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { DTService } from 'src/app/shared/data-table/dt.service';
 import { Apartment } from './apartment';
 import { KeyValue } from './model/key-value';
+import { ApartmentEditService } from '../apartment-edit/apartment-edit.service';
 
 @Component({
   selector: 'app-apartment-list',
@@ -39,7 +40,11 @@ export class ApartmentListComponent implements OnInit, OnDestroy {
 
   private killer$ = new Subject<void>();
 
-  constructor(private dtService: DTService, private router: Router) {
+  constructor(
+    private dtService: DTService,
+    private router: Router,
+    private apartmentService: ApartmentEditService) 
+  {
     this.searchInput = new UntypedFormControl();
     this.leasesNumbers = [null, ...Array.from({ length: 21 }, (_, index) => index)];
   }
@@ -86,7 +91,6 @@ export class ApartmentListComponent implements OnInit, OnDestroy {
   private loadApartmentPage(page: number, size: number, text: string): void {
     const dtDefinition = 'APARTMENT';
     
-    
     let filter: Filter = {};
     if (this.isRented != null) {
       filter.isRented = this.isRented;
@@ -103,7 +107,6 @@ export class ApartmentListComponent implements OnInit, OnDestroy {
       this.selectedColumnName = '';
     }
 
-
     this.dtService.getItemsCount(dtDefinition, text, filter)
       .pipe(takeUntil(this.killer$))
       .subscribe(value => this.totalElements = value);
@@ -117,9 +120,20 @@ export class ApartmentListComponent implements OnInit, OnDestroy {
     this.loadApartmentPage(0, 10, this.searchInput.value);
   }
 
-  pinApartment(): void {
-    throw new Error("method not implemented");
+  pinApartment(id: number, pin: boolean): void {
+    this.apartmentService.pinApartment(id, pin)
+      .pipe(takeUntil(this.killer$))
+      .subscribe({
+        next: () => {
+          const apartmentIndex = this.apartments.findIndex(apartment => apartment.id === id);
+          if (apartmentIndex !== -1) {
+            this.apartments[apartmentIndex].pinned = pin;
+            this.apartments = [...this.apartments];
+          }
+        }
+      });
   }
+  
   
 }
 

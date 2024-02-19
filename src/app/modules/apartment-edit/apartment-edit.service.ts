@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApartmentDto } from './model/apartment-dto';
 import { Observable } from 'rxjs';
@@ -25,6 +25,12 @@ export class ApartmentEditService {
 
   uploadImage(formData: FormData): Observable<UploadResponse> {
     return this.http.post<UploadResponse>("/api/apartments/upload-image", formData);
+  }
+
+
+  pinApartment(id: number, isPinned: boolean): Observable<void> {
+    const params = new HttpParams().set('isPinned', isPinned.toString());
+    return this.http.post<void>(`/api/apartments/${id}/pin`, null, { params });
   }
 
 }
