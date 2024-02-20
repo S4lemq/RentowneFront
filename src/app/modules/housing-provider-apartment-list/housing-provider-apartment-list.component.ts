@@ -91,10 +91,7 @@ export class HousingProviderApartmentListComponent implements AfterViewInit, OnD
     });
     _popup.afterClosed()
     .pipe(takeUntil(this.killer$))
-    .subscribe(result => {
-      if (result?.action === 'saved') {
-        console.log(result.data);
-      }
+    .subscribe(() => {
       this.loadData();
     });
   }

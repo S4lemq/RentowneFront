@@ -1,0 +1,40 @@
+.card{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 30px;
+}
+
+mat-form-field {
+    width: 100%;
+    max-width: 300px;  
+}
+
+ 
+.btn {
+}
+
+.main-container{
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+
+.container-left{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;  
+}
+
+.container-rigth{
+    display: flex;
+    flex-direction: column;
+}

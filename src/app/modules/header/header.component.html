@@ -30,8 +30,8 @@
             </div>
             <div class="head-user-avatar-container">
                 <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
-                    <img src="../../../assets/image/plubowicz.jpg" alt="user" class="user-avatar">
-                    <!-- <div class="circle-indicator pulse"></div> -->
+                    <img *ngIf="profileImage" src="{{'/api/data/image/' + profileImage}}" alt="user" class="user-avatar">
+                    <div class="circle-indicator pulse"></div>
                 </div>
             </div>
         </div>

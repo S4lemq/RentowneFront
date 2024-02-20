@@ -23,11 +23,6 @@ export class ApartmentEditService {
     return this.http.delete<void>("/api/apartments/" + id);
   }
 
-  uploadImage(formData: FormData): Observable<UploadResponse> {
-    return this.http.post<UploadResponse>("/api/apartments/upload-image", formData);
-  }
-
-
   pinApartment(id: number, isPinned: boolean): Observable<void> {
     const params = new HttpParams().set('isPinned', isPinned.toString());
     return this.http.post<void>(`/api/apartments/${id}/pin`, null, { params });

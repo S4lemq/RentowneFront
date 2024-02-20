@@ -94,11 +94,11 @@
                         </div>
                     </div>
                 </form>
-                <img *ngIf="image" src="{{'/api/data/apartmentImage/' + image}}" width="220" height="165">
+                <img *ngIf="image" src="{{'/api/data/image/' + image}}" width="220" height="165">
                 <form [formGroup]="imageForm" (submit)="uploadFile()">
-                <input type="file" [accept]="requredFileTypes" (change)="onFileChange($event)">
-                <button mat-flat-button style="background-color: black; color: white;" [disabled]="!this.imageSelected">Wgraj zdjęcie</button>
-            </form>
+                    <input type="file" [accept]="requredFileTypes" (change)="onFileChange($event)">
+                    <button mat-flat-button style="background-color: black; color: white;" [disabled]="!this.imageSelected">Wgraj zdjęcie</button>
+                </form>
         </mat-tab>
         <mat-tab label="Dostawcy">
             <app-housing-provider-apartment-list [apartmentId]="this.apartmentId"></app-housing-provider-apartment-list>

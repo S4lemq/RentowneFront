@@ -38,7 +38,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatDatepickerModule,
     MatMomentDateModule,
     MatExpansionModule,
-    MatTooltipModule
+    MatTooltipModule,
   ],
   exports: [
     MatIconModule,

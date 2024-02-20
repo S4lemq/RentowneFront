@@ -40,6 +40,7 @@ import { LeaseAgreementListComponent } from 'src/app/modules/lease-agreement-lis
 import { HousingProviderListComponent } from 'src/app/modules/housing-provider-list/housing-provider-list.component';
 import { MeterListComponent } from 'src/app/modules/meter-list/meter-list.component';
 import {BreadcrumbModule} from 'xng-breadcrumb';
+import { ProfileEditComponent } from 'src/app/modules/profile-edit/profile-edit.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import {BreadcrumbModule} from 'xng-breadcrumb';
     LeaseAgreementListComponent,
     HousingProviderListComponent,
     MeterListComponent,
+    ProfileEditComponent
   ],
   imports: [
     CommonModule,

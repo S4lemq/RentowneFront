@@ -58,7 +58,7 @@
   <div class="card-list">
     <mat-card class="card" *ngFor="let apartment of apartments">
         <img *ngIf="!apartment?.image" src="/assets/image/image-placeholder.png" class="container-1" (click)="navigateToApartment(apartment.id)">
-        <img *ngIf="apartment?.image" src="{{'/api/data/apartmentImage/'+ apartment?.image}}" class="container-1" (click)="navigateToApartment(apartment.id)">
+        <img *ngIf="apartment?.image" src="{{'/api/data/image/'+ apartment?.image}}" class="container-1" (click)="navigateToApartment(apartment.id)">
 
         <div class="container-2" (click)="navigateToApartment(apartment.id)">
           <p class="container-2-name">{{apartment.apartmentName}}</p>

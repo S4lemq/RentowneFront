@@ -9,6 +9,7 @@ import { ConfirmDialogService } from '../confirm-dialog/confirm-dialog.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NavigationService } from '../common/service/navigation.service';
 import { BaseComponent } from '../common/base.component';
+import { ImageService } from '../common/service/image.service';
 
 @Component({
   selector: 'app-apartment-edit',
@@ -37,7 +38,8 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
     private dialogService: ConfirmDialogService,
     private router: Router,
     private translateService: TranslateService,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private imageService: ImageService
     ) { }
 
   ngOnInit(): void {
@@ -163,7 +165,7 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
   uploadFile() {
     let formData = new FormData();
     formData.append('file', this.imageForm.get('file')?.value);
-    this.apartmentEditService.uploadImage(formData)
+    this.imageService.uploadImage(formData)
       .subscribe(result => {
         this.image = result.filename;
         this.snackBar.open("Plik graficzny został wgrany", '', {

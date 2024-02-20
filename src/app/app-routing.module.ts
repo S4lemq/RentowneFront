@@ -31,6 +31,7 @@ import { HousingProviderListComponent } from './modules/housing-provider-list/ho
 import { MeterListComponent } from './modules/meter-list/meter-list.component';
 import { DeactivateGurad } from './modules/common/guard/deactivateGuard';
 import { ApartmentEditComponent } from './modules/apartment-edit/apartment-edit.component';
+import { ProfileEditComponent } from './modules/profile-edit/profile-edit.component';
 
 const routes: Routes = [
    {
@@ -151,6 +152,13 @@ const routes: Routes = [
         component: MeterListComponent, 
         canActivate: [AuthorizeGuard], 
         data: { breadcrumb: 'Rentowne > Lista liczników' }
+      },
+      {
+        path: 'profile/edit', 
+        component: ProfileEditComponent, 
+        canActivate: [AuthorizeGuard],
+        canDeactivate: [DeactivateGurad],
+        data: { breadcrumb: 'Rentowne > Profil > Edycja' }
       },
     ]
   },

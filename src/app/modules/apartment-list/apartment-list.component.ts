@@ -6,9 +6,9 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DTService } from 'src/app/shared/data-table/dt.service';
+import { ApartmentEditService } from '../apartment-edit/apartment-edit.service';
 import { Apartment } from './apartment';
 import { KeyValue } from './model/key-value';
-import { ApartmentEditService } from '../apartment-edit/apartment-edit.service';
 
 @Component({
   selector: 'app-apartment-list',

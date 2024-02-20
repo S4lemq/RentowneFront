@@ -1,0 +1,49 @@
+<mat-card class="card">
+    <form [formGroup]="form" class="form">
+        <div class="main-container">
+            <div class="container-left">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'register.name' | translate }}</mat-label>
+                    <input matInput formControlName="firstname">
+                    <mat-error *ngIf="firstname?.invalid && (firstname?.dirty || firstname?.touched)">
+                        {{ getFirstNameErrorMsg() }}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'register.surname' | translate }}</mat-label>
+                    <input matInput formControlName="lastname">
+                    <mat-error *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)">
+                        {{ getLastNameErrorMsg() }}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'register.email' | translate }}</mat-label>
+                    <input matInput formControlName="email">
+                </mat-form-field>
+                <mat-checkbox formControlName="changePassword">Zmień hasło</mat-checkbox>
+                <mat-form-field appearance="outline" *ngIf="this.changePassword?.value">
+                    <mat-label>{{ 'register.password' | translate }}</mat-label>
+                    <input [type]="hide ? 'password' : 'text'" matInput formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                        {{ getPasswordErrorMsg() }}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" *ngIf="this.changePassword?.value">
+                    <mat-label>{{ 'register.repeatPassword' | translate }}</mat-label>
+                    <input [type]="hide ? 'password' : 'text'" matInput formControlName="repeatPassword">
+                    <mat-error *ngIf="repeatPassword?.invalid && (repeatPassword?.dirty || repeatPassword?.touched)">
+                        {{ getRepeatPasswordErrorMsg() }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="container-right">
+                <img *ngIf="image" src="{{'/api/data/image/' + image}}" width="220" height="165">
+                <input type="file" [accept]="requredFileTypes" (change)="onFileChange($event)">
+                <button mat-flat-button style="background-color: black; color: white; max-width: 300px; width: 100%" (click)="submit()">Zapisz</button>
+            </div>
+        </div>
+    </form>
+</mat-card>
