@@ -61,7 +61,7 @@ export class HousingProviderEditComponent implements OnInit, OnDestroy, BaseComp
     return this.fb.group({
       fieldName: [''],
       price: ['', [Validators.required, Validators.min(0), Validators.max(99999), maxDecimalPlaces(5)]],
-      billingMethod: ['']
+      billingMethod: ['', Validators.required]
     });
   }
 
@@ -98,6 +98,12 @@ export class HousingProviderEditComponent implements OnInit, OnDestroy, BaseComp
   }
   
   submit() {
+    if (this.typeControl?.value === 'INTERNET' || this.typeControl?.value === 'ADMINISTRATIVE_FEE' || this.typeControl?.value === 'WATER') {
+      const item = this.items.at(0) as FormGroup;
+      const billingMethodControl = item.get('billingMethod');
+      billingMethodControl?.setValidators(null);
+      billingMethodControl?.updateValueAndValidity();
+    }
     if (this.housingProviderForm.valid) {
       this.isFormSubmitted = true;
       const providerFieldDtos = this.getProviderFieldDtos();
@@ -188,7 +194,16 @@ export class HousingProviderEditComponent implements OnInit, OnDestroy, BaseComp
   get conversionRateControl() {
     return this.housingProviderForm.get("conversionRate");
   }
+
+  getBillingMethodErrorMsg(index: number): string {
+    const item = this.items.at(index) as FormGroup;
+    const billingMethodControl = item.get('billingMethod');
   
+    if (billingMethodControl?.hasError('required')) {
+      return 'Wartość wymagana';
+    }
+    return '';
+  }
 
   getPriceErrorMsg(index: number): string {
     const item = this.items.at(index) as FormGroup;

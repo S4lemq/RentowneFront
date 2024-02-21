@@ -81,15 +81,13 @@ export class HousingProviderAddComponent implements OnInit, OnDestroy, BaseCompo
   }
 
   submit() {
-    if(this.typeControl?.value === 'INTERNET' || this.typeControl?.value === 'ADMINISTRATIVE_FEE' || this.typeControl?.value === 'WATER') {
+    if (this.typeControl?.value === 'INTERNET' || this.typeControl?.value === 'ADMINISTRATIVE_FEE' || this.typeControl?.value === 'WATER') {
       const item = this.items.at(0) as FormGroup;
       const billingMethodControl = item.get('billingMethod');
       billingMethodControl?.setValidators(null);
       billingMethodControl?.updateValueAndValidity();
     }
     if (this.housingProviderForm.valid) {
-      console.log('valid');
-      
       this.isFormSubmitted = true;
       const providerFieldDtos = this.getProviderFieldDtos();
 
