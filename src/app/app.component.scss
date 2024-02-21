@@ -114,20 +114,20 @@
     // background-color: red;
 }
 
- 
-
  */
 
-
-
-  .spin{
-    position: absolute;
-    min-height: 100vh; /* Zapewnia, że element będzie miał co najmniej wysokość viewportu */
-    height: 100%;
+ .spin{
+    position: fixed;
+    height: 100vh;
     width: 100%;
     background: black;
     opacity: 0.7;
     z-index: 99;
-    margin-top: -92px;
- }
+    top: 0;
+    left: 0;
+    display: flex; /* Ustawiamy flex, aby łatwo wyśrodkować spinner */
+    justify-content: center; /* Wyśrodkowanie w poziomie */
+    align-items: center; /* Wyśrodkowanie w pionie */
+}
+
 
