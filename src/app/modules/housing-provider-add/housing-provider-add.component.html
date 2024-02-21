@@ -67,6 +67,9 @@
                             {{ billingMethod | translateBillingMethod }}
                         </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="item.get('billingMethod')?.invalid">
+                        {{getBillingMethodErrorMsg(i)}}
+                    </mat-error>
                 </mat-form-field>
         
                 <div class="btn-delete">

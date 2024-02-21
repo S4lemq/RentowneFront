@@ -24,7 +24,13 @@
 
         <ng-container matColumnDef="settled">
           <th mat-header-cell *matHeaderCellDef mat-sort-header="settled">Rozliczono</th>
-          <td mat-cell *matCellDef="let element"> {{element.settled}} </td>
+          <td mat-cell *matCellDef="let element">
+            <i *ngIf="element.settled; else notSettled" class="fas fa-check menu-icon"></i>
+            <ng-template #notSettled>
+              <i class="fas fa-times menu-icon"></i>
+            </ng-template>
+          </td>
+          
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
