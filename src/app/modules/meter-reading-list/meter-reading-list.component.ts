@@ -17,7 +17,7 @@ export class MeterReadingListComponent implements AfterViewInit, OnDestroy {
 
   private killer$ = new Subject<void>();
   displayedColumns: string[] = [
-    "id", "currentReading", "readingDate", "consumption", "settled"
+    "currentReading", "readingDate", "consumption", "settled"
   ];
   totalElements: number = 0;
   meterReadings: MeterReadingDto[] = [];

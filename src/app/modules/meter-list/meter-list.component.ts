@@ -14,7 +14,7 @@ import { MeterRowDto } from './model/meter-row-dto';
 export class MeterListComponent implements AfterViewInit, OnDestroy {
   private killer$ = new Subject<void>();
   displayedColumns: string[] = [
-    "apartment", "rentedObject", "name", "meterType", "meterNumber",
+    "apartment", "rentedObject", "meterName", "meterType", "meterNumber",
     "initialMeterReading", "installationDate", "actions"
   ];
   totalElements: number = 0;

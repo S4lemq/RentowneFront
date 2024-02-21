@@ -1,12 +1,3 @@
-.mat-column-id {
-    width: 10%;
-}
-
-.mat-column-currentReading {
-    width: 40%;
-}
-
-
 .container {
     position: relative;
     padding: 20px;
@@ -21,3 +12,21 @@ table {
     border-width: 0.1px;
     border-color: rgba(0, 0, 0, 0.12);
 }
+
+
+.mat-column-currentReading {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-column-readingDate {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-column-consumption {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-column-settled {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+

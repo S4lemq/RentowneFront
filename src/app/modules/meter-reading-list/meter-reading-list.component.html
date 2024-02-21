@@ -4,12 +4,6 @@
     <div class="table-container">
       <table mat-table [dataSource]="meterReadings" class="example-table" matSort>
   
-        <!-- Kolumna ID -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="id">{{ 'dataTable.id' | translate }}</th>
-          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-        </ng-container>
-  
         <!-- Kolumna Odczyt -->
         <ng-container matColumnDef="currentReading">
           <th mat-header-cell *matHeaderCellDef mat-sort-header="currentReading">Odczyt</th>
@@ -29,7 +23,7 @@
         </ng-container>
 
         <ng-container matColumnDef="settled">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="settled">{{ 'dataTable.settled' | translate }}</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="settled">Rozliczono</th>
           <td mat-cell *matCellDef="let element"> {{element.settled}} </td>
         </ng-container>
 
