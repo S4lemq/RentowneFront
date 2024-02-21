@@ -8,6 +8,9 @@ import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import { HousingProviderService } from '../housing-provider-add/housing-provider.service';
 import { ApartmentHousingProviderRequest } from '../housing-provider-add/model/apartment-housing-provider-request';
+import { TranslateService } from '@ngx-translate/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateProviderTypePipe } from '../housing-provider-add/pipe/translate-provider-type.pipe';
 
 @Component({
   selector: 'app-housing-provider-select-popup',
@@ -22,6 +25,7 @@ export class HousingProviderSelectPopupComponent implements OnInit, AfterViewIni
   totalElements: number = 0;
   housingProviders: HousingProviderDto[] = [];
   inputData: any;
+  selectedHousingProviders!: number[];
   selection = new SelectionModel<HousingProviderDto>(true, []);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -31,10 +35,18 @@ export class HousingProviderSelectPopupComponent implements OnInit, AfterViewIni
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dtService: DTService,
     private ref: MatDialogRef<HousingProviderSelectPopupComponent>,
-    private housingProviderService: HousingProviderService) {}
+    private housingProviderService: HousingProviderService,
+    private translateService: TranslateService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.inputData = this.data;
+    if (Array.isArray(this.data.selectedHousingProviders)) {
+      this.selectedHousingProviders = this.data.selectedHousingProviders;
+    } else {
+      this.selectedHousingProviders = [];
+    }
   }
 
   ngOnDestroy(): void {
@@ -88,8 +100,23 @@ export class HousingProviderSelectPopupComponent implements OnInit, AfterViewIni
         return data as HousingProviderDto[];
       })
     ).pipe(takeUntil(this.killer$))
-    .subscribe(data => this.housingProviders = data);
+    .subscribe(data => {
+      this.housingProviders = data;
+      this.preselectProviders();
+    });
   }
+
+  preselectProviders() {
+    // Upewniamy się, że housingProviders zostały już załadowane.
+    if (this.housingProviders && this.selectedHousingProviders) {
+      this.housingProviders.forEach(provider => {
+        if (provider.id !== undefined && this.selectedHousingProviders.includes(provider.id)) {
+          this.selection.select(provider);
+        }
+      });
+    }
+  }
+  
 
   getSelectedIds(): number[] {
     return this.selection.selected
@@ -105,7 +132,24 @@ export class HousingProviderSelectPopupComponent implements OnInit, AfterViewIni
 
     this.housingProviderService.addHousingProviderToApartment(dto)
     .pipe(takeUntil(this.killer$))
-    .subscribe(() => this.closePopup());
+    .subscribe({
+      next: () => {
+        () => this.closePopup()
+      },
+      error: err => {
+        if (err.error.code === 'PROVIDER_TYPE_ALREADY_EXISTS') {
+          const translateProviderTypePipe = new TranslateProviderTypePipe();
+          const providerType = translateProviderTypePipe.transform(err.error.field);
+          this.translateService.get("snackbar.providerTypeAlreadyExists", { type: providerType })
+          .subscribe(translatedText => {
+            this.snackBar.open(translatedText, '', {
+              duration: 3000,
+              panelClass: ['snackbarError']
+            });
+          });
+        }
+      }
+    });
   }
 
   /** Whether the number of selected elements matches the total number of rows. */

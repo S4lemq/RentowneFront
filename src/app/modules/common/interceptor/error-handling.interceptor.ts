@@ -23,7 +23,7 @@ export class ErrorHandlingInterceptor implements HttpInterceptor {
     // Przepuść request dalej w łańcuchu.
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error.error && ((error.error.message === 'WRONG_GOOGLE_AUTH_CODE') || (error.error.message === 'BAD_CREDENTIALS') || (error.error.message === 'USER_ALREADY_EXISTS'))) {
+        if (error.error && ((error.error.message === 'WRONG_GOOGLE_AUTH_CODE') || (error.error.message === 'BAD_CREDENTIALS') || (error.error.message === 'USER_ALREADY_EXISTS') || (error.error.message === 'PROVIDER_TYPE_ALREADY_EXISTS'))) {
           // Ignoruj ten błąd i przekaż go dalej bez wyświetlania komunikatu.
           return throwError(() => error);
         }

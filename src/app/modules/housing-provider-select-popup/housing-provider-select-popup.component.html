@@ -29,7 +29,7 @@
             <!-- Kolumna Typ -->
             <ng-container matColumnDef="type">
             <th mat-header-cell *matHeaderCellDef mat-sort-header="type">Typ</th>
-            <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.type | translateProviderType}} </td>
             </ng-container>
         
             <!-- Kolumna Podatek -->

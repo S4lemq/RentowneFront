@@ -91,8 +91,7 @@
     "common.message.RENTED_OBJECT_DOES_NOT_HAVE_METERS":"Obiekt nie posiada wymaganych liczników: woda, energia elektryczna. Dodaj liczniki dla tego obiektu.",
     "meter.name": "Nazwa licznika",
     "snackbar.userSaved": "Dane użytkownika zostały zaktualizowane.",
-
-
+    "snackbar.providerTypeAlreadyExists": "Dostawca o podanym typie: {{type}} jest już przypisany do tej nieruchomości.",
 
     "END_OF_FILE": "Dodawaj wpisy powyżej!"
 }

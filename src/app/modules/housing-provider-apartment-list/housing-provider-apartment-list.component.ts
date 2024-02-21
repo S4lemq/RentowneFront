@@ -20,6 +20,7 @@ export class HousingProviderApartmentListComponent implements AfterViewInit, OnD
   ];
   totalElements: number = 0;
   housingProviders: HousingProviderDto[] = [];
+  selectedHousingProviders?: number[];
   @Input() apartmentId!: number;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -73,20 +74,27 @@ export class HousingProviderApartmentListComponent implements AfterViewInit, OnD
       map(data => {
         this.dtService.getItemsCount(dtDefinition, text, filter)
         .pipe(takeUntil(this.killer$))
-        .subscribe(
-          value => this.totalElements = value 
+        .subscribe(value => {
+            this.totalElements = value;
+            this.selectedHousingProviders = data
+              .map(provider => provider.id)
+              .filter((id): id is number => id !== null && id !== undefined);
+          } 
         );
         return data as HousingProviderDto[];
       })
     ).pipe(takeUntil(this.killer$))
-    .subscribe(data => this.housingProviders = data);
+    .subscribe(data => {
+      this.housingProviders = data
+    });
   }
 
   openPopup() {
     let _popup = this.dialog.open(HousingProviderSelectPopupComponent,{
       width: '80%',
       data: {
-        apartmentId: this.apartmentId
+        apartmentId: this.apartmentId,
+        selectedHousingProviders: this.selectedHousingProviders
       }
     });
     _popup.afterClosed()
