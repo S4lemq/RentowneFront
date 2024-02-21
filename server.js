@@ -4,7 +4,7 @@ const proxy = require('http-proxy-middleware');
 const app = express();
 
 const apiProxy = proxy.createProxyMiddleware("/api", {
-    target: process.env.BACKEND_URL || '',
+    target: process.env.BACKEND_URL || 'https://rentowne-production.up.railway.app/',
     changeOrigin: true
 });
 app.use(apiProxy);
