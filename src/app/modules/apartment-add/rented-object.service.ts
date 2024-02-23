@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RentedObjectDto } from '../apartment-edit/model/rented-object-dto';
 import { Observable } from 'rxjs';
+import { BasicSettlementDto } from '../tenant/tenant-profile/model/basic-settlement-dto';
 
 @Injectable({
   providedIn: 'root'

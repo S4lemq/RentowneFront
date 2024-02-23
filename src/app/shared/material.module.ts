@@ -17,6 +17,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [],
@@ -39,6 +40,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatMomentDateModule,
     MatExpansionModule,
     MatTooltipModule,
+    MatRadioModule,
   ],
   exports: [
     MatIconModule,
@@ -57,7 +59,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatDatepickerModule,
     MatMomentDateModule,
     MatExpansionModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatRadioModule,
   ],
   providers: [
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },

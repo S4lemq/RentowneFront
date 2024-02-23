@@ -1,0 +1,30 @@
+<div *ngIf="tenantSettlementSummary">
+    <h1>Podsumowanie</h1>
+    <p>Numer płatności: {{tenantSettlementSummary.id}}</p>
+    <div>Data złożenia: {{tenantSettlementSummary.placeDate | date: 'yyyy-MM-dd HH:mm'}}</div>
+    <p>Status: {{tenantSettlementSummary.status}}</p>
+    <p>Wartość: {{tenantSettlementSummary.grossValue}} PLN</p>
+    <p *ngIf="tenantSettlementSummary.payment.note">Płatność: <br/>
+        <span [innerHTML]="tenantSettlementSummary.payment.note | replace: '\n': '<br />'"></span>
+
+    </p>
+</div>
+
+
+<div *ngIf="!tenantSettlementSummary">
+    <h1>do zapłaty</h1>
+    <p>wartość: {{initData?.totalAmount}}</p>
+    <p>data: {{initData?.settlementDate | date: 'yyyy-MM-dd HH:mm'}}</p>
+
+    <div>
+        <h2>Płatność</h2>
+        <mat-radio-group>
+            <mat-radio-button *ngFor="let payment of initData?.payment"
+                [value]="payment" [checked]="payment.defaultPayment">
+                {{payment.name}}
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <button mat-raised-button (click)="submit()">Opłać najem</button>
+</div>

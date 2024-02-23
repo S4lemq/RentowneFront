@@ -1,37 +1,37 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApartmentMeterEditContainerComponent } from './modules/apartment-meter-edit-container/apartment-meter-edit-container.component';
 import { DefaultComponent } from './layouts/default/default.component';
 import { EmptyLoginComponent } from './layouts/empty-login/empty-login.component';
 import { EmptyTenantLoginComponent } from './layouts/empty-tenant-login/empty-tenant-login.component';
 import { TenantFullpageComponent } from './layouts/tenant-fullpage/tenant-fullpage.component';
 import { ApartmentAddComponent } from './modules/apartment-add/apartment-add.component';
+import { ApartmentEditComponent } from './modules/apartment-edit/apartment-edit.component';
 import { ApartmentListComponent } from './modules/apartment-list/apartment-list.component';
 import { AuthorizeGuard } from './modules/common/guard/authorizeGuard';
+import { DeactivateGurad } from './modules/common/guard/deactivateGuard';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
-import { LoginComponent } from './modules/login/login.component';
-import { MeterAddComponent } from './modules/meter-add/meter-add.component';
-import { MeterEditComponent } from './modules/meter-edit/meter-edit.component';
-import { RegisterComponent } from './modules/register/register.component';
-import { TenantAddComponent } from './modules/tenant-add/tenant-add.component';
-import { TenantEditComponent } from './modules/tenant-edit/tenant-edit.component';
-import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGuard';
-import { ProfileComponent } from './modules/tenant/profile/profile.component';
-import { TenantLoginComponent } from './modules/tenant/tenant-login/tenant-login.component';
-import { LostPasswordComponent } from './modules/lost-password/lost-password.component';
-import { LostPasswordTenantComponent } from './modules/lost-password-tenant/lost-password-tenant.component';
-import { TenantListComponent } from './modules/tenant-list/tenant-list.component';
 import { HousingProviderAddComponent } from './modules/housing-provider-add/housing-provider-add.component';
 import { HousingProviderEditComponent } from './modules/housing-provider-edit/housing-provider-edit.component';
-import { RentedObjectSettlementListComponent } from './modules/rented-object-settlement-list/rented-object-settlement-list.component';
-import { SingleRentedObjectSettlementListComponent } from './modules/single-rented-object-settlement-list/single-rented-object-settlement-list.component';
-import { SettlementStatsComponent } from './modules/settlement-stats/settlement-stats.component';
-import { LeaseAgreementListComponent } from './modules/lease-agreement-list/lease-agreement-list.component';
 import { HousingProviderListComponent } from './modules/housing-provider-list/housing-provider-list.component';
+import { LeaseAgreementListComponent } from './modules/lease-agreement-list/lease-agreement-list.component';
+import { LoginComponent } from './modules/login/login.component';
+import { LostPasswordTenantComponent } from './modules/lost-password-tenant/lost-password-tenant.component';
+import { LostPasswordComponent } from './modules/lost-password/lost-password.component';
+import { MeterAddComponent } from './modules/meter-add/meter-add.component';
+import { MeterEditComponent } from './modules/meter-edit/meter-edit.component';
 import { MeterListComponent } from './modules/meter-list/meter-list.component';
-import { DeactivateGurad } from './modules/common/guard/deactivateGuard';
-import { ApartmentEditComponent } from './modules/apartment-edit/apartment-edit.component';
 import { ProfileEditComponent } from './modules/profile-edit/profile-edit.component';
+import { RegisterComponent } from './modules/register/register.component';
+import { RentedObjectSettlementListComponent } from './modules/rented-object-settlement-list/rented-object-settlement-list.component';
+import { SettlementStatsComponent } from './modules/settlement-stats/settlement-stats.component';
+import { SingleRentedObjectSettlementListComponent } from './modules/single-rented-object-settlement-list/single-rented-object-settlement-list.component';
+import { TenantAddComponent } from './modules/tenant-add/tenant-add.component';
+import { TenantEditComponent } from './modules/tenant-edit/tenant-edit.component';
+import { TenantListComponent } from './modules/tenant-list/tenant-list.component';
+import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGuard';
+import { TenantLoginComponent } from './modules/tenant/tenant-login/tenant-login.component';
+import { TenantProfileComponent } from './modules/tenant/tenant-profile/tenant-profile.component';
+import { TenantSettlementComponent } from './modules/tenant/tenant-settlement/tenant-settlement.component';
 
 const routes: Routes = [
    {
@@ -180,7 +180,8 @@ const routes: Routes = [
   },
   {
     path: '', component: TenantFullpageComponent, children: [
-      {path: 'tenant/profile', component: ProfileComponent, canActivate: [TenantAuthorizeGuard]},
+      {path: 'tenant/profile', component: TenantProfileComponent, canActivate: [TenantAuthorizeGuard]},
+      {path: 'tenant/settlement', component: TenantSettlementComponent, canActivate: [TenantAuthorizeGuard]},
     ]
   } 
 
