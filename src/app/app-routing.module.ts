@@ -32,6 +32,7 @@ import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGu
 import { TenantLoginComponent } from './modules/tenant/tenant-login/tenant-login.component';
 import { TenantProfileComponent } from './modules/tenant/tenant-profile/tenant-profile.component';
 import { TenantSettlementComponent } from './modules/tenant/tenant-settlement/tenant-settlement.component';
+import { TenantSettlementNotificationComponent } from './modules/tenant-settlement-notification/tenant-settlement-notification.component';
 
 const routes: Routes = [
    {
@@ -182,6 +183,7 @@ const routes: Routes = [
     path: '', component: TenantFullpageComponent, children: [
       {path: 'tenant/profile', component: TenantProfileComponent, canActivate: [TenantAuthorizeGuard]},
       {path: 'tenant/settlement', component: TenantSettlementComponent, canActivate: [TenantAuthorizeGuard]},
+      {path: 'tenant/notification/:orderHash', component: TenantSettlementNotificationComponent, canActivate: [TenantAuthorizeGuard]},
     ]
   } 
 
