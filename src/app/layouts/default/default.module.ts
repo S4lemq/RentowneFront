@@ -41,6 +41,7 @@ import { HousingProviderListComponent } from 'src/app/modules/housing-provider-l
 import { MeterListComponent } from 'src/app/modules/meter-list/meter-list.component';
 import {BreadcrumbModule} from 'xng-breadcrumb';
 import { ProfileEditComponent } from 'src/app/modules/profile-edit/profile-edit.component';
+import { ImageCropperComponent } from 'src/app/modules/profile-edit/image-cropper/image-cropper.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { ProfileEditComponent } from 'src/app/modules/profile-edit/profile-edit.
     LeaseAgreementListComponent,
     HousingProviderListComponent,
     MeterListComponent,
-    ProfileEditComponent
+    ProfileEditComponent,
+    ImageCropperComponent
   ],
   imports: [
     CommonModule,

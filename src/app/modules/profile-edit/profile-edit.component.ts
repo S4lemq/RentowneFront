@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BaseComponent } from '../common/base.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { UserService } from './user.service';
 import { UserDto } from './model/user-dto';
 import { matchpassword } from '../common/validators/match-password.validators';
@@ -9,6 +9,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ImageService } from '../common/service/image.service';
 import { ProfileUpdateService } from './profile-update.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ImageCropperComponent } from './image-cropper/image-cropper.component';
+import { ImageDataDto } from './model/image-data';
 
 @Component({
   selector: 'app-profile-edit',
@@ -21,32 +24,41 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
   form!: FormGroup;
   imageForm!: FormGroup;
   isFormSubmitted: boolean = false;
-  hide = true;
-  isFormValid = () => (this.isFormSubmitted || !this.form?.dirty) && !this.imageSelected
+  oldPasswordHide = true;
+  passwordHide = true;
+  repeatPasswordHide = true;
   userId?: number;
   requredFileTypes = "image/jpeg, image/png";
   image: string | null = null;
   imageSelected: boolean = false;
+
+  file: string = '';
+  changePasswordControl = new FormControl(false);
 
   constructor(
     private userService: UserService,
     private snackBar: MatSnackBar,
     private translateService: TranslateService,
     private imageService: ImageService,
-    private profileUpdateService: ProfileUpdateService
+    private profileUpdateService: ProfileUpdateService,
+    private dialog: MatDialog
   ) {}
+
+  isFormValid(): boolean {
+    return (this.isFormSubmitted || !this.form?.dirty) && !this.imageSelected;
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
       firstname: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern("^[a-zA-ZąĄćĆęĘłŁńŃóÓśŚźŹżŻ]+$")]),
       lastname: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern("^[a-zA-ZąĄćĆęĘłŁńŃóÓśŚźŹżŻ]+$")]),
       email: new FormControl({value: '', disabled: true}),
+      oldPassword: new FormControl(null),
       password: new FormControl(null, [
         Validators.pattern("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–\\[\\]{}:;',?/*~$^+=<>]).{8,64}$"),
         Validators.maxLength(64)
       ]),
       repeatPassword: new FormControl(null),
-      changePassword: new FormControl(false),
       file: new FormControl('')
       },
       { validators:matchpassword });
@@ -69,6 +81,10 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
     .pipe(takeUntil(this.killer$))
     .subscribe(data => {
       this.mapFormValues(data);
+      if (data.image) {
+        this.image = data.image; // Przechowuje nazwę pliku obrazu
+        this.file = '/api/data/image/' + data.image; // Ustawia URL do wyświetlenia obrazu
+      }
     })
   }
 
@@ -87,6 +103,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
                 id: this.userId,
                 firstname: this.firstname?.value,
                 lastname: this.lastname?.value,
+                oldPassword: this.oldPassword?.value,
                 password: this.password?.value,
                 repeatPassword: this.repeatPassword?.value,
                 image: result.filename,
@@ -105,13 +122,19 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
             firstname: this.firstname?.value,
             lastname: this.lastname?.value,
             password: this.password?.value,
+            oldPassword: this.oldPassword?.value,
             repeatPassword: this.repeatPassword?.value,
             image: this.image
           } as UserDto,
         ).pipe(takeUntil(this.killer$))
-        .subscribe(() => {
-          const translatedText = this.translateService.instant("snackbar.userSaved");
-          this.snackBar.open(translatedText, '', {duration: 3000, panelClass: ['snackbarSuccess']});
+        .subscribe({
+          next: () => {
+            const translatedText = this.translateService.instant("snackbar.userSaved");
+            this.snackBar.open(translatedText, '', {duration: 3000, panelClass: ['snackbarSuccess']});
+          },
+          error: err => {
+            this.oldPassword?.setErrors({ server: true });
+          }
         });
       }
     } else {
@@ -127,16 +150,53 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
     });
     this.userId = data.id;
     this.image = data.image;
+  } 
+
+  onFileChange(event: any) {
+    const files = event.target.files as FileList;
+    if (files.length > 0) {
+      const originalFile = files[0];
+      const _file = URL.createObjectURL(originalFile)
+      this.resetInput();
+      this.openAvatarEditor({image: _file, fileName: originalFile.name} as ImageDataDto)
+        .subscribe(
+          (result) => {
+            if (result) {
+                // result to teraz File, więc tworzymy z niego URL obiektu
+                const objectUrl = URL.createObjectURL(result);
+                this.file = objectUrl; // Używamy URL obiektu zamiast bezpośredniego pliku
+                this.imageSelected = true;
+                this.form.patchValue({
+                  file: result
+                });
+            }
+          }
+        )
+    }
   }
 
+  openAvatarEditor(imageData: ImageDataDto): Observable<any> {
+    const dialogRef = this.dialog.open(ImageCropperComponent, {
+      maxWidth: '80vw',
+      maxHeight: '80vh',
+      data: imageData,
+    });
 
-  onFileChange(event: any){
-    if(event.target.files.length > 0){
-      this.imageSelected = true;
-      this.form.patchValue({
-        file: event.target.files[0]
-      });
+    return dialogRef.afterClosed();
+  }
+
+  resetInput(){
+    const input = document.getElementById('avatar-input-file') as HTMLInputElement;
+    if(input){
+      input.value = "";
     }
+  }
+
+  getOldPasswordErrorMsg() {
+    if (this.oldPassword?.hasError('server')) {
+      return 'Nieprawidłowe hasło';
+    }
+    return '';
   }
 
   getPasswordErrorMsg() {
@@ -204,6 +264,10 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
     return this.form.get("email");
   }
 
+  get oldPassword() {
+    return this.form.get("oldPassword");
+  }
+
   get password() {
     return this.form.get("password");
   }
@@ -213,7 +277,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
   }
 
   get changePassword() {
-    return this.form.get("changePassword");
+    return this.changePasswordControl;
   }
 
   get fileControl() {

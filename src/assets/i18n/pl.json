@@ -92,6 +92,11 @@
     "meter.name": "Nazwa licznika",
     "snackbar.userSaved": "Dane użytkownika zostały zaktualizowane.",
     "snackbar.providerTypeAlreadyExists": "Dostawca o podanym typie: {{type}} jest już przypisany do tej nieruchomości.",
+    "profile": {
+        "oldPassword": "Stare hasło",
+        "newPassword": "Nowe hasło",
+        "repeatPassword": "Powtórz nowe hasło"
+    },
 
     "END_OF_FILE": "Dodawaj wpisy powyżej!"
 }

@@ -3,6 +3,7 @@ export interface UserDto {
     firstname?: string
     lastname?: string
     email?: string
+    oldPassword?: string
     password?: string
     repeatPassword?: string
     image: string
