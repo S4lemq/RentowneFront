@@ -22,6 +22,6 @@ export class TenantSettlementService {
   }
 
   getStatus(hash: any): Observable<NotificationDto> {
-    return this.http.get<NotificationDto>(`/api/tenant/notification` + hash);
+    return this.http.get<NotificationDto>(`/api/tenant/notification/` + hash);
   }
 }
