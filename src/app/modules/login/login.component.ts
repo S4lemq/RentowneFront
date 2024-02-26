@@ -31,7 +31,10 @@ export class LoginComponent implements OnInit {
     placeholder: '',
     inputStyles:{
       'display':'flex',
-      'border-color': 'initial'
+      'border-color': '#858585',
+      'width': '40px',
+      'height': '40px',
+      'font-size': '24px',
     },
     containerStyles:{
       'display':'flex',
@@ -108,11 +111,11 @@ export class LoginComponent implements OnInit {
 
   updateInputStyles() {
     if (this.otpConfig.inputStyles) {
-      this.otpConfig.inputStyles['border-color'] = this.invalidCode ? 'red' : 'initial';
+      this.otpConfig.inputStyles['border-color'] = this.invalidCode ? 'red' : '#858585';
     } else {
       this.otpConfig.inputStyles = {
         'display': 'flex',
-        'border-color': this.invalidCode ? 'red' : 'initial'
+        'border-color': this.invalidCode ? 'red' : '#858585',
       };
     }
   }

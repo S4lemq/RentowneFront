@@ -1,17 +1,19 @@
 <div class="layout">
-    <div class="login-form" *ngIf="!authResponse.mfaEnabled">
-        <div class="login-controls">
-            <div class="logo-container">
-                <div class="logo">
-                    <mat-icon>person</mat-icon>
+    <div class="main-container" *ngIf="!authResponse.mfaEnabled">
+        <div class="head">
+            <mat-icon class="logo">person</mat-icon>
+            <div class="welcome">
+                <div class="welcome-1">
+                    {{ 'login.welcomeInRentowne' | translate }}
                 </div>
-                <div class="logo-text">
-                    <span>{{ 'login.welcomeInRentowne' | translate }}</span>
-                    <p>{{ 'login.enterData' | translate }}</p>
+                <div class="welcome-2">
+                    {{ 'login.enterData' | translate }}
                 </div>
             </div>
-            <div class="field-container">
-                <form [formGroup]="formGroup" class="form">
+        </div>
+        <div class="field-container">
+            <form [formGroup]="formGroup" class="form">
+                <div class="gap">
                     <mat-form-field appearance="outline">
                         <mat-label>{{ 'login.email' | translate }}</mat-label>
                         <input matInput formControlName="email">
@@ -26,21 +28,24 @@
                         <mat-error *ngIf="this.password?.invalid">
                             {{getPasswordErrorMsg()}}
                         </mat-error>
-                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" style="margin-bottom: 12px;">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
                     </mat-form-field>
-                    <div align="end" routerLink="/lost-password" class="lost-password-link">Zapomniałeś hasła?</div>
-                    <button mat-flat-button class="button-login" style="background-color: black; color: white;" (click)="submit()">{{ 'login.getIn' | translate }}</button>
-                </form>
-            </div>
-        </div>
-        <div style="padding-top: 15px;">
-            <span>
-                {{ 'login.doNotHaveAccount' | translate }}
-            </span>
-            <a routerLink="/register" class="registr-link">{{ 'login.register' | translate }}</a><br>
-            <!-- <a routerLink="/lost-password" class="lost-password-link">Zapomniałeś hasła?</a> -->
+                </div>
+                <div align="end" routerLink="/lost-password" class="lost-password-link">Zapomniałeś hasła?</div>
+                <button mat-flat-button color="primary" (click)="submit()" class="button">
+                    <span class="button-text">{{ 'login.getIn' | translate }}</span>
+                </button>
+                <div style="padding-top: 8px;">
+                    <div style="display: flex; justify-content: center; gap: 3px;">
+                        <span>
+                            {{ 'login.doNotHaveAccount' | translate }}
+                        </span>
+                        <a routerLink="/register" class="registr-link">{{ 'login.register' | translate }}</a><br>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -65,5 +70,4 @@
             </div>
         </div>
     </div>
-
 </div>

@@ -7,7 +7,7 @@
         "email": "Adres e-mail",
         "password": "Hasło",
         "repeatPassword": "Powtórz hasło",
-        "mfaEnabled": "Dwuskładnikowe uwierzytelnienie",
+        "mfaEnabled": "Dwuskładnikowe uwierzytelnianie",
         "submit": "Zarejestruj się",
         "scanCode": "Zeskanuj kod QR w aplikacji Google Authenticator",
         "addCode": "Podaj 6-cyfrowy kod wygenerowany w aplikacji",
@@ -25,14 +25,14 @@
         "enterCorrectData": "Podaj poprawne dane logowania",
         "email": "Adres e-mail",
         "password": "Hasło",
-        "getIn": "Zaloguj",
+        "getIn": "Zaloguj się",
         "doNotHaveAccount": "Nie masz konta?",
         "register": "Zarejestruj się",
-        "tfa": "Uwierzytelnianie dwuskładnikowe",
+        "tfa": "Dwuskładnikowe uwierzytelnianie",
         "enterCode": "Wprowadź 6-cyfrowy kod weryfikacyjny wygenerowany przez Google Authenticator",
         "code": "Kod",
         "confirmCode": "Potwierdź kod",
-        "addCode": "Podaj 6-cyfrowy kod wygenerowany przez Google Authenticator"
+        "addCode": "Podaj kod z aplikacji Google Authenticator"
     },
     "dataTable": {
         "id": "Id",

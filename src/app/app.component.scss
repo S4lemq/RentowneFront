@@ -1,4 +1,11 @@
+//======================================================BUTTON======================================================
 
+::ng-deep .mat-mdc-unelevated-button.mat-primary {
+    --mdc-filled-button-container-color: #14539A !important;
+    --mdc-filled-button-label-text-color: #FFFFFF;
+}
+
+//============================================================================================================
 
 //=======================================================CHECKBOX===============================================================================
 
@@ -65,7 +72,7 @@
 ::ng-deep .mat-mdc-form-field-error {
     margin-top: -3px;
     display: block;
-    font-size: 11px !important;
+    font-size: 10px !important;
     margin-left: -17px !important;
     margin-right: -40px !important;
   }
@@ -79,42 +86,62 @@
 
 // ============================================================================
 
-/* 
- //change mat-nput size
+
+ //change mat-input size
 ::ng-deep .mat-mdc-text-field-wrapper {
-    height: 35px !important;
+    height: 44px !important;
 }
 
 //change mat-form-field input height
 ::ng-deep .mat-mdc-input-element {
-    top: -10px !important;
+    top: -6px !important;
     position: relative !important;
 }
 
-//change label font position
+
+/* //change label font position
 ::ng-deep .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
-    top: 13px !important;
+    top: 15px !important;
     left: 0px;
     font-size: 12px;
-}
+} */
 
-// zmienia rozmiar inputów
+// zmienia rozmiar w środku wartości przed wpisaniem
 ::ng-deep .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
-    top: 13px !important;
-    font-size: 12px;
+    top: 21px !important;
+    font-size: 14px;
 }
 
 ::ng-deep .mat-mdc-form-field .mdc-text-field--outlined .mdc-notched-outline--upgraded .mdc-floating-label--float-above {
     top: 28px !important;
     position: relative !important;
-    margin-left: 5px;
+    font-size: 14px;
+    // margin-left: 4px;
+    // --mat-mdc-form-field-floating-label-scale: 0.6;
     // font-weight: 300 !important;
-    // --mat-mdc-form-field-floating-label-scale: 0.8;
-    // left: 4px;
     // background-color: red;
 }
+/* 
+::ng-deep .mat-mdc-form-field-icon-suffix>.mat-icon {
+    padding: 1px !important;
+    top: 14px !important;
+    right: 7px !important;
+    position: absolute !important;
+    z-index: 5 !important;
+} */
 
- */
+::ng-deep .mat-mdc-focus-indicator { 
+    font-size: 25px;
+
+}
+
+
+// ::ng-deep .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label{
+//     font-size: 18px !important;
+//     padding: 0 10px;
+// }
+
+
 
  .spin{
     position: fixed;
