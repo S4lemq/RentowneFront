@@ -22,14 +22,11 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
   apartmentForm!: FormGroup;
   rentedObjectsFormArray!: FormArray;
   requredFileTypes = "image/jpeg, image/png";
-  imageForm!: FormGroup;
   image?: string | null = null;
-  imageUploaded: boolean = false;
-  imageSelected: boolean = false;
   apartmentId!: number;
   selectedIndex!: number;
   isFormSubmitted: boolean = false;
-  isFormValid = () => this.isFormSubmitted || !this.apartmentForm?.dirty;
+  imageSelected: boolean = false;
 
   constructor(
     private acitvatedRoute: ActivatedRoute,
@@ -40,15 +37,15 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
     private translateService: TranslateService,
     private navigationService: NavigationService,
     private imageService: ImageService
-    ) { }
+  ) { }
+
+  isFormValid(): boolean {
+    return (this.isFormSubmitted || !this.apartmentForm?.dirty) && !this.imageSelected;
+  }
 
   ngOnInit(): void {
     this.apartmentId = Number(this.acitvatedRoute.snapshot.params['id']);
     this.getApartment();
-
-    this.imageForm = new FormGroup({
-      file: new FormControl('')
-    });
     
     this.apartmentForm = new FormGroup({
       apartmentName: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(60)]),
@@ -60,7 +57,8 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
       zipCode: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]),
       cityName: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(60)]),
       voivodeship: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(60)]),
-      rentedObjects: new FormArray([])
+      rentedObjects: new FormArray([]),
+      file: new FormControl('')
     });
     this.apartmentForm.get('leasesNumber')?.valueChanges.subscribe((leasesNumber: number) => {
       this.updateRentedObjects(leasesNumber);
@@ -95,10 +93,8 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
   }
 
   submit() {
-    if(this.apartmentForm.valid) {
+    if (this.apartmentForm.valid) {
       this.isFormSubmitted = true;
-      this.imageUploaded = false;
-
       const addressDto: AddressDto = {
         id: this.apartment.addressDto?.id,
         streetName: this.apartmentForm.get('streetName')?.value,
@@ -108,26 +104,49 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
         cityName: this.apartmentForm.get('cityName')?.value,
         voivodeship: this.apartmentForm.get('voivodeship')?.value,
       }
-
       const rentedObjectsDtosArray = Array.from(this.getRentedObjectsFormArray.controls, control => ({
         rentedObjectName: control.get('rentedObjectName')?.value
       }));
-
-      this.apartmentEditService.savePost(this.apartmentId, {
-        apartmentName: this.apartmentForm.get('apartmentName')?.value,
-        leasesNumber: this.apartmentForm.get('leasesNumber')?.value,
-        area: this.apartmentForm.get('area')?.value,
-        addressDto: addressDto,
-        rentedObjectDtos: rentedObjectsDtosArray,
-        image: this.image
-      } as ApartmentDto)
-      .subscribe(() => {
-        this.router.navigate(["/apartments/edit", this.apartmentId])
-        .then(() => {
-          const translatedText = this.translateService.instant("snackbar.apartmentSaved");
-          this.snackBar.open(translatedText, '', {duration: 3000, panelClass: ['snackbarSuccess']});
-        })
-      });
+      if (this.imageSelected) {
+        this.imageSelected = false;
+        let formData = new FormData();
+        formData.append('file', this.fileControl?.value);
+        this.imageService.uploadImage(formData)
+          .subscribe(result => {
+            this.image = result.filename;
+            this.apartmentEditService.savePost(this.apartmentId, {
+              apartmentName: this.apartmentName?.value,
+              leasesNumber: this.leasesNumber?.value,
+              area: this.area?.value,
+              addressDto: addressDto,
+              rentedObjectDtos: rentedObjectsDtosArray,
+              image: result.filename
+            } as ApartmentDto)
+            .subscribe(() => {
+              this.router.navigate(["/apartments/edit", this.apartmentId])
+              .then(() => {
+                const translatedText = this.translateService.instant("snackbar.apartmentSaved");
+                this.snackBar.open(translatedText, '', {duration: 3000, panelClass: ['snackbarSuccess']});
+              })
+            });
+          });
+      } else {
+        this.apartmentEditService.savePost(this.apartmentId, {
+          apartmentName: this.apartmentName?.value,
+          leasesNumber: this.leasesNumber?.value,
+          area: this.area?.value,
+          addressDto: addressDto,
+          rentedObjectDtos: rentedObjectsDtosArray,
+          image: this.image
+        } as ApartmentDto)
+        .subscribe(() => {
+          this.router.navigate(["/apartments/edit", this.apartmentId])
+          .then(() => {
+            const translatedText = this.translateService.instant("snackbar.apartmentSaved");
+            this.snackBar.open(translatedText, '', {duration: 3000, panelClass: ['snackbarSuccess']});
+          })
+        });
+      }
     } else {
       this.apartmentForm.markAllAsTouched();
     }
@@ -162,7 +181,7 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
         });
   }
 
-  uploadFile() {
+  /* uploadFile() {
     let formData = new FormData();
     formData.append('file', this.imageForm.get('file')?.value);
     this.imageService.uploadImage(formData)
@@ -175,16 +194,16 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
         this.imageUploaded = true;
         this.imageSelected = false;
       });
-  }
+  }*/
 
   onFileChange(event: any){
     if(event.target.files.length > 0){
       this.imageSelected = true;
-      this.imageForm.patchValue({
+      this.apartmentForm.patchValue({
         file: event.target.files[0]
       });
     }
-  }
+  } 
 
   private updateRentedObjects(leasesNumber: number): void {
     this.rentedObjectsFormArray = this.apartmentForm.get('rentedObjects') as FormArray;
@@ -360,5 +379,10 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
   get voivodeship() {
     return this.apartmentForm.get("voivodeship");
   }
+
+  get fileControl() {
+    return this.apartmentForm.get("file");
+  }
+
 
 }

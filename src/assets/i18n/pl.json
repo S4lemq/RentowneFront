@@ -89,7 +89,7 @@
     "snackbar.housingProviderSaved": "Dostawca został zapisany",
     "common.message.BAD_METER_READING_DATE_TENANT":"Data początku umowy nie może być w tym samym miesiącu co data ostatniego odczytu licznika w danym obiekcie",
     "common.message.BAD_METER_READING_VALUES_TENANT":"Jedna z początkowych wartości odczytów liczników jest niższa niż ostatni odczyt liczników w danym obiekcie. Sprawdź odczyty liczników w obiekcie",
-    "common.message.RENTED_OBJECT_DOES_NOT_HAVE_METERS":"Obiekt nie posiada wymaganych liczników: woda, energia elektryczna. Dodaj liczniki dla tego obiektu.",
+    "common.message.RENTED_OBJECT_DOES_NOT_HAVE_METERS":"Obiekt nie posiada wymaganych liczników: woda i/lub energia elektryczna. Dodaj liczniki dla tego obiektu.",
     "meter.name": "Nazwa licznika",
     "snackbar.userSaved": "Dane użytkownika zostały zaktualizowane.",
     "snackbar.providerTypeAlreadyExists": "Dostawca o podanym typie: {{type}} jest już przypisany do tej nieruchomości.",

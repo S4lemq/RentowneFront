@@ -140,7 +140,7 @@ export class TenantAddComponent implements OnInit, OnDestroy, BaseComponent {
       ).pipe(takeUntil(this.killer$))
       .subscribe(tenant => {
         const translatedText = this.translateService.instant("snackbar.tenantAdded");
-        this.router.navigate(["tenants/edit/", tenant.id])
+        this.router.navigate(["agreements/edit/", tenant.id])
             .then(() => this.snackBar.open(translatedText, '', {
                 duration: 3000,
                 panelClass: ['snackbarSuccess']

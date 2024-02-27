@@ -18,7 +18,7 @@ export class TenantService {
     return this.http.get<TenantDto>(`/api/tenants/` + id);
   }
 
-  updateTenant(dto: TenantDto): Observable<any> {
+  updateTenant(dto: TenantDto): Observable<TenantDto> {
     return this.http.put<TenantDto>(`/api/tenants`, dto);
   }
 

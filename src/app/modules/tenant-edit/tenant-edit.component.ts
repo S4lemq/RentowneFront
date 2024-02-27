@@ -215,7 +215,7 @@ export class TenantEditComponent implements OnInit, OnDestroy, BaseComponent {
       this.tenantService.updateTenant(tenant)
       .pipe(takeUntil(this.killer$))
       .subscribe(() => {
-        this.router.navigate(["/tenants/edit", this.tenantId])
+        this.router.navigate(["agreements/edit", this.tenantId])
           .then(() => {
             const translatedText = this.translateService.instant("snackbar.tenantSaved");
             this.snackBar.open(translatedText, '', {duration: 3000, panelClass: ['snackbarSuccess']});

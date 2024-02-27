@@ -77,11 +77,6 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                    <div class="btn">
-                        <button mat-flat-button style="background-color: black; color: white;" (click)="submit()" [disabled]="!apartmentForm.dirty && !this.imageUploaded">Zapisz</button>
-                        <!-- <button mat-flat-button color="warn" (click)="confirmDelete(apartment.id)">Usuń</button> -->
-                        <button mat-flat-button color="primary" (click)="goBack()">Powrót</button>
-                    </div>
                     <div formArrayName="rentedObjects">
                         <div *ngFor="let rentedObject of getRentedObjectsFormArray.controls; let i = index" [formGroupName]="i">
                         <mat-form-field appearance="outline">
@@ -93,11 +88,13 @@
                         </mat-form-field>
                         </div>
                     </div>
-                </form>
-                <img *ngIf="image" src="{{'/api/data/image/' + image}}" width="220" height="165">
-                <form [formGroup]="imageForm" (submit)="uploadFile()">
+                    <img *ngIf="image" src="{{'/api/data/image/' + image}}" width="220" height="165">
                     <input type="file" [accept]="requredFileTypes" (change)="onFileChange($event)">
-                    <button mat-flat-button style="background-color: black; color: white;" [disabled]="!this.imageSelected">Wgraj zdjęcie</button>
+                    <div class="btn">
+                        <button mat-flat-button style="background-color: black; color: white;" (click)="submit()">Zapisz</button>
+                        <!-- <button mat-flat-button color="warn" (click)="confirmDelete(apartment.id)">Usuń</button> -->
+                        <button mat-flat-button color="primary" (click)="goBack()">Powrót</button>
+                    </div>
                 </form>
         </mat-tab>
         <mat-tab label="Dostawcy">
