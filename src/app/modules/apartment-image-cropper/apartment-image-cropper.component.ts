@@ -2,20 +2,20 @@ import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import Cropper from 'cropperjs';
-import { ImageDataDto } from '../model/image-data';
+import { ImageDataDto } from '../profile-edit/model/image-data';
 
 @Component({
-  selector: 'app-image-cropper',
-  templateUrl: './image-cropper.component.html',
-  styleUrls: ['./image-cropper.component.scss']
+  selector: 'app-apartment-image-cropper',
+  templateUrl: './apartment-image-cropper.component.html',
+  styleUrls: ['./apartment-image-cropper.component.scss']
 })
-export class ImageCropperComponent implements OnInit, AfterViewInit {
+export class ApartmentImageCropperComponent implements OnInit, AfterViewInit {
 
   cropper!: Cropper;
   sanitizedUrl!: SafeUrl;
 
   constructor(
-    public dialogRef: MatDialogRef<ImageCropperComponent>,
+    public dialogRef: MatDialogRef<ApartmentImageCropperComponent>,
     @Inject(MAT_DIALOG_DATA) public imageData: ImageDataDto,
     private sanitizer: DomSanitizer
   ) {}
@@ -31,42 +31,15 @@ export class ImageCropperComponent implements OnInit, AfterViewInit {
   initCropper() {
     const image = document.getElementById('image') as HTMLImageElement;
     this.cropper = new Cropper(image, {
-      aspectRatio: 1,
+      aspectRatio: 4 / 3,
       viewMode: 1,
       guides: false,
-      
     });
-  }
-
-  // make the crop box rounded
-  getRoundedCanvas(sourceCanvas: any) {
-    var canvas = document.createElement('canvas');
-    var context: any = canvas.getContext('2d');
-    var width = sourceCanvas.width;
-    var height = sourceCanvas.height;
-
-    canvas.width = width;
-    canvas.height = height;
-    context.imageSmoothingEnabled = true;
-    context.drawImage(sourceCanvas, 0, 0, width, height);
-    context.globalCompositeOperation = 'destination-in';
-    context.beginPath();
-    context.arc(
-      width / 2,
-      height / 2,
-      Math.min(width, height) / 2,
-      0,
-      2 * Math.PI,
-      true
-    );
-    context.fill();
-    return canvas;
   }
 
   crop() {
     const croppedCanvas = this.cropper.getCroppedCanvas();
-    const croppedPhoto = this.getRoundedCanvas(croppedCanvas);
-    const roundedImageDataURL = croppedPhoto.toDataURL();
+    const roundedImageDataURL = croppedCanvas.toDataURL();
     const file = this.dataURLtoFile(roundedImageDataURL, this.imageData.fileName);
     this.dialogRef.close(file);
   }
@@ -93,5 +66,6 @@ export class ImageCropperComponent implements OnInit, AfterViewInit {
     this.cropper.clear();
     this.cropper.crop();
   }
+
 
 }

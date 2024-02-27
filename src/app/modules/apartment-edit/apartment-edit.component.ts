@@ -1,22 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ApartmentEditService } from './apartment-edit.service';
-import { ApartmentDto } from './model/apartment-dto';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AddressDto } from './model/address-dto';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ConfirmDialogService } from '../confirm-dialog/confirm-dialog.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { NavigationService } from '../common/service/navigation.service';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { BaseComponent } from '../common/base.component';
 import { ImageService } from '../common/service/image.service';
+import { NavigationService } from '../common/service/navigation.service';
+import { ConfirmDialogService } from '../confirm-dialog/confirm-dialog.service';
+import { ImageCropperComponent } from '../profile-edit/image-cropper/image-cropper.component';
+import { ImageDataDto } from '../profile-edit/model/image-data';
+import { ApartmentEditService } from './apartment-edit.service';
+import { AddressDto } from './model/address-dto';
+import { ApartmentDto } from './model/apartment-dto';
+import { ApartmentImageCropperComponent } from '../apartment-image-cropper/apartment-image-cropper.component';
 
 @Component({
   selector: 'app-apartment-edit',
   templateUrl: './apartment-edit.component.html',
   styleUrls: ['./apartment-edit.component.scss']
 })
-export class ApartmentEditComponent implements OnInit, BaseComponent {
+export class ApartmentEditComponent implements OnInit, OnDestroy, BaseComponent {
+  private killer$ = new Subject<void>();
 
   apartment!: ApartmentDto;
   apartmentForm!: FormGroup;
@@ -27,6 +33,7 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
   selectedIndex!: number;
   isFormSubmitted: boolean = false;
   imageSelected: boolean = false;
+  file: string = '';
 
   constructor(
     private acitvatedRoute: ActivatedRoute,
@@ -36,7 +43,8 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
     private router: Router,
     private translateService: TranslateService,
     private navigationService: NavigationService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private dialog: MatDialog
   ) { }
 
   isFormValid(): boolean {
@@ -60,7 +68,9 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
       rentedObjects: new FormArray([]),
       file: new FormControl('')
     });
-    this.apartmentForm.get('leasesNumber')?.valueChanges.subscribe((leasesNumber: number) => {
+    this.apartmentForm.get('leasesNumber')?.valueChanges
+    .pipe(takeUntil(this.killer$))
+    .subscribe((leasesNumber: number) => {
       this.updateRentedObjects(leasesNumber);
     });
 
@@ -69,6 +79,11 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
       this.selectedIndex = this.convertLabelToIndex(lastTabLabel);
       this.navigationService.setLastTabLabel('');
     }
+  }
+
+  ngOnDestroy(): void {
+    this.killer$.next();
+    this.killer$.complete();
   }
 
   goBack() {
@@ -86,9 +101,14 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
 
   getApartment() {
     this.apartmentEditService.getApartment(this.apartmentId)
+      .pipe(takeUntil(this.killer$))
       .subscribe(apartment => {
         this.mapFormValues(apartment)
         this.apartment = apartment;
+        if (apartment.image) {
+          this.image = apartment.image; // Przechowuje nazwę pliku obrazu
+          this.file = '/api/data/image/' + apartment.image; // Ustawia URL do wyświetlenia obrazu
+        }
       });
   }
 
@@ -112,6 +132,7 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
         let formData = new FormData();
         formData.append('file', this.fileControl?.value);
         this.imageService.uploadImage(formData)
+          .pipe(takeUntil(this.killer$))
           .subscribe(result => {
             this.image = result.filename;
             this.apartmentEditService.savePost(this.apartmentId, {
@@ -122,6 +143,7 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
               rentedObjectDtos: rentedObjectsDtosArray,
               image: result.filename
             } as ApartmentDto)
+            .pipe(takeUntil(this.killer$))
             .subscribe(() => {
               this.router.navigate(["/apartments/edit", this.apartmentId])
               .then(() => {
@@ -139,6 +161,7 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
           rentedObjectDtos: rentedObjectsDtosArray,
           image: this.image
         } as ApartmentDto)
+        .pipe(takeUntil(this.killer$))
         .subscribe(() => {
           this.router.navigate(["/apartments/edit", this.apartmentId])
           .then(() => {
@@ -171,9 +194,11 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
   confirmDelete(id: number | undefined) {
     this.dialogService.openConfirmDialog("Czy na pewno chcesz usunąć mieszkanie?")
       .afterClosed()
+        .pipe(takeUntil(this.killer$))
         .subscribe(result => {
           if(result) {
             this.apartmentEditService.delete(id)
+              .pipe(takeUntil(this.killer$))
               .subscribe(() => {
                 this.router.navigate(["/apartments"])
               });
@@ -181,29 +206,47 @@ export class ApartmentEditComponent implements OnInit, BaseComponent {
         });
   }
 
-  /* uploadFile() {
-    let formData = new FormData();
-    formData.append('file', this.imageForm.get('file')?.value);
-    this.imageService.uploadImage(formData)
-      .subscribe(result => {
-        this.image = result.filename;
-        this.snackBar.open("Plik graficzny został wgrany", '', {
-          duration: 3000,
-          panelClass: ['snackbarSuccess']
-        });
-        this.imageUploaded = true;
-        this.imageSelected = false;
-      });
-  }*/
-
-  onFileChange(event: any){
-    if(event.target.files.length > 0){
-      this.imageSelected = true;
-      this.apartmentForm.patchValue({
-        file: event.target.files[0]
-      });
+  onFileChange(event: any) {
+    const files = event.target.files as FileList;
+    if (files.length > 0) {
+      const originalFile = files[0];
+      const _file = URL.createObjectURL(originalFile)
+      this.resetInput();
+      this.openAvatarEditor({image: _file, fileName: originalFile.name} as ImageDataDto)
+        .pipe(takeUntil(this.killer$))
+        .subscribe(
+          (result) => {
+            if (result) {
+                // result to teraz File, więc tworzymy z niego URL obiektu
+                const objectUrl = URL.createObjectURL(result);
+                this.file = objectUrl; // Używamy URL obiektu zamiast bezpośredniego pliku
+                this.imageSelected = true;
+                this.apartmentForm.patchValue({
+                  file: result
+                });
+            }
+          }
+        )
     }
-  } 
+  }
+
+  openAvatarEditor(imageData: ImageDataDto): Observable<any> {
+    const dialogRef = this.dialog.open(ApartmentImageCropperComponent, {
+      maxWidth: '80vw',
+      maxHeight: '80vh',
+      data: imageData,
+    });
+
+    return dialogRef.afterClosed();
+  }
+
+  resetInput(){
+    const input = document.getElementById('avatar-input-file') as HTMLInputElement; //do poprawy bo nazwa pliku powinna byc przekazywana
+    if(input){
+      input.value = "";
+    }
+  }
+
 
   private updateRentedObjects(leasesNumber: number): void {
     this.rentedObjectsFormArray = this.apartmentForm.get('rentedObjects') as FormArray;

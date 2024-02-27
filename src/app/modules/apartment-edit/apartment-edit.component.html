@@ -88,8 +88,26 @@
                         </mat-form-field>
                         </div>
                     </div>
-                    <img *ngIf="image" src="{{'/api/data/image/' + image}}" width="220" height="165">
-                    <input type="file" [accept]="requredFileTypes" (change)="onFileChange($event)">
+
+                    <div class="avatar-container">
+                        <div class="image-container" *ngIf="file; else placeholder"
+                             [ngClass]="{'box-shadow-avatar': !!file}"
+                             [ngStyle]="{backgroundImage: 'url(' + file + ')'}">
+                        </div>
+                    
+                        <ng-template #placeholder>
+                            <div class="image-container avatar-placeholder"></div>
+                        </ng-template>
+                    
+                        <label for="avatar-input-file">
+                            <div class="icon-wrapper">
+                                <input type="file" id="avatar-input-file" [accept]="requredFileTypes" (change)="onFileChange($event)" />
+                                <mat-icon class="icon" fontIcon="edit"></mat-icon>
+                            </div>
+                        </label>
+                    </div>
+
+
                     <div class="btn">
                         <button mat-flat-button style="background-color: black; color: white;" (click)="submit()">Zapisz</button>
                         <!-- <button mat-flat-button color="warn" (click)="confirmDelete(apartment.id)">Usuń</button> -->
