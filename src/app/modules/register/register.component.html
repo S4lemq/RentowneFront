@@ -1,54 +1,51 @@
 <div class="layout">
     <div *ngIf="!registerResponse.mfaEnabled">
         <form [formGroup]="registerForm" class="registerForm">
-            <div class="logo-container">
-                <div class="logo">
-                    <mat-icon>person</mat-icon>
-                </div>
-                <div class="register-text">
-                    <span>Zarejestruj się do Rentowne</span>
-                </div>
+            <div class="register-text">
+                <span>Załóż konto w serwisie Rentowne</span>
             </div>
-            <mat-form-field appearance="outline">
-                <mat-label>{{ 'register.name' | translate }}</mat-label>
-                <input matInput formControlName="firstname">
-                <mat-error *ngIf="firstname?.invalid && (firstname?.dirty || firstname?.touched)">
-                    {{ getFirstNameErrorMsg() }}
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>{{ 'register.surname' | translate }}</mat-label>
-                <input matInput formControlName="lastname">
-                <mat-error *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)">
-                    {{ getLastNameErrorMsg() }}
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>{{ 'register.email' | translate }}</mat-label>
-                <input matInput formControlName="email" placeholder="pat@example.com">
-                <mat-error *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-                    {{ getEmailErrorMessage() }}
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>{{ 'register.password' | translate }}</mat-label>
-                <input [type]="hide ? 'password' : 'text'" matInput formControlName="password">
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
-                <mat-error *ngIf="password?.invalid && (password?.dirty || password?.touched)">
-                    {{ getPasswordErrorMsg() }}
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>{{ 'register.repeatPassword' | translate }}</mat-label>
-                <input [type]="hide ? 'password' : 'text'" matInput formControlName="repeatPassword">
-                <mat-error *ngIf="repeatPassword?.invalid && (repeatPassword?.dirty || repeatPassword?.touched)">
-                    {{ getRepeatPasswordErrorMsg() }}
-                </mat-error>
-            </mat-form-field>
+            <div class="inputs">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'register.name' | translate }}</mat-label>
+                    <input matInput formControlName="firstname">
+                    <mat-error *ngIf="firstname?.invalid && (firstname?.dirty || firstname?.touched)">
+                        {{ getFirstNameErrorMsg() }}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'register.surname' | translate }}</mat-label>
+                    <input matInput formControlName="lastname">
+                    <mat-error *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)">
+                        {{ getLastNameErrorMsg() }}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'register.email' | translate }}</mat-label>
+                    <input matInput formControlName="email" placeholder="pat@example.com">
+                    <mat-error *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                        {{ getEmailErrorMessage() }}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'register.password' | translate }}</mat-label>
+                    <input [type]="hide ? 'password' : 'text'" matInput formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                        {{ getPasswordErrorMsg() }}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'register.repeatPassword' | translate }}</mat-label>
+                    <input [type]="hide ? 'password' : 'text'" matInput formControlName="repeatPassword">
+                    <mat-error *ngIf="repeatPassword?.invalid && (repeatPassword?.dirty || repeatPassword?.touched)">
+                        {{ getRepeatPasswordErrorMsg() }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
             <mat-checkbox class="checkbox" color="primary" formControlName="mfaEnabled">{{ 'register.mfaEnabled' | translate }}</mat-checkbox>
-            <button mat-flat-button style="background-color: black; color: white;" (click)="register()">{{ 'register.submit' | translate }}</button>
+            <button mat-flat-button color="primary" (click)="register()" class="button"><span class="button-text">{{ 'register.submit' | translate }}</span></button>
             <div class="have-account">
                 <span>
                     Masz już konto? 
@@ -60,15 +57,19 @@
     <div class="main-otp-container" *ngIf="registerResponse.mfaEnabled">
         <div class="container">
             <div class="verify-text-container-1">
-                <span class="verify-text-1">{{ 'register.scanCode' | translate }}</span>
+                <span class="verify-text-1">{{ 'register.title' | translate }}</span>
+            </div>
+
+            <div class="verify-text-container-2">
+                <span class="verify-text-2">{{ 'register.scanCode' | translate }}</span>
             </div>
     
             <div class="qr-code">
-                <img [src]="registerResponse.secretImageUri" alt="QR Code" style="width: 250px; height: 250px;">
+                <img [src]="registerResponse.secretImageUri" alt="QR Code" style="width: 150px; height: 150px;">
             </div>
     
-            <div class="verify-text-container-2">
-                <span class="verify-text-2">{{ 'register.addCode' | translate }}</span>
+            <div class="verify-text-container-3">
+                <span class="verify-text-3">{{ 'register.addCode' | translate }}</span>
             </div>
     
             <ng-otp-input

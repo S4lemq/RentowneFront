@@ -7,6 +7,7 @@
 
 .main-container{
     display: flex;
+    width: 388px;
     padding: 30px 40px;
     flex-direction: column;
     justify-content: center;
@@ -39,7 +40,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-   gap: 4px;
+    gap: 4px;
 }
 
 .welcome-1{
@@ -58,6 +59,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    letter-spacing: -0.01px;
 }
 
 .field-container {
@@ -114,12 +116,13 @@
 }
 
 .registr-link:hover {
-    color: #00004f;
+    color: #071c33;
 }
 
 
 .main-otp-container {
     padding: 30px 40px;
+    width: 388px;
     background-color: white;
     border-radius: 5px;
     display: flex;
@@ -165,6 +168,7 @@
 .verify-text-container-1 {
     display: flex;
     justify-content: center;
+    letter-spacing: -0.01px;
     padding-bottom: 10px;
 }
 

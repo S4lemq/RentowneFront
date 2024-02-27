@@ -2,11 +2,19 @@
     display: flex;
     flex-direction: column;
     background-color: white;
-    padding: 20px 40px 20px 40px;
-    width: 400px;
-    border-radius: 10px;
-    gap: 8px;
+    padding: 30px 40px 30px 40px;
+    width: 388px;
+    border-radius: 5px;
+    //gap: 10px;
 }
+
+.mat-mdc-form-field-error {
+    margin-top: -3px;
+    display: block;
+    font-size: 10px !important;
+    margin-left: -17px !important;
+    margin-right: -40px !important;
+  }
 
 .layout{
     height: 100vh;
@@ -17,13 +25,13 @@
 
 .checkbox {
     margin-top: -10px;
-    padding-bottom: 10px;
     margin-left: -10px;
 }
 
 .main-otp-container {
-    width: 517px;
-    height: 500px;
+    width: 388px;
+    height: auto;
+    padding: 30px 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,7 +45,7 @@
 }
 
 .btn-container {
-    padding-top: 5px;
+    //padding-top: 5px;
     display: flex;
     justify-content: center;
 }
@@ -50,26 +58,31 @@
 
 .verify-text-1 {
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 700;
+    letter-spacing: -0.01px;
 }
 
 
 .verify-code-btn{
-    width: 150px;
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: -0.01px;
+    font-weight: 700;
 }
 
 .error-code-empty {
-    margin-left: 58px;
+    margin-left: 15px;
     font-size: 12px;
     color: white;
     padding: 5px 0 5px 0;
 }
 
 .error-code-visible {
-    margin-left: 58px;
-    font-size: 12px;
+    margin-left: 14px;
+    font-size: 10px;
     color: red;
-    padding: 5px 0 5px 0;
+    padding: 1px 0 9px 0;
 }
 
 .red-border .each_input {
@@ -84,49 +97,72 @@
 .verify-text-container-2 {
     display: flex;
     justify-content: center;
+    padding-bottom: 10px;
 }
 
 .verify-text-2 {
-    font-size: 15px;
+    font-size: 14px;
+    letter-spacing: -0.01px;
 }
 
-.logo-container {
+.verify-text-container-3 {
     display: flex;
-    align-items: center; 
-    gap: 15px; 
-    margin-bottom: 10px;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
     justify-content: center;
-    width: 40px; 
-    height: 40px; 
-    border-radius: 50%; 
-    background-color: #000; 
-    color: #fff;
+    padding-top: 10px;
 }
+
+.verify-text-3 {
+    font-size: 14px;
+}
+
+
 
 .register-text {
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 700;
+    padding-bottom: 10px;
+}
+
+.inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 8px;
 }
 
 .have-account{
     display: flex;
     justify-content: center;
-    padding-top: 15px;
+    padding-top: 8px;
 }
 
 .registr-link {
     margin-left: 3px;
-    color: blue;
+    color: #14539A;
     text-decoration: none;
 }
 
 .registr-link:hover {
-    color: #00004f;
+    color: #071c33;
     cursor: pointer
 }
 
+.button{
+    margin: 10px 0 10px 0;
+}
+
+.button-text{
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: -0.01px;
+    font-weight: 700;
+}
+
+.mat-mdc-unelevated-button.mat-mdc-button-base, .mat-mdc-outlined-button.mat-mdc-button-base {
+    min-height: 45px;
+    padding: 12px;
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+    height: 16px;
+}

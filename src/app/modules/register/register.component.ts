@@ -35,12 +35,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
     placeholder: '',
     inputStyles:{
       'display':'flex',
-      'border-color': 'initial'
+      'border-color': 'initial',
+      'width': '40px',
+      'height': '40px',
+      'font-size': '24px',
     },
     containerStyles:{
       'display':'flex',
       'justify-content': 'center',
-      'padding-top': '20px'
+      'padding-top': '10px'
     },
     inputClass:'each_input',
     containerClass:'all_inputs'

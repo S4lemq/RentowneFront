@@ -9,6 +9,7 @@
         "repeatPassword": "Powtórz hasło",
         "mfaEnabled": "Dwuskładnikowe uwierzytelnianie",
         "submit": "Zarejestruj się",
+        "title": "Dwuskładnikowe uwierzytelnianie",
         "scanCode": "Zeskanuj kod QR w aplikacji Google Authenticator",
         "addCode": "Podaj 6-cyfrowy kod wygenerowany w aplikacji",
         "code": "Kod",
@@ -27,7 +28,7 @@
         "password": "Hasło",
         "getIn": "Zaloguj się",
         "doNotHaveAccount": "Nie masz konta?",
-        "register": "Zarejestruj się",
+        "register": "Załóż konto",
         "tfa": "Dwuskładnikowe uwierzytelnianie",
         "enterCode": "Wprowadź 6-cyfrowy kod weryfikacyjny wygenerowany przez Google Authenticator",
         "code": "Kod",
@@ -96,6 +97,16 @@
         "oldPassword": "Stare hasło",
         "newPassword": "Nowe hasło",
         "repeatPassword": "Powtórz nowe hasło"
+    },
+    "sendChangePassword":{
+        "title": "Ustaw nowe hasło",
+        "submit": "Ustaw"
+    },
+    "send":{
+        "title-1": "Nie pamiętam hasła",
+        "title-2": "Wprowadź adres e-mail, którego użyto podczas zakładania konta. Wiadomość z linkiem, którym zalogujesz się do serwisu, zostanie wysłana na Twoją skrzynkę pocztową.",
+        "submit": "Wyślij",
+        "return": "< Wstecz"
     },
 
     "END_OF_FILE": "Dodawaj wpisy powyżej!"
