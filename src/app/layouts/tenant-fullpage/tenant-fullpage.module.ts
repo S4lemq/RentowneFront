@@ -7,6 +7,8 @@ import { TenantFullpageComponent } from './tenant-fullpage.component';
 import { TenantSettlementComponent } from 'src/app/modules/tenant/tenant-settlement/tenant-settlement.component';
 import { TenantProfileComponent } from 'src/app/modules/tenant/tenant-profile/tenant-profile.component';
 import { ReplacePipe } from 'src/app/modules/tenant/tenant-profile/replace.pipe';
+import { TenantSettlementNotificationComponent } from 'src/app/modules/tenant-settlement-notification/tenant-settlement-notification.component';
+import { MaterialModule } from 'src/app/shared/material.module';
 
 
 
@@ -15,13 +17,15 @@ import { ReplacePipe } from 'src/app/modules/tenant/tenant-profile/replace.pipe'
     TenantFullpageComponent,
     TenantSettlementComponent,
     TenantProfileComponent,
-    ReplacePipe
+    ReplacePipe,
+    TenantSettlementNotificationComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule
   ]
 })
 export class TenantFullpageModule { }

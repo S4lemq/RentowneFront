@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TenantSettlementService } from '../tenant/tenant-settlement/tenant-settlement.service';
 import { ActivatedRoute } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, interval, mergeMap, takeUntil, takeWhile, timer } from 'rxjs';
 
 @Component({
   selector: 'app-tenant-settlement-notification',
@@ -30,6 +30,15 @@ export class TenantSettlementNotificationComponent implements OnInit, OnDestroy 
     let hash = this.activatedRoute.snapshot.params['orderHash'];
     this.tenantSettlementService.getStatus(hash)
       .pipe(takeUntil(this.killer$))
-      .subscribe(status => this.status = status.paid);
+      .subscribe(status => {
+        this.status = status.paid
+        if (this.status === false){
+          interval(3000).pipe(
+            mergeMap(() => this.tenantSettlementService.getStatus(hash)),
+            takeUntil(timer(3 * 60 * 1000)),
+            takeWhile(value => value.paid === false, true)
+          ).subscribe(status => this.status = status.paid);
+        }
+      });
   }
 }

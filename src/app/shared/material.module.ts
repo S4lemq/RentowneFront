@@ -18,6 +18,7 @@ import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/m
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
@@ -41,6 +42,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatExpansionModule,
     MatTooltipModule,
     MatRadioModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatIconModule,
@@ -61,6 +63,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatExpansionModule,
     MatTooltipModule,
     MatRadioModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
