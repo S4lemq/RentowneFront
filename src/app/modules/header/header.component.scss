@@ -27,7 +27,9 @@
         background-color: #ffffff;
         border-radius: 0.625rem;
         box-shadow: 0px 0px 10px 0 rgb(34 41 47 / 10%);
-        padding: 0.813rem 1.563rem;
+        //padding: 0.813rem 1.563rem;
+        height: 4.5rem;
+        padding: 0 1.5rem 0 1.5rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -73,7 +75,7 @@
             }
 
             .head-user-avatar-container {
-                margin-left: 20px;
+                margin-left: 10px;
 
                 .head-user-avatar {
                     position: relative;
@@ -167,7 +169,7 @@
 
     .search-btn {
         color: #fff;
-        background-color: #699dfa;
+        background-color: #14539A;
         cursor: pointer;
         border: 1px solid transparent;
         padding: 0.47rem 0.75rem;
@@ -177,7 +179,7 @@
 
 
 .overlay-language {
-    padding: 0.5rem 0;
+    padding: 0;
     ul {
         list-style: none;
         width: 10rem;
@@ -205,15 +207,18 @@
     padding: 0;
     ul {
         list-style: none;
-        width: 320px;
+        width: 280px;
+        border: 1px;
+        border-color: #eff2f3;
 
         li {
-            padding: 1rem;
 
             &.notification-head-container {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+                padding: 1rem;
+                background-color: #eff2f3;
 
                 .notification-head {
                     font-size: 15px;
@@ -222,7 +227,7 @@
 
                 .view-all-link {
                     font-size: 100%;
-                    color: #699dfa;
+                    color: #14539A;
                     cursor: pointer;
                 }
             }
@@ -230,11 +235,13 @@
             &.notification-message-container {
                 cursor: pointer;
                 display: flex;
+                padding: 1rem 0 0.5rem 1rem;
 
                 i {
-                    margin-right: 15px;
+                    margin-top: 12px;
+                    margin-right: 20px;
                     font-size: 20px;
-                    color: #699dfa;
+                    color: #14539A;
                     width: 25px;
                     text-align: center;
                 }
@@ -248,10 +255,6 @@
                 .notification-desc {
                     font-size: 12px;
                     color: #74788d;
-                }
-
-                &:hover {
-                    background: #eff2f3;
                 }
             }
         }
@@ -274,6 +277,7 @@
 
             .icon {
                 margin-right: 0.6rem;
+                color: #14539A;
             }
         }
 

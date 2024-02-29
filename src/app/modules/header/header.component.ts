@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
-import { languages, notifications, userItems } from './header-dummy-data';
+import { languages, notifications, userItems, messages } from './header-dummy-data';
 import { LogoutService } from '../login/logout.service';
 import { Router } from '@angular/router';
 import { UserService } from '../profile-edit/user.service';
@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   languages = languages;
   notifications = notifications;
   userItems = userItems;
+  messages = messages;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {

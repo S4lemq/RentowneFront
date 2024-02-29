@@ -17,7 +17,7 @@ export const notifications = [
     {
         icon: 'far fa-cloud-download',
         subject: 'Pobieranie zakończone',
-        description: 'Lorem ipsum dolor sit amet, consectetuer.'
+        description: '104 kB • 27 minut temu'
     },
     /* {
         icon: 'far fa-cloud-upload',
@@ -29,6 +29,14 @@ export const notifications = [
         subject: '350 MB trash files',
         description: 'Lorem ipsum dolor sit amet, consectetuer.'
     } */
+];
+
+export const messages = [
+    {
+        icon: 'far fa-comment-alt-slash',
+        subject: 'Brak wiadomości',
+        description: 'Twoja skrzynka jest pusta.'
+    },
 ];
 
 export const userItems = [

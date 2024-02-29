@@ -1,6 +1,27 @@
 @import "variables.scss";
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 @import '~@angular/cdk/overlay-prebuilt.css';
+
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('assets/fonts/Roboto-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('assets/fonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Now-Bold';
+    src: url('assets/fonts/Now-Bold.otf');
+}
+
+@font-face {
+    font-family: 'Now-Regular';
+    src: url('assets/fonts/Now-Regular.otf');
+}
+
 
 * {
     margin: 0;

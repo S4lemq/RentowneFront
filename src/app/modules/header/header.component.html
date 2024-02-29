@@ -63,8 +63,22 @@
     <div class="overlay overlay-notification overlay-fall">
         <ul>
             <li class="notification-head-container">
-                <div class="notification-head">Brak wiadomości</div>
+                <div class="notification-head">Wiadomości</div>
             </li>
+            <li class="notification-message-container"
+            *ngFor="let message of messages"
+            cdkMenuItem
+        >
+            <i [class]="message.icon"></i>
+            <div>
+                <div class="notification-subject">
+                    {{message.subject}}
+                </div>
+                <p class="notification-desc">
+                    {{message.description}}
+                </p>
+            </div>
+        </li>
         </ul>
     </div>
 </ng-template>
