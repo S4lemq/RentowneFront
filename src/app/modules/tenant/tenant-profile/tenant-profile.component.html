@@ -16,15 +16,17 @@
     <p>wartość: {{initData?.totalAmount}}</p>
     <p>data: {{initData?.settlementDate | date: 'yyyy-MM-dd HH:mm'}}</p>
 
-    <div>
-        <h2>Płatność</h2>
-        <mat-radio-group>
-            <mat-radio-button *ngFor="let payment of initData?.payment"
-                [value]="payment" [checked]="payment.defaultPayment">
-                {{payment.name}}
-            </mat-radio-button>
-        </mat-radio-group>
-    </div>
+    <form [formGroup]="formGroup">
+        <div>
+            <h2>Płatność</h2>
+            <mat-radio-group formControlName="payment">
+                <mat-radio-button *ngFor="let payment of initData?.payment" [value]="payment.id">
+                    {{payment.name}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
 
-    <button mat-raised-button (click)="submit()">Opłać najem</button>
+        <button mat-raised-button (click)="submit()">Opłać najem</button>
+    </form>
+
 </div>

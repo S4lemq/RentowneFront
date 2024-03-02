@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class DTService {
 
-  private apiUrl = '/api/files';
+  private apiUrl = '/api/access/files';
 
   constructor(private http: HttpClient) { }
 

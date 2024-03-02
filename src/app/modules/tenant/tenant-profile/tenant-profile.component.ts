@@ -4,7 +4,7 @@ import { TenantSettlementService } from '../tenant-settlement/tenant-settlement.
 import { BasicSettlementDto } from './model/basic-settlement-dto';
 import { TenantSettlementDto } from './model/tenant-settlement-dto';
 import { TenantSettlementSummary } from './model/tenant-settlement-summary';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-tenant-profile',
@@ -20,20 +20,19 @@ export class TenantProfileComponent implements OnInit, OnDestroy {
   tenantSettlementSummary!: TenantSettlementSummary;
 
   constructor(
-    private tenantSettlementService: TenantSettlementService,
-    private formBuilder: FormBuilder,
+    private tenantSettlementService: TenantSettlementService
   ) {}
 
   ngOnInit(): void {
+    this.formGroup = new FormGroup({
+      payment: new FormControl('', Validators.required)
+    });
     this.tenantSettlementService.getBasicSettlementData()
       .pipe(takeUntil(this.killer$))
       .subscribe((data: BasicSettlementDto) => {
         this.initData = data;
         this.setDefaultPayment();
       });
-    this.formGroup = this.formBuilder.group({
-      payment:  ['', Validators.required]
-    });
   }
 
   ngOnDestroy(): void {
@@ -42,15 +41,17 @@ export class TenantProfileComponent implements OnInit, OnDestroy {
   }
 
   setDefaultPayment() {
-    this.formGroup.patchValue({"payment": this.initData?.payment
-      .filter(payment => payment.defaultPayment === true)[0]
-    });
+    const defaultPaymentId = this.initData?.payment.find(payment => payment.defaultPayment)?.id;
+    if (defaultPaymentId !== undefined) {
+      this.formGroup.patchValue({payment: defaultPaymentId});
+    }
   }
+  
 
   submit() {
     this.tenantSettlementService.placeSettlement(
       { totalAmount: this.initData?.totalAmount,
-        paymentId: Number(this.formGroup.get('payment')?.value.id)
+        paymentId: this.payment?.value
       } as TenantSettlementDto
     ).pipe(takeUntil(this.killer$))
     .subscribe((summary: TenantSettlementSummary) => {
@@ -61,6 +62,10 @@ export class TenantProfileComponent implements OnInit, OnDestroy {
         }
       }
     )
+  }
+
+  get payment() {
+    return this.formGroup.get("payment");
   }
 
 

@@ -77,6 +77,7 @@ export class MeterEditComponent implements OnInit, OnDestroy, BaseComponent {
 
   submit() {
     if (this.meterForm.valid) {
+      this.isFormSubmitted = true;
       this.meterService.updateMeter(
         {
           id: this.meterId,
