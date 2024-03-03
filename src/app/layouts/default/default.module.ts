@@ -11,6 +11,7 @@ import { ApartmentListComponent } from 'src/app/modules/apartment-list/apartment
 import { ApartmentMeterEditContainerComponent } from 'src/app/modules/apartment-meter-edit-container/apartment-meter-edit-container.component';
 import { BodyComponent } from 'src/app/modules/body/body.component';
 import { CalculatePopupComponent } from 'src/app/modules/calculate-popup/calculate-popup.component';
+import { TranslateMeterUnitPipe } from 'src/app/modules/common/pipe/translate-meter-unit.pipe';
 import { ConfirmDialogComponent } from 'src/app/modules/confirm-dialog/confirm-dialog.component';
 import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
 import { HeaderComponent } from 'src/app/modules/header/header.component';
@@ -38,12 +39,12 @@ import { SublevelMenuComponent } from 'src/app/modules/sidenav/sublevel-menu.com
 import { SingleRentedObjectSettlementExportPopupComponent } from 'src/app/modules/single-rented-object-settlement-export-popup/single-rented-object-settlement-export-popup.component';
 import { SingleRentedObjectSettlementListComponent } from 'src/app/modules/single-rented-object-settlement-list/single-rented-object-settlement-list.component';
 import { TenantAddComponent } from 'src/app/modules/tenant-add/tenant-add.component';
+import { TenantBasicEditComponent } from 'src/app/modules/tenant-basic-edit/tenant-basic-edit.component';
 import { TenantEditComponent } from 'src/app/modules/tenant-edit/tenant-edit.component';
 import { TenantListComponent } from 'src/app/modules/tenant-list/tenant-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { DefaultComponent } from './default.component';
-import { TranslateMeterUnitPipe } from 'src/app/modules/common/pipe/translate-meter-unit.pipe';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { TranslateMeterUnitPipe } from 'src/app/modules/common/pipe/translate-me
     ProfileEditComponent,
     ImageCropperComponent,
     ApartmentImageCropperComponent,
-    TranslateMeterUnitPipe
+    TranslateMeterUnitPipe,
+    TenantBasicEditComponent
   ],
   imports: [
     CommonModule,

@@ -58,15 +58,15 @@ export class TenantEditComponent implements OnInit, OnDestroy, BaseComponent {
       this.mapFormValues(data);
       this.leaseAgreementId = data.leaseAgreementDto?.id;
       this.addressId = data.addressDto?.id;
-      if (data.apartmentId != null) {
-        this.apartmentOfTenant = data.apartmentId;
-        this.apartmentService.getAllApartments(data.apartmentId)
+      if (data.apartment?.id != null) {
+        this.apartmentOfTenant = data.apartment?.id;
+        this.apartmentService.getAllApartments(data.apartment?.id)
           .pipe(takeUntil(this.killer$))
           .subscribe(apartmentsData => this.apartments = apartmentsData);
       }
-      if (data.rentedObjectDto?.id != null && data.apartmentId != null) {
+      if (data.rentedObjectDto?.id != null && data.apartment?.id != null) {
         this.retedObjectOfTenant = data.rentedObjectDto?.id;
-        this.rentedObjectService.getAllRentedObjectsByLoggedUser(data.apartmentId, data.rentedObjectDto?.id)
+        this.rentedObjectService.getAllRentedObjectsByLoggedUser(data.apartment?.id, data.rentedObjectDto?.id)
           .pipe(takeUntil(this.killer$))
           .subscribe(data => this.rentedObjects = data);
       }
@@ -76,7 +76,7 @@ export class TenantEditComponent implements OnInit, OnDestroy, BaseComponent {
     this.tenantForm = new FormGroup({
       firstname: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
       lastname: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
-      email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(60)]),
+      email: new FormControl({value: '', disabled: true}),
       accountNumber: new FormControl('', [Validators.maxLength(28)]),
       phoneNumber: new FormControl('', [Validators.maxLength(20)]),
       streetName: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]),
@@ -156,7 +156,7 @@ export class TenantEditComponent implements OnInit, OnDestroy, BaseComponent {
       returnedDepositAmount: tenant.leaseAgreementDto?.returnedDepositAmount,
       contractActive: tenant.leaseAgreementDto?.contractActive,
       rentedObjectId: tenant.rentedObjectDto?.id,
-      apartmentId: tenant.apartmentId,
+      apartmentId: tenant.apartment?.id,
       contractSigningDate: tenant.leaseAgreementDto?.contractSigningDate
     });
   }
@@ -199,6 +199,10 @@ export class TenantEditComponent implements OnInit, OnDestroy, BaseComponent {
         id: this.rentedObjectId?.value
       }
 
+      const apartmentDto: ApartmentDto = {
+        id: this.apartmentIdControl?.value
+      }
+
       const tenant: TenantDto = {
         id: this.tenantId,
         firstname: this.firstname?.value,
@@ -209,7 +213,7 @@ export class TenantEditComponent implements OnInit, OnDestroy, BaseComponent {
         leaseAgreementDto: leaseAgreementDto,
         addressDto: addressDto,
         rentedObjectDto: rentedObjectDto,
-        apartmentId: this.apartmentIdControl?.value
+        apartment: apartmentDto
       }
 
       this.tenantService.updateTenant(tenant)
@@ -263,19 +267,6 @@ export class TenantEditComponent implements OnInit, OnDestroy, BaseComponent {
     }
     if (this.lastname?.errors?.['maxlength']) {
       return "Maksymalnie 50";
-    }
-    return null;
-  }
-
-  getEmailErrorMsg() {
-    if (this.email?.errors?.['email']) {
-      return 'Nieprawidłowy format e-mail';
-    }
-    if (this.email?.errors?.['required']) {
-      return 'Wartość wymagana';
-    }
-    if (this.email?.errors?.['maxlength']) {
-      return "Maksymalnie 60";
     }
     return null;
   }

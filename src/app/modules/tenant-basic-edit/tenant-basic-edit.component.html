@@ -1,0 +1,122 @@
+<mat-card>
+    <mat-tab-group color="primary">
+        <mat-tab label="Najemca">
+            <form [formGroup]="form" class="form">
+                <mat-form-field appearance="outline">
+                    <mat-label>Imię</mat-label>
+                    <input matInput formControlName="firstname">
+                    <mat-error *ngIf="firstname?.invalid && (firstname?.dirty || firstname?.touched)">
+                        {{getFirstnameErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>Nazwisko</mat-label>
+                    <input matInput formControlName="lastname">
+                    <mat-error *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)">
+                        {{getLastnameErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>Adres email</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-error *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                        {{getEmailErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>Numer konta bankowego</mat-label>
+                    <input matInput formControlName="accountNumber">
+                    <mat-error *ngIf="accountNumber?.invalid && (accountNumber?.dirty || accountNumber?.touched)">
+                        {{getAccountNumberErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>Numer telefonu</mat-label>
+                    <input matInput formControlName="phoneNumber">
+                    <mat-error *ngIf="phoneNumber?.invalid && (phoneNumber?.dirty || phoneNumber?.touched)">
+                        {{getPhoneNumberErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.street' | translate }}</mat-label>
+                    <input matInput formControlName="streetName">
+                    <mat-error *ngIf="streetName?.invalid && (streetName?.dirty || streetName?.touched)">
+                        {{getStreetNameErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.buildingNumber' | translate }}</mat-label>
+                    <input matInput formControlName="buildingNumber">
+                    <mat-error *ngIf="buildingNumber?.invalid && (buildingNumber?.dirty || buildingNumber?.touched)">
+                        {{getBuildingNumberErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.apartmentNumber' | translate }}</mat-label>
+                    <input matInput formControlName="apartmentNumber">
+                    <mat-error *ngIf="apartmentNumber?.invalid && (apartmentNumber?.dirty || apartmentNumber?.touched)">
+                        {{getApartmentNumberErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.zipCode' | translate }}</mat-label>
+                    <input matInput formControlName="zipCode">
+                    <mat-error *ngIf="zipCode?.invalid && (zipCode?.dirty || zipCode?.touched)">
+                        {{getZipCodeErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.cityName' | translate }}</mat-label>
+                    <input matInput formControlName="cityName">
+                    <mat-error *ngIf="cityName?.invalid && (cityName?.dirty || cityName?.touched)">
+                        {{getCityNameErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.voivodeship' | translate }}</mat-label>
+                    <input matInput formControlName="voivodeship">
+                    <mat-error *ngIf="voivodeship?.invalid && (voivodeship?.dirty || voivodeship?.touched)">
+                        {{getVoivodeshipErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Data początku umowy</mat-label>
+                    <input matInput [matDatepicker]="pickerStartContractDate" formControlName="startContractDate">
+                    <mat-datepicker-toggle matIconSuffix [for]="pickerStartContractDate"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerStartContractDate></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Data końca umowy</mat-label>
+                    <input matInput [matDatepicker]="pickerEndContractDate" formControlName="endContractDate">
+                    <mat-datepicker-toggle matIconSuffix [for]="pickerEndContractDate"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerEndContractDate></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.apartment' | translate }}</mat-label>
+                    <input matInput formControlName="apartment">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.rentedObject' | translate }}</mat-label>
+                    <input matInput formControlName="rentedObject">
+                </mat-form-field>
+
+                <button mat-flat-button color="primary" (click)="submit()">Zapisz</button>
+            </form>
+        </mat-tab>
+    </mat-tab-group>
+</mat-card>
+
