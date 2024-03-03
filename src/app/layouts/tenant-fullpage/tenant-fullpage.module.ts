@@ -1,24 +1,26 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TenantFullpageComponent } from './tenant-fullpage.component';
-import { TenantSettlementComponent } from 'src/app/modules/tenant/tenant-settlement/tenant-settlement.component';
-import { TenantProfileComponent } from 'src/app/modules/tenant/tenant-profile/tenant-profile.component';
-import { ReplacePipe } from 'src/app/modules/tenant/tenant-profile/replace.pipe';
+import { RouterModule } from '@angular/router';
 import { TenantSettlementNotificationComponent } from 'src/app/modules/tenant-settlement-notification/tenant-settlement-notification.component';
+import { PaySettlementPopupComponent } from 'src/app/modules/tenant/pay-settlement-popup/pay-settlement-popup.component';
+import { ReplacePipe } from 'src/app/modules/tenant/tenant-profile/replace.pipe';
+import { TenantProfileComponent } from 'src/app/modules/tenant/tenant-profile/tenant-profile.component';
+import { TranslateSettlementStatusPipe } from 'src/app/modules/tenant/tenant-profile/translate-settlement-status.pipe';
 import { MaterialModule } from 'src/app/shared/material.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { TenantFullpageComponent } from './tenant-fullpage.component';
 
 
 
 @NgModule({
   declarations: [
     TenantFullpageComponent,
-    TenantSettlementComponent,
     TenantProfileComponent,
     ReplacePipe,
-    TenantSettlementNotificationComponent
+    TenantSettlementNotificationComponent,
+    TranslateSettlementStatusPipe,
+    PaySettlementPopupComponent
   ],
   imports: [
     CommonModule,

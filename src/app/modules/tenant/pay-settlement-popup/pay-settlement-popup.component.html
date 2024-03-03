@@ -1,0 +1,38 @@
+<div class="card-1">
+    <div *ngIf="tenantSettlementSummary">
+        <h1>Podsumowanie</h1>
+        <p>Numer płatności: {{tenantSettlementSummary.id}}</p>
+        <div>Data złożenia: {{tenantSettlementSummary.placeDate | date: 'yyyy-MM-dd HH:mm'}}</div>
+        <p>Status: {{tenantSettlementSummary.status}}</p>
+        <p>Wartość: {{tenantSettlementSummary.grossValue}} PLN</p>
+        <p *ngIf="tenantSettlementSummary.payment.note">Płatność: <br/>
+            <span [innerHTML]="tenantSettlementSummary.payment.note | replace: '\n': '<br />'"></span>
+        </p>
+        <div mat-dialog-actions>
+            <button mat-raised-button class="btn" color="warn"[mat-dialog-close]="false">Zamknij</button>
+        </div>
+    </div>
+
+    <div *ngIf="!tenantSettlementSummary">
+        <h1>do zapłaty</h1>
+        <p>wartość: {{data.totalAmount}}</p>
+        <p>data: {{data.totalAmount | date: 'yyyy-MM-dd HH:mm'}}</p>
+
+        <form [formGroup]="formGroup">
+            <div>
+                <h2>Płatność</h2>
+                <mat-radio-group formControlName="payment">
+                    <mat-radio-button *ngFor="let payment of paymentMethods" [value]="payment.id">
+                        {{payment.name}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+            <div mat-dialog-actions>
+                <button mat-raised-button (click)="submit()">Opłać najem</button>
+                <button mat-raised-button class="btn" color="warn"[mat-dialog-close]="false">Anuluj</button>
+            </div>
+            
+        </form>
+    </div>
+</div>

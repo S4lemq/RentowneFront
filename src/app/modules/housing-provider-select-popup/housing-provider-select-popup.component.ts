@@ -134,7 +134,7 @@ export class HousingProviderSelectPopupComponent implements OnInit, AfterViewIni
     .pipe(takeUntil(this.killer$))
     .subscribe({
       next: () => {
-        () => this.closePopup()
+        () => this.closePopup();
       },
       error: err => {
         if (err.error.code === 'PROVIDER_TYPE_ALREADY_EXISTS') {

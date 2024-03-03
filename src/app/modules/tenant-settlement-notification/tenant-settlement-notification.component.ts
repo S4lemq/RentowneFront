@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TenantSettlementService } from '../tenant/tenant-settlement/tenant-settlement.service';
+import { TenantSettlementService } from '../tenant/tenant-profile/tenant-settlement.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, interval, mergeMap, takeUntil, takeWhile, timer } from 'rxjs';
 
