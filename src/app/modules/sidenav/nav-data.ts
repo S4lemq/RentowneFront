@@ -27,6 +27,21 @@ export const navbarData: InavbarData[] = [
         label: 'Najemcy'
     },
     {
+        routeLink: 'agreements',
+        icon: 'fal fa-copy',
+        label: 'Umowy',
+        items: [
+            {
+                routeLink: 'agreements',
+                label: 'Lista umów'
+            },
+            {
+                routeLink: 'agreements/add',
+                label: 'Dodaj umowę'
+            }
+        ]
+    },
+    {
         routeLink: 'housing-providers',
         icon: 'fal fa-address-card',
         label: 'Dostawcy',
@@ -65,20 +80,5 @@ export const navbarData: InavbarData[] = [
         routeLink: 'analytics',
         icon: 'fal fa-chart-line',
         label: 'Analizy'
-    },
-    {
-        routeLink: 'agreements',
-        icon: 'fal fa-copy',
-        label: 'Umowy',
-        items: [
-            {
-                routeLink: 'agreements',
-                label: 'Lista umów'
-            },
-            {
-                routeLink: 'agreements/add',
-                label: 'Dodaj umowę'
-            }
-        ]
     },
 ];

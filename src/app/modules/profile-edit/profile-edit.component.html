@@ -2,6 +2,25 @@
     <form [formGroup]="form" class="form">
         <div class="main-container">
             <div class="container-left">
+                <div class="title">
+                    {{ 'profile.title' | translate }}
+                </div>
+                <div class="avatar-container">
+                    <div class="image-container" *ngIf="file; else placeholder"
+                         [ngClass]="{'box-shadow-avatar': !!file}"
+                         [ngStyle]="{backgroundImage: 'url(' + file + ')'}">
+                
+                    <label for="avatar-input-file">
+                        <div class="icon-wrapper">
+                            <input type="file" id="avatar-input-file" [accept]="requredFileTypes" (change)="onFileChange($event)" />
+                            <mat-icon class="icon" fontIcon="edit"></mat-icon>
+                        </div>
+                    </label>
+                    </div>
+                    <ng-template #placeholder>
+                        <div class="image-container avatar-placeholder"></div>
+                    </ng-template>
+                </div>
                 <mat-form-field appearance="outline">
                     <mat-label>{{ 'register.name' | translate }}</mat-label>
                     <input matInput formControlName="firstname">
@@ -20,59 +39,43 @@
                     <mat-label>{{ 'register.email' | translate }}</mat-label>
                     <input matInput formControlName="email">
                 </mat-form-field>
-                <mat-checkbox [formControl]="changePasswordControl">Zmień hasło</mat-checkbox>
-                <mat-form-field appearance="outline" *ngIf="this.changePassword?.value">
-                    <mat-label>{{ 'profile.oldPassword' | translate }}</mat-label>
-                    <input [type]="oldPasswordHide ? 'password' : 'text'" matInput formControlName="oldPassword">
-                    <button mat-icon-button matSuffix (click)="oldPasswordHide = !oldPasswordHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="oldPasswordHide">
-                        <mat-icon>{{oldPasswordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                    <mat-error *ngIf="oldPassword?.invalid && (oldPassword?.dirty || oldPassword?.touched)">
-                        {{ getOldPasswordErrorMsg() }}
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" *ngIf="this.changePassword?.value">
-                    <mat-label>{{ 'profile.newPassword' | translate }}</mat-label>
-                    <input [type]="passwordHide ? 'password' : 'text'" matInput formControlName="password">
-                    <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
-                        <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                    <mat-error *ngIf="password?.invalid && (password?.dirty || password?.touched)">
-                        {{ getPasswordErrorMsg() }}
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" *ngIf="this.changePassword?.value">
-                    <mat-label>{{ 'profile.repeatPassword' | translate }}</mat-label>
-                    <input [type]="repeatPasswordHide ? 'password' : 'text'" matInput formControlName="repeatPassword">
-                    <button mat-icon-button matSuffix (click)="repeatPasswordHide = !repeatPasswordHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="repeatPasswordHide">
-                        <mat-icon>{{repeatPasswordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                    <mat-error *ngIf="repeatPassword?.invalid && (repeatPassword?.dirty || repeatPassword?.touched)">
-                        {{ getRepeatPasswordErrorMsg() }}
-                    </mat-error>
-                </mat-form-field>
+                <mat-slide-toggle color="primary" [formControl]="changePasswordControl">Zmień hasło</mat-slide-toggle>
+                <div class="change-password">
+                    <mat-form-field appearance="outline" *ngIf="this.changePassword?.value">
+                        <mat-label>{{ 'profile.oldPassword' | translate }}</mat-label>
+                        <input [type]="oldPasswordHide ? 'password' : 'text'" matInput formControlName="oldPassword">
+                        <button mat-icon-button matSuffix (click)="oldPasswordHide = !oldPasswordHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="oldPasswordHide">
+                            <mat-icon>{{oldPasswordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="oldPassword?.invalid && (oldPassword?.dirty || oldPassword?.touched)">
+                            {{ getOldPasswordErrorMsg() }}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" *ngIf="this.changePassword?.value">
+                        <mat-label>{{ 'profile.newPassword' | translate }}</mat-label>
+                        <input [type]="passwordHide ? 'password' : 'text'" matInput formControlName="password">
+                        <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
+                            <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                            {{ getPasswordErrorMsg() }}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" *ngIf="this.changePassword?.value">
+                        <mat-label>{{ 'profile.repeatPassword' | translate }}</mat-label>
+                        <input [type]="repeatPasswordHide ? 'password' : 'text'" matInput formControlName="repeatPassword">
+                        <button mat-icon-button matSuffix (click)="repeatPasswordHide = !repeatPasswordHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="repeatPasswordHide">
+                            <mat-icon>{{repeatPasswordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="repeatPassword?.invalid && (repeatPassword?.dirty || repeatPassword?.touched)">
+                            {{ getRepeatPasswordErrorMsg() }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
             </div>
 
             <div class="container-right">
-                <div class="avatar-container">
-                    <div class="image-container" *ngIf="file; else placeholder"
-                         [ngClass]="{'box-shadow-avatar': !!file}"
-                         [ngStyle]="{backgroundImage: 'url(' + file + ')'}">
-                    </div>
-                
-                    <ng-template #placeholder>
-                        <div class="image-container avatar-placeholder"></div>
-                    </ng-template>
-                
-                    <label for="avatar-input-file">
-                        <div class="icon-wrapper">
-                            <input type="file" id="avatar-input-file" [accept]="requredFileTypes" (change)="onFileChange($event)" />
-                            <mat-icon class="icon" fontIcon="edit"></mat-icon>
-                        </div>
-                    </label>
-                </div>
-                
-                <button mat-flat-button style="background-color: black; color: white; max-width: 300px; width: 100%" (click)="submit()">Zapisz</button>
+                <button mat-flat-button color="primary" (click)="submit()">Zapisz</button>
             </div>
         </div>
     </form>

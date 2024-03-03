@@ -8,7 +8,7 @@
         "password": "Hasło",
         "repeatPassword": "Powtórz hasło",
         "mfaEnabled": "Dwuskładnikowe uwierzytelnianie",
-        "submit": "Zarejestruj się",
+        "submit": "Załóż konto",
         "title": "Dwuskładnikowe uwierzytelnianie",
         "scanCode": "Zeskanuj kod QR w aplikacji Google Authenticator",
         "addCode": "Podaj 6-cyfrowy kod wygenerowany w aplikacji",
@@ -94,6 +94,7 @@
     "snackbar.userSaved": "Dane użytkownika zostały zaktualizowane.",
     "snackbar.providerTypeAlreadyExists": "Dostawca o podanym typie: {{type}} jest już przypisany do tej nieruchomości.",
     "profile": {
+        "title": "Edycja profilu",
         "oldPassword": "Stare hasło",
         "newPassword": "Nowe hasło",
         "repeatPassword": "Powtórz nowe hasło"
