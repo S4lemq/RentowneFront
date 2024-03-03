@@ -16,7 +16,7 @@
     <div *ngIf="!tenantSettlementSummary">
         <h1>do zapłaty</h1>
         <p>wartość: {{data.totalAmount}}</p>
-        <p>data: {{data.totalAmount | date: 'yyyy-MM-dd HH:mm'}}</p>
+        <p>data: {{data.settlementDate | date: 'yyyy-MM-dd HH:mm'}}</p>
 
         <form [formGroup]="formGroup">
             <div>

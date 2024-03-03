@@ -37,7 +37,6 @@ export class TenantProfileComponent implements AfterViewInit, OnDestroy {
     let _popup = this.dialog.open(PaySettlementPopupComponent,{
       width: '60%',
       data: {
-        title: "Opłać najem",
         totalAmount: totalAmount,
         settlementDate: settlementDate
       }

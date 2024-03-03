@@ -1,3 +1,4 @@
 <h1>Dziękujemy za zakupy</h1>
 
 <div class="status">Status zamówienie: <mat-spinner [diameter]="20" *ngIf="!status"></mat-spinner><span *ngIf="status" class="orderPaid">Opłacone</span></div>
+<button color="primary" mat-raised-button routerLink="tenant/profile">Powrót do listy rozliczeń</button>

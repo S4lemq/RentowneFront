@@ -64,6 +64,7 @@ export class PaySettlementPopupComponent implements OnInit, OnDestroy {
     .subscribe((summary: TenantSettlementSummary) => {
         if (summary.redirectUrl) {
           window.location.href = summary.redirectUrl;
+          this.closePopup();
         } else {
           this.tenantSettlementSummary = summary;
         }
