@@ -109,6 +109,13 @@
         "submit": "Wyślij",
         "return": "< Wstecz"
     },
+    "creditCard":{
+        "number": "Numer karty",
+        "name": "Dane posiadacza karty",
+        "month": "Miesiąc",
+        "year": "Rok",
+        "CVV": "CVV/CVC"
+    },
     "common.message.NO_SETTLEMENTS": "Brak rozliczeń, dodaj najpierw rozliczenia w sekcji Finanse, aby wyswietlić analizę.",
 
     "END_OF_FILE": "Dodawaj wpisy powyżej!"

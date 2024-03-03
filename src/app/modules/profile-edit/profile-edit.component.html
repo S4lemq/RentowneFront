@@ -75,90 +75,72 @@
             </div>
 
             <div class="container-right">
-                <div class="box">
-                    <section class="card pa-50 card-container">
                       <app-credit-card
                         [cardNumber]="cardNumber"
                         [cardHolderName]="cardHolderName"
                         [cardExpiryYear]="cardExpiryYear"
                         [cardExpiryMonth]="cardExpiryMonth"
                       ></app-credit-card>
-                      <form [formGroup]="cardForm" class="layout-column" novalidate>
-                        <label class="mt-20">
-                          <input
-                            type="text"
-                            data-test-id="number-input"
-                            autocomplete="off"
-                            formControlName="number"
-                            class="white large outlined"
-                            [class]="{'error': true}"
-                            placeholder="Card Number"
-                          />
-                        </label>
-                        <label class="mt-20">
-                          <input
-                            type="text"
-                            formControlName="name"
-                            autocomplete="off"
-                            data-test-id="name-input"
-                            class="white large outlined"
-                            [class]="{'error': true}"
-                            placeholder="Name on card"
-                          />
-                        </label>
-                        <div class="layout-row card-info mt-20">
-                          <section class="layout-column">
-                            <div class="flex">
-                              <label class="expiry-month">
-                                <input
-                                  type="text"
-                                  formControlName="month"
-                                  data-test-id="month-input"
-                                  autocomplete="off"
-                                  class="white large outlined"
-                                  [class]="{'error': true}"
-                                  placeholder="##"
-                                />
-                                <p class="form-hint">Expiry Month</p>
-                              </label>
-                              <label class="expiry-year ml-8">
-                                <input
-                                  type="number"
-                                  formControlName="year"
-                                  data-test-id="year-input"
-                                  autocomplete="off"
-                                  class="white large outlined"
-                                  [class]="{'error': true}"
-                                  placeholder="####"
-                                />
-                                <p class="form-hint">Expiry Year</p>
-                              </label>
-                            </div>
-                          </section>
-                  
-                          <label class="cvv-number">
-                            <input
-                              type="number"
-                              formControlName="cvv"
-                              autocomplete="off"
-                              data-test-id="cvv-input"
-                              class="white large outlined"
-                              [class]="{'error': true}"
-                              placeholder="###"
-                            />
-                            <p class="form-hint">CVV/CVC</p>
-                          </label>
-                        </div>
-                  
-                        <button class="mt-50" type="submit" data-test-id="submit-button">
-                          Submit
-                        </button>
-                      </form>
-                    </section>
+                      <div class="layout-column" novalidate>
+                        <mat-form-field appearance="outline" class="mt-20">
+                            <mat-label>{{ 'creditCard.number' | translate }}</mat-label>
+                            <input matInput
+                                formControlName="number"
+                                autocomplete="off"
+                                data-test-id="number-input"
+                                placeholder="Numer karty">
+                            <mat-error *ngIf="form.controls['number'].hasError('required')">Wartość wymagana</mat-error>
+                        </mat-form-field>
+                        
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{ 'creditCard.name' | translate }}</mat-label>
+                            <input matInput
+                                formControlName="name"
+                                autocomplete="off"
+                                data-test-id="name-input"
+                                placeholder="Dane posiadacza karty">
+                            <mat-error *ngIf="form.controls['name'].hasError('required')">Wartość wymagana</mat-error>
+                        </mat-form-field>
+                          <div class="layout-row card-info">
+                            <section class="layout-column">
+                              <div class="flex">
+                                <mat-form-field appearance="outline" class="small-field">
+                                    <mat-label>{{ 'creditCard.month' | translate }}</mat-label>
+                                  <input matInput
+                                         formControlName="month"
+                                         data-test-id="month-input"
+                                         autocomplete="off"
+                                         placeholder="##">
+                                  <mat-error *ngIf="form.controls['month'].hasError('required')">Wartość wymagana</mat-error>
+                                </mat-form-field>
+                          
+                                <mat-form-field appearance="outline" class="small-field">
+                                    <mat-label>{{ 'creditCard.year' | translate }}</mat-label>
+                                  <input matInput
+                                         type="number"
+                                         formControlName="year"
+                                         data-test-id="year-input"
+                                         autocomplete="off"
+                                         placeholder="####">
+                                  <mat-error *ngIf="form.controls['year'].hasError('required')">Wartość wymagana</mat-error>
+                                </mat-form-field>
+                              </div>
+                            </section>
+                          
+                            <mat-form-field appearance="outline" class="small-field">
+                            <mat-label>{{ 'creditCard.CVV' | translate }}</mat-label>
+                              <input matInput
+                                     type="number"
+                                     formControlName="cvv"
+                                     autocomplete="off"
+                                     data-test-id="cvv-input"
+                                     placeholder="###">
+                              <mat-error *ngIf="form.controls['cvv'].hasError('required')">Wartość wymagana</mat-error>
+                            </mat-form-field>
+                          </div>
+                    </div>
+                    <button mat-flat-button color="primary" (click)="submit()">Zapisz</button>
                   </div>
-
-                <button mat-flat-button color="primary" (click)="submit()">Zapisz</button>
             </div>
-        </div>
     </form>
 </mat-card>

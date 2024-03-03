@@ -23,7 +23,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
   private killer$ = new Subject<void>();
   
   form!: FormGroup;
-  cardForm!: FormGroup;
   imageForm!: FormGroup;
   isFormSubmitted: boolean = false;
   oldPasswordHide = true;
@@ -61,7 +60,12 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
         Validators.maxLength(64)
       ]),
       repeatPassword: new FormControl(null),
-      file: new FormControl('')
+      file: new FormControl(''),
+      number:  new FormControl('', [Validators.required, Validators.pattern("^[0-9]{16}$")]),
+      name: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z]+$")]),
+      month: new FormControl('', [Validators.required, Validators.pattern("^(0[1-9]|1[0-2])$")]),
+      year: new FormControl('', [Validators.required, this.validYear()]),
+      cvv: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{3}$")])
       },
       { validators:matchpassword });
       this.form.get('password')?.valueChanges
@@ -69,13 +73,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
       .subscribe(() => {
         this.form.get('repeatPassword')?.updateValueAndValidity();
     });
-    this.cardForm = new FormGroup({
-      number:  new FormControl('', [Validators.required, Validators.pattern("^[0-9]{16}$")]),
-      name: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z]+$")]),
-      month: new FormControl('', [Validators.required, Validators.pattern("^(0[1-9]|1[0-2])$")]),
-      year: new FormControl('', [Validators.required, this.validYear()]),
-      cvv: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{3}$")])
-    })
 
 
       this.getUser();
@@ -304,19 +301,19 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
   }
 
   get cardNumber() {
-    return formatCardNumber(this.cardForm.get("number")?.value);
+    return formatCardNumber(this.form.get("number")?.value);
   }
 
   get cardExpiryMonth() {
-    return formatExpiryDate(this.cardForm.get("month")?.value);
+    return formatExpiryDate(this.form.get("month")?.value);
   }
 
   get cardExpiryYear() {
-    return formatExpiryDate(this.cardForm.get("year")?.value);
+    return formatExpiryDate(this.form.get("year")?.value);
   }
 
   get cardHolderName() {
-    return this.cardForm.get("name")?.value || "Card Holder Name";
+    return this.form.get("name")?.value || "Card Holder Name";
   }
 
 }

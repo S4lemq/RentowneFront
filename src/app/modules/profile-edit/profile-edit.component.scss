@@ -12,11 +12,12 @@
 
 mat-form-field {
     width: 100%;
-    max-width: 300px;  
+    max-width: 350px;
+    min-width: 50px; 
 }
 
 .change-password{
-    padding-top: 20px;
+    padding-top: 40px;
 }
 
  
@@ -34,10 +35,11 @@ mat-form-field {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 300px;  
+    max-width: 350px;  
 }
 
-.container-rigth{
+.container-right{
+    padding-top: 32px;
     display: flex;
     flex-direction: column;
 }
@@ -175,19 +177,12 @@ mat-form-field {
 }
 
 
-
-.box {
-    display: flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    margin-top: 50px;
-  }
   
   .layout-column {
     display: flex;
     flex-direction: column;
   }
+
   
   .layout-row {
     display: flex;
@@ -196,8 +191,13 @@ mat-form-field {
   
   .flex {
     display: flex;
+    gap: 5px;
   }
   
+  .small-field {
+    width: 100%;
+    max-width: 110px;
+}
   
   .card {
     background: white;
@@ -214,21 +214,6 @@ mat-form-field {
     color: #0f0f0f;
   }
   
-  input {
-    padding: 12px;
-    border-radius: 4px;
-    border-width: 2px;
-    outline: none;
-    font-size: 14px;
-    border: 2px solid grey;
-    box-sizing: border-bottom;
-  
-  
-    &:focus {
-      border-bottom: 2px solid #000;
-    }
-  }
-  
   .pa-50 {
     padding: 50px;
   }
@@ -237,65 +222,21 @@ mat-form-field {
     margin-top: 20px;
   }
   
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-  }
-  
-  input {
-    width: 350px;
-  }
-  
-  button {
-    margin-top: 50px;
-    height: 44px;
-    background-color: #00ff00;
-    border: none;
-    outline: 2px dashed #00ff00;
-    outline-offset: 3px;
-    border-radius: 4px;
-    cursor: pointer;
-  
-    &:active {
-      outline: none;
-    }
-  }
-  
   
   .error-text {
     margin-bottom: 0;
     min-height: 16px;
   }
   
-  .card-container {
-    position: relative;
-    margin-top: 200px;
-  }
+//   .card-container {
+//     position: relative;
+//     margin-top: 200px;
+//   }
   
   .card-info {
-    justify-content: space-between;;
+    justify-content: space-between;
   }
-  
-  .expiry-month,
-  .expiry-year {
-  
-    input {
-      max-width: 75px;
-    }
-  }
-  
-  .expiry-year {
-    margin-left: 8px;
-  }
-  
-  .cvv-number {
-    input {
-      max-width: 100px;
-    }
-  }
-  
-  
+
   
   credit-card {
     position: absolute;
