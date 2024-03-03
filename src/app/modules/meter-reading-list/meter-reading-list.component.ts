@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, Input, OnDestroy, ViewChild } from '@angular/core';
-import { MeterReadingDto } from '../meter-reading-add-popup/model/meter-reading-dto';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { DTService } from 'src/app/shared/data-table/dt.service';
 import { Subject, map, merge, startWith, switchMap, takeUntil } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
-import { MeterReadingAddPopupComponent } from '../meter-reading-add-popup/meter-reading-add-popup.component';
+import { DTService } from 'src/app/shared/data-table/dt.service';
 import { NavigationService } from '../common/service/navigation.service';
+import { MeterReadingAddPopupComponent } from '../meter-reading-add-popup/meter-reading-add-popup.component';
+import { MeterReadingDto } from '../meter-reading-add-popup/model/meter-reading-dto';
 
 @Component({
   selector: 'app-meter-reading-list',
@@ -103,4 +103,5 @@ export class MeterReadingListComponent implements AfterViewInit, OnDestroy {
       this.loadMeterReadings();
     });
   }
+  
 }

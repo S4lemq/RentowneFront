@@ -18,7 +18,7 @@
                                 {{ meterType | translateMeterType }}
                             </mat-option>
                         </mat-select>
-                        <span *ngIf="meterType?.value" matSuffix>{{ getUnit(meterType?.value) }}&nbsp;</span>
+                        <span *ngIf="meterType?.value" matSuffix>{{meterType?.value | translateMeterUnit}}</span>
                         <mat-error *ngIf="meterType?.invalid">
                             {{ getMeterTypeErrorMsg() }}
                         </mat-error>
@@ -47,7 +47,7 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Odczyt początkowy</mat-label>
                         <input matInput formControlName="initialMeterReading" type="number">
-                        <span matTextSuffix>m³&nbsp;</span>
+                        <span *ngIf="meterType?.value" matSuffix>{{meterType?.value | translateMeterUnit}}</span>
                         <mat-error *ngIf="this.initialMeterReading?.invalid">
                             {{getInitialMeterReadingErrorMsg()}}
                         </mat-error>

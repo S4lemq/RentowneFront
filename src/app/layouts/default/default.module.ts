@@ -43,6 +43,7 @@ import { TenantListComponent } from 'src/app/modules/tenant-list/tenant-list.com
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { DefaultComponent } from './default.component';
+import { TranslateMeterUnitPipe } from 'src/app/modules/common/pipe/translate-meter-unit.pipe';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { DefaultComponent } from './default.component';
     MeterListComponent,
     ProfileEditComponent,
     ImageCropperComponent,
-    ApartmentImageCropperComponent
+    ApartmentImageCropperComponent,
+    TranslateMeterUnitPipe
   ],
   imports: [
     CommonModule,

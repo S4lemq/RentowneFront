@@ -113,26 +113,6 @@ export class MeterEditComponent implements OnInit, OnDestroy, BaseComponent {
     });
   }
 
-  getUnit(meterType: MeterType | null): string {
-    if (!meterType) {
-      return '';
-    }
-  
-    switch (meterType) {
-      case MeterType.WATER_COLD:
-      case MeterType.WATER_WARM:
-      case MeterType.GAS:
-        return 'm³';
-      case MeterType.ELECTRIC:
-        return 'kWh';
-      case MeterType.HEAT:
-        return 'GJ';
-      default:
-        return '';
-    }
-  }
-  
-
   getInitialMeterReadingErrorMsg(): string {
     if (this.initialMeterReading?.hasError('min')) {
       return 'Minimalnie 0m³';

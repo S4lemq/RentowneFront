@@ -42,7 +42,9 @@
 
             <ng-container matColumnDef="initialMeterReading">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header="initialMeterReading">Odczyt początkowy</th>
-                <td mat-cell *matCellDef="let element"> {{element.initialMeterReading}}</td>
+                <td mat-cell *matCellDef="let element"> {{element.initialMeterReading}} 
+                    <span *ngIf="element.initialMeterReading">{{element.meterType | translateMeterUnit}}</span>
+                </td>
             </ng-container>
 
             <ng-container matColumnDef="installationDate">

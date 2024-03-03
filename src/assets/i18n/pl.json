@@ -108,6 +108,7 @@
         "submit": "Wyślij",
         "return": "< Wstecz"
     },
+    "common.message.NO_SETTLEMENTS": "Brak rozliczeń, dodaj najpierw rozliczenia w sekcji Finanse, aby wyswietlić analizę.",
 
     "END_OF_FILE": "Dodawaj wpisy powyżej!"
 }

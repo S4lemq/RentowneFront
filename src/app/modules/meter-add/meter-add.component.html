@@ -18,7 +18,7 @@
                                 {{ meterType | translateMeterType }}
                             </mat-option>
                         </mat-select>
-                        <span *ngIf="meterType?.value" matSuffix>{{ getUnit(meterType?.value) }}&nbsp;</span>
+                        <span *ngIf="meterType?.value" matSuffix>{{meterType?.value | translateMeterUnit}}</span>
                         <mat-error *ngIf="meterType?.invalid">
                             {{ getMeterTypeErrorMsg() }}
                         </mat-error>

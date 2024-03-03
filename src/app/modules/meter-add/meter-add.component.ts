@@ -1,16 +1,16 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
+import { RentedObjectService } from '../apartment-add/rented-object.service';
+import { RentedObjectDto } from '../apartment-edit/model/rented-object-dto';
+import { BaseComponent } from '../common/base.component';
+import { maxDecimalPlaces } from '../common/validators/max-decimal-places.validator';
 import { MeterService } from '../meter-edit/meter.service';
 import { MeterDto } from '../meter-edit/model/meter-dto';
 import { MeterType } from '../meter-edit/model/meter-type';
-import { RentedObjectService } from '../apartment-add/rented-object.service';
-import { RentedObjectDto } from '../apartment-edit/model/rented-object-dto';
-import { TranslateService } from '@ngx-translate/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { maxDecimalPlaces } from '../common/validators/max-decimal-places.validator';
-import { BaseComponent } from '../common/base.component';
 
 @Component({
   selector: 'app-meter-add',
@@ -85,25 +85,6 @@ export class MeterAddComponent implements OnInit, OnDestroy, BaseComponent {
       });
     } else {
       this.meterForm.markAllAsTouched();
-    }
-  }
-
-  getUnit(meterType: MeterType | null): string {
-    if (!meterType) {
-      return '';
-    }
-  
-    switch (meterType) {
-      case MeterType.WATER_COLD:
-      case MeterType.WATER_WARM:
-      case MeterType.GAS:
-        return 'm³';
-      case MeterType.ELECTRIC:
-        return 'kWh';
-      case MeterType.HEAT:
-        return 'GJ';
-      default:
-        return '';
     }
   }
 

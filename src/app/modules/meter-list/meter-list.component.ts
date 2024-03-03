@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
+import { UntypedFormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Subject, map, merge, startWith, switchMap, takeUntil } from 'rxjs';
 import { DTService } from 'src/app/shared/data-table/dt.service';
-import { UntypedFormControl } from '@angular/forms';
 import { MeterRowDto } from './model/meter-row-dto';
 
 @Component({
