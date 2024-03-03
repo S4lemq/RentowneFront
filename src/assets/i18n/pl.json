@@ -94,6 +94,7 @@
     "snackbar.userSaved": "Dane użytkownika zostały zaktualizowane.",
     "snackbar.providerTypeAlreadyExists": "Dostawca o podanym typie: {{type}} jest już przypisany do tej nieruchomości.",
     "profile": {
+        "title": "Edycja profilu",
         "oldPassword": "Stare hasło",
         "newPassword": "Nowe hasło",
         "repeatPassword": "Powtórz nowe hasło"
