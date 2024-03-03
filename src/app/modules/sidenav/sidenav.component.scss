@@ -11,7 +11,7 @@
     .logo-container{
         display: flex;
         align-items: center;
-        padding: 0.938rem 0.938rem 0 0.938rem;
+        padding: 0.6rem 0.938rem 0 0.938rem;
         width: 100%;
 
         .logo{
@@ -27,13 +27,29 @@
             border: none; 
             height: 3.5rem;
             border-radius: 0.625rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .logotype{
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
         }
 
         .logo-text{
             font-family: Now-Bold;
-            margin-left: 1.5rem;
+            margin-left: 0.2rem;
+            margin-top: 0.4rem;
             font-size: 24px;
             font-weight: 700;
+            color: #fff;
+        }
+
+        .logo-text-2{
+            font-family: Now-Regular;
+            margin-left: 0.2rem;
+            //margin-top: 2rem;
+            font-size: 16px;
             color: #fff;
         }
 
@@ -56,7 +72,7 @@
 }
 
 .sidenav-collapsed {
-    width: 16.5625rem;
+    width: 17.0rem;
 }
 
 .sidenav-nav{
@@ -72,6 +88,11 @@
     .sidenav-nav-item {
         width: 100%;
         margin-bottom: 0.625rem;
+
+        .tooltip{
+            opacity: 0;
+            position: absolute;
+        }
 
         .sidenav-nav-link{
             display: flex;
@@ -105,6 +126,22 @@
             }
         }
     }
+
+    .sidenav-nav-item:hover{
+        .tooltip{
+            position: absolute;
+            left: 5.5rem;
+            //top: 50%;
+            //transform: translate(50%, -50%);
+            box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
+            border-radius: 0.6rem;
+            padding: 0.4rem 1.2rem;
+            line-height: 1.8rem;
+            z-index: 20;
+            background-color: #fff;
+            opacity: 1;
+        }
+    }
 }
 
 .active {
@@ -133,14 +170,14 @@
 
 .sublevel-nav{
     list-style: none;
-    margin-left: 10px;
+    margin-left: 5px;
 
     .sublevel-nav-item {
         .sublevel-nav-link {
             display: flex;
             align-items: center;
             height: 3rem;
-            color: #898989;
+            color: #a3a3a3;
             text-decoration: none;
             border-radius: 0.625rem;
             transition: all .3s ease;

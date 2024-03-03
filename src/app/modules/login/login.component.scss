@@ -45,7 +45,6 @@
 
 .welcome-1{
     color: #000;
-    font-family: Roboto;
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
@@ -54,12 +53,11 @@
 
 .welcome-2{
     color: #000;
-    font-family: Roboto;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    letter-spacing: -0.01px;
+    letter-spacing: -0.02px;
 }
 
 .field-container {
@@ -168,7 +166,7 @@
 .verify-text-container-1 {
     display: flex;
     justify-content: center;
-    letter-spacing: -0.01px;
+    letter-spacing: -0.5px;
     padding-bottom: 10px;
 }
 

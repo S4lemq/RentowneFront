@@ -8,7 +8,7 @@
         "password": "Hasło",
         "repeatPassword": "Powtórz hasło",
         "mfaEnabled": "Dwuskładnikowe uwierzytelnianie",
-        "submit": "Zarejestruj się",
+        "submit": "Załóż konto",
         "title": "Dwuskładnikowe uwierzytelnianie",
         "scanCode": "Zeskanuj kod QR w aplikacji Google Authenticator",
         "addCode": "Podaj 6-cyfrowy kod wygenerowany w aplikacji",
