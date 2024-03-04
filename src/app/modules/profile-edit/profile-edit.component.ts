@@ -313,7 +313,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
   }
 
   get cardHolderName() {
-    return this.form.get("name")?.value || "Card Holder Name";
+    return this.form.get("name")?.value || "Imię i nazwisko";
   }
 
 }

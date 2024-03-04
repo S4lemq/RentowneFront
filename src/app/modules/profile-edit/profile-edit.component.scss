@@ -7,13 +7,11 @@
 .form{
     display: flex;
     flex-direction: column;
-    gap: 5px;
 }
 
 mat-form-field {
     width: 100%;
     max-width: 350px;
-    min-width: 50px; 
 }
 
 .change-password{
@@ -27,7 +25,8 @@ mat-form-field {
 .main-container{
     display: flex;
     flex-direction: row;
-    gap: 40px;
+    //gap: 40px;
+    justify-content: space-between;
 }
 
 
@@ -38,17 +37,31 @@ mat-form-field {
     max-width: 350px;  
 }
 
+.container-center{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px;  
+}
+
 .container-right{
-    padding-top: 32px;
+    //padding-top: 32px;
     display: flex;
     flex-direction: column;
+}
+
+.title-card{
+  font-size: 15px;
+  padding-bottom: 20px;
+  text-transform: uppercase;
 }
 
 .title{
     font-size: 22px;
     font-weight: 700;
     letter-spacing: -0.1px;
-}
+    //text-transform: uppercase;
+  }
 
 .avatar-container {
     position: relative;

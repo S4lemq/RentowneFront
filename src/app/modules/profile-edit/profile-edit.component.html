@@ -73,8 +73,32 @@
                     </mat-form-field>
                 </div>
             </div>
-
+            <div class="container-center">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'profile.telephone' | translate }}</mat-label>
+                    <input matInput formControlName="telephone">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'profile.address' | translate }}</mat-label>
+                    <input matInput formControlName="address">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'profile.city' | translate }}</mat-label>
+                    <input matInput formControlName="city">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'profile.zipCode' | translate }}</mat-label>
+                    <input matInput formControlName="zipCode">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'profile.country' | translate }}</mat-label>
+                    <input matInput formControlName="country">
+                </mat-form-field>
+            </div>
             <div class="container-right">
+                <!-- <div class="title-card">
+                    {{ 'profile.card' | translate }}
+                </div> -->
                       <app-credit-card
                         [cardNumber]="cardNumber"
                         [cardHolderName]="cardHolderName"
@@ -110,7 +134,7 @@
                                          formControlName="month"
                                          data-test-id="month-input"
                                          autocomplete="off"
-                                         placeholder="##">
+                                         placeholder="••">
                                   <mat-error *ngIf="form.controls['month'].hasError('required')">Wartość wymagana</mat-error>
                                 </mat-form-field>
                           
@@ -121,7 +145,7 @@
                                          formControlName="year"
                                          data-test-id="year-input"
                                          autocomplete="off"
-                                         placeholder="####">
+                                         placeholder="••">
                                   <mat-error *ngIf="form.controls['year'].hasError('required')">Wartość wymagana</mat-error>
                                 </mat-form-field>
                               </div>

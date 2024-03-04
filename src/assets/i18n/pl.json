@@ -97,7 +97,13 @@
         "title": "Edycja profilu",
         "oldPassword": "Stare hasło",
         "newPassword": "Nowe hasło",
-        "repeatPassword": "Powtórz nowe hasło"
+        "repeatPassword": "Powtórz nowe hasło",
+        "telephone": "Telefon",
+        "address": "Ulica",
+        "city": "Miasto",
+        "zipCode": "Kod pocztowy",
+        "country": "Kraj",
+        "card": "Dodaj kartę"
     },
     "sendChangePassword":{
         "title": "Ustaw nowe hasło",
