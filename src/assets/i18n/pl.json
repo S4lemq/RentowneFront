@@ -97,7 +97,13 @@
         "title": "Edycja profilu",
         "oldPassword": "Stare hasło",
         "newPassword": "Nowe hasło",
-        "repeatPassword": "Powtórz nowe hasło"
+        "repeatPassword": "Powtórz nowe hasło",
+        "telephone": "Telefon",
+        "address": "Ulica",
+        "city": "Miasto",
+        "zipCode": "Kod pocztowy",
+        "country": "Kraj",
+        "card": "Dodaj kartę"
     },
     "sendChangePassword":{
         "title": "Ustaw nowe hasło",
@@ -108,6 +114,13 @@
         "title-2": "Wprowadź adres e-mail, którego użyto podczas zakładania konta. Wiadomość z linkiem, którym zalogujesz się do serwisu, zostanie wysłana na Twoją skrzynkę pocztową.",
         "submit": "Wyślij",
         "return": "< Wstecz"
+    },
+    "creditCard":{
+        "number": "Numer karty",
+        "name": "Dane posiadacza karty",
+        "month": "Miesiąc",
+        "year": "Rok",
+        "CVV": "CVV/CVC"
     },
     "common.message.NO_SETTLEMENTS": "Brak rozliczeń, dodaj najpierw rozliczenia w sekcji Finanse, aby wyswietlić analizę.",
 

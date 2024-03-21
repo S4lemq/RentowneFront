@@ -73,10 +73,98 @@
                     </mat-form-field>
                 </div>
             </div>
-
-            <div class="container-right">
-                <button mat-flat-button color="primary" (click)="submit()">Zapisz</button>
+            <div class="container-center">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'profile.telephone' | translate }}</mat-label>
+                    <input matInput formControlName="telephone">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'profile.address' | translate }}</mat-label>
+                    <input matInput formControlName="address">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'profile.city' | translate }}</mat-label>
+                    <input matInput formControlName="city">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'profile.zipCode' | translate }}</mat-label>
+                    <input matInput formControlName="zipCode">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'profile.country' | translate }}</mat-label>
+                    <input matInput formControlName="country">
+                </mat-form-field>
             </div>
-        </div>
+            <div class="container-right">
+                <!-- <div class="title-card">
+                    {{ 'profile.card' | translate }}
+                </div> -->
+                      <app-credit-card
+                        [cardNumber]="cardNumber"
+                        [cardHolderName]="cardHolderName"
+                        [cardExpiryYear]="cardExpiryYear"
+                        [cardExpiryMonth]="cardExpiryMonth"
+                      ></app-credit-card>
+                      <div class="layout-column" novalidate>
+                        <mat-form-field appearance="outline" class="mt-20">
+                            <mat-label>{{ 'creditCard.number' | translate }}</mat-label>
+                            <input matInput
+                                formControlName="number"
+                                autocomplete="off"
+                                data-test-id="number-input"
+                                placeholder="Numer karty">
+                            <mat-error *ngIf="form.controls['number'].hasError('required')">Wartość wymagana</mat-error>
+                        </mat-form-field>
+                        
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{ 'creditCard.name' | translate }}</mat-label>
+                            <input matInput
+                                formControlName="name"
+                                autocomplete="off"
+                                data-test-id="name-input"
+                                placeholder="Dane posiadacza karty">
+                            <mat-error *ngIf="form.controls['name'].hasError('required')">Wartość wymagana</mat-error>
+                        </mat-form-field>
+                          <div class="layout-row card-info">
+                            <section class="layout-column">
+                              <div class="flex">
+                                <mat-form-field appearance="outline" class="small-field">
+                                    <mat-label>{{ 'creditCard.month' | translate }}</mat-label>
+                                  <input matInput
+                                         formControlName="month"
+                                         data-test-id="month-input"
+                                         autocomplete="off"
+                                         placeholder="••">
+                                  <mat-error *ngIf="form.controls['month'].hasError('required')">Wartość wymagana</mat-error>
+                                </mat-form-field>
+                          
+                                <mat-form-field appearance="outline" class="small-field">
+                                    <mat-label>{{ 'creditCard.year' | translate }}</mat-label>
+                                  <input matInput
+                                         type="number"
+                                         formControlName="year"
+                                         data-test-id="year-input"
+                                         autocomplete="off"
+                                         placeholder="••">
+                                  <mat-error *ngIf="form.controls['year'].hasError('required')">Wartość wymagana</mat-error>
+                                </mat-form-field>
+                              </div>
+                            </section>
+                          
+                            <mat-form-field appearance="outline" class="small-field">
+                            <mat-label>{{ 'creditCard.CVV' | translate }}</mat-label>
+                              <input matInput
+                                     type="number"
+                                     formControlName="cvv"
+                                     autocomplete="off"
+                                     data-test-id="cvv-input"
+                                     placeholder="###">
+                              <mat-error *ngIf="form.controls['cvv'].hasError('required')">Wartość wymagana</mat-error>
+                            </mat-form-field>
+                          </div>
+                    </div>
+                    <button mat-flat-button color="primary" (click)="submit()">Zapisz</button>
+                  </div>
+            </div>
     </form>
 </mat-card>

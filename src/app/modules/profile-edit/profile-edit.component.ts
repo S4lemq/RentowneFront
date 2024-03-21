@@ -12,6 +12,7 @@ import { ProfileUpdateService } from './profile-update.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageCropperComponent } from './image-cropper/image-cropper.component';
 import { ImageDataDto } from './model/image-data';
+import { formatCardNumber, formatExpiryDate } from '../common/utils';
 
 @Component({
   selector: 'app-profile-edit',
@@ -59,14 +60,20 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
         Validators.maxLength(64)
       ]),
       repeatPassword: new FormControl(null),
-      file: new FormControl('')
+      file: new FormControl(''),
+      number:  new FormControl('', [Validators.required, Validators.pattern("^[0-9]{16}$")]),
+      name: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z]+$")]),
+      month: new FormControl('', [Validators.required, Validators.pattern("^(0[1-9]|1[0-2])$")]),
+      year: new FormControl('', [Validators.required, this.validYear()]),
+      cvv: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{3}$")])
       },
       { validators:matchpassword });
       this.form.get('password')?.valueChanges
       .pipe(takeUntil(this.killer$))
       .subscribe(() => {
         this.form.get('repeatPassword')?.updateValueAndValidity();
-      });
+    });
+
 
       this.getUser();
   }
@@ -74,6 +81,15 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
   ngOnDestroy(): void {
     this.killer$.next();
     this.killer$.complete();
+  }
+
+  validYear() {
+    return (control: any): { [key: string]: any } | null => {
+      let now = new Date().getFullYear();
+      let diff = Number(control.value) - now;
+      const valid = diff >= 0 && diff <= 3;
+      return !valid ? { validYear: { value: control.value } } : null;
+    };
   }
 
   getUser() {
@@ -282,6 +298,22 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
 
   get fileControl() {
     return this.form.get("file");
+  }
+
+  get cardNumber() {
+    return formatCardNumber(this.form.get("number")?.value);
+  }
+
+  get cardExpiryMonth() {
+    return formatExpiryDate(this.form.get("month")?.value);
+  }
+
+  get cardExpiryYear() {
+    return formatExpiryDate(this.form.get("year")?.value);
+  }
+
+  get cardHolderName() {
+    return this.form.get("name")?.value || "Imię i nazwisko";
   }
 
 }

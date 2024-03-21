@@ -2,7 +2,7 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ApartmentAddComponent } from 'src/app/modules/apartment-add/apartment-add.component';
 import { ApartmentEditComponent } from 'src/app/modules/apartment-edit/apartment-edit.component';
@@ -45,6 +45,9 @@ import { TenantListComponent } from 'src/app/modules/tenant-list/tenant-list.com
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { DefaultComponent } from './default.component';
+import { TranslateMeterUnitPipe } from 'src/app/modules/common/pipe/translate-meter-unit.pipe';
+import { BrowserModule } from '@angular/platform-browser';
+import { CreditCardComponent } from 'src/app/modules/credit-card/credit-card.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +90,8 @@ import { DefaultComponent } from './default.component';
     ApartmentImageCropperComponent,
     TranslateMeterUnitPipe,
     TenantBasicEditComponent
+    TranslateMeterUnitPipe,
+    CreditCardComponent
   ],
   imports: [
     CommonModule,
@@ -95,7 +100,9 @@ import { DefaultComponent } from './default.component';
     ReactiveFormsModule,
     OverlayModule,
     CdkMenuModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    BrowserModule,
+    FormsModule
   ]
 })
 export class DefaultModule { }
