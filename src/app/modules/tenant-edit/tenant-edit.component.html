@@ -33,9 +33,6 @@
                             <mat-form-field appearance="outline">
                                 <mat-label>Adres email</mat-label>
                                 <input matInput formControlName="email">
-                                <mat-error *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-                                    {{getEmailErrorMsg()}}
-                                </mat-error>
                             </mat-form-field>
                     
                             <mat-form-field appearance="outline">

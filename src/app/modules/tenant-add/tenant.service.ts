@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TenantDto } from './model/tenant-dto';
 import { Observable } from 'rxjs';
+import { TenantDto } from './model/tenant-dto';
 
 @Injectable({
   providedIn: 'root'

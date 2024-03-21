@@ -26,12 +26,13 @@ import { RentedObjectSettlementListComponent } from './modules/rented-object-set
 import { SettlementStatsComponent } from './modules/settlement-stats/settlement-stats.component';
 import { SingleRentedObjectSettlementListComponent } from './modules/single-rented-object-settlement-list/single-rented-object-settlement-list.component';
 import { TenantAddComponent } from './modules/tenant-add/tenant-add.component';
+import { TenantBasicEditComponent } from './modules/tenant-basic-edit/tenant-basic-edit.component';
 import { TenantEditComponent } from './modules/tenant-edit/tenant-edit.component';
 import { TenantListComponent } from './modules/tenant-list/tenant-list.component';
+import { TenantSettlementNotificationComponent } from './modules/tenant-settlement-notification/tenant-settlement-notification.component';
 import { TenantAuthorizeGuard } from './modules/tenant/common/tenant-authorizeGuard';
 import { TenantLoginComponent } from './modules/tenant/tenant-login/tenant-login.component';
 import { TenantProfileComponent } from './modules/tenant/tenant-profile/tenant-profile.component';
-import { TenantSettlementNotificationComponent } from './modules/tenant-settlement-notification/tenant-settlement-notification.component';
 
 const routes: Routes = [
    {
@@ -159,6 +160,13 @@ const routes: Routes = [
         canActivate: [AuthorizeGuard],
         canDeactivate: [DeactivateGurad],
         data: { breadcrumb: 'Rentowne > Profil > Edycja' }
+      },
+      {
+        path: 'tenants/edit/:id', 
+        component: TenantBasicEditComponent, 
+        canActivate: [AuthorizeGuard],
+        canDeactivate: [DeactivateGurad],
+        data: { breadcrumb: 'Rentowne > Lista najemców > Edycja' }
       },
     ]
   },
