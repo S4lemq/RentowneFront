@@ -75,24 +75,58 @@
             </div>
             <div class="container-center">
                 <mat-form-field appearance="outline">
-                    <mat-label>{{ 'profile.telephone' | translate }}</mat-label>
-                    <input matInput formControlName="telephone">
+                    <mat-label>{{ 'apartment.street' | translate }}</mat-label>
+                    <input matInput formControlName="streetName">
+                    <mat-error *ngIf="streetName?.invalid && (streetName?.dirty || streetName?.touched)">
+                        {{getStreetNameErrorMsg()}}
+                    </mat-error>
                 </mat-form-field>
+          
                 <mat-form-field appearance="outline">
-                    <mat-label>{{ 'profile.address' | translate }}</mat-label>
-                    <input matInput formControlName="address">
+                    <mat-label>{{ 'apartment.buildingNumber' | translate }}</mat-label>
+                    <input matInput formControlName="buildingNumber">
+                    <mat-error *ngIf="buildingNumber?.invalid && (buildingNumber?.dirty || buildingNumber?.touched)">
+                        {{getBuildingNumberErrorMsg()}}
+                    </mat-error>
                 </mat-form-field>
+          
                 <mat-form-field appearance="outline">
-                    <mat-label>{{ 'profile.city' | translate }}</mat-label>
-                    <input matInput formControlName="city">
+                    <mat-label>{{ 'apartment.apartmentNumber' | translate }}</mat-label>
+                    <input matInput formControlName="apartmentNumber">
+                    <mat-error *ngIf="apartmentNumber?.invalid && (apartmentNumber?.dirty || apartmentNumber?.touched)">
+                        {{getApartmentNumberErrorMsg()}}
+                    </mat-error>
                 </mat-form-field>
+          
                 <mat-form-field appearance="outline">
-                    <mat-label>{{ 'profile.zipCode' | translate }}</mat-label>
+                    <mat-label>{{ 'apartment.zipCode' | translate }}</mat-label>
                     <input matInput formControlName="zipCode">
+                    <mat-error *ngIf="zipCode?.invalid && (zipCode?.dirty || zipCode?.touched)">
+                        {{getZipCodeErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.cityName' | translate }}</mat-label>
+                    <input matInput formControlName="cityName">
+                    <mat-error *ngIf="cityName?.invalid && (cityName?.dirty || cityName?.touched)">
+                        {{getCityNameErrorMsg()}}
+                    </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'apartment.voivodeship' | translate }}</mat-label>
+                    <input matInput formControlName="voivodeship">
+                    <mat-error *ngIf="voivodeship?.invalid && (voivodeship?.dirty || voivodeship?.touched)">
+                        {{getVoivodeshipErrorMsg()}}
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
-                    <mat-label>{{ 'profile.country' | translate }}</mat-label>
-                    <input matInput formControlName="country">
+                    <mat-label>Numer telefonu</mat-label>
+                    <input matInput formControlName="phoneNumber">
+                    <mat-error *ngIf="phoneNumber?.invalid && (phoneNumber?.dirty || phoneNumber?.touched)">
+                        {{getPhoneNumberErrorMsg()}}
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div class="container-right">
@@ -112,8 +146,10 @@
                                 formControlName="number"
                                 autocomplete="off"
                                 data-test-id="number-input"
-                                placeholder="Numer karty">
-                            <mat-error *ngIf="form.controls['number'].hasError('required')">Wartość wymagana</mat-error>
+                                maxlength="16">
+                            <mat-error *ngIf="form.controls['number']?.invalid && (form.controls['number']?.dirty || form.controls['number']?.touched)">
+                                {{ getCardNumberErrorMsg() }}
+                            </mat-error>
                         </mat-form-field>
                         
                         <mat-form-field appearance="outline">
@@ -121,9 +157,10 @@
                             <input matInput
                                 formControlName="name"
                                 autocomplete="off"
-                                data-test-id="name-input"
-                                placeholder="Dane posiadacza karty">
-                            <mat-error *ngIf="form.controls['name'].hasError('required')">Wartość wymagana</mat-error>
+                                data-test-id="name-input">
+                                <mat-error *ngIf="form.controls['name']?.invalid && (form.controls['name']?.dirty || form.controls['name']?.touched)">
+                                    {{ getCardNameErrorMsg() }}
+                                </mat-error>
                         </mat-form-field>
                           <div class="layout-row card-info">
                             <section class="layout-column">
@@ -134,19 +171,24 @@
                                          formControlName="month"
                                          data-test-id="month-input"
                                          autocomplete="off"
+                                         maxlength="2"
                                          placeholder="••">
-                                  <mat-error *ngIf="form.controls['month'].hasError('required')">Wartość wymagana</mat-error>
+                                    <mat-error *ngIf="form.controls['month']?.invalid && (form.controls['month']?.dirty || form.controls['month']?.touched)">
+                                        {{ getMonthErrorMsg() }}
+                                    </mat-error>
                                 </mat-form-field>
                           
                                 <mat-form-field appearance="outline" class="small-field">
                                     <mat-label>{{ 'creditCard.year' | translate }}</mat-label>
                                   <input matInput
-                                         type="number"
                                          formControlName="year"
                                          data-test-id="year-input"
                                          autocomplete="off"
+                                         maxlength="2"
                                          placeholder="••">
-                                  <mat-error *ngIf="form.controls['year'].hasError('required')">Wartość wymagana</mat-error>
+                                    <mat-error *ngIf="form.controls['year']?.invalid && (form.controls['year']?.dirty || form.controls['year']?.touched)">
+                                        {{ getYearErrorMsg() }}
+                                    </mat-error>
                                 </mat-form-field>
                               </div>
                             </section>
@@ -154,12 +196,14 @@
                             <mat-form-field appearance="outline" class="small-field">
                             <mat-label>{{ 'creditCard.CVV' | translate }}</mat-label>
                               <input matInput
-                                     type="number"
                                      formControlName="cvv"
                                      autocomplete="off"
                                      data-test-id="cvv-input"
+                                     maxlength="3"
                                      placeholder="###">
-                              <mat-error *ngIf="form.controls['cvv'].hasError('required')">Wartość wymagana</mat-error>
+                                     <mat-error *ngIf="form.controls['cvv']?.invalid && (form.controls['cvv']?.dirty || form.controls['cvv']?.touched)">
+                                        {{ getCvvErrorMsg() }}
+                                    </mat-error>
                             </mat-form-field>
                           </div>
                     </div>

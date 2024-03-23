@@ -11,7 +11,6 @@ import { ApartmentListComponent } from 'src/app/modules/apartment-list/apartment
 import { ApartmentMeterEditContainerComponent } from 'src/app/modules/apartment-meter-edit-container/apartment-meter-edit-container.component';
 import { BodyComponent } from 'src/app/modules/body/body.component';
 import { CalculatePopupComponent } from 'src/app/modules/calculate-popup/calculate-popup.component';
-import { TranslateMeterUnitPipe } from 'src/app/modules/common/pipe/translate-meter-unit.pipe';
 import { ConfirmDialogComponent } from 'src/app/modules/confirm-dialog/confirm-dialog.component';
 import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
 import { HeaderComponent } from 'src/app/modules/header/header.component';
@@ -89,8 +88,7 @@ import { CreditCardComponent } from 'src/app/modules/credit-card/credit-card.com
     ImageCropperComponent,
     ApartmentImageCropperComponent,
     TranslateMeterUnitPipe,
-    TenantBasicEditComponent
-    TranslateMeterUnitPipe,
+    TenantBasicEditComponent,
     CreditCardComponent
   ],
   imports: [
