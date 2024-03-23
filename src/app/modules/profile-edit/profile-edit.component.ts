@@ -157,111 +157,95 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
   }
 
   submit() {
-    if (this.form.valid) {
-      this.isFormSubmitted = true;
-      if (this.imageSelected) {
-        this.imageSelected = false;
-        let formData = new FormData();
-        formData.append('file', this.fileControl?.value);
-        this.imageService.uploadImage(formData)
-          .subscribe(result => {
-            const addressDto: AddressDto = {
-              id: this.addressId,
-              streetName: this.form.get('streetName')?.value,
-              buildingNumber: this.form.get('buildingNumber')?.value,
-              apartmentNumber: this.form.get('apartmentNumber')?.value,
-              zipCode: this.form.get('zipCode')?.value,
-              cityName: this.form.get('cityName')?.value,
-              voivodeship: this.form.get('voivodeship')?.value
-            }
-            
-            const paymentCardDto: PaymentCardDto = {
-              id: this.paymentCardId,
-              number: this.form.get("number")?.value,
-              month: this.form.get("month")?.value,
-              year: this.form.get("year")?.value,
-              name: this.form.get("name")?.value,
-              cvv: this.form.get("cvv")?.value
-            }
-            const userDto: UserDto = {
-              id: this.userId,
-              firstname: this.firstname?.value,
-              lastname: this.lastname?.value,
-              oldPassword: this.oldPassword?.value,
-              password: this.password?.value,
-              repeatPassword: this.repeatPassword?.value,
-              image: result.filename,
-              phoneNumber: this.phoneNumber?.value,
-              paymentCardDto: paymentCardDto,
-              addressDto: addressDto
-            }
-            this.userService.updateUser(userDto)
-            .pipe(takeUntil(this.killer$))
-            .subscribe({
-              next: () => {
-                this.profileUpdateService.changeProfileImage(result.filename);
-                const translatedText = this.translateService.instant("snackbar.userSaved");
-                this.snackBar.open(translatedText, '', {duration: 3000, panelClass: ['snackbarSuccess']});
-              },
-              error: err => {
-                if (err?.error?.code === 'EMPTY_REQUIRED_ADDRESS_FIELDS' || err?.error?.code === 'EMPTY_REQUIRED_PAYMENT_CARD_FIELDS') {
-                  //error związany z adresem oraz kartą płatniczą obsłużone snackbarem
-                  return;
-                }
-                this.oldPassword?.setErrors({ server: true });
-              }
-            });
-          });
-      } else {
-        const addressDto: AddressDto = {
-          id: this.addressId,
-          streetName: this.form.get('streetName')?.value,
-          buildingNumber: this.form.get('buildingNumber')?.value,
-          apartmentNumber: this.form.get('apartmentNumber')?.value,
-          zipCode: this.form.get('zipCode')?.value,
-          cityName: this.form.get('cityName')?.value,
-          voivodeship: this.form.get('voivodeship')?.value
-        }
-
-        const paymentCardDto: PaymentCardDto = {
-          id: this.paymentCardId,
-          number: this.form.get("number")?.value,
-          month: this.form.get("month")?.value,
-          year: this.form.get("year")?.value,
-          name: this.form.get("name")?.value,
-          cvv: this.form.get("cvv")?.value
-        }
-        this.userService.updateUser(
-          {
-            id: this.userId,
-            firstname: this.firstname?.value,
-            lastname: this.lastname?.value,
-            password: this.password?.value,
-            oldPassword: this.oldPassword?.value,
-            repeatPassword: this.repeatPassword?.value,
-            image: this.image,
-            phoneNumber: this.phoneNumber?.value,
-            paymentCardDto: paymentCardDto,
-            addressDto: addressDto
-          } as UserDto
-        ).pipe(takeUntil(this.killer$))
-        .subscribe({
-          next: () => {
-            const translatedText = this.translateService.instant("snackbar.userSaved");
-            this.snackBar.open(translatedText, '', {duration: 3000, panelClass: ['snackbarSuccess']});
-          },
-          error: err => {
-            if (err?.error?.code === 'EMPTY_REQUIRED_ADDRESS_FIELDS' || err?.error?.code === 'EMPTY_REQUIRED_PAYMENT_CARD_FIELDS') {
-              //error związany z adresem oraz kartą płatniczą obsłużone snackbarem
-              return;
-            }
-            this.oldPassword?.setErrors({ server: true });
-          }
-        });
-      }
-    } else {
+    if (!this.form.valid) {
       this.form.markAllAsTouched();
+      return;
     }
+  
+    this.isFormSubmitted = true;
+  
+    const userDto: UserDto = this.createUserDto();
+  
+    if (this.imageSelected) {
+      this.handleImageUpload(userDto);
+    } else {
+      this.updateUserProfile(userDto);
+    }
+  }
+
+  private createUserDto(): UserDto {
+    const addressDto: AddressDto = this.createAddressDto();
+    const paymentCardDto: PaymentCardDto = this.createPaymentCardDto();
+  
+    return {
+      id: this.userId,
+      firstname: this.firstname?.value,
+      lastname: this.lastname?.value,
+      oldPassword: this.oldPassword?.value,
+      password: this.password?.value,
+      repeatPassword: this.repeatPassword?.value,
+      image: this.image || '',
+      phoneNumber: this.phoneNumber?.value,
+      paymentCardDto: paymentCardDto,
+      addressDto: addressDto
+    };
+  }
+  
+  private createAddressDto(): AddressDto {
+    return {
+      id: this.addressId,
+      streetName: this.form.get('streetName')?.value,
+      buildingNumber: this.form.get('buildingNumber')?.value,
+      apartmentNumber: this.form.get('apartmentNumber')?.value,
+      zipCode: this.form.get('zipCode')?.value,
+      cityName: this.form.get('cityName')?.value,
+      voivodeship: this.form.get('voivodeship')?.value
+    };
+  }
+  
+  private createPaymentCardDto(): PaymentCardDto {
+    return {
+      id: this.paymentCardId,
+      number: this.form.get("number")?.value,
+      month: this.form.get("month")?.value,
+      year: this.form.get("year")?.value,
+      name: this.form.get("name")?.value,
+      cvv: this.form.get("cvv")?.value
+    };
+  }
+  
+  private handleImageUpload(userDto: UserDto) {
+    this.imageSelected = false;
+    let formData = new FormData();
+    formData.append('file', this.fileControl?.value);
+  
+    this.imageService.uploadImage(formData).subscribe(result => {
+      userDto.image = result.filename;
+      this.updateUserProfile(userDto, () => this.profileUpdateService.changeProfileImage(result.filename));
+    });
+  }
+  
+  private updateUserProfile(userDto: UserDto, additionalSuccessAction?: () => void) {
+    this.userService.updateUser(userDto).pipe(takeUntil(this.killer$)).subscribe({
+      next: () => {
+        if (additionalSuccessAction) additionalSuccessAction();
+        this.showSuccessSnackbar();
+      },
+      error: (err) => this.handleError(err)
+    });
+  }
+  
+  private showSuccessSnackbar() {
+    const translatedText = this.translateService.instant("snackbar.userSaved");
+    this.snackBar.open(translatedText, '', { duration: 3000, panelClass: ['snackbarSuccess'] });
+  }
+  
+  private handleError(err: any) {
+    if (err?.error?.code === 'EMPTY_REQUIRED_ADDRESS_FIELDS' || err?.error?.code === 'EMPTY_REQUIRED_PAYMENT_CARD_FIELDS') {
+      // Obsługa błędów związanych z adresem oraz kartą płatniczą za pomocą snackbara
+      return;
+    }
+    this.oldPassword?.setErrors({ server: true });
   }
 
   mapFormValues(data: UserDto): void {
