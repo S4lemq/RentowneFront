@@ -1,7 +1,7 @@
 <mat-card class="card">
     <form [formGroup]="form" class="form">
         <div class="main-container">
-            <div class="container-left">
+            <mat-card class="container-left">
                 <div class="title">
                     {{ 'profile.title' | translate }}
                 </div>
@@ -72,30 +72,40 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-            </div>
+            </mat-card>
             <div class="container-center">
-                <mat-form-field appearance="outline">
-                    <mat-label>{{ 'profile.telephone' | translate }}</mat-label>
-                    <input matInput formControlName="telephone">
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>{{ 'profile.address' | translate }}</mat-label>
-                    <input matInput formControlName="address">
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>{{ 'profile.city' | translate }}</mat-label>
-                    <input matInput formControlName="city">
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>{{ 'profile.zipCode' | translate }}</mat-label>
-                    <input matInput formControlName="zipCode">
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>{{ 'profile.country' | translate }}</mat-label>
-                    <input matInput formControlName="country">
-                </mat-form-field>
-            </div>
-            <div class="container-right">
+                <mat-card class="container-center-top">
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{ 'profile.telephone' | translate }}</mat-label>
+                        <input matInput formControlName="telephone">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{ 'profile.address' | translate }}</mat-label>
+                        <input matInput formControlName="address">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{ 'profile.city' | translate }}</mat-label>
+                        <input matInput formControlName="city">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{ 'profile.zipCode' | translate }}</mat-label>
+                        <input matInput formControlName="zipCode">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{ 'profile.country' | translate }}</mat-label>
+                        <input matInput formControlName="country">
+                    </mat-form-field>
+                </mat-card>
+                <mat-card class="container-center-bottom">
+                    <mat-select formControlName="language">
+                        <mat-option>
+                            <!-- <mat-option *ngFor="let meterType of meterTypes" [value]="meterType"> -->
+                            <!-- {{ meterType | translateMeterType }} -->
+                        </mat-option>
+                    </mat-select> 
+                </mat-card>
+            </div>  
+            <mat-card class="container-right">
                 <!-- <div class="title-card">
                     {{ 'profile.card' | translate }}
                 </div> -->
@@ -164,7 +174,7 @@
                           </div>
                     </div>
                     <button mat-flat-button color="primary" (click)="submit()">Zapisz</button>
-                  </div>
+                  </mat-card>
             </div>
     </form>
 </mat-card>

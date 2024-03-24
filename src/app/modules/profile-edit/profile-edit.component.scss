@@ -34,20 +34,44 @@ mat-form-field {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 350px;  
+    max-width: 350px; 
+    //box-shadow: 8px 7px 60px -16px rgba(15, 18, 30, 0.4);
+    padding: 40px 40px 0 40px;
 }
 
 .container-center{
   display: flex;
   flex-direction: column;
+  gap: 20px;
+  height: 100%;
   width: 100%;
   max-width: 350px;  
+  padding: 40px 40px 40px 40px;
+}
+
+.container-center-top{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-width: 350px;  
+  padding: 40px 40px 40px 40px;
+}
+.container-center-bottom{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-width: 350px;  
+  padding: 40px 40px 40px 40px;
 }
 
 .container-right{
     //padding-top: 32px;
     display: flex;
     flex-direction: column;
+    padding: 40px 40px 40px 40px;
+    height: 100%;
 }
 
 .title-card{
