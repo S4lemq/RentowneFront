@@ -2,8 +2,7 @@
     padding: 30px 40px 20px 40px;
     display: flex;
     flex-direction: column;
-    //width: fit-content;
-    //width: max-content;
+    min-width: 1080px;
 }
 
 .form{
@@ -15,11 +14,12 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .small-number-field {
   width: 100%;
-  max-width: 130px;
+  //max-width: 130px;
 }
 
 mat-form-field {
@@ -56,7 +56,7 @@ mat-form-field {
     flex-direction: column;
     height: 100%;
     width: 100%;
-    max-width: 350px; 
+    max-width: 400px; 
     min-width: 280px; 
     //box-shadow: 8px 7px 60px -16px rgba(15, 18, 30, 0.4);
     padding: 30px 40px 0 40px;
@@ -68,7 +68,7 @@ mat-form-field {
   gap: 35px;
   height: 100%;
   width: 100%;
-  max-width: 350px; 
+  max-width: 400px; 
   min-width: 280px;  
   //padding: 0 0 0 40px;
 }
@@ -86,7 +86,6 @@ mat-form-field {
   flex-direction: column;
   // height: 100%;
   // width: 100%;
-  max-width: 350px;  
   padding: 30px 40px 20px 40px;
 }
 
@@ -95,8 +94,7 @@ mat-form-field {
     flex-direction: column;
     height: 100%;
     gap: 27px;
-    // flex: 1 1 auto;
-    // align-content: space-between;
+    min-width: 420px;
 }
 
 .container-right-top{
