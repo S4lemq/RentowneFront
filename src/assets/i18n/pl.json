@@ -123,6 +123,8 @@
         "CVV": "CVV/CVC"
     },
     "common.message.NO_SETTLEMENTS": "Brak rozliczeń, dodaj najpierw rozliczenia w sekcji Finanse, aby wyswietlić analizę.",
+    "common.message.EMPTY_REQUIRED_ADDRESS_FIELDS": "Wymagane pola (numer budynku, kod pocztowy, miejscowość, województwo) muszą być wszystkie puste lub wypełnione.",
+    "common.message.EMPTY_REQUIRED_PAYTEMNT_CARD_FIELDS": "Pola karty płatniczej muszą być wszystkie wypełnione lub puste.",
 
     "END_OF_FILE": "Dodawaj wpisy powyżej!"
 }

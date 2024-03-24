@@ -11,7 +11,6 @@ import { ApartmentListComponent } from 'src/app/modules/apartment-list/apartment
 import { ApartmentMeterEditContainerComponent } from 'src/app/modules/apartment-meter-edit-container/apartment-meter-edit-container.component';
 import { BodyComponent } from 'src/app/modules/body/body.component';
 import { CalculatePopupComponent } from 'src/app/modules/calculate-popup/calculate-popup.component';
-import { TranslateMeterUnitPipe } from 'src/app/modules/common/pipe/translate-meter-unit.pipe';
 import { ConfirmDialogComponent } from 'src/app/modules/confirm-dialog/confirm-dialog.component';
 import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
 import { HeaderComponent } from 'src/app/modules/header/header.component';
@@ -48,6 +47,7 @@ import { DefaultComponent } from './default.component';
 import { TranslateMeterUnitPipe } from 'src/app/modules/common/pipe/translate-meter-unit.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { CreditCardComponent } from 'src/app/modules/credit-card/credit-card.component';
+import { TranslateLanguageType } from 'src/app/modules/profile-edit/translate-language-type.pipe';
 
 @NgModule({
   declarations: [
@@ -89,9 +89,9 @@ import { CreditCardComponent } from 'src/app/modules/credit-card/credit-card.com
     ImageCropperComponent,
     ApartmentImageCropperComponent,
     TranslateMeterUnitPipe,
-    TenantBasicEditComponent
-    TranslateMeterUnitPipe,
-    CreditCardComponent
+    TenantBasicEditComponent,
+    CreditCardComponent,
+    TranslateLanguageType
   ],
   imports: [
     CommonModule,

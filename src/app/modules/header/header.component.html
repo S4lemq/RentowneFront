@@ -5,12 +5,11 @@
         </div>
         <div class="head-content-right">
             <div class="head-menu">
-                <div class="head-menu-item">
+                <div class="head-menu-item" *ngIf="selectedLanguage">
                     <button class="head-menu-item-btn ripple" [cdkMenuTriggerFor]="languageOverlay">
-                        <img [src]="'assets/flags/' + selectedLanguage.flag + '.jpg'"
-                         class="flag" alt="flag">
+                      <img [src]="'assets/flags/' + selectedLanguage?.flag + '.jpg'" class="flag" alt="flag">
                     </button>
-                </div>
+                  </div>
                 <div class="head-menu-item">
                     <button class="head-menu-item-btn ripple"  (click)="toggleFullScreen()">
                         <i *ngIf="!isFullScreen" class="far fa-expand menu-icon"></i>
@@ -51,7 +50,7 @@
 <ng-template #languageOverlay>
     <div class="overlay overlay-language overlay-fall">
         <ul>
-            <li *ngFor="let lang of languages" cdkMenuItem>
+            <li *ngFor="let lang of languages" cdkMenuItem (click)="onLanguageClick(lang.name)">
                 <img [src]="'assets/flags/' + lang.flag + '.jpg'" alt="flag">
                 <span>{{lang.language}}</span>
             </li>
@@ -113,7 +112,7 @@
 <ng-template #userOverlay>
     <div class="overlay overlay-user overlay-fall" cdkMenu>
         <ul>
-            <li *ngFor="let item of userItems" cdkMenuItem (click)="onMenuClick(item.label)">
+            <li *ngFor="let item of userItems" cdkMenuItem (click)="onMenuClick(item.name)">
                 <a>
                     <i class="icon" [ngClass]="item.icon"></i>
                     <span>{{item.label}}</span>

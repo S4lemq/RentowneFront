@@ -107,6 +107,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
           if (!response.mfaEnabled && response.landlordAccess) {
             this.jwtService.setAccessToken(response.accessToken as string);
             this.jwtService.setRefreshToken(response.refreshToken as string);
+            this.setDefaultLanguage();
             this.router.navigate(["/dashboard"])
           } else {
             this.registerResponse = response;
@@ -147,6 +148,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
           this.updateInputStyles();
         }
       })
+  }
+
+  setDefaultLanguage() {
+    localStorage.setItem('preferredLanguage', 'pl');
+    this.translate.use('pl');
   }
 
   getPasswordErrorMsg() {
