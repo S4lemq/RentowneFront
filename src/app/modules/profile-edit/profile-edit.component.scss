@@ -1,7 +1,9 @@
 .card{
-    padding: 30px 40px;
+    padding: 30px 40px 20px 40px;
     display: flex;
     flex-direction: column;
+    //width: fit-content;
+    //width: max-content;
 }
 
 .form{
@@ -9,89 +11,124 @@
     flex-direction: column;
 }
 
+.two-form{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.small-number-field {
+  width: 100%;
+  max-width: 130px;
+}
+
 mat-form-field {
-    width: 100%;
-    max-width: 350px;
+  width: 100%;
+  max-width: 350px;
 }
 
 .change-password{
-    padding-top: 40px;
+  padding-top: 40px;
 }
 
  
-.btn {
+.button-text {
+  font-size: 18px;
+  text-align: center;
+  letter-spacing: -0.01px;
+  font-weight: 700;
+}
+
+.button{
+  margin: 12px 0 12px 0;
 }
 
 .main-container{
     display: flex;
     flex-direction: row;
-    //gap: 40px;
-    justify-content: space-between;
+    gap: 40px;
+    //justify-content: space-between;
 }
 
 
 .container-left{
     display: flex;
     flex-direction: column;
+    height: 100%;
     width: 100%;
     max-width: 350px; 
+    min-width: 280px; 
     //box-shadow: 8px 7px 60px -16px rgba(15, 18, 30, 0.4);
-    padding: 40px 40px 0 40px;
+    padding: 30px 40px 0 40px;
 }
 
 .container-center{
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 35px;
   height: 100%;
   width: 100%;
-  max-width: 350px;  
-  padding: 40px 40px 40px 40px;
+  max-width: 350px; 
+  min-width: 280px;  
+  //padding: 0 0 0 40px;
 }
 
 .container-center-top{
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
-  max-width: 350px;  
-  padding: 40px 40px 40px 40px;
+  // height: 100%;
+  // width: 100%;
+  //max-width: 350px;  
+  padding: 30px 40px 20px 40px;
 }
 .container-center-bottom{
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
+  // height: 100%;
+  // width: 100%;
   max-width: 350px;  
-  padding: 40px 40px 40px 40px;
+  padding: 30px 40px 20px 40px;
 }
 
 .container-right{
-    //padding-top: 32px;
     display: flex;
     flex-direction: column;
-    padding: 40px 40px 40px 40px;
     height: 100%;
+    gap: 27px;
+    // flex: 1 1 auto;
+    // align-content: space-between;
 }
 
-.title-card{
-  font-size: 15px;
-  padding-bottom: 20px;
-  text-transform: uppercase;
+.container-right-top{
+  display: flex;
+  flex-direction: column;
+  padding: 30px 40px 20px 40px;
+  //height: 100%;
+  //gap: 20px;
 }
+
 
 .title{
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 700;
-    letter-spacing: -0.1px;
+    //letter-spacing: -0.1px;
     //text-transform: uppercase;
+    padding-bottom: 40px;
+  }
+
+  .edit{
+    font-size: 20px;
+    font-weight: 700;
+    //letter-spacing: -0.1px;
+    //text-transform: uppercase;
+    padding-bottom: 30px;
   }
 
 .avatar-container {
     position: relative;
     display: flex;
     justify-content: center;
-    padding: 30px 0;
+    padding: 0 0 30px 0;
 }
 
 .image-container {
@@ -115,7 +152,8 @@ mat-form-field {
     height: 40px;
     width: 40px;
     padding: .35rem;
-    background-color:#2962FF;
+   //background-color:#2962FF;
+    background-color:#505050;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -127,7 +165,8 @@ mat-form-field {
 
     &:hover {
         transition: all .25s;
-        background-color: darken(#2962FF, 15%);
+        //background-color: darken(#2962FF, 15%);
+        background-color: darken(#505050, 15%);
     }
 
     .icon {
@@ -255,8 +294,8 @@ mat-form-field {
     padding: 50px;
   }
   
-  .mt-20 {
-    margin-top: 20px;
+  .mt-40 {
+    margin-top: 40px;
   }
   
   

@@ -103,7 +103,11 @@
         "city": "Miasto",
         "zipCode": "Kod pocztowy",
         "country": "Kraj",
-        "card": "Dodaj kartę"
+        "card": "Dodaj kartę",
+        "language": "Preferencje językowe",
+        "addressData": "Dane adresowe",
+        "save": "Zapisz",
+        "shortInfo": "Dane podstawowe"
     },
     "sendChangePassword":{
         "title": "Ustaw nowe hasło",

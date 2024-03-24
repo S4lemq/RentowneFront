@@ -1,10 +1,13 @@
 <mat-card class="card">
+    <!-- <div class="edit">
+        {{ 'profile.title' | translate }}
+    </div> -->
     <form [formGroup]="form" class="form">
         <div class="main-container">
             <mat-card class="container-left">
                 <div class="title">
-                    {{ 'profile.title' | translate }}
-                </div>
+                    {{ 'profile.shortInfo' | translate }}
+                </div> 
                 <div class="avatar-container">
                     <div class="image-container" *ngIf="file; else placeholder"
                          [ngClass]="{'box-shadow-avatar': !!file}"
@@ -38,6 +41,13 @@
                 <mat-form-field appearance="outline">
                     <mat-label>{{ 'register.email' | translate }}</mat-label>
                     <input matInput formControlName="email">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Numer telefonu</mat-label>
+                    <input matInput formControlName="phoneNumber">
+                    <mat-error *ngIf="phoneNumber?.invalid && (phoneNumber?.dirty || phoneNumber?.touched)">
+                        {{getPhoneNumberErrorMsg()}}
+                    </mat-error>
                 </mat-form-field>
                 <mat-slide-toggle color="primary" [formControl]="changePasswordControl">Zmień hasło</mat-slide-toggle>
                 <div class="change-password">
@@ -75,6 +85,9 @@
             </mat-card>
             <div class="container-center">
                 <mat-card class="container-center-top">
+                    <div class="title">
+                        {{ 'profile.addressData' | translate }}
+                    </div> 
                     <mat-form-field appearance="outline">
                         <mat-label>{{ 'apartment.street' | translate }}</mat-label>
                         <input matInput formControlName="streetName">
@@ -83,7 +96,8 @@
                     </mat-error>
                 </mat-form-field>
               
-                <mat-form-field appearance="outline">
+                <div class="two-form">
+                <mat-form-field appearance="outline" class="small-number-field">
                         <mat-label>{{ 'apartment.buildingNumber' | translate }}</mat-label>
                         <input matInput formControlName="buildingNumber">
                     <mat-error *ngIf="buildingNumber?.invalid && (buildingNumber?.dirty || buildingNumber?.touched)">
@@ -91,13 +105,15 @@
                     </mat-error>
                     </mat-form-field>
               
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class="small-number-field">
                         <mat-label>{{ 'apartment.apartmentNumber' | translate }}</mat-label>
                         <input matInput formControlName="apartmentNumber">
                     <mat-error *ngIf="apartmentNumber?.invalid && (apartmentNumber?.dirty || apartmentNumber?.touched)">
                         {{getApartmentNumberErrorMsg()}}
                     </mat-error>
                     </mat-form-field>
+
+                </div>
               
                 <mat-form-field appearance="outline">
                         <mat-label>{{ 'apartment.zipCode' | translate }}</mat-label>
@@ -122,13 +138,12 @@
                         {{getVoivodeshipErrorMsg()}}
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Numer telefonu</mat-label>
-                    <input matInput formControlName="phoneNumber">
-                    <mat-error *ngIf="phoneNumber?.invalid && (phoneNumber?.dirty || phoneNumber?.touched)">
-                        {{getPhoneNumberErrorMsg()}}
-                    </mat-error>
-                </mat-form-field>
+                </mat-card>
+
+                <mat-card class="container-center-bottom">
+                    <div class="title">
+                        {{ 'profile.language' | translate }}
+                    </div> 
                     <mat-form-field appearance="outline">
                         <mat-label>Preferowany język</mat-label>
                         <mat-select formControlName="preferedLanguage">
@@ -138,19 +153,12 @@
                     </mat-select>
                     </mat-form-field>
                 </mat-card>
-                <mat-card class="container-center-bottom">
-                    <mat-select formControlName="language">
-                        <mat-option>
-                            <!-- <mat-option *ngFor="let meterType of meterTypes" [value]="meterType"> -->
-                            <!-- {{ meterType | translateMeterType }} -->
-                        </mat-option>
-                    </mat-select> 
-                </mat-card>
             </div>  
-            <mat-card class="container-right">
-                <!-- <div class="title-card">
+            <div class="container-right">
+            <mat-card class="container-right-top">
+                <div class="title">
                     {{ 'profile.card' | translate }}
-                </div> -->
+                </div>
                       <app-credit-card
                         [cardNumber]="cardNumber"
                         [cardHolderName]="cardHolderName"
@@ -158,7 +166,7 @@
                         [cardExpiryMonth]="cardExpiryMonth"
                       ></app-credit-card>
                       <div class="layout-column" novalidate>
-                        <mat-form-field appearance="outline" class="mt-20">
+                        <mat-form-field appearance="outline" class="mt-40">
                             <mat-label>{{ 'creditCard.number' | translate }}</mat-label>
                             <input matInput
                                 formControlName="number"
@@ -225,8 +233,11 @@
                             </mat-form-field>
                           </div>
                     </div>
-                    <button mat-flat-button color="primary" (click)="submit()">Zapisz</button>
                   </mat-card>
+                  <button mat-flat-button color="primary" (click)="submit()" class="button">
+                    <span class="button-text">{{ 'profile.save' | translate }}</span>
+                </button>
             </div>
+        </div>
     </form>
 </mat-card>
