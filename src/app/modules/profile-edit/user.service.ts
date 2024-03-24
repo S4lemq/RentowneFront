@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserDto } from './model/user-dto';
 import { Observable } from 'rxjs';
+import { PreferedLanguage } from '../login/model/prefered-language';
 
 @Injectable({
   providedIn: 'root'
@@ -21,4 +22,9 @@ export class UserService {
   getUserProfileImage(): Observable<string> {
     return this.http.get("/api/users/profile-image", { responseType: 'text' });
   }
+
+  getUserProfileImageAndLang(): Observable<UserDto> {
+    return this.http.get<UserDto>("/api/users/profile-image-lang");
+  }
+
 }

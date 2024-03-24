@@ -1,0 +1,132 @@
+{
+    "server.error.USER_ALREADY_EXISTS": "Вказана електронна адреса вже використовується",
+  "common.error.register.default": "Під час реєстрації сталася помилка. Будь ласка, спробуйте знову",
+  "register": {
+    "name": "Ім'я",
+    "surname": "Прізвище",
+    "email": "Електронна адреса",
+    "password": "Пароль",
+    "repeatPassword": "Повторіть пароль",
+    "mfaEnabled": "Двофакторна аутентифікація",
+    "submit": "Створити обліковий запис",
+    "title": "Двофакторна аутентифікація",
+    "scanCode": "Відскануйте QR-код у додатку Google Authenticator",
+    "addCode": "Введіть 6-значний код, сгенерований у додатку",
+    "code": "Код",
+    "confirmCode": "Підтвердити код",
+    "error": {
+      "email": "Недійсна електронна адреса",
+      "password": "Мінімум 8 символів, велика літера, цифра, спеціальний символ",
+      "matchPassword": "Паролі повинні бути ідентичними"
+    }
+  },
+  "login": {
+    "welcomeInRentowne": "Ласкаво просимо до Rentowne",
+    "enterData": "Введіть дані для входу, щоб продовжити",
+    "enterCorrectData": "Введіть правильні дані для входу",
+    "email": "Електронна адреса",
+    "password": "Пароль",
+    "getIn": "Увійти",
+    "doNotHaveAccount": "Не маєте облікового запису?",
+    "register": "Створити обліковий запис",
+    "tfa": "Двофакторна аутентифікація",
+    "enterCode": "Введіть 6-значний код верифікації, сгенерований Google Authenticator",
+    "code": "Код",
+    "confirmCode": "Підтвердити код",
+    "addCode": "Введіть код з додатку Google Authenticator"
+  },
+  "dataTable": {
+    "id": "Id",
+    "search": "Пошук",
+    "button-filter": "Фільтр",
+    "filter": {
+      "sortDirection": "Напрямок сортування",
+      "columnName": "Сортувати за",
+      "leasesNumber": "Кількість об'єктів",
+      "isRented": "Чи є квартира з вільним об'єктом?"
+    }
+  },
+  "apartmentDataTable": {
+    "name": "Назва",
+    "leasesNumber": "Кількість об'єктів",
+    "isRented": "Орендовано"
+  },
+  "common.yes": "Так",
+  "common.no": "Ні",
+  "apartment": {
+    "card.leasesNumber": "Кількість об'єктів:",
+    "card.unsettled-income": "Неврегульований дохід:",
+    "name": "Назва квартири",
+    "leasesNumber": "Кількість об'єктів",
+    "area": "Площа",
+    "street": "Вулиця",
+    "buildingNumber": "Номер будинку",
+    "apartmentNumber": "Номер квартири",
+    "zipCode": "Поштовий індекс",
+    "cityName": "Місто",
+    "voivodeship": "Воєводство"
+  },
+  "snackbar.apartmentAdded": "Квартира додана",
+  "rentedObject.name": "Назва об'єкта",
+  "required": "Необхідне значення",
+  "common.message.NON_UNIQUE_RENTED_OBJECT_NAME": "Назви студій повинні бути унікальними",
+  "snackbar.server-error": "Помилка 504: Сервер не відповідає. Спробуйте знову через мить.",
+  "snackbar.meterAdded": "Лічильник додано",
+  "snackbar.tenantAdded": "Орендар доданий",
+  "snackbar.tenantSaved": "Орендар збережений",
+  "snackbar.apartmentSaved": "Квартира збережена",
+  "snackbar.meterSaved": "Лічильник збережений",
+  "common.message.BAD_LINK": "Недійсне посилання URL, спробуйте знову заповнити форму скидання пароля.",
+  "common.message.LINK_EXPIRED": "Посилання застаріло, вам потрібно знову заповнити форму скидання пароля.",
+  "matPaginator": {
+    "itemsPerPageLabel": "Елементів на сторінці",
+    "nextPageLabel": "Наступна сторінка",
+    "previousPageLabel": "Попередня сторінка",
+    "firstPageLabel": "Перша сторінка",
+    "lastPageLabel": "Остання сторінка",
+    "rangeLabel": "з"
+  },
+  "snackbar.housingProviderSaved": "Провайдер збережений",
+  "common.message.BAD_METER_READING_DATE_TENANT": "Дата початку договору не може бути в тому самому місяці, що і дата останнього показника лічильника для даного об'єкта",
+  "common.message.BAD_METER_READING_VALUES_TENANT": "Один з початкових показників лічильника нижчий за останній показник лічильника для даного об'єкта. Перевірте показники лічильників в об'єкті",
+  "common.message.RENTED_OBJECT_DOES_NOT_HAVE_METERS": "Об'єкт не має необхідних лічильників: вода та/або електрика. Додайте лічильники для цього об'єкта.",
+  "meter.name": "Назва лічильника",
+  "snackbar.userSaved": "Дані користувача оновлені.",
+  "snackbar.providerTypeAlreadyExists": "Провайдер вказаного типу: {{type}} вже призначений для цієї власності.",
+  "profile": {
+    "title": "Редагувати профіль",
+    "oldPassword": "Старий пароль",
+    "newPassword": "Новий пароль",
+    "repeatPassword": "Повторити новий пароль",
+    "telephone": "Телефон",
+    "address": "Вулиця",
+    "city": "Місто",
+    "zipCode": "Поштовий індекс",
+    "country": "Країна",
+    "card": "Додати картку"
+  },
+  "sendChangePassword": {
+    "title": "Встановити новий пароль",
+    "submit": "Встановити"
+  },
+  "send": {
+    "title-1": "Я забув свій пароль",
+    "title-2": "Введіть електронну адресу, використану при створенні облікового запису. На вашу поштову скриньку буде відправлено повідомлення з посиланням для входу в сервіс.",
+    "submit": "Надіслати",
+    "return": "< Назад"
+  },
+  "creditCard": {
+    "number": "Номер карти",
+    "name": "Ім'я власника карти",
+    "month": "Місяць",
+    "year": "Рік",
+    "CVV": "CVV/CVC"
+  },
+  "common.message.NO_SETTLEMENTS": "Розрахунків немає, спочатку додайте розрахунки у розділі Фінанси, щоб відображати аналіз.",
+  "common.message.EMPTY_REQUIRED_ADDRESS_FIELDS": "Обов'язкові поля (номер будинку, поштовий індекс, місто, воєводство) повинні бути або всі порожніми, або всі заповненими.",
+  "common.message.EMPTY_REQUIRED_PAYTEMNT_CARD_FIELDS": "Поля платіжної картки повинні бути або всі заповнені, або всі порожні."
+
+
+
+  ,"END_OF_FILE": "Dodawaj wpisy powyżej!"
+}

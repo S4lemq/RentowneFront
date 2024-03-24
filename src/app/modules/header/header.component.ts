@@ -6,6 +6,7 @@ import { UserService } from '../profile-edit/user.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ProfileUpdateService } from '../profile-edit/profile-update.service';
 import { TranslateService } from '@ngx-translate/core';
+import { lang } from 'moment';
 
 @Component({
   selector: 'app-header',
@@ -43,12 +44,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.checkCanShowSearchAsOverlay(window.innerWidth);
-    this.selectedLanguage = this.languages[0];
-    this.userService.getUserProfileImage()
+
+    this.userService.getUserProfileImageAndLang()
     .pipe(takeUntil(this.killer$))
     .subscribe(data => {
-      this.profileImage = data;
+      this.profileImage = data.image;
+      const language = data.preferredLanguage
+      if (language === 'POLISH') {
+        this.selectedLanguage = this.languages[0];
+      } else if (language === 'ENGLISH') {
+        this.selectedLanguage = this.languages[1];
+      } else if (language === 'UKRAINIAN') {
+        this.selectedLanguage = this.languages[2];
+      }
     });
+
     this.profileUpdateService.currentProfileImage
     .pipe(takeUntil(this.killer$))
     .subscribe(image => {
@@ -81,12 +91,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (name === 'POLISH') {
       localStorage.setItem('preferredLanguage', 'pl');
       this.translateService.use('pl');
+      this.selectedLanguage = this.languages[0];
     } else if (name === 'ENGLISH') {
       localStorage.setItem('preferredLanguage', 'en');
       this.translateService.use('en');
+      this.selectedLanguage = this.languages[1];
     } else if (name === 'UKRAINIAN') {
       localStorage.setItem('preferredLanguage', 'uk');
       this.translateService.use('uk');
+      this.selectedLanguage = this.languages[2];
     }
   }
 
