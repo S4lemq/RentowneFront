@@ -128,6 +128,14 @@
                         {{getPhoneNumberErrorMsg()}}
                     </mat-error>
                 </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Preferowany język</mat-label>
+                    <mat-select formControlName="preferedLanguage">
+                        <mat-option *ngFor="let language of languages" [value]="language">
+                            {{ language | translateLanguageType }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
             <div class="container-right">
                 <!-- <div class="title-card">

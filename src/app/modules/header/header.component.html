@@ -51,7 +51,7 @@
 <ng-template #languageOverlay>
     <div class="overlay overlay-language overlay-fall">
         <ul>
-            <li *ngFor="let lang of languages" cdkMenuItem>
+            <li *ngFor="let lang of languages" cdkMenuItem (click)="onLanguageClick(lang.name)">
                 <img [src]="'assets/flags/' + lang.flag + '.jpg'" alt="flag">
                 <span>{{lang.language}}</span>
             </li>
@@ -113,7 +113,7 @@
 <ng-template #userOverlay>
     <div class="overlay overlay-user overlay-fall" cdkMenu>
         <ul>
-            <li *ngFor="let item of userItems" cdkMenuItem (click)="onMenuClick(item.label)">
+            <li *ngFor="let item of userItems" cdkMenuItem (click)="onMenuClick(item.name)">
                 <a>
                     <i class="icon" [ngClass]="item.icon"></i>
                     <span>{{item.label}}</span>

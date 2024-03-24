@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../profile-edit/user.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ProfileUpdateService } from '../profile-edit/profile-update.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -36,7 +37,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private logoutService: LogoutService,
     private userService: UserService,
     private router: Router,
-    private profileUpdateService: ProfileUpdateService
+    private profileUpdateService: ProfileUpdateService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -61,8 +63,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.killer$.complete();
   }
 
-  onMenuClick(itemLabel: string) {
-    if (itemLabel === 'Wyloguj') {
+  onMenuClick(name: string) {
+    if (name === 'log-out') {
       this.logoutService.logout()
       .pipe(takeUntil(this.killer$))
       .subscribe(() => {
@@ -70,8 +72,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
         sessionStorage.removeItem('accessToken');
         sessionStorage.removeItem('refreshToken');
       });
-    } else if (itemLabel === 'Profil') {
+    } else if (name === 'profile') {
       this.router.navigate(['profile/edit']);
+    }
+  }
+
+  onLanguageClick(name: string) {
+    if (name === 'POLISH') {
+      localStorage.setItem('preferredLanguage', 'pl');
+      this.translateService.use('pl');
+    } else if (name === 'ENGLISH') {
+      localStorage.setItem('preferredLanguage', 'en');
+      this.translateService.use('en');
+    } else if (name === 'UKRAINIAN') {
+      localStorage.setItem('preferredLanguage', 'uk');
+      this.translateService.use('uk');
     }
   }
 

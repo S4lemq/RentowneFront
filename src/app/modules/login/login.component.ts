@@ -7,6 +7,7 @@ import { AuthenticationRequestDto } from './model/authentication-request';
 import { AuthenticationResponseDto } from './model/authentication-response';
 import { VerificationRequestDto } from '../register/model/register-verify-code';
 import { NgOtpInputConfig } from 'ng-otp-input';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -49,7 +50,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private jwtService: JwtService,
-    private router: Router
+    private router: Router,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -73,6 +75,7 @@ export class LoginComponent implements OnInit {
             if(response.landlordAccess && !response.mfaEnabled) {
               this.jwtService.setAccessToken(response.accessToken as string);
               this.jwtService.setRefreshToken(response.refreshToken as string);
+              this.setDefaultLanguage(response.preferredLanguage as string);
               this.router.navigate(["/dashboard"]);
             } else if (response.landlordAccess && !this.authResponse.mfaEnabled) {
               this.authResponse = response;
@@ -107,6 +110,19 @@ export class LoginComponent implements OnInit {
           this.updateInputStyles();
         }
       })
+  }
+
+  setDefaultLanguage(name: string) {
+    if (name === 'POLISH') {
+      localStorage.setItem('preferredLanguage', 'pl');
+      this.translateService.use('pl');
+    } else if (name === 'ENGLISH') {
+      localStorage.setItem('preferredLanguage', 'en');
+      this.translateService.use('en');
+    } else if (name === 'UKRAINIAN') {
+      localStorage.setItem('preferredLanguage', 'uk');
+      this.translateService.use('uk');
+    }
   }
 
   updateInputStyles() {

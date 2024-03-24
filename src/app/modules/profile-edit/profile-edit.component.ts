@@ -15,6 +15,7 @@ import { PaymentCardDto } from './model/payment-card-dto';
 import { UserDto } from './model/user-dto';
 import { ProfileUpdateService } from './profile-update.service';
 import { UserService } from './user.service';
+import { PreferedLanguage } from '../login/model/prefered-language';
 
 @Component({
   selector: 'app-profile-edit',
@@ -36,6 +37,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
   requredFileTypes = "image/jpeg, image/png";
   image: string | null = null;
   imageSelected: boolean = false;
+  languages = Object.values(PreferedLanguage);
 
   file: string = '';
   changePasswordControl = new FormControl(false);
@@ -66,6 +68,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
       repeatPassword: new FormControl(null),
       file: new FormControl(''),
       phoneNumber: new FormControl('', [Validators.maxLength(20)]),
+      preferedLanguage: new FormControl(''),
 
       number:  new FormControl('', [Validators.pattern("^[0-9]*$"), Validators.minLength(16)]),
       name: new FormControl('', [this.validName(), Validators.maxLength(100)]),
@@ -86,7 +89,8 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
       .subscribe(() => {
         this.form.get('repeatPassword')?.updateValueAndValidity();
     });
-      this.getUser();
+
+    this.getUser();
   }
 
   ngOnDestroy(): void {
@@ -125,8 +129,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
     };
   }
   
-  
-
   validName(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
@@ -186,6 +188,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
       repeatPassword: this.repeatPassword?.value,
       image: this.image || '',
       phoneNumber: this.phoneNumber?.value,
+      preferredLanguage: this.preferedLanguage?.value,
       paymentCardDto: paymentCardDto,
       addressDto: addressDto
     };
@@ -254,6 +257,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
       lastname: data.lastname,
       email: data.email,
       phoneNumber: data.phoneNumber,
+      preferedLanguage: data.preferredLanguage,
       number: data.paymentCardDto?.number,
       name: data.paymentCardDto?.name,
       month: data.paymentCardDto?.month,
@@ -560,4 +564,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy, BaseComponent {
     return this.form.get("phoneNumber");
   }
 
+  get preferedLanguage() {
+    return this.form.get("preferedLanguage");
+  }
 }

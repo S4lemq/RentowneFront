@@ -1,15 +1,18 @@
 export const languages = [
     {
         language: 'Polski',
-        flag: 'pl'
+        flag: 'pl',
+        name: 'POLISH'
     },
     {
         language: 'English',
-        flag: 'uk'
+        flag: 'uk',
+        name: 'ENGLISH'
     },
     {
         language: 'Yкраїнська',
-        flag: 'ua'
+        flag: 'ua',
+        name: 'UKRAINIAN'
     }
 ];
 
@@ -42,7 +45,8 @@ export const messages = [
 export const userItems = [
     {
         icon: 'far fa-user',
-        label: 'Profil'
+        label: 'Profil',
+        name: 'profile'
     },
     /* {
         icon: 'far fa-cog',
@@ -54,6 +58,7 @@ export const userItems = [
     }, */
     {
         icon: 'far fa-power-off',
-        label: 'Wyloguj'
+        label: 'Wyloguj',
+        name: 'log-out'
     }
 ];

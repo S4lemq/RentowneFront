@@ -47,6 +47,7 @@ import { DefaultComponent } from './default.component';
 import { TranslateMeterUnitPipe } from 'src/app/modules/common/pipe/translate-meter-unit.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { CreditCardComponent } from 'src/app/modules/credit-card/credit-card.component';
+import { TranslateLanguageType } from 'src/app/modules/profile-edit/translate-language-type.pipe';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { CreditCardComponent } from 'src/app/modules/credit-card/credit-card.com
     ApartmentImageCropperComponent,
     TranslateMeterUnitPipe,
     TenantBasicEditComponent,
-    CreditCardComponent
+    CreditCardComponent,
+    TranslateLanguageType
   ],
   imports: [
     CommonModule,
