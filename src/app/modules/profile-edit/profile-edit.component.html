@@ -1,7 +1,7 @@
 <mat-card class="card">
     <form [formGroup]="form" class="form">
         <div class="main-container">
-            <div class="container-left">
+            <mat-card class="container-left">
                 <div class="title">
                     {{ 'profile.title' | translate }}
                 </div>
@@ -72,36 +72,37 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-            </div>
+            </mat-card>
             <div class="container-center">
-                <mat-form-field appearance="outline">
-                    <mat-label>{{ 'apartment.street' | translate }}</mat-label>
-                    <input matInput formControlName="streetName">
-                    <mat-error *ngIf="streetName?.invalid && (streetName?.dirty || streetName?.touched)">
+                <mat-card class="container-center-top">
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{ 'apartment.street' | translate }}</mat-label>
+                        <input matInput formControlName="streetName">
+                        <mat-error *ngIf="streetName?.invalid && (streetName?.dirty || streetName?.touched)">
                         {{getStreetNameErrorMsg()}}
                     </mat-error>
                 </mat-form-field>
-          
+              
                 <mat-form-field appearance="outline">
-                    <mat-label>{{ 'apartment.buildingNumber' | translate }}</mat-label>
-                    <input matInput formControlName="buildingNumber">
+                        <mat-label>{{ 'apartment.buildingNumber' | translate }}</mat-label>
+                        <input matInput formControlName="buildingNumber">
                     <mat-error *ngIf="buildingNumber?.invalid && (buildingNumber?.dirty || buildingNumber?.touched)">
                         {{getBuildingNumberErrorMsg()}}
                     </mat-error>
-                </mat-form-field>
-          
+                    </mat-form-field>
+              
                 <mat-form-field appearance="outline">
-                    <mat-label>{{ 'apartment.apartmentNumber' | translate }}</mat-label>
-                    <input matInput formControlName="apartmentNumber">
+                        <mat-label>{{ 'apartment.apartmentNumber' | translate }}</mat-label>
+                        <input matInput formControlName="apartmentNumber">
                     <mat-error *ngIf="apartmentNumber?.invalid && (apartmentNumber?.dirty || apartmentNumber?.touched)">
                         {{getApartmentNumberErrorMsg()}}
                     </mat-error>
-                </mat-form-field>
-          
+                    </mat-form-field>
+              
                 <mat-form-field appearance="outline">
-                    <mat-label>{{ 'apartment.zipCode' | translate }}</mat-label>
-                    <input matInput formControlName="zipCode">
-                    <mat-error *ngIf="zipCode?.invalid && (zipCode?.dirty || zipCode?.touched)">
+                        <mat-label>{{ 'apartment.zipCode' | translate }}</mat-label>
+                        <input matInput formControlName="zipCode">
+                        <mat-error *ngIf="zipCode?.invalid && (zipCode?.dirty || zipCode?.touched)">
                         {{getZipCodeErrorMsg()}}
                     </mat-error>
                 </mat-form-field>
@@ -128,16 +129,25 @@
                         {{getPhoneNumberErrorMsg()}}
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Preferowany język</mat-label>
-                    <mat-select formControlName="preferedLanguage">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Preferowany język</mat-label>
+                        <mat-select formControlName="preferedLanguage">
                         <mat-option *ngFor="let language of languages" [value]="language">
                             {{ language | translateLanguageType }}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="container-right">
+                    </mat-form-field>
+                </mat-card>
+                <mat-card class="container-center-bottom">
+                    <mat-select formControlName="language">
+                        <mat-option>
+                            <!-- <mat-option *ngFor="let meterType of meterTypes" [value]="meterType"> -->
+                            <!-- {{ meterType | translateMeterType }} -->
+                        </mat-option>
+                    </mat-select> 
+                </mat-card>
+            </div>  
+            <mat-card class="container-right">
                 <!-- <div class="title-card">
                     {{ 'profile.card' | translate }}
                 </div> -->
@@ -216,7 +226,7 @@
                           </div>
                     </div>
                     <button mat-flat-button color="primary" (click)="submit()">Zapisz</button>
-                  </div>
+                  </mat-card>
             </div>
     </form>
 </mat-card>
