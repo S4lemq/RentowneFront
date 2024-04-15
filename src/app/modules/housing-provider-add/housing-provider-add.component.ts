@@ -68,7 +68,7 @@ export class HousingProviderAddComponent implements OnInit, OnDestroy, BaseCompo
     return this.fb.group({
       fieldName: [''],
       price: ['', [Validators.required, Validators.min(0), Validators.max(99999), maxDecimalPlaces(5)]],
-      billingMethod: ['', Validators.required]
+      billingMethod: ['']
     });
   }
 
